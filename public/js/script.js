@@ -1,7 +1,7 @@
    
     //establishing the scebe abd background color
     var scene = new THREE.Scene();
-    scene.background = new THREE.Color( "rgb(255, 255, 255)" );
+    scene.background = new THREE.Color( "rgb(0, 0, 0)" );
     var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 500 );
 
     //rendering the window and everything in it
