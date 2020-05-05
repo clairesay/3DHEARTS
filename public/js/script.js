@@ -15,8 +15,10 @@
   camera.position.z = 20;
 
   //Adding Orbit Controls
-  var controls = new THREE.OrbitControls( camera, renderer.domElement );
+  // var controls = new THREE.OrbitControls( camera, renderer.domElement );
+
   // controls.enableDamping = true;
+
 ///////////////////////// MODEL LOADER /////////////////////////////
      
     // Loading STL model
@@ -47,30 +49,19 @@
     heart.rotation.z = -3;
       ////////////////////// CHANGING VIEWS WITH BUTTONS /////////////////////
 
+        document.getElementById('orientview1').addEventListener('click', function orientView1() {
+          // camera.rotation.x = 0.28;
+          // camera.rotation.y = 0.84;
+          // camera.rotation.z = 0.21;
+          // heart.rotation.x = 0.28
+          // heart.rotation.y = 0.4
+          // heart.rotation.z = 0.21
+          // camera.rotation.x = -0.3;
+        })   
 
       ////////////////////// CHANGING VIEWS WITH BUTTONS /////////////////////
   })
 
-
-  ////////////////////// CHANGING VIEWS WITH BUTTONS /////////////////////
-  // function orientView(n) {
-  //   switch (n) {
-  //     case 1:
-  //       console.log('1')
-  //       camera.position.x = 3;
-  //       camera.position.y = 1;
-  //       camera.position.z = 15;
-  //       break;
-  //     case 2:
-  //       console.log('2')
-  //       camera.position.x = 0;
-  //       break;
-  //     default:
-  //       console.log('novaluefound')
-  //   }
-  // }
-
-  ////////////////////// CHANGING VIEWS WITH BUTTONS /////////////////////
   //Grid for reference
   var gridXZ = new THREE.GridHelper( 10, 10 );
   scene.add(gridXZ);
@@ -87,6 +78,7 @@
   var animate = function () {
       requestAnimationFrame( animate );
       // controls.update();
+      console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
       renderer.render( scene, camera );
   };
 
