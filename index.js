@@ -54,7 +54,6 @@ const server = http.createServer((req, res) => {
         } else {
             // success
             res.writeHead(200, { 'Content-Type': contentType });
-            console.log(path.parse(__filename).name);
             res.end(content, 'utf8');
 
         }
