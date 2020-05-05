@@ -1,13 +1,13 @@
 ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
   //establishing the scebe abd background color
   var scene = new THREE.Scene();
-  scene.background = new THREE.Color( "rgb(0, 0, 0)" );
+  scene.background = new THREE.Color( "rgb(255, 255, 255)" );
   var camera = new THREE.PerspectiveCamera( 45, window.innerWidth/window.innerHeight, 1, 500 );
 
   //rendering the window and everything in it
   var renderer = new THREE.WebGLRenderer();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-  document.body.appendChild( renderer.domElement );
+  renderer.setSize( window.innerWidth/1.5, window.innerHeight/1.5);
+  document.getElementById('heart-model').appendChild( renderer.domElement );
 
   //Setting the position of the camera
   camera.position.x = 0;

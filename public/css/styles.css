@@ -1,3 +1,467 @@
 * {
+    font-family: 'Work Sans', sans-serif;
+    /* font-family: 'Libre Franklin', sans-serif; */
+}
+
+/* SWAL */
+button.swal2-confirm.swal2-styled {
+    background-color: #595959;
+}
+
+button.swal2-styled {
+    font-weight: 600;
+    border-radius: 3px;
+}
+
+/* TOP LEFT BUTTONS */
+button {
+    background-color: transparent;
+    border: none;
+    padding-right: 24px;
+}
+
+.back path {
+    transform: scale(1.5)
+}
+
+/* TEXT BUTTONS */
+.text-button {
+    padding: 0.8em 1.6em;
+    background-color: black;
+    border-radius: 3em;
+    color: white;
+    font-size: 16px;
+    position: fixed;
+    bottom: 4em;
+    right: 4em;
+}
+
+#previous {
+    position: fixed;
+    bottom: 4em;
+    left: 4em;
+}
+
+#next {
+    position: fixed;
+    bottom: 4em;
+    right: 4em;
+}
+
+.module-slide {
+    display: none;
+}
+
+/* DISPLAY AND VISIBILITY STATES */
+.none {
+    display: none;
+}
+
+.grid {
+    display: grid;
+}
+
+.flex {
+    display: flex;
+}
+
+.disabled {
+    visibility: hidden;
+}
+
+.enabled {
+    visibility: visible;
+    display: flex;
+}
+
+.nav-button svg {
+    fill: white;
+}
+
+.nav-button {
+    padding: 1em 1em 0.8em 1em;
+    background-color: black;
+    border-radius: 6em;
+}
+/* HEADER */
+header {
+    display: flex;
+}
+
+#module-name {
+    display: flex;
+    flex-direction: column;
+}
+
+#module-name * {
     margin: 0;
+}
+
+h3 {
+    font-weight: 400;
+    font-size: 18px;
+}
+
+/* CHANGED THIS FOR THE TOGGLE LABEL */
+h5 {
+    font-weight: 400;
+    font-size: 14px;
+    margin: -15px 0 0 0 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+/* GIVING THE MENUS SPACE */
+.common-structure {
+    margin: 2em;
+    min-height: calc(100vh - 4em);
+}
+
+/* MENU CLASS */
+.menu {
+    width: 100%;
+    max-width: 1024px;
+}
+
+.menu a:hover {
+    cursor: pointer;
+}
+
+button:hover {
+    cursor:pointer;
+}
+
+/* INDEX MENU */
+#index-menu {
+    display: grid;
+    grid-template-rows: 80px 240px 80px;
+    grid-template-areas: "pre-workshop-link" "main-workshop-link" "post-workshop-link";
+    row-gap: 1em;
+}
+
+.menu > a {
+    padding: 1em;
+    border: 1px solid black;
+    
+    color: black;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+/* SUB MENUS */
+
+#pre-workshop-menu {
+    grid-template-rows: 80px;
+    row-gap: 1em;
+}
+
+#pre-workshop-link {
+    grid-area: pre-workshop-link;
+}
+
+#main-workshop-menu, #post-workshop-menu {
+    grid-template-rows: 30vh 30vh;
+    grid-template-columns: 40vw 40vw;
+    row-gap: 1em;
+    column-gap: 1em;
+}
+
+#main-workshop-link {
+    grid-area: main-workshop-link;
+}
+
+#post-workshop-link {
+    grid-area: post-workshop-link;
+}
+
+/* /// FOR INFORMATION ONLY /// */
+.content {
+    margin-left: 54px;
+    margin-top: 2em;
+    flex-direction: column;
+}
+
+/* /// FOR ACTIVITY AND INTERACTION /// */
+.activity {
+    margin-left: 54px;
+    margin-top: 1em;
+    flex-direction: column;
+}
+
+.case-content {
+    visibility: hidden;
+}
+
+.module-slide .case-content:first-of-type {
+    visibility: visible;
+}
+
+.module-slide .case-content:first-of-type {
+    visibility: visible;
+}
+
+.module-slide h1 {
+    margin: 0 0 0.5em 0;
+}
+
+#next-module {
+    visibility: hidden;
+}
+
+/* /////////////// NAVIGATION TAB LOCATED AT THE BOTTOM OF THE SCREEN /////////////// */
+#navigation-tab {
+    display: flex;
+    justify-content: space-around;
+    background-color: #ccc;
+
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    margin-left: -32px;
+    padding: 0.75em 0 ;
+}
+
+#navigation-tab a {
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
+    color: #595959;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+#navigation-tab a:hover {
+    color: black;
+}
+
+/* /////////////// NAVIGATION TAB LOCATED AT THE BOTTOM OF THE SCREEN /////////////// */
+
+/* /////////////// UL /////////////// */
+
+ul {
+    margin-left: -40px;
+}
+
+li {
+    margin-left: 40px;
+}
+
+/* ////////////////// PREWORKSHOP MODULE HEALTHY HEART MODEL /////////////////////////////////// */
+
+
+/* //////////////////////////////////// MODEL RENDERING AND LABELS //////////////////////////////////////////// */
+#heart-model  {
+    width: 74vw;
+    height: 40vw;
+}
+
+/* INSTRUCTIONS FOR HOW TO INTERACt */
+.step {
+    display: none;
+    flex-direction: column;
+}
+
+.step strong {
+    margin-left: -20px;
+    font-size: 18px;
+}
+
+.step:first-of-type {
+    display: flex;
+}
+
+/* INSTRUCTIONS FOR HOW TO INTERACt */
+
+#toggles {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#model-toggles {
+    margin: 1em 0;
+}
+
+input:checked + label[for="on"] {
+    background-color: #54d160;
+}
+
+input {
+    width: 0;
+    visibility: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+label:first-of-type {
+    border-radius: 3px 0 0 3px;
+    border-right: 1px solid #ddd;
+}
+
+label:last-of-type {
+    border-radius: 0 3px 3px 0;
+    border-left: 1px solid #ccc;
+}
+
+label {
+    /* border: 1px solid black; */
+    background-color: #eeeeee;
+    padding: 0.3em 1em;
+    font-size: 16px;
+}
+
+label:hover {
+    background-color: #ccc;
+}
+
+input:checked + label {
+    background-color:black;
+    color: white;
+}
+
+label[for="segments"]{
+    position: relative;
+    right: 11px;
+}
+
+label[for="realistic"] {
+    position: relative;
+    right: 23px;
+}
+
+label[for="off"] {
+    position: relative;
+    right: 12px;
+}
+
+
+
+/* /////////////////////// PLACEHOLDERR and IMAGES ////////////////////////////////////////// */
+
+#placeholder-heart {
+    max-height: 50vh;
+}
+
+.chest-xr {
+    height: 100%;
+    width: 74vw;
+}
+
+#case-content-button {
+    margin-left: auto;
+    margin-right: -2px;
+    z-index: 10;
+}
+
+#case-content-button img{
+    width: 50px;
+}
+
+#interaction-case-content-button-explanation {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* /////////////////////////// MODAL ///////////////////////////// */
+
+
+.noModal {
+    display: none;
+}
+
+.showModal {
+    background-color: black;
+    opacity: 0.75;
+    display: grid;
+    grid-template-rows: 45px 1fr;
+    grid-template-columns: 170px 110px 1fr;
+    grid-template-areas: "Examination ChestXR ." "Information Information Information";
+    /* display: flex; */
+    /* flex-direction: column; */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    z-index: 10;
+}
+
+#modal {
+    margin: auto;
+    width: 80vw;
+    height: 60vh;
+    opacity: 1;
+    background-color: transparent;
+    border-radius: 12px;
+    position: fixed;
+    top: 18vh;
+    left: 10vw;
+}
+
+/* #modal-review-tabs {
+    display: flex;
+    flex-direction: row;
+} */
+
+#on-examination-review {
+    grid-area: Examination;
+    background-color: black;
+    color: white;
+    padding: 0.8em;
+    margin: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+#chest-xr-review {
+    grid-area: ChestXR;
+    background-color: grey;
+    color: white;
+    padding: 0.8em;
+    margin: 0;
+    border-radius: 10px 10px 0 0;
+}
+
+#on-examination-review:hover, #chest-xr-review:hover {
+    cursor: pointer;
+}
+
+#on-examination-review-content {
+    flex-direction: column;
+}
+
+#on-examination-review-content h4 {
+    margin-top: 2.5em;
+}
+
+#on-examination-review-content, #chest-xr-review-content {
+    grid-area: Information;
+    background-color: black;
+    color: white;
+    text-align: left;
+    padding: 1em;
+    overflow-y: auto;
+}
+
+#chest-xr-review-content {
+    display: none;
+}
+
+#chest-xr-review-content img {
+    height: 100%;
+    width: auto;
+
+}
+
+/* /////////////////////////// MODAL ///////////////////////////// */
+
+/*///////////////////////////////////// MEDIA QUERIES START HERE ////////////////////////////////////////*/
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    
+    /* STYLES GO HERE */ 
+
 }
