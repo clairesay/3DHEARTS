@@ -1,0 +1,40 @@
+<body class="common-structure">
+    <header>
+        <button id="returnToMenu" onclick="exitModule();"> <svg width="24" height="24"
+                xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+                <path
+                    d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
+                </svg> </button>
+        <div id="module-name">
+            <h1>Healthy Heart Anatomy</h1>
+            <h3>Pre-workshop Module</h3>
+        </div>
+    </header>
+    <section id="intro" class="content">
+        <p>Pan, Zoom and Slice this model of a normal paediatric heart to learn more about its anatomy.</p>
+        <p>Read the tabs to see key features that render a heart healthy.</p>
+    </section>
+    <section id="healthy-heart-model" class="content none">
+        <article id="toggles">
+            <form id="model-toggles">
+                <input type="radio" name="render-type" id="clear" value="clear">
+                <label for="clear">Clear</label>
+                <input type="radio" name="render-type" id="segments" value="segments">
+                <label for="segments">Segments</label>
+                <input type="radio" name="render-type" id="realistic" value="realistic" checked>
+                <label for="realistic">Realistic</label>
+            </form>
+            <h5>Labels
+                <form id="model-toggles">
+                    <input type="radio" name="part-labels" id="on" value="labels-on" checked>
+                    <label for="on">On</label>
+                    <input type="radio" name="part-labels" id="off" value="labels-off">
+                    <label for="off">Off</label>
+                </form>
+            </h5>
+        </article>
+    </section>
+    <button id="start" class="text-button" onclick="startPreWorkshopModule();">Start</button>
+</body>
+<script src="js/pre-workshop.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

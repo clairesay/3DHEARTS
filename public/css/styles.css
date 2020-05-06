@@ -258,6 +258,10 @@ li {
     height: 40vw;
 }
 
+#heart-model:focus {
+    outline-width: 0;
+}
+
 /* INSTRUCTIONS FOR HOW TO INTERACt */
 .step {
     display: none;
