@@ -7,7 +7,7 @@
                     d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
                 </svg> </button>
         <div id="module-name">
-            <h1>Ben's Story</h1>
+            <h1>{{ title }}</h1>
             <h3>On Examination</h3>
         </div>
     </header>
@@ -16,22 +16,15 @@
         <p>Let's look at the case of Ben and a potential diagnosis of a congenital heart defect.</p>
     </section>
     <section class="content module-slide">
-        <p class="case-content">Ben is a 3 month old infant, brought into the Emergency Department by his parents.</p>
-        <p class="case-content">Ben has had intermittent difficulty breathing for the past week.</p>
-        <p class="case-content">He tires during breast feeds, and sometimes becomes sweaty during feeds.</p>
-        <p class="case-content">He has had <strong> no cough, no rhinorrhoea and no fevers</strong>.</p>
-        <p class="case-content">His parents have noticed he is breathing fast.</p>
-        <p class="case-content">He has not put on much weight in the past 3 weeks.</p>
+        {{#each prelim}}
+            <p class="case-content">{{ this }}</p>
+        {{/each}}
     </section>
     <section class="content module-slide">
         <h1>Background History</h1>
-        <p class="case-content">Elective LSCS at 38 weeks, uncomplicated pregnancy</p>
-        <p class="case-content">He didn't require resuscitation or admission to Special Care Nursery or NICU</p>
-        <p class="case-content">Apgar scores 8 (1 minute) and 9 (5 minutes)</p>
-        <p class="case-content">Birth weight: 3300g (40th centile)</p>
-        <p class="case-content">Immunisations: received birth and 6 weeks</p>
-        <p class="case-content">No other known medical problems, admissions or operations</p>
-        <p class="case-content">Family Hx: nil significant, one 7 year old brother who is well</p>
+        {{#each background}}
+            <p class="case-content">{{ this }}</p>
+        {{/each}}
     </section>
     <section class="content module-slide">
         <h1>On Examination</h1>
@@ -63,7 +56,7 @@
         <p class="case-content">There is a radiology practice adjacent to your clinic and you organise a chest XR.</p>
     </section>
     <section class="content module-slide">
-        <p class="case-content"><img class="chest-xr" src="images/XRAY/Ben_XR.jpg"></p>
+        <p class="case-content"><img class="chest-xr" src={{ xray }}></p>
     </section>
     <section class="content module-slide">
         <h1>What are your differential diagnoses?</h1>

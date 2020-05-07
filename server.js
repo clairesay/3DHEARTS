@@ -3,6 +3,28 @@ const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 5000;
 const app = express();
 
+//////////// GET STORYBLOK STORIES //////////////
+
+var StoryblokClient = require('storyblok-js-client')
+var ben;
+
+const Storyblok = new StoryblokClient({
+    accessToken: "cxBOVdDowPMBH7h41jTGuQtt"
+})
+
+Storyblok.get('cdn/stories', {
+        version: 'published'
+    })
+    .then((response) => {
+        response.data.stories.forEach((story) => {
+            ben = story.content
+        })
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
+/////////////////////////////////////////////////
 
 app.use(express.static(__dirname + '/public'))
 
@@ -25,7 +47,14 @@ app.get('/pre-workshop-module', (req, res) => {
 app.get('/:heartId-:stage?.html', (req, res) => {
     var heartId = req.params.heartId
     var stage = req.params.stage
-    res.render(`${heartId}-${stage}`)
+
+    //pass story information into client
+    res.render(`${heartId}-${stage}`, {
+        title: `${ben.name}'s Story`,
+        prelim: ben.prelim.split("\n"),
+        oe: ben.oe.split("\n"),
+        xray: `https://s3.amazonaws.com${ben.xray.slice(1, ben.xray.length)}`
+    })
 })
 
 app.get('/about', (req, res) => {
