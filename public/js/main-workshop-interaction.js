@@ -21,15 +21,15 @@ function exitModule() {
 var path = window.location.pathname;
 var page = path.split("/").pop();
 
-if (page.includes('OE')) {
+if (page.includes('oe')) {
   document.querySelectorAll('#navigation-tab a')[0].style.color = "black";
   document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "500";
   document.querySelectorAll('#navigation-tab a')[0].style.cursor = "default";
-} else if (page.includes('INTERACTION')) {
+} else if (page.includes('interaction')) {
   document.querySelectorAll('#navigation-tab a')[1].style.color = "black";
   document.querySelectorAll('#navigation-tab a')[1].style.fontWeight = "500";
   document.querySelectorAll('#navigation-tab a')[1].style.cursor = "default";
-} else if (page.includes('EXPLANATION')) {
+} else if (page.includes('explanation')) {
   document.querySelectorAll('#navigation-tab a')[2].style.color = "black";
   document.querySelectorAll('#navigation-tab a')[2].style.fontWeight = "500";
   document.querySelectorAll('#navigation-tab a')[2].style.cursor = "default";
