@@ -1,9 +1,8 @@
 * {
     font-family: 'Work Sans', sans-serif;
-    /* font-family: 'Libre Franklin', sans-serif; */
 }
 
-/* SWAL */
+/* //////////////// SWAL /////////////////// */
 button.swal2-confirm.swal2-styled {
     background-color: #595959;
 }
@@ -13,7 +12,7 @@ button.swal2-styled {
     border-radius: 3px;
 }
 
-/* TOP LEFT BUTTONS */
+/* //////////////// TOP LEFT BUTTONS //////////////// */
 button {
     background-color: transparent;
     border: none;
@@ -24,7 +23,7 @@ button {
     transform: scale(1.5)
 }
 
-/* TEXT BUTTONS */
+/* ////////////////////// TEXT BUTTONS ////////////// */
 .text-button {
     padding: 0.8em 1.6em;
     background-color: black;
@@ -36,6 +35,7 @@ button {
     right: 4em;
 }
 
+/* ////////////////////// PROGRESS BUTTONS ////////////// */
 #previous {
     position: fixed;
     bottom: 4em;
@@ -48,11 +48,21 @@ button {
     right: 4em;
 }
 
-.module-slide {
-    display: none;
+.nav-button svg {
+    fill: white;
 }
 
-/* DISPLAY AND VISIBILITY STATES */
+.nav-button {
+    padding: 1em 1em 0.8em 1em;
+    background-color: black;
+    border-radius: 6em;
+}
+
+#next-module {
+    visibility: hidden;
+}
+
+/* /////////////////// DISPLAY AND VISIBILITY STATES CLASSES /////////////////// */
 .none {
     display: none;
 }
@@ -74,16 +84,15 @@ button {
     display: flex;
 }
 
-.nav-button svg {
-    fill: white;
+/* ////////////////////////// GLOBAL /////////////////////// */
+/* BODY */
+
+.common-structure {
+    margin: 2em;
+    min-height: calc(100vh - 4em);
 }
 
-.nav-button {
-    padding: 1em 1em 0.8em 1em;
-    background-color: black;
-    border-radius: 6em;
-}
-/* HEADER */
+/* ////////////////////////// HEADER //////////////////// */
 header {
     display: flex;
 }
@@ -113,13 +122,7 @@ h5 {
     align-items: center;
 }
 
-/* GIVING THE MENUS SPACE */
-.common-structure {
-    margin: 2em;
-    min-height: calc(100vh - 4em);
-}
-
-/* MENU CLASS */
+/* //////////////////// MENU CLASS //////////////// */
 .menu {
     width: 100%;
     max-width: 1024px;
@@ -133,7 +136,7 @@ button:hover {
     cursor:pointer;
 }
 
-/* INDEX MENU */
+/* ////////////////// INDEX MENU ////////////////// */
 #index-menu {
     display: grid;
     grid-template-rows: 80px 240px 80px;
@@ -151,8 +154,7 @@ button:hover {
     font-size: 16px;
 }
 
-/* SUB MENUS */
-
+/* ////////////////// INDEX SUB MENUS ////////////////*/
 #pre-workshop-menu {
     grid-template-rows: 80px;
     row-gap: 1em;
@@ -177,14 +179,14 @@ button:hover {
     grid-area: post-workshop-link;
 }
 
-/* /// FOR INFORMATION ONLY /// */
+/* ///////////// FOR INFORMATION SLIDES ONLY /////////////////// */
 .content {
     margin-left: 54px;
     margin-top: 2em;
     flex-direction: column;
 }
 
-/* /// FOR ACTIVITY AND INTERACTION /// */
+/* ///////////// FOR ACTIVITY AND INTERACTION ////////////////// */
 .activity {
     margin-left: 54px;
     margin-top: 1em;
@@ -193,6 +195,10 @@ button:hover {
 
 .case-content {
     visibility: hidden;
+}
+
+.module-slide {
+    display: none;
 }
 
 .module-slide .case-content:first-of-type {
@@ -205,10 +211,6 @@ button:hover {
 
 .module-slide h1 {
     margin: 0 0 0.5em 0;
-}
-
-#next-module {
-    visibility: hidden;
 }
 
 /* /////////////// NAVIGATION TAB LOCATED AT THE BOTTOM OF THE SCREEN /////////////// */
@@ -237,10 +239,7 @@ button:hover {
     color: black;
 }
 
-/* /////////////// NAVIGATION TAB LOCATED AT THE BOTTOM OF THE SCREEN /////////////// */
-
-/* /////////////// UL /////////////// */
-
+/* /////////////// UNORDERED LISTS /////////////// */
 ul {
     margin-left: -40px;
 }
@@ -249,10 +248,7 @@ li {
     margin-left: 40px;
 }
 
-/* ////////////////// PREWORKSHOP MODULE HEALTHY HEART MODEL /////////////////////////////////// */
-
-
-/* //////////////////////////////////// MODEL RENDERING AND LABELS //////////////////////////////////////////// */
+/* /////////// DIV FOR MODEL TO RENDER IN //////////// */
 #heart-model  {
     width: 74vw;
     height: 40vw;
@@ -262,7 +258,7 @@ li {
     outline-width: 0;
 }
 
-/* INSTRUCTIONS FOR HOW TO INTERACt */
+/* ////////// STEPS/INSTRUCTIONS FOR HOW TO INTERACT ////////////// */
 .step {
     display: none;
     flex-direction: column;
@@ -277,8 +273,7 @@ li {
     display: flex;
 }
 
-/* INSTRUCTIONS FOR HOW TO INTERACt */
-
+/* //////////////// MODEL TOGGLES (DEPENDS ON WHAT WE NEED THIS WILL CHANGE) ////////////////// */
 #toggles {
     display: flex;
     flex-wrap: nowrap;
@@ -310,7 +305,6 @@ label:last-of-type {
 }
 
 label {
-    /* border: 1px solid black; */
     background-color: #eeeeee;
     padding: 0.3em 1em;
     font-size: 16px;
@@ -342,7 +336,7 @@ label[for="off"] {
 
 
 
-/* /////////////////////// PLACEHOLDERR and IMAGES ////////////////////////////////////////// */
+/* ///////////////// PLACEHOLDER and IMAGES //////////////// */
 
 #placeholder-heart {
     max-height: 50vh;
@@ -370,28 +364,24 @@ label[for="off"] {
     justify-content: space-between;
 }
 
-/* /////////////////////////// MODAL ///////////////////////////// */
+/* ////////////////// INTERACTION: REVIEW INFORMATION MODAL ///////////////////// */
 
-
-.noModal {
+.no-modal {
     display: none;
 }
 
-.showModal {
+.show-modal {
     background-color: black;
     opacity: 0.75;
     display: grid;
     grid-template-rows: 45px 1fr;
     grid-template-columns: 170px 110px 1fr;
     grid-template-areas: "Examination ChestXR ." "Information Information Information";
-    /* display: flex; */
-    /* flex-direction: column; */
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-
     z-index: 10;
 }
 
@@ -406,11 +396,6 @@ label[for="off"] {
     top: 18vh;
     left: 10vw;
 }
-
-/* #modal-review-tabs {
-    display: flex;
-    flex-direction: row;
-} */
 
 #on-examination-review {
     grid-area: Examination;
@@ -458,11 +443,9 @@ label[for="off"] {
 #chest-xr-review-content img {
     height: 100%;
     width: auto;
-
 }
 
-/* /////////////////////////// MODAL ///////////////////////////// */
-
+/*///////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*///////////////////////////////////// MEDIA QUERIES START HERE ////////////////////////////////////////*/
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
     

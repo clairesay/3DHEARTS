@@ -1,5 +1,7 @@
-////////////////// TOP LEFT EXIT MODULE ////////////////////
+//This is for the interaction section of the module
 
+////////////////// TOP LEFT EXIT MODULE ////////////////////
+//Warning to prevent user from accidentally leaving the module
 function exitModule() {
   Swal.fire({
     title: 'Leave Module?',
@@ -11,16 +13,17 @@ function exitModule() {
     reverseButtons: true
   }).then((result) => {
     if (result.value) {
-      console.log('noway');
       window.location.href = "index.html";
     }
   })
 }
 
-////////////////// NAVIGATION TAB  ////////////////////
+//////////////////////////////////////// NAVIGATION TAB  //////////////////////////////////////
+//checking for the path name
 var path = window.location.pathname;
 var page = path.split("/").pop();
 
+//highlighting the text to show the current page displayed
 if (page.includes('oe')) {
   document.querySelectorAll('#navigation-tab a')[0].style.color = "black";
   document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "500";
@@ -35,8 +38,8 @@ if (page.includes('oe')) {
   document.querySelectorAll('#navigation-tab a')[2].style.cursor = "default";
 }
 
+//If the user clicks on a different section to jump to, warn them before they jump to it
 function jumpSection(destination, sectionName) {
-  console.log(destination);
   if (destination == page) {
   } else {
     Swal.fire({
@@ -56,90 +59,103 @@ function jumpSection(destination, sectionName) {
   }
 }
 
-//////////// BACK BUTTON FIXING //////////////
-
-document.getElementById('previous').addEventListener('click', function pointViewCount() {
-  localStorage.setItem('prevCurrentPoint', currentPoint);
-  // console.log(localStorage.getItem('prevCurrentPoint'));
-})
-
-
-////////// AT THE END OF A MODULE /////////////
+///////////////////////////////// AT THE END OF A MODULE ///////////////////////////
+//at the end of the module, automatically forward user to the next section
 function nextModule() {
-  window.location.href = "17040-EXPLANATION.html";
+  window.location.href = "17040-explanation.html";
 }
 
-////////// PROGRESSION THROUGH CONTENT /////////////
-let blarg = 0;
+////////// USING LOCAL STORAGE TO OFFSET IF USER NAVIGATES TO PREVIOUS SLIDE FIXING/////////////
+document.getElementById('previous').addEventListener('click', function pointViewCount() {
+  localStorage.setItem('prevCurrentPoint', currentPoint);
+})
 
-
+/////////////////////////////////// PROGRESSION THROUGH SLIDES ///////////////////////////////
+let pointIncrement = 0;
+//function to show current slide
 function showSlide(currentSlide) {
+  //if the current slide is the first one, hide the previous button and show the next button only
   if (currentSlide == 0) {
     document.getElementById('previous').style.visibility = "hidden"
     document.getElementById('next').style.visibility = "visible"
+  //if the current slide is the second last one, show the next-module button, hide the next button and show the previous button
   } else if (currentSlide == (document.querySelectorAll('.module-slide').length - 1)) {
     document.getElementById('previous').style.visibility = "visible"
     document.getElementById('next-module').style.visibility = "visible"
     document.getElementById('next').style.visibility = "hidden"
+  //show both the previous and next buttons and hide the next-module button at all other times
   } else {
     document.getElementById('previous').style.visibility = "visible"
     document.getElementById('next').style.visibility = "visible"
     document.getElementById('next-module').style.visibility = "hidden"
   }
 
+  //show this slide a.k.a current slide
   var thisSlide = document.getElementsByClassName('module-slide')[currentSlide];
   thisSlide.style.display = "flex";
   var caseContent = document.querySelectorAll('.case-content');
+  //if this slide contains a class called 'case-content' a.k.a a point in a slide
   for (var i = 0; i < caseContent.length; i++) {
     if ((thisSlide.contains(caseContent[i])) && (true)) {
+      //change the next button to show the next point
       document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
     }
   }
-  //This is for the interaction steps
+
+  //instead if the current slide has steps i.e. the actual interaction stage
   var stepContent = document.querySelectorAll('.step');
+  //check for steps
   for (var i = 0; i < stepContent.length; i++) {
     if ((thisSlide.contains(stepContent[i])) && (true)) {
+      //change the next and previous buttons to move through steps
       document.getElementById('next').setAttribute("onclick", "nextStep(1);")
       document.getElementById('previous').setAttribute("onclick", "nextStep(-1);")
+      //if the current step is the first step, display it (it doesn't work when this isn't there for some reason)
       if (currentStep == 0) {
-        console.log('nail')
         var firstStep = document.querySelectorAll('.step')[currentStep];
         firstStep.style.display = "flex"
       }
     }
   }
-
 }
 
-
+//Progression through slides
 var currentSlide = 0;
 function nextSlide(n) {
+  //hide the previous slide
   var previousSlide = document.getElementsByClassName('module-slide')[currentSlide];
   previousSlide.style.display = "none";
+  //add or minus 1 to current slide, depending on previous or next button click
   currentSlide += n;
+  //display the slide
   showSlide(currentSlide);
 }
-
 showSlide(currentSlide);
 
+/////////////////////////////////// PROGRESSION THROUGH POINT CONTENT /////////////////////////////
+
+//This both a progression and display function for showing each point in the module
 var currentPoint = 0;
 function nextPoint(n) {
+  //x is the number of elements with the class case-content within the current slide
   var x = document.getElementsByClassName('module-slide')[currentSlide].querySelectorAll('.case-content').length;
+  //Add or minus 1 to the current point, depending on previous or next button click
   currentPoint += n;
-  blarg++;
-
+  pointIncrement++;
   var thisPoint = document.getElementsByClassName('case-content')[currentPoint];
-  //count how many are already visible
 
+  //if the current point is less than the number existing in this slide
   if (currentPoint < x) {
+    //show it
     thisPoint.style.visibility = "visible";
-
+    //if the points on this slide have already been displayed, add on the number to the current point count so that the it skips to the next slide
   } else if (localStorage.hasOwnProperty('prevCurrentPoint') == true) {
     currentPoint == (parseInt(localStorage.getItem('prevCurrentPoint')));
     document.getElementById('next').setAttribute("onclick", "nextSlide(1);");
     document.getElementById('next').click();
     localStorage.clear();
     currentPoint--;
+    //if the current point is the maximum number of points in this slide, clear the class name, move on
   } else if (currentPoint == x) {
     for (let i = 0; i < currentPoint; i++) {
       document.getElementsByClassName('module-slide')[currentSlide].querySelectorAll('.case-content')[0].classList = "";
@@ -154,40 +170,49 @@ function nextPoint(n) {
   }
 }
 
-// document.querySelector('.step:first-of-type')[0].style.display = "flex";
-
+////////////////////////////////// PROGRESSION THROUGH STEPS OF INTERACTION /////////////////////////////
+//Progress through the Steps
 var currentStep = 0;
 function nextStep(m) {
-  console.log(m);
+  //Increment the steps by either -1 or 1 depending upon previous or next buttons clicked
   currentStep += m;
-  if (currentStep <= 0) {
-  } else {
+  //If the current step exists
+  if (currentStep > 0) {
+    //Hide the previous step
     var previousStep = document.querySelectorAll('.step')[currentStep - 1];
     previousStep.style.display = "none";
   }
-  console.log(currentStep)
+  //Show the current step
   showStep();
 }
 
+//Display the Step
 function showStep() {
+  //Number of Steps
   var steps = document.querySelectorAll('.step').length;
+  
+  //If the first step hasn't been accessed yet, progress to changing slides
   if (currentStep < 0) {
     document.getElementById('next').setAttribute("onclick", "nextSlide(1);");
     document.getElementById('previous').setAttribute("onclick", "nextSlide(-1);");
     document.getElementById('previous').click();
     currentStep = 0;
+
+  //If the current step is less than the number of steps that exist but greater than 0
   } else if ((currentStep < steps) && (currentStep >= 0)) {
     var thisStep = document.querySelectorAll('.step')[currentStep];
     for (let l = 0; l < steps; l++) {
+      //And if step[l] doesn't equal to the current step that is being displayed
       if (l != currentStep) {
         document.querySelectorAll('.step')[l].style.display = "none";
       }
     }
+    //show this step
     thisStep.style.display = "flex";
-
     // Switch View in Three
     changeView(currentStep)
-
+    
+    //If the current step has reached the number of existing steps, progress to changing slides
   } else if (currentStep == (steps)) {
     document.getElementById('next').setAttribute("onclick", "nextSlide(1);");
     document.getElementById('previous').setAttribute("onclick", "nextSlide(-1);");
@@ -268,45 +293,26 @@ function changeView(step) {
   }
 }
 
+/////////////////////////////////////// MODAL REVIEW INFORMATION /////////////////////////////////////////////
 
-
-////////////////////////////////////// REVIEW INFORMATION /////////////////////////////////////////////
-
-
+//Toggling display of review information in modal
 function showReviewModal() {
-  var modalBlackout = document.getElementById('modalBlackout');
-  modalBlackout.classList.toggle('showModal');
+  //Modal Background
+  var modalBlackout = document.getElementById('modal-blackout');
+  modalBlackout.classList.toggle('show-modal');
+  //Actual Modal
   var modal = document.getElementById('modal');
-  modal.classList.toggle('showModal');
-  console.log('working')
+  modal.classList.toggle('show-modal');
 }
 
-// var modalBlackout = document.getElementById('modalBlackout');
-// var modal = document.getElementById('modal');
-
-
-//   document.addEventListener('click', function(evt) {
-//     if (document.getElementById('modal').classList.contains("showModal")) {
-//     document.addEventListener('click', function(event) {
-//       var isClickInside = modal.contains(event.target);
-//     if ((isClickInside == false) && (document.getElementById('modal').classList.contains("showModal"))) {
-//       console.log('heha');
-//       modalBlackout.classList.toggle('showModal');
-//       modal.classList.toggle('showModal');
-//       }
-//     }
-//   )}
-// });
-
-
-
-
-//toggling between Review Information in Modal
+//Selecting onexamination and chest xr review titles and content
 var OEReviewHeading = document.getElementById('on-examination-review');
 var chestXRReviewHeading = document.getElementById('chest-xr-review');
 var OEReviewContent = document.getElementById('on-examination-review-content');
 var chestXRReviewContent = document.getElementById('chest-xr-review-content');
+
 //On Examination
+//Check if OE heading is clicked to show OE review content
 OEReviewHeading.addEventListener('click', function showOEReview() {
   OEReviewHeading.style.backgroundColor = "black";
   chestXRReviewHeading.style.backgroundColor = "gray";
@@ -315,6 +321,7 @@ OEReviewHeading.addEventListener('click', function showOEReview() {
 })
 
 //Chest XR
+//Check if Chest XR heading is clicked to show Chest XR review content
 chestXRReviewHeading.addEventListener('click', function showChestXRReview() {
   chestXRReviewHeading.style.backgroundColor = "black";
   OEReviewHeading.style.backgroundColor = "gray";
