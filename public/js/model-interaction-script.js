@@ -57,8 +57,6 @@ loader.load('models/17040.stl', function (geometry) {
 
   // get heart object to rotate
   heartObj = scene.getObjectByName('heart', true);
-
-
 })
 
 
