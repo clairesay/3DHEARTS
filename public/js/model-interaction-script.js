@@ -1,12 +1,24 @@
-///////////////////////// SETTING UP THE SCENE /////////////////////////////   
+///////////////////////// SETTING UP THE SCENE /////////////////////////////  
+// var labelRenderer; 
 //establishing the scebe abd background color
 var scene = new THREE.Scene();
 scene.background = new THREE.Color("rgb(0, 0, 0)");
 var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
 
+//Adding Lights to the Scene
+var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+scene.add(light);
+
 //rendering the window and everything in it
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize((window.innerWidth / 1.5), (window.innerHeight / 1.5));
+
+// labelRenderer = new CSS2DRenderer();
+// labelRenderer.setSize( window.innerWidth, window.innerHeight );
+// labelRenderer.domElement.style.position = 'absolute';
+// labelRenderer.domElement.style.top = '0px';
+// document.getElementById('heart-model').appendChild( labelRenderer.domElement );
+
 
 //Insert inside 'heart-model' div in interaction template
 var container = document.getElementById('heart-model');
@@ -57,26 +69,8 @@ loader.load('models/17040.stl', function (geometry) {
 
   // get heart object to rotate
   heartObj = scene.getObjectByName('heart', true);
-
-
-    // //////////////////
-  var earthDiv = document.createElement( 'div' );
-  earthDiv.className = 'label';
-  earthDiv.textContent = 'Earth';
-  earthDiv.style.marginTop = '-1em';
-  var earthLabel = new CSS2DObject( earthDiv );
-  earthLabel.position.set( 0, 100, 0 );
-  heart.add( earthLabel );
-
-  labelRenderer = new CSS2DRenderer();
-  labelRenderer.setSize( window.innerWidth, window.innerHeight );
-  labelRenderer.domElement.style.position = 'absolute';
-  labelRenderer.domElement.style.top = '0px';
-  document.body.appendChild( labelRenderer.domElement );
-  // /////////////////
 })
-
-
+ 
 
 ////////////////////// CHANGING VIEWS WITH BUTTONS /////////////////////
 
@@ -200,17 +194,16 @@ loader.load('models/17040.stl', function (geometry) {
 // axesHelper.visible = true;
 // scene.add(axesHelper);
 
-//Adding Lights to the Scene
-var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-scene.add(light);
+
+
+animate();
 
 //Animate and Render
-var animate = function () {
+function animate() {
   requestAnimationFrame(animate);
   controls.update();
-  // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
   renderer.render(scene, camera);
-  labelRenderer.render( scene, camera ); //added
+  // labelRenderer.render(scene, camera);
 };
 
 // resize window on event onWindowResize
@@ -221,7 +214,6 @@ function onWindowResize() {
   renderer.setSize((window.innerWidth / 1.5), (window.innerHeight / 1.5));
 }
 
-animate();
 
 
 
