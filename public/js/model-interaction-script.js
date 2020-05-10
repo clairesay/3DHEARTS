@@ -57,6 +57,23 @@ loader.load('models/17040.stl', function (geometry) {
 
   // get heart object to rotate
   heartObj = scene.getObjectByName('heart', true);
+
+
+    // //////////////////
+  var earthDiv = document.createElement( 'div' );
+  earthDiv.className = 'label';
+  earthDiv.textContent = 'Earth';
+  earthDiv.style.marginTop = '-1em';
+  var earthLabel = new CSS2DObject( earthDiv );
+  earthLabel.position.set( 0, 100, 0 );
+  heart.add( earthLabel );
+
+  labelRenderer = new CSS2DRenderer();
+  labelRenderer.setSize( window.innerWidth, window.innerHeight );
+  labelRenderer.domElement.style.position = 'absolute';
+  labelRenderer.domElement.style.top = '0px';
+  document.body.appendChild( labelRenderer.domElement );
+  // /////////////////
 })
 
 
@@ -193,6 +210,7 @@ var animate = function () {
   controls.update();
   // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
   renderer.render(scene, camera);
+  labelRenderer.render( scene, camera ); //added
 };
 
 // resize window on event onWindowResize
