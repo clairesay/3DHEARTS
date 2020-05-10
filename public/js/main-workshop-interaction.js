@@ -223,6 +223,15 @@ function showStep() {
 ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
 
 function changeView(step) {
+  
+// 
+// myCone.lookAt( s1.position ); 
+// q1 = new THREE.Quaternion().copy( myCone.quaternion );
+
+// myCone.lookAt( s2.position );
+// q2 = new THREE.Quaternion().copy( myCone.quaternion );
+// THREE.Quaternion.slerp( q1, q2, myCone.quaternion, time ); // 0 < time < 1
+// 
   switch (step) {
     case 1:
       camera.position.x = 7.96
@@ -231,6 +240,7 @@ function changeView(step) {
       camera.rotation.x = -0.32;
       camera.rotation.y = 0.41;
       camera.rotation.z = 0.13;
+      light.position.set( camera.position.x, camera.position.y, camera.position.z );
       break;
     case 2:
       camera.position.x = 17.26
@@ -239,6 +249,7 @@ function changeView(step) {
       camera.rotation.x = -0.46
       camera.rotation.y = 1.04
       camera.rotation.z = 0.4
+      light.position.set( camera.position.x, camera.position.y, camera.position.z );
       break;
     case 3:
       camera.position.x = 1.84
@@ -247,6 +258,7 @@ function changeView(step) {
       camera.rotation.x = 2.02
       camera.rotation.y = 0.09
       camera.rotation.z = -2.95
+      light.position.set( camera.position.x, camera.position.y, camera.position.z );
       break;
     case 4:
       camera.position.x = 0.7
@@ -255,6 +267,7 @@ function changeView(step) {
       camera.rotation.x = -0.27
       camera.rotation.y = 0.04
       camera.rotation.z = 0.01
+      light.position.set( camera.position.x, camera.position.y, camera.position.z );
       break;
     case 5:
       camera.position.x = -6.19
@@ -263,6 +276,7 @@ function changeView(step) {
       camera.rotation.x = 0.83
       camera.rotation.y = -0.31
       camera.rotation.z = 0.32
+      light.position.set( camera.position.x, camera.position.y, camera.position.z );
       break;
     case 6:
       camera.position.x = 17.21
@@ -271,6 +285,7 @@ function changeView(step) {
       camera.rotation.x = 1.45
       camera.rotation.y = 1.04
       camera.rotation.z = -1.43
+      light.position.set( camera.position.x, camera.position.y, camera.position.z );
       break;
     case 7:
       camera.position.x = 0.37
@@ -279,6 +294,7 @@ function changeView(step) {
       camera.rotation.x = 2.51
       camera.rotation.y = 0.02
       camera.rotation.z = -3.13
+      light.position.set( camera.position.x, camera.position.y, camera.position.z );
       break;
     case 8:
       camera.position.x = -0.4
@@ -287,10 +303,12 @@ function changeView(step) {
       camera.rotation.x = 3.01
       camera.rotation.y = -0.02
       camera.rotation.z = 3.14
+      light.position.set( camera.position.x, camera.position.y, camera.position.z );
       break;
     default:
       break;
   }
+
 }
 
 /////////////////////////////////////// MODAL REVIEW INFORMATION /////////////////////////////////////////////
