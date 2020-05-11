@@ -1,7 +1,21 @@
 //This is for the interaction section of the module
 
+import * as THREE from '../js/three.module.js';
+import { OBJLoader } from '../js/OBJLoader.js';
+  import { OrbitControls } from '../js/OrbitControls.js';
+
+//Because the module doesn't work otherwise.
+window.nextPoint = nextPoint;
+window.nextModule = nextModule;
+window.nextSlide = nextSlide;
+window.nextStep = nextStep;
+window.exitModule = exitModule;
+window.jumpSection = jumpSection;
+window.showReviewModal = showReviewModal;
+window.changeView = changeView;
 ////////////////// TOP LEFT EXIT MODULE ////////////////////
 //Warning to prevent user from accidentally leaving the module
+
 function exitModule() {
   Swal.fire({
     title: 'Leave Module?',
@@ -338,3 +352,4 @@ chestXRReviewHeading.addEventListener('click', function showChestXRReview() {
   chestXRReviewContent.style.display = "flex";
 })
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
