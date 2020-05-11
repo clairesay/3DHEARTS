@@ -1,3 +1,4 @@
+
 <body class="common-structure">
     <header>
         <button id="returnToMenu" onclick="exitModule();"> <svg width="24" height="24"
@@ -167,10 +168,13 @@
         <a onclick="jumpSection('17040-explanation.html', 'Explanation');">Explanation</a>
     </section>
 </body>
-<script src="js/main-workshop-interaction.js"></script>
-<script src="js/three.js"></script>
+
+{{!-- <script src="js/three.js"></script>
 <script src="js/STLLoader.js"></script>
 <script src="js/OrbitControls.js"></script>
-<script src="js/dat.gui.js"></script>
-<script src="js/model-interaction-script.js"></script>
+<script src="js/dat.gui.js"></script> --}}
+<script type="module" src="js/model-interaction-script.js"></script>
+{{!-- I didn't know how to link in the following --}}
+{{!-- <script type="module" src="js/main-workshop-interaction.js"></script> --}} 
+
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
