@@ -237,6 +237,15 @@ function showStep() {
 ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
 
 function changeView(step) {
+  
+// 
+// myCone.lookAt( s1.position ); 
+// q1 = new THREE.Quaternion().copy( myCone.quaternion );
+
+// myCone.lookAt( s2.position );
+// q2 = new THREE.Quaternion().copy( myCone.quaternion );
+// THREE.Quaternion.slerp( q1, q2, myCone.quaternion, time ); // 0 < time < 1
+// 
   switch (step) {
     case 1:
       camera.position.x = 7.96
