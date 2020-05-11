@@ -16,8 +16,14 @@ Storyblok.get('cdn/stories', {
         version: 'published'
     })
     .then((response) => {
+        
         response.data.stories.forEach((story) => {
-            ben = story.content
+            var content = story.content
+            var sections = story.content.define_sections.split("\n")
+            // How to add a section into a 'ben' object
+            // sections.forEach((section) => ben.)
+            console.log(ben[`${sections[0]}`])
+
         })
     })
     .catch((error) => {
@@ -51,8 +57,8 @@ app.get('/:heartId-:stage?.html', (req, res) => {
     //pass story information into client
     res.render(`${heartId}-${stage}`, {
         title: `${ben.name}'s Story`,
-        prelim: ben.prelim.split("\n"),
-        oe: ben.oe.split("\n"),
+        prelim: ben.preliminary_information.split("\n"),
+        oe: ben.on_examination.split("\n"),
         xray: `https://s3.amazonaws.com${ben.xray.slice(1, ben.xray.length)}`
     })
 })
