@@ -186,9 +186,9 @@ loader.load('models/17040.stl', function (geometry) {
 // axesHelper.visible = true;
 // scene.add(axesHelper);
 
-//Adding Lights to the Scene
-var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-scene.add(light);
+// //Adding Lights to the Scene
+// var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+// scene.add(light);
 
 //Animate and Render
 var animate = function () {
