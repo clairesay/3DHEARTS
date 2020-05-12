@@ -7,26 +7,50 @@
                     d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
                 </svg> </button>
         <div id="module-name">
-            <h1>{{ title }}</h1>
+            <h1>Ben's Story</h1>
             <h3>On Examination</h3>
         </div>
     </header>
+    
     <section class="content module-slide">
         <!-- <h1>Case #17040</h1> -->
         <p>Let's look at the case of Ben and a potential diagnosis of a congenital heart defect.</p>
     </section>
+
+    {{!-- <section class="content module-slide">
+        {{#each preliminary_information}}
+            <p class="case-content">{{this}}</p>
+        {{/each}}
+    </section> --}}
+
+    {{!-- {{#each content}}
+        <section class="content module-slide">
+            {{#each this}}
+                <p class="case-content">{{this}}</p>
+            {{/this}}
+        </section>
+    {{/each}} --}}
+
     <section class="content module-slide">
-        {{#each prelim}}
+        {{#each preliminary_information}}
             <p class="case-content">{{ this }}</p>
         {{/each}}
     </section>
     <section class="content module-slide">
         <h1>Background History</h1>
-        {{#each background}}
+        {{#each background_history}}
             <p class="case-content">{{ this }}</p>
         {{/each}}
     </section>
     <section class="content module-slide">
+        <h1>On Examination</h1>
+        {{#each on_examination}}
+            <p class="case-content">{{ this }}</p>
+        {{/each}}
+    </section>
+
+
+    {{!-- <section class="content module-slide">
         <h1>On Examination</h1>
         <p class="case-content">Ben looks unwell with increased work of breathing and a vigorous cry</p>
         <p class="case-content">Growth: looks small for his age; weight 5kg (3rd centile); was 25th centile at 6-week
@@ -51,27 +75,35 @@
             <li>soft and non-tender</li>
             <li>liver edge 2cm below right costal margin</li>
         </ul>
-    </section>
+    </section>  --}}
+
     <section class="content module-slide">
         <p class="case-content">There is a radiology practice adjacent to your clinic and you organise a chest XR.</p>
     </section>
     <section class="content module-slide">
-        <p class="case-content"><img class="chest-xr" src={{ xray }}></p>
+        <p class="case-content"><img class="chest-xr" src={{xray}}></p>
     </section>
     <section class="content module-slide">
         <h1>What are your differential diagnoses?</h1>
         <p class="case-content">Think carefully about your answer before you proceed to the next page.</p>
     </section>
+
     <section class="content module-slide">
         <h1>What are your differential diagnoses?</h1>
-        <li class="case-content">Cardiac - pulmonary oedema</li>
+        {{#each differential_diagnoses}}
+            <li class="case-content">{{ this }}</li>
+        {{/each}}
+        {{!-- <li class="case-content">Cardiac - pulmonary oedema</li>
         <li class="case-content">Upper airway - croup, epiglottitis, foreign body</li>
         <li class="case-content">Lower airway - bronchiolitis, viral-induced wheeze, pneumonia, empyema</li>
-        <li class="case-content">Central - diabetic keto-acidosis, toxin/poisoning</li>
+        <li class="case-content">Central - diabetic keto-acidosis, toxin/poisoning</li> --}}
     </section>
     <section class="content module-slide">
         <p class="case-content">Well done on examining your patient! Proceed to Interaction!</p>
     </section>
+
+
+
     <button id="previous" class="nav-button" onclick="nextSlide(-1)"> <svg width="24" height="24"
             xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
             <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>

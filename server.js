@@ -3,10 +3,11 @@ const exphbs = require('express-handlebars');
 const PORT = process.env.PORT || 5000;
 const app = express();
 
-//////////// GET STORYBLOK STORIES //////////////
+//////////// GET STORYBLOK CONTENT //////////////
 
 var StoryblokClient = require('storyblok-js-client')
-var ben;
+// This variable will contain the information to be templated
+var ben = new Object();
 
 const Storyblok = new StoryblokClient({
     accessToken: "cxBOVdDowPMBH7h41jTGuQtt"
@@ -16,13 +17,37 @@ Storyblok.get('cdn/stories', {
         version: 'published'
     })
     .then((response) => {
-        
+
         response.data.stories.forEach((story) => {
-            var content = story.content
-            var sections = story.content.define_sections.split("\n")
-            // How to add a section into a 'ben' object
-            // sections.forEach((section) => ben.)
-            console.log(ben[`${sections[0]}`])
+            // // The following commented code is an attempt to dynamically generate sections depending on 
+            // // the amount of scheme in Storyblok. I was not able to get it to work so we have to just
+            // // stick with the sections already defined in Storyblok.
+
+            // // Grab the content section so we can template the relevant information
+            // var content = story.content
+
+            // // Parse the 'Define Sections' schema to grab the titles of the sections to template
+            // var section_titles = story.content.define_sections.split("\n")
+
+            // // For each section name we'll add it to the Object we defined earlier
+            // section_titles.forEach((title) => {
+            //     ben[`${title}`] = content[`${title}`].split("\n")
+            // })
+
+            // ben.xray = `https://s3.amazonaws.com${content.xray.slice(1)}`
+            // ben.name = content.name
+
+            // console.log(ben)
+
+            switch(story.content.name) {
+                case "Ben":
+                    ben = story.content
+                    break
+                default:
+                    break
+            }
+
+            console.log(ben)
 
         })
     })
@@ -51,15 +76,18 @@ app.get('/pre-workshop-module', (req, res) => {
 })
 
 app.get('/:heartId-:stage?.html', (req, res) => {
+    // These variables used to call the .hbs file according to the URL
     var heartId = req.params.heartId
     var stage = req.params.stage
 
-    //pass story information into client
+    // pass story information into client
     res.render(`${heartId}-${stage}`, {
         title: `${ben.name}'s Story`,
-        prelim: ben.preliminary_information.split("\n"),
-        oe: ben.on_examination.split("\n"),
-        xray: `https://s3.amazonaws.com${ben.xray.slice(1, ben.xray.length)}`
+        preliminary_information: ben.preliminary_information.split("\n"),
+        background_history: ben.background_history.split("\n"),
+        on_examination: ben.on_examination.split("\n"),
+        differential_diagnoses: ben.differential_diagnoses.split("\n"),
+        xray: `https://s3.amazonaws.com${ben.xray.slice(1)}`
     })
 })
 
