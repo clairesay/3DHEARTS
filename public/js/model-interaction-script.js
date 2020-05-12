@@ -1,9 +1,16 @@
-
+//importing js modules
 import * as THREE from '../js/three.module.js';
 import { OBJLoader } from '../js/OBJLoader.js';
 import { OrbitControls } from '../js/OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from '../js/CSS2DRenderer.js';
+
 //Because the module doesn't work otherwise.
 window.camera = camera;
+
+//Declaring some variables for the labels
+var testDiv, testLabel, labelRenderer;
+//Declaring variable for the model
+var heart;
 
 ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
 //establishing the scebe abd background color
@@ -19,6 +26,19 @@ renderer.setSize((window.innerWidth / 1.5), (window.innerHeight / 1.5));
 var container = document.getElementById('heart-model');
 container.appendChild(renderer.domElement);
 
+//Generating Labels for the Model
+testDiv = document.createElement( 'div' );
+testDiv.className = 'model-label';
+testDiv.textContent = 'Moon';
+testLabel = new CSS2DObject( testDiv );
+testLabel.position.set( 0, -20, 0 );
+
+//Setting up the Label Renderer and positioning it over the 3D container only.
+labelRenderer = new CSS2DRenderer();
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+container.appendChild( labelRenderer.domElement );
+
 //Setting the position of the camera
 camera.position.x = 0;
 camera.position.y = 0;
@@ -29,42 +49,69 @@ scene.add( light );
 
 //Adding Orbit Controls
 var controls = new OrbitControls(camera, container);
-// controls.enableDamping = true;
+controls.enableDamping = true;
+
+//Zoom in and out buttons controlling max and min camera zoom
+window.zoom = zoom;
+function zoom(zoomValue) {
+  switch(zoomValue) {
+    case -1:
+      controls.maxDistance = 20;
+      controls.minDistance = 20;
+      break;
+    case 1:
+      controls.maxDistance = 10;
+      controls.minDistance = 10;
+      break;
+    default:
+      break;
+  }
+}
+
+//Show Labels function
+window.showLabel = showLabel;
+function showLabel(showValue) {
+  switch(showValue) {
+    case 1:
+      testDiv.style.visibility = "visible";
+      break;
+    case -1:
+      testDiv.style.visibility = "hidden";
+      break;
+    default:
+      break;
+  }
+}
 
 // Declare variables to manipulate heart object rotation
 var heartObj;
 var xRotation, yRotation, zRotation;
 
 ///////////////////////// MODEL LOADER /////////////////////////////
-
 // Loading STL model
 var loader = new OBJLoader()
 loader.load('models/17040.obj', function ( heart ) {
 
-  //centering geometry
-  // geometry.center();
+  //material of model
+  var material = new THREE.MeshStandardMaterial({
+    color: 0xfffeea,
+    metalness: 0.1,
+    roughness: 0.75,
+    shadowSide: THREE.DoubleSide,
+  });
+  
   heart.traverse( function ( child ) {
 
     if ( child instanceof THREE.Mesh ) {
        child.geometry.center();
+       child.material = material;
 
     }
   })
 
-  //material of model
-  // var material = new THREE.MeshStandardMaterial({
-  //   color: 0xfffeee,
-  //   metalness: 0.1,
-  //   roughness: 0.75,
-  //   shadowSide: THREE.DoubleSide,
-  // });
-
-  //combining loaded geometry with material
-  // var heart = new THREE.Mesh(geometry, material);
-  // heart.castShadow = true;
+  //adding labels to heart, and heart to the scene
   heart.name = 'heart';
-
-  //adding heart to the scene
+  heart.add( testLabel );
   scene.add(heart);
 
   //positioning the heart for optimal scale and visibility
@@ -202,16 +249,13 @@ loader.load('models/17040.obj', function ( heart ) {
 // axesHelper.visible = true;
 // scene.add(axesHelper);
 
-// //Adding Lights to the Scene
-// var light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-// scene.add(light);
-
 //Animate and Render
 var animate = function () {
   requestAnimationFrame(animate);
   controls.update();
   // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
   renderer.render(scene, camera);
+  labelRenderer.render( scene, camera );
 };
 
 // resize window on event onWindowResize
@@ -240,7 +284,6 @@ window.showReviewModal = showReviewModal;
 window.changeView = changeView;
 ////////////////// TOP LEFT EXIT MODULE ////////////////////
 //Warning to prevent user from accidentally leaving the module
-
 function exitModule() {
   Swal.fire({
     title: 'Leave Module?',
@@ -462,6 +505,10 @@ function showStep() {
 ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
 
 function changeView(step) {
+  //Setting the container size of the label renderer
+  var canvas = document.getElementsByTagName('canvas')[0]
+  labelRenderer.setSize( canvas.clientWidth, canvas.clientHeight);
+
   switch (step) {
     case 1:
       camera.position.x = 7.96
@@ -470,7 +517,11 @@ function changeView(step) {
       camera.rotation.x = -0.32;
       camera.rotation.y = 0.41;
       camera.rotation.z = 0.13;
+      //Light position changes as camera position changes
       light.position.set( camera.position.x, camera.position.y, camera.position.z );
+      //Setting Labels
+      testDiv.textContent = 'Moon';
+      testLabel.position.set( 0, -20, 0 );
       break;
     case 2:
       camera.position.x = 17.26
@@ -480,6 +531,8 @@ function changeView(step) {
       camera.rotation.y = 1.04
       camera.rotation.z = 0.4
       light.position.set( camera.position.x, camera.position.y, camera.position.z );
+      testDiv.textContent = 'Earth';
+      testLabel.position.set( 0, 20, 0 );
       break;
     case 3:
       camera.position.x = 1.84
@@ -489,6 +542,7 @@ function changeView(step) {
       camera.rotation.y = 0.09
       camera.rotation.z = -2.95
       light.position.set( camera.position.x, camera.position.y, camera.position.z );
+      testDiv.textContent = 'Sun';
       break;
     case 4:
       camera.position.x = 0.7
@@ -538,7 +592,6 @@ function changeView(step) {
     default:
       break;
   }
-
 }
 
 /////////////////////////////////////// MODAL REVIEW INFORMATION /////////////////////////////////////////////

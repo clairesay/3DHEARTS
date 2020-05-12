@@ -252,11 +252,28 @@ li {
 #heart-model  {
     width: 74vw;
     height: 40vw;
+    position: relative;
 }
 
 #heart-model:focus {
     outline-width: 0;
 }
+
+.model-label {
+    padding:  0.5em 0.75em;
+    background-color: white;
+}
+
+.model-label::after {
+    content: "";
+    position: absolute;
+    top: 99%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+  }
 
 /* ////////// STEPS/INSTRUCTIONS FOR HOW TO INTERACT ////////////// */
 .step {
