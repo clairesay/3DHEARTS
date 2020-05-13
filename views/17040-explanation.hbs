@@ -14,7 +14,7 @@
         <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
         <p>Think carefully about your answer before you proceed to the next page.</p>
     </section>
-    <section class="content module-slide">
+    {{!-- <section class="content module-slide">
         <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
         <h3>Explanation</h3>
         <p class="case-content">Ben has a VSD with left to right shunting (i.e., an acyanotic congenital cardiac
@@ -42,15 +42,24 @@
                 gradient to develop, which results in increased left to right flow across the VSD and eventually into
                 the lungs.</li>
         </ul>
-    </section>
+    </section> --}}
     <section class="content module-slide">
+        <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
+        <h3>Explanation</h3>
+        {{#each explanation}}
+            {{list this}}
+        {{/each}}
+    </section>
+
+    {{!-- <section class="content module-slide">
         <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
         <h3>Explanation</h3>
         <p>This explains why newborn babies typically do not show symptoms even if they have a large VSD (and often they
             do not have a murmur!) Symptoms usually develop over approximately 4-6 weeks, once the pulmonary vascular
             resistance decreases. Similarly, neonates have a relative right axis deviation on the ECG, which slowly
             changes to a normal/left axis.</p>
-    </section>
+    </section> --}}
+    
     <section class="content module-slide">
         <p class="case-content">Well done on completing Ben's Story! Return to Modules Home to discover more stories.
         </p>

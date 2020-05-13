@@ -205,9 +205,7 @@ button:hover {
     visibility: visible;
 }
 
-.module-slide .case-content:first-of-type {
-    visibility: visible;
-}
+
 
 .module-slide h1 {
     margin: 0 0 0.5em 0;
