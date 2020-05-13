@@ -1,8 +1,277 @@
-//This is for the interaction section of the module
+//importing js modules
+import * as THREE from './three.module.js';
+import { OBJLoader } from './OBJLoader.js';
+import { OrbitControls } from './OrbitControls.js';
+import { CSS2DRenderer, CSS2DObject } from './CSS2DRenderer.js';
 
-import * as THREE from '../js/three.module.js';
-import { OBJLoader } from '../js/OBJLoader.js';
-  import { OrbitControls } from '../js/OrbitControls.js';
+//Because the module doesn't work otherwise.
+window.camera = camera;
+
+//Declaring some variables for the labels
+var testDiv, testLabel, labelRenderer;
+//Declaring variable for the model
+var heart;
+
+///////////////////////// SETTING UP THE SCENE /////////////////////////////   
+//establishing the scebe abd background color
+var scene = new THREE.Scene();
+scene.background = new THREE.Color("rgb(0, 0, 0)");
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+
+//rendering the window and everything in it
+var renderer = new THREE.WebGLRenderer();
+renderer.setSize((window.innerWidth / 1.5), (window.innerHeight / 1.5));
+
+//Insert inside 'heart-model' div in interaction template
+var container = document.getElementById('heart-model');
+container.appendChild(renderer.domElement);
+
+//Generating Labels for the Model
+testDiv = document.createElement( 'div' );
+testDiv.className = 'model-label';
+testDiv.textContent = 'Moon';
+testLabel = new CSS2DObject( testDiv );
+testLabel.position.set( 0, -20, 0 );
+
+//Setting up the Label Renderer and positioning it over the 3D container only.
+labelRenderer = new CSS2DRenderer();
+labelRenderer.domElement.style.position = 'absolute';
+labelRenderer.domElement.style.top = '0px';
+container.appendChild( labelRenderer.domElement );
+
+//Setting the position of the camera
+camera.position.x = 0;
+camera.position.y = 0;
+camera.position.z = 20;
+var light = new THREE.PointLight( 0xfffdd0, 1.1, 100 );
+light.position.set( camera.position.x, camera.position.y, camera.position.z );
+scene.add( light );
+
+//Adding Orbit Controls
+var controls = new OrbitControls(camera, container);
+controls.enableDamping = true;
+
+//Zoom in and out buttons controlling max and min camera zoom
+window.zoom = zoom;
+function zoom(zoomValue) {
+  switch(zoomValue) {
+    case -1:
+      controls.maxDistance = 20;
+      controls.minDistance = 20;
+      break;
+    case 1:
+      controls.maxDistance = 10;
+      controls.minDistance = 10;
+      break;
+    default:
+      break;
+  }
+}
+
+//Show Labels function
+window.showLabel = showLabel;
+function showLabel(showValue) {
+  switch(showValue) {
+    case 1:
+      testDiv.style.visibility = "visible";
+      break;
+    case -1:
+      testDiv.style.visibility = "hidden";
+      break;
+    default:
+      break;
+  }
+}
+
+// Declare variables to manipulate heart object rotation
+var heartObj;
+var xRotation, yRotation, zRotation;
+
+///////////////////////// MODEL LOADER /////////////////////////////
+// Loading STL model
+var loader = new OBJLoader()
+loader.load('models/17040.obj', function ( heart ) {
+
+  //material of model
+  var material = new THREE.MeshStandardMaterial({
+    color: 0xfffeea,
+    metalness: 0.1,
+    roughness: 0.75,
+    shadowSide: THREE.DoubleSide,
+  });
+  
+  heart.traverse( function ( child ) {
+
+    if ( child instanceof THREE.Mesh ) {
+       child.geometry.center();
+       child.material = material;
+
+    }
+  })
+
+  //adding labels to heart, and heart to the scene
+  heart.name = 'heart';
+  heart.add( testLabel );
+  scene.add(heart);
+
+  //positioning the heart for optimal scale and visibility
+  heart.scale.set(0.1, 0.1, 0.1);
+  console.log(heart.rotation.x, heart.rotation.y, heart.rotation.z)
+  heart.rotation.x = 0;
+  heart.rotation.y = 3;
+  heart.rotation.z = 0;
+
+  // get heart object to rotate
+  heartObj = scene.getObjectByName('heart', true);
+})
+
+
+
+////////////////////// CHANGING VIEWS WITH BUTTONS /////////////////////
+
+// document.getElementById('view1-17040').addEventListener('click', function orientView() {
+//   camera.position.x = 7.96
+//   camera.position.y = 5.83
+//   camera.position.z = 17.4
+//   camera.rotation.x = -0.32;
+//   camera.rotation.y = 0.41;
+//   camera.rotation.z = 0.13;
+// })
+
+// document.getElementById('view2-17040').addEventListener('click', function orientView() {
+//   camera.position.x = 17.26
+//   camera.position.y = 4.45
+//   camera.position.z = 9.07
+//   camera.rotation.x = -0.46
+//   camera.rotation.y = 1.04
+//   camera.rotation.z = 0.4
+// })
+
+// document.getElementById('view3-17040').addEventListener('click', function orientView() {
+//   camera.position.x = 1.84
+//   camera.position.y = -17.93
+//   camera.position.z = -8.67
+//   camera.rotation.x = 2.02
+//   camera.rotation.y = 0.09
+//   camera.rotation.z = -2.95
+// })  
+
+// document.getElementById('view4-17040').addEventListener('click', function orientView() {
+//   camera.position.x = 0.7
+//   camera.position.y = 5.24
+//   camera.position.z = 19.29
+//   camera.rotation.x = -0.27
+//   camera.rotation.y = 0.04
+//   camera.rotation.z = 0.01
+// })  
+
+// document.getElementById('view5-17040').addEventListener('click', function orientView() {
+//   camera.position.x = -6.19
+//   camera.position.y = -14
+//   camera.position.z = 12.87
+//   camera.rotation.x = 0.83
+//   camera.rotation.y = -0.31
+//   camera.rotation.z = 0.32
+// })  
+
+// document.getElementById('view6-17040').addEventListener('click', function orientView() {
+//   camera.position.x = 17.21
+//   camera.position.y = -10.12
+//   camera.position.z = 1.24
+//   camera.rotation.x = 1.45
+//   camera.rotation.y = 1.04
+//   camera.rotation.z = -1.43
+// })  
+
+// document.getElementById('view7-17040').addEventListener('click', function orientView() {
+//   // camera.position.lerp(new THREE.Vector3(0.37, -11.82, -16.13), viewLerp)
+//   camera.position.x = 0.37
+//   camera.position.y = -11.82
+//   camera.position.z = -16.13
+//   camera.rotation.x = 2.51
+//   camera.rotation.y = 0.02
+//   camera.rotation.z = -3.13
+// })  
+
+// document.getElementById('view8-17040').addEventListener('click', function orientView() {
+//   camera.position.x = -0.4
+//   camera.position.y = -2.64
+//   camera.position.z = -19.82
+//   camera.rotation.x = 3.01
+//   camera.rotation.y = -0.02
+//   camera.rotation.z = 3.14
+// })  
+
+// document.getElementById('report').addEventListener('click', function orientView1() {
+//   console.log(camera.position, camera.rotation);
+// })
+////////////////////// CHANGING VIEWS WITH BUTTONS /////////////////////
+
+
+
+
+////////////////////// GUI /////////////////////
+
+// var params = {
+//   // rotateX: 0,
+//   // rotateY: 0,
+//   // rotateZ: 0,
+//   showAxes: true
+// }
+
+// var gui = new dat.GUI();
+
+// // gui.add(params, 'rotateX', -Math.PI/2, Math.PI/2).step(0.01).name('Rotate on X Axis').onChange(function(value) {
+// //   heartObj.rotation.x = value;
+// // })
+// // gui.add(params, 'rotateY', -Math.PI / 2, Math.PI / 2).step(0.01).name('Rotate on Y Axis').onChange(function (value) {
+// //   heartObj.rotation.y = value;
+// // })
+// // gui.add(params, 'rotateZ', -Math.PI/2, Math.PI/2).step(0.01).name('Rotate on Z Axis').onChange(function(value) {
+// //   heartObj.rotation.z = value;
+// // })
+
+// gui.add(params, 'showAxes').name('Show Axes').onChange(function (value) {
+//   axesHelper.visible = value;
+//   gridXZ.visible = value;
+// })
+
+
+
+
+// //Grid for reference
+// var gridXZ = new THREE.GridHelper(10, 10);
+// gridXZ.visible = true;
+// scene.add(gridXZ);
+
+// //Axes for xyz reference
+// var axesHelper = new THREE.AxesHelper(5);
+// axesHelper.visible = true;
+// scene.add(axesHelper);
+
+//Animate and Render
+var animate = function () {
+  requestAnimationFrame(animate);
+  controls.update();
+  // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
+  renderer.render(scene, camera);
+  labelRenderer.render( scene, camera );
+};
+
+// resize window on event onWindowResize
+window.addEventListener('resize', onWindowResize, false)
+function onWindowResize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize((window.innerWidth / 1.5), (window.innerHeight / 1.5));
+}
+
+animate();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// PREVIOUSLY THIS WAS THE MAIN INTERACTION JS FILE //
 
 //Because the module doesn't work otherwise.
 window.nextPoint = nextPoint;
@@ -15,7 +284,6 @@ window.showReviewModal = showReviewModal;
 window.changeView = changeView;
 ////////////////// TOP LEFT EXIT MODULE ////////////////////
 //Warning to prevent user from accidentally leaving the module
-
 function exitModule() {
   Swal.fire({
     title: 'Leave Module?',
@@ -237,6 +505,10 @@ function showStep() {
 ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
 
 function changeView(step) {
+  //Setting the container size of the label renderer
+  var canvas = document.getElementsByTagName('canvas')[0]
+  labelRenderer.setSize( canvas.clientWidth, canvas.clientHeight);
+
   switch (step) {
     case 1:
       camera.position.x = 7.96
@@ -245,7 +517,11 @@ function changeView(step) {
       camera.rotation.x = -0.32;
       camera.rotation.y = 0.41;
       camera.rotation.z = 0.13;
+      //Light position changes as camera position changes
       light.position.set( camera.position.x, camera.position.y, camera.position.z );
+      //Setting Labels
+      testDiv.textContent = 'Moon';
+      testLabel.position.set( 0, -20, 0 );
       break;
     case 2:
       camera.position.x = 17.26
@@ -255,6 +531,8 @@ function changeView(step) {
       camera.rotation.y = 1.04
       camera.rotation.z = 0.4
       light.position.set( camera.position.x, camera.position.y, camera.position.z );
+      testDiv.textContent = 'Earth';
+      testLabel.position.set( 0, 20, 0 );
       break;
     case 3:
       camera.position.x = 1.84
@@ -264,6 +542,7 @@ function changeView(step) {
       camera.rotation.y = 0.09
       camera.rotation.z = -2.95
       light.position.set( camera.position.x, camera.position.y, camera.position.z );
+      testDiv.textContent = 'Sun';
       break;
     case 4:
       camera.position.x = 0.7
@@ -313,7 +592,6 @@ function changeView(step) {
     default:
       break;
   }
-
 }
 
 /////////////////////////////////////// MODAL REVIEW INFORMATION /////////////////////////////////////////////
@@ -352,4 +630,6 @@ chestXRReviewHeading.addEventListener('click', function showChestXRReview() {
   chestXRReviewContent.style.display = "flex";
 })
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

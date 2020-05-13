@@ -9,6 +9,9 @@ const app = express();
 var StoryblokClient = require('storyblok-js-client')
 // This variable will contain the information to be templated
 var ben = new Object();
+var ayanthi = new Object();
+var amin = new Object();
+var richardson = new Object();
 
 const Storyblok = new StoryblokClient({
     accessToken: "cxBOVdDowPMBH7h41jTGuQtt"
@@ -22,7 +25,7 @@ Storyblok.get('cdn/stories', {
         response.data.stories.forEach((story) => {
             // // The following commented code is an attempt to dynamically generate sections depending on 
             // // the amount of scheme in Storyblok. I was not able to get it to work so we have to just
-            // // stick with the sections already defined in Storyblok.
+            // // stick with the sections already defined in Storyblok for now.
 
             // // Grab the content section so we can template the relevant information
             // var content = story.content
@@ -44,12 +47,18 @@ Storyblok.get('cdn/stories', {
                 case "Ben":
                     ben = story.content
                     break
+                case "Ayanthi":
+                    ayanthi = story.content
+                    break
+                case "Amin":
+                    amin = story.content
+                    break
+                case "Richardson":
+                    richardson = story.content
+                    break
                 default:
                     break
             }
-
-            console.log(ben)
-
         })
     })
     .catch((error) => {
@@ -108,7 +117,7 @@ Handlebars.registerHelper("review", function (context) {
     }
 })
 
-Handlebars.registerHelper("interactionSteps", function(context) {
+Handlebars.registerHelper("interactionSteps", function (context) {
     return new Handlebars.SafeString("<p class='step'>" + context + "</p>")
 })
 
@@ -138,18 +147,33 @@ app.get('/:heartId-:stage?.html', (req, res) => {
     var heartId = req.params.heartId
     var stage = req.params.stage
 
-    // pass story information into client
-    res.render(`${heartId}-${stage}`, {
-        title: `${ben.name}'s Story`,
-        preliminary_information: ben.preliminary_information.split("\n"),
-        background_history: ben.background_history.split("\n"),
-        on_examination: ben.on_examination.split("\n"),
-        differential_diagnoses: ben.differential_diagnoses.split("\n"),
-        xray: `https://s3.amazonaws.com${ben.xray.slice(1)}`,
-        interaction: ben.interaction.split("\n"),
-        cardiac_explanation: ben.cardiac_explanation.split("\n"),
-        explanation: ben.explanation.split("\n")
-    })
+    // pass story information into client depending on heartId
+    switch (heartId) {
+        // Ben
+        case "17040":
+            res.render(`${heartId}-${stage}`, {
+                title: `${ben.name}'s Story`,
+                heartId: heartId,
+                preliminary_information: ben.preliminary_information.split("\n"),
+                background_history: ben.background_history.split("\n"),
+                on_examination: ben.on_examination.split("\n"),
+                differential_diagnoses: ben.differential_diagnoses.split("\n"),
+                xray: `https://s3.amazonaws.com${ben.xray.slice(1)}`,
+                cardiac_explanation: ben.cardiac_explanation.split("\n"),
+                explanation: ben.explanation.split("\n")
+            })
+            break
+
+        // Ayanthi
+        case "19401":
+            break
+
+        default:
+            break
+    }
+
+
+
 })
 
 app.get('/about', (req, res) => {
