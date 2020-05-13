@@ -60,8 +60,6 @@ Storyblok.get('cdn/stories', {
                     break
             }
         })
-
-        console.log(ayanthi)
     })
     .catch((error) => {
         console.log(error)
@@ -144,15 +142,17 @@ app.get('/pre-workshop-module', (req, res) => {
     })
 })
 
-app.get('/:heartId-:stage?.html', (req, res) => {
+app.get('/:heartId-:stage.html', (req, res) => {
     // These variables used to call the .hbs file according to the URL
     var heartId = req.params.heartId
     var stage = req.params.stage
 
     // pass story information into client depending on heartId
     switch (heartId) {
+
         // Ben
         case "17040":
+            console.log(heartId)
             res.render(`${stage}`, {
                 title: `${ben.name}'s Story`,
                 name: ben.name,
@@ -183,13 +183,44 @@ app.get('/:heartId-:stage?.html', (req, res) => {
             })
             break
 
+        // Amin
+        case "16751":
+            res.render(`${stage}`, {
+                title: `${amin.name}'s Story`,
+                name: amin.name,
+                heartId: heartId,
+                preliminary_information: amin.preliminary_information.split("\n"),
+                background_history: amin.background_history.split("\n"),
+                on_examination: amin.on_examination.split("\n"),
+                differential_diagnoses: amin.differential_diagnoses.split("\n"),
+                xray: `https://s3.amazonaws.com${amin.xray.slice(1)}`,
+                cardiac_explanation: amin.cardiac_explanation.split("\n"),
+                explanation: amin.explanation.split("\n")
+            })
+            break
+
+        // Richardson
+        case "19863":
+            res.render(`${stage}`, {
+                title: `${richardson.name}'s Story`,
+                name: richardson.name,
+                heartId: heartId,
+                preliminary_information: richardson.preliminary_information.split("\n"),
+                background_history: richardson.background_history.split("\n"),
+                on_examination: richardson.on_examination.split("\n"),
+                differential_diagnoses: richardson.differential_diagnoses.split("\n"),
+                xray: `https://s3.amazonaws.com${richardson.xray.slice(1)}`,
+                cardiac_explanation: richardson.cardiac_explanation.split("\n"),
+                explanation: richardson.explanation.split("\n")
+            })
+            break
+
         default:
             break
     }
-
-
-
 })
+
+app.get
 
 app.get('/about', (req, res) => {
     res.render('about')
