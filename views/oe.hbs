@@ -1,0 +1,238 @@
+<body class="common-structure">
+    <header>
+        <button id="returnToMenu" onclick="exitModule();"> <svg width="24" height="24"
+                xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+                <path
+                    d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
+            </svg> </button>
+        <div id="module-name">
+            <h1>{{name}}'s Story</h1>
+            <h3>On Examination</h3>
+        </div>
+    </header>
+
+    <section class="content module-slide">
+        <p>Let's look at the case of {{name}} and a potential diagnosis of a congenital heart defect.</p>
+    </section>
+
+    <section class="content module-slide">
+        {{#each preliminary_information}}
+        {{list this}}
+        {{/each}}
+    </section>
+
+    <section class="content module-slide">
+        <h1>Background History</h1>
+        {{#each background_history}}
+        {{list this}}
+        {{/each}}
+    </section>
+
+    <section class="content module-slide">
+        <h1>On Examination</h1>
+        {{#each on_examination}}
+        {{ list this }}
+        {{/each}}
+    </section>
+
+    <section class="content module-slide">
+        <p class="case-content">There is a radiology practice adjacent to your clinic and you organise a chest XR.</p>
+    </section>
+
+    <section class="content module-slide">
+        <p class="case-content"><img class="chest-xr" src={{xray}}></p>
+    </section>
+
+    <section class="content module-slide">
+        <h1>What are your differential diagnoses?</h1>
+        <p class="case-content">Think carefully about your answer before you proceed to the next page.</p>
+    </section>
+
+    <section class="content module-slide">
+        <h1>What are your differential diagnoses?</h1>
+        {{#each differential_diagnoses}}
+        {{list this}}
+        {{/each}}
+    </section>
+
+    <section class="content module-slide">
+        <p class="case-content">Well done on examining your patient! Proceed to Interaction!</p>
+    </section>
+
+
+
+    <button id="previous" class="nav-button" onclick="nextSlide(-1)"> <svg width="24" height="24"
+            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+            <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>
+    </button>
+    <button id="next-module" class="text-button" onclick="nextModule();">Interaction</button>
+    <button id="next" class="nav-button" onclick="nextSlide(1);"><svg width="24" height="24"
+            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
+            <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
+        </svg></button>
+    <section id="navigation-tab">
+        <a onclick="jumpSection('" + {{heartId}} + "-oe.html', 'Case Examination');">Case Examination</a>
+        <a onclick="jumpSection('" + {{heartId}} + "-interaction.html', 'Interaction');">Interaction</a>
+        <a onclick="jumpSection('" + {{heartId}} + "-explanation.html', 'Explanation');">Explanation</a>
+    </section>
+</body>
+
+<script>
+    //This is for the on-examination section of the module
+
+    ////////////////// TOP LEFT EXIT MODULE ////////////////////
+    //Warning to prevent user from accidentally leaving the module
+    function exitModule() {
+        Swal.fire({
+            title: 'Leave Module?',
+            text: 'You will be taken back to the Modules Homepage.',
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: 'Cancel',
+            confirmButtonText: 'Leave',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.value) {
+                window.location.href = "index.html";
+            }
+        })
+    }
+
+    /////////////////////////////////// NAVIGATION TAB  ////////////////////////////////
+    //checking for the path name
+    var path = window.location.pathname;
+    var page = path.split("/").pop();
+
+    //highlighting the text to show the current page displayed
+    if (page.includes('oe')) {
+        document.querySelectorAll('#navigation-tab a')[0].style.color = "black";
+        document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[0].style.cursor = "default";
+    } else if (page.includes('interaction')) {
+        document.querySelectorAll('#navigation-tab a')[1].style.color = "black";
+        document.querySelectorAll('#navigation-tab a')[1].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[1].style.cursor = "default";
+    } else if (page.includes('explanation')) {
+        document.querySelectorAll('#navigation-tab a')[2].style.color = "black";
+        document.querySelectorAll('#navigation-tab a')[2].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[2].style.cursor = "default";
+    }
+
+    //If the user clicks on a different section to jump to, warn them before they jump to it
+    function jumpSection(destination, sectionName) {
+        if (destination == page) {
+        } else {
+            Swal.fire({
+                title: 'Start the ' + sectionName + ' section?',
+                text: 'You will leave this module.',
+                icon: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'Cancel',
+                confirmButtonText: 'Start',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.value) {
+                    window.location.href = destination;
+                } else if (result.dismiss === Swal.DismissReason.cancel) {
+                }
+            })
+        }
+    }
+
+    ///////////////////////////////// AT THE END OF A MODULE ///////////////////////////
+    //at the end of the module, automatically forward user to the next section
+    function nextModule() {
+        window.location.href = {{heartId}} + "-interaction.html";
+    }
+
+    ////////// USING LOCAL STORAGE TO OFFSET IF USER NAVIGATES TO PREVIOUS SLIDE FIXING/////////////
+    document.getElementById('previous').addEventListener('click', function pointViewCount() {
+        localStorage.setItem('prevCurrentPoint', currentPoint);
+    })
+
+    /////////////////////////////////// PROGRESSION THROUGH SLIDES ///////////////////////////////
+    let pointIncrement = 0;
+    //function to show current slide
+    function showSlide(currentSlide) {
+        //if the current slide is the first one, hide the previous button and show the next button only
+        if (currentSlide == 0) {
+            document.getElementById('previous').style.visibility = "hidden"
+            document.getElementById('next').style.visibility = "visible"
+            //if the current slide is the second last one, show the next-module button, hide the next button and show the previous button
+        } else if (currentSlide == (document.querySelectorAll('.module-slide').length - 1)) {
+            document.getElementById('previous').style.visibility = "visible"
+            document.getElementById('next-module').style.visibility = "visible"
+            document.getElementById('next').style.visibility = "hidden"
+            //show both the previous and next buttons and hide the next-module button at all other times
+        } else {
+            document.getElementById('previous').style.visibility = "visible"
+            document.getElementById('next').style.visibility = "visible"
+            document.getElementById('next-module').style.visibility = "hidden"
+        }
+
+        //show this slide a.k.a current slide
+        var thisSlide = document.getElementsByClassName('module-slide')[currentSlide];
+        thisSlide.style.display = "flex";
+        var caseContent = document.querySelectorAll('.case-content');
+        //if this slide contains a class called 'case-content' a.k.a a point in a slide
+        for (var i = 0; i < caseContent.length; i++) {
+            if ((thisSlide.contains(caseContent[i])) && (true)) {
+                //change the next button to show the next point
+                document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
+            }
+        }
+    }
+
+    //Progression through slides
+    var currentSlide = 0;
+    function nextSlide(n) {
+        //hide the previous slide
+        var previousSlide = document.getElementsByClassName('module-slide')[currentSlide];
+        previousSlide.style.display = "none";
+        //add or minus 1 to current slide, depending on previous or next button click
+        currentSlide += n;
+        //display the slide
+        showSlide(currentSlide);
+    }
+    showSlide(currentSlide);
+
+    /////////////////////////////////// PROGRESSION THROUGH POINT CONTENT /////////////////////////////
+
+    //This both a progression and display function for showing each point in the module
+    var currentPoint = 0;
+    function nextPoint(n) {
+        //x is the number of elements with the class case-content within the current slide
+        var x = document.getElementsByClassName('module-slide')[currentSlide].querySelectorAll('.case-content').length;
+        //Add or minus 1 to the current point, depending on previous or next button click
+        currentPoint += n;
+        pointIncrement++;
+        var thisPoint = document.getElementsByClassName('case-content')[currentPoint];
+
+        //if the current point is less than the number existing in this slide
+        if (currentPoint < x) {
+            //show it
+            thisPoint.style.visibility = "visible";
+            //if the points on this slide have already been displayed, add on the number to the current point count so that the it skips to the next slide
+        } else if (localStorage.hasOwnProperty('prevCurrentPoint') == true) {
+            currentPoint == (parseInt(localStorage.getItem('prevCurrentPoint')));
+            document.getElementById('next').setAttribute("onclick", "nextSlide(1);");
+            document.getElementById('next').click();
+            localStorage.clear();
+            currentPoint--;
+            //if the current point is the maximum number of points in this slide, clear the class name, move on
+        } else if (currentPoint == x) {
+            for (let i = 0; i < currentPoint; i++) {
+                document.getElementsByClassName('module-slide')[currentSlide].querySelectorAll('.case-content')[0].classList = "";
+            }
+            document.getElementById('next').click();
+            document.getElementById('next').setAttribute("onclick", "nextSlide(1);");
+            document.getElementById('next').click();
+        } else {
+            document.getElementById('next').setAttribute("onclick", "nextSlide(1);");
+            document.getElementById('next').click();
+            currentPoint = 0;
+        }
+    }
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
