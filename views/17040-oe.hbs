@@ -11,74 +11,57 @@
             <h3>On Examination</h3>
         </div>
     </header>
+    
     <section class="content module-slide">
-        <!-- <h1>Case #17040</h1> -->
         <p>Let's look at the case of Ben and a potential diagnosis of a congenital heart defect.</p>
     </section>
+
     <section class="content module-slide">
-        <p class="case-content">Ben is a 3 month old infant, brought into the Emergency Department by his parents.</p>
-        <p class="case-content">Ben has had intermittent difficulty breathing for the past week.</p>
-        <p class="case-content">He tires during breast feeds, and sometimes becomes sweaty during feeds.</p>
-        <p class="case-content">He has had <strong> no cough, no rhinorrhoea and no fevers</strong>.</p>
-        <p class="case-content">His parents have noticed he is breathing fast.</p>
-        <p class="case-content">He has not put on much weight in the past 3 weeks.</p>
+        {{#each preliminary_information}}
+            {{list this}}
+        {{/each}}
     </section>
+
     <section class="content module-slide">
         <h1>Background History</h1>
-        <p class="case-content">Elective LSCS at 38 weeks, uncomplicated pregnancy</p>
-        <p class="case-content">He didn't require resuscitation or admission to Special Care Nursery or NICU</p>
-        <p class="case-content">Apgar scores 8 (1 minute) and 9 (5 minutes)</p>
-        <p class="case-content">Birth weight: 3300g (40th centile)</p>
-        <p class="case-content">Immunisations: received birth and 6 weeks</p>
-        <p class="case-content">No other known medical problems, admissions or operations</p>
-        <p class="case-content">Family Hx: nil significant, one 7 year old brother who is well</p>
+        {{#each background_history}}
+            {{list this}}
+        {{/each}}
     </section>
+
     <section class="content module-slide">
         <h1>On Examination</h1>
-        <p class="case-content">Ben looks unwell with increased work of breathing and a vigorous cry</p>
-        <p class="case-content">Growth: looks small for his age; weight 5kg (3rd centile); was 25th centile at 6-week
-            immunisation</p>
-        <p class="case-content">No dysmorphic features</p>
-        <p class="case-content">Vitals: HR 162 per minute; RR 68; SpO<sub>2</sub> 98% in air; afebrile; capillary refill
-            3 seconds</p>
+        {{#each on_examination}}
+            {{ list this }}
+        {{/each}}
     </section>
-    <section class="content module-slide">
-        <h1>On Examination</h1>
-        <ul class="case-content">Respiratory:
-            <li>subcostal and intercostal recessions with abdominal breathing</li>
-            <li>no stridor, tracheal tug or nasal flaring</li>
-            <li>auscultation: widespread bilateral crepitations with scattered wheeze</li>
-        </ul>
-        <ul class="case-content">Cardiac:
-            <li>normal 1<sup>st</sup> and 2<sup>nd</sup> heart sounds</li>
-            <li>3/6 pansystolic murmur at the left lower sternal edge</li>
-            <li>palpable femoral pulses</li>
-        </ul>
-        <ul class="case-content">Abdomen:
-            <li>soft and non-tender</li>
-            <li>liver edge 2cm below right costal margin</li>
-        </ul>
-    </section>
+
     <section class="content module-slide">
         <p class="case-content">There is a radiology practice adjacent to your clinic and you organise a chest XR.</p>
     </section>
+
     <section class="content module-slide">
-        <p class="case-content"><img class="chest-xr" src="images/XRAY/Ben_XR.jpg"></p>
+        <p class="case-content"><img class="chest-xr" src={{xray}}></p>
     </section>
+
     <section class="content module-slide">
         <h1>What are your differential diagnoses?</h1>
         <p class="case-content">Think carefully about your answer before you proceed to the next page.</p>
     </section>
+
     <section class="content module-slide">
         <h1>What are your differential diagnoses?</h1>
-        <li class="case-content">Cardiac - pulmonary oedema</li>
-        <li class="case-content">Upper airway - croup, epiglottitis, foreign body</li>
-        <li class="case-content">Lower airway - bronchiolitis, viral-induced wheeze, pneumonia, empyema</li>
-        <li class="case-content">Central - diabetic keto-acidosis, toxin/poisoning</li>
+        {{#each differential_diagnoses}}
+           {{list this}}
+        {{/each}}
     </section>
+    
     <section class="content module-slide">
         <p class="case-content">Well done on examining your patient! Proceed to Interaction!</p>
     </section>
+
+
+
     <button id="previous" class="nav-button" onclick="nextSlide(-1)"> <svg width="24" height="24"
             xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
             <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>
@@ -94,5 +77,5 @@
         <a onclick="jumpSection('17040-explanation.html', 'Explanation');">Explanation</a>
     </section>
 </body>
-<script src="js/main-workshop.js"></script>
+<script src="js/main-workshop-on-examination.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
