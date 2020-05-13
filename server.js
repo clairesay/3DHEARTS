@@ -60,6 +60,8 @@ Storyblok.get('cdn/stories', {
                     break
             }
         })
+
+        console.log(ayanthi)
     })
     .catch((error) => {
         console.log(error)
@@ -151,8 +153,9 @@ app.get('/:heartId-:stage?.html', (req, res) => {
     switch (heartId) {
         // Ben
         case "17040":
-            res.render(`${heartId}-${stage}`, {
+            res.render(`${stage}`, {
                 title: `${ben.name}'s Story`,
+                name: ben.name,
                 heartId: heartId,
                 preliminary_information: ben.preliminary_information.split("\n"),
                 background_history: ben.background_history.split("\n"),
@@ -166,6 +169,18 @@ app.get('/:heartId-:stage?.html', (req, res) => {
 
         // Ayanthi
         case "19401":
+            res.render(`${stage}`, {
+                title: `${ayanthi.name}'s Story`,
+                name: ayanthi.name,
+                heartId: heartId,
+                preliminary_information: ayanthi.preliminary_information.split("\n"),
+                background_history: ayanthi.background_history.split("\n"),
+                on_examination: ayanthi.on_examination.split("\n"),
+                differential_diagnoses: ayanthi.differential_diagnoses.split("\n"),
+                xray: `https://s3.amazonaws.com${ayanthi.xray.slice(1)}`,
+                cardiac_explanation: ayanthi.cardiac_explanation.split("\n"),
+                explanation: ayanthi.explanation.split("\n")
+            })
             break
 
         default:

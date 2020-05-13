@@ -6,7 +6,7 @@
                     d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
             </svg> </button>
         <div id="module-name">
-            <h1>Ben's Story</h1>
+            <h1>{{name}}'s Story</h1>
             <h3>Explanation</h3>
         </div>
     </header>
@@ -14,35 +14,7 @@
         <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
         <p>Think carefully about your answer before you proceed to the next page.</p>
     </section>
-    {{!-- <section class="content module-slide">
-        <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-        <h3>Explanation</h3>
-        <p class="case-content">Ben has a VSD with left to right shunting (i.e., an acyanotic congenital cardiac
-            condition).</p>
-        <p class="case-content">Other left to right shunts include typical ASDs and PDAs.</p>
-        <p class="case-content">These left to right shunt conditions cause increased pulmonary blood flow (tachypnoea on
-            presentation and plethoric lung fields on the chest x-ray).</p>
-    </section>
-    <section class="content module-slide">
-        <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-        <h3>Explanation</h3>
-        <ul>The degree of left to right flow across a VSD is dependent on two variables: the size of the VSD and the
-            pressure difference between the right and left ventricles.
-            <li class="case-content">A small VSD is called 'restrictive' and will have a higher pressure difference
-                between the ventricles, with high speed flow across a small area. In general, a louder murmur equates to
-                a smaller VSD</li>
-            <li class="case-content">If the VSD is of a size that is clinically significant, the degree of shunt between
-                the ventricles will depend on the pressure difference between the left and right ventricles (i.e., from
-                the high pressure side to the low pressure side)</li>
-            <li class="case-content">At birth, high pulmonary vascular resistance means the RV has to pump against the
-                higher resistance pulmonary vasculature and the RV pressure is high, meaning the pressure difference
-                between the ventricles (and therefore the flow across a VSD) is minimal</li>
-            <li class="case-content">Over the first 4-6 weeks, the pulmonary vascular resistance decreases, which
-                results in lowered RV pressure. In the setting of a large VSD, this allows a significant pressure
-                gradient to develop, which results in increased left to right flow across the VSD and eventually into
-                the lungs.</li>
-        </ul>
-    </section> --}}
+   
     <section class="content module-slide">
         <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
         <h3>Explanation</h3>
@@ -51,17 +23,8 @@
         {{/each}}
     </section>
 
-    {{!-- <section class="content module-slide">
-        <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-        <h3>Explanation</h3>
-        <p>This explains why newborn babies typically do not show symptoms even if they have a large VSD (and often they
-            do not have a murmur!) Symptoms usually develop over approximately 4-6 weeks, once the pulmonary vascular
-            resistance decreases. Similarly, neonates have a relative right axis deviation on the ECG, which slowly
-            changes to a normal/left axis.</p>
-    </section> --}}
-
     <section class="content module-slide">
-        <p class="case-content">Well done on completing Ben's Story! Return to Modules Home to discover more stories.
+        <p class="case-content">Well done on completing {{name}}'s Story! Return to Modules Home to discover more stories.
         </p>
     </section>
     <button id="previous" class="nav-button" onclick="nextSlide(-1)"> <svg width="24" height="24"
@@ -74,12 +37,12 @@
             <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
         </svg></button>
     <section id="navigation-tab">
-        <a onclick="jumpSection('17040-oe.html', 'Case Examination');">Case Examination</a>
-        <a onclick="jumpSection('17040-interaction.html', 'Interaction');">Interaction</a>
-        <a onclick="jumpSection('17040-explanation.html', 'Explanation');">Explanation</a>
+        <a onclick="jumpSection('" + {{heartId}} + "-oe.html', 'Case Examination');">Case Examination</a>
+        <a onclick="jumpSection('" + {{heartId}} + "-interaction.html', 'Interaction');">Interaction</a>
+        <a onclick="jumpSection('" + {{heartId}} + "-explanation.html', 'Explanation');">Explanation</a>
     </section>
 </body>
-{{!-- <script src="js/17040-workshop-explanation.js"></script> --}}
+
 <script>
     //This is for the explanation section of the module
 

@@ -6,13 +6,13 @@
                     d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
             </svg> </button>
         <div id="module-name">
-            <h1>Ben's Story</h1>
+            <h1>{{name}}'s Story</h1>
             <h3>On Examination</h3>
         </div>
     </header>
 
     <section class="content module-slide">
-        <p>Let's look at the case of Ben and a potential diagnosis of a congenital heart defect.</p>
+        <p>Let's look at the case of {{name}} and a potential diagnosis of a congenital heart defect.</p>
     </section>
 
     <section class="content module-slide">
@@ -71,9 +71,9 @@
             <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
         </svg></button>
     <section id="navigation-tab">
-        <a onclick="jumpSection('17040-oe.html', 'Case Examination');">Case Examination</a>
-        <a onclick="jumpSection('17040-interaction.html', 'Interaction');">Interaction</a>
-        <a onclick="jumpSection('17040-explanation.html', 'Explanation');">Explanation</a>
+        <a onclick="jumpSection('" + {{heartId}} + "-oe.html', 'Case Examination');">Case Examination</a>
+        <a onclick="jumpSection('" + {{heartId}} + "-interaction.html', 'Interaction');">Interaction</a>
+        <a onclick="jumpSection('" + {{heartId}} + "-explanation.html', 'Explanation');">Explanation</a>
     </section>
 </body>
 {{!-- <script src="js/17040-workshop-on-examination.js"></script> --}}
@@ -142,7 +142,7 @@
     ///////////////////////////////// AT THE END OF A MODULE ///////////////////////////
     //at the end of the module, automatically forward user to the next section
     function nextModule() {
-        window.location.href = "17040-interaction.html";
+        window.location.href = {{heartId}} + "-interaction.html";
     }
 
     ////////// USING LOCAL STORAGE TO OFFSET IF USER NAVIGATES TO PREVIOUS SLIDE FIXING/////////////
