@@ -162,6 +162,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
                 on_examination: ben.on_examination.split("\n"),
                 differential_diagnoses: ben.differential_diagnoses.split("\n"),
                 xray: `https://s3.amazonaws.com${ben.xray.slice(1)}`,
+                model: `https://s3.amazonaws.com${ben.model.slice(1)}`,
                 cardiac_explanation: ben.cardiac_explanation.split("\n"),
                 explanation: ben.explanation.split("\n")
             })
@@ -178,6 +179,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
                 on_examination: ayanthi.on_examination.split("\n"),
                 differential_diagnoses: ayanthi.differential_diagnoses.split("\n"),
                 xray: `https://s3.amazonaws.com${ayanthi.xray.slice(1)}`,
+                model: `https://s3.amazonaws.com${ayanthi.model.slice(1)}`,
                 cardiac_explanation: ayanthi.cardiac_explanation.split("\n"),
                 explanation: ayanthi.explanation.split("\n")
             })
@@ -194,6 +196,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
                 on_examination: amin.on_examination.split("\n"),
                 differential_diagnoses: amin.differential_diagnoses.split("\n"),
                 xray: `https://s3.amazonaws.com${amin.xray.slice(1)}`,
+                model: `https://s3.amazonaws.com${amin.model.slice(1)}`,
                 cardiac_explanation: amin.cardiac_explanation.split("\n"),
                 explanation: amin.explanation.split("\n")
             })
@@ -210,6 +213,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
                 on_examination: richardson.on_examination.split("\n"),
                 differential_diagnoses: richardson.differential_diagnoses.split("\n"),
                 xray: `https://s3.amazonaws.com${richardson.xray.slice(1)}`,
+                model: `https://s3.amazonaws.com${richardson.model.slice(1)}`,
                 cardiac_explanation: richardson.cardiac_explanation.split("\n"),
                 explanation: richardson.explanation.split("\n")
             })

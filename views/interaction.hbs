@@ -240,7 +240,8 @@
     ///////////////////////// MODEL LOADER /////////////////////////////
     // Loading STL model
     var loader = new OBJLoader()
-    loader.load("models/" + {{heartId}} + ".obj", function (heart) {
+    
+    loader.load("{{ model }}", function (heart) {
 
         //material of model
         var material = new THREE.MeshStandardMaterial({
