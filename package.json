@@ -10,14 +10,12 @@
   "author": "Claire Say",
   "license": "ISC",
   "dependencies": {
-    "es6-tween": "^5.5.11",
     "express": "^4.17.1",
     "express-handlebars": "^4.0.4",
     "handlebars": "^4.7.6",
     "storyblok-js-client": "^2.4.1",
     "three": "^0.115.0",
     "three-stl-loader": "^1.0.6",
-    "tweenjs": "^1.0.2",
     "uuid": "^7.0.2"
   },
   "devDependencies": {
