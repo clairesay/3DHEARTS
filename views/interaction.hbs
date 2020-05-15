@@ -8,6 +8,7 @@
         <div id="module-name">
             <h1>{{name}}'s Story</h1>
             <h3>Interaction</h3>
+            <button onclick="tweenExample();">HEY NOW</button>
         </div>
 
         <section id="modal-blackout" class="no-modal"> </section>
@@ -146,18 +147,17 @@
         <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
     </section>
 </body>
-<script src="../public/js/Tween.js"></script>
 <script type="module">
     //importing js modules
     import * as THREE from './js/three.module.js';
     import { OBJLoader } from './js/OBJLoader.js';
     import { OrbitControls } from './js/OrbitControls.js';
     import { CSS2DRenderer, CSS2DObject } from './js/CSS2DRenderer.js';
-  
+    import TWEEN from 'https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.3.2/Tween.js';
 
     //Because the module doesn't work otherwise.
     window.camera = camera;
-
+    window.tweenExample = tweenExample;
     //Declaring some variables for the labels
     var testDiv, testLabel, labelRenderer;
     //Declaring variable for the model
@@ -196,6 +196,7 @@
     camera.position.x = 0;
     camera.position.y = 0;
     camera.position.z = 20;
+
     var light = new THREE.PointLight(0xfffdd0, 1.1, 100);
     light.position.set(camera.position.x, camera.position.y, camera.position.z);
     scene.add(camera);
@@ -204,23 +205,11 @@
     //Adding Orbit Controls
     var controls = new OrbitControls(camera, container);
     controls.enableDamping = true;
+    controls.rotateSpeed = 1.0;
+    controls.zoomSpeed = 1.2;
+    controls.panSpeed = 0.8;
 
     //Zoom in and out buttons controlling max and min camera zoom
-    window.zoom = zoom;
-    function zoom(zoomValue) {
-        switch (zoomValue) {
-            case -1:
-                controls.maxDistance = 20;
-                controls.minDistance = 20;
-                break;
-            case 1:
-                controls.maxDistance = 10;
-                controls.minDistance = 10;
-                break;
-            default:
-                break;
-        }
-    }
 
     //Show Labels function
     window.showLabel = showLabel;
@@ -283,13 +272,34 @@
 
     /////////////////////////////////////////////////
 
+    function tweenExample() {
+        var from = {
+            x: camera.position.x,
+            y: camera.position.y,
+            z: camera.position.z
+        };
+        var to = {
+            x: 0,
+            y: 0,
+            z: 30
+        };
+        console.log('happening')
+        var tween = new TWEEN.Tween(camera.position)
+            .to(to, 1000)
+            .easing( TWEEN.Easing.Quadratic.InOut).start();
+    }
 
+    var animatic = function () {
+                requestAnimationFrame(animate);
+            TWEEN.update();
+    }
     /////////////////////////////////////////////////
 
     //Animate and Render
     var animate = function () {
         requestAnimationFrame(animate);
         controls.update();
+            TWEEN.update();
         // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
         renderer.render(scene, camera);
         labelRenderer.render(scene, camera);
@@ -540,25 +550,11 @@
     }
 
     ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
-var position;
-var target;
-var tween;
 
     function changeView(step) {
         //Setting the container size of the label renderer
         var canvas = document.getElementsByTagName('canvas')[0]
         labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
-
-TWEEN.autoPlay(true); // simplify the your code
- 
-let coords = { x: 0, y: 0 };
-let tween = new TWEEN.Tween(coords)
-  .to({ x: 100, y: 100 }, 1000)
-  .on('update', ({ x, y }) => {
-    console.log(`The values is x: ${x} and y: ${y}`);
-  })
-  .start();
-
         switch (step) {
             case 1:
                 //camera.position.x = 7.96
@@ -567,14 +563,6 @@ let tween = new TWEEN.Tween(coords)
                 //camera.rotation.x = -0.32;
                 //camera.rotation.y = 0.41;
                 //camera.rotation.z = 0.13;
-                position = { x : 0, y: 0, z:0 };
-                target = { x : 40, y: 50, z: 20 };
-                tween =  new TWEEN.Tween(position).to(target, 1000);
-                tween.onUpdate(function(){
-                camera.position.x = position.x;
-                camera.position.y = position.y;
-                camera.position.z = position.z
-            });
                 //Setting Labels
                 testDiv.textContent = 'Moon';
                 testLabel.position.set(0, -20, 0);
