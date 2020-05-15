@@ -146,13 +146,14 @@
         <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
     </section>
 </body>
-
+<script src="../public/js/Tween.js"></script>
 <script type="module">
     //importing js modules
     import * as THREE from './js/three.module.js';
     import { OBJLoader } from './js/OBJLoader.js';
     import { OrbitControls } from './js/OrbitControls.js';
     import { CSS2DRenderer, CSS2DObject } from './js/CSS2DRenderer.js';
+  
 
     //Because the module doesn't work otherwise.
     window.camera = camera;
@@ -181,7 +182,9 @@
     testDiv.className = 'model-label';
     testDiv.textContent = 'Moon';
     testLabel = new CSS2DObject(testDiv);
-    testLabel.position.set(0, -20, 0);
+
+
+
 
     //Setting up the Label Renderer and positioning it over the 3D container only.
     labelRenderer = new CSS2DRenderer();
@@ -195,7 +198,8 @@
     camera.position.z = 20;
     var light = new THREE.PointLight(0xfffdd0, 1.1, 100);
     light.position.set(camera.position.x, camera.position.y, camera.position.z);
-    scene.add(light);
+    scene.add(camera);
+    camera.add(light);
 
     //Adding Orbit Controls
     var controls = new OrbitControls(camera, container);
@@ -231,7 +235,7 @@
             default:
                 break;
         }
-    }
+    }  
 
     // Declare variables to manipulate heart object rotation
     var heartObj;
@@ -246,6 +250,7 @@
         //material of model
         var material = new THREE.MeshStandardMaterial({
             color: 0xfffeea,
+            
             metalness: 0.1,
             roughness: 0.75,
             shadowSide: THREE.DoubleSide,
@@ -275,6 +280,11 @@
         // get heart object to rotate
         heartObj = scene.getObjectByName('heart', true);
     })
+
+    /////////////////////////////////////////////////
+
+
+    /////////////////////////////////////////////////
 
     //Animate and Render
     var animate = function () {
@@ -530,22 +540,41 @@
     }
 
     ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
+var position;
+var target;
+var tween;
 
     function changeView(step) {
         //Setting the container size of the label renderer
         var canvas = document.getElementsByTagName('canvas')[0]
         labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
 
+TWEEN.autoPlay(true); // simplify the your code
+ 
+let coords = { x: 0, y: 0 };
+let tween = new TWEEN.Tween(coords)
+  .to({ x: 100, y: 100 }, 1000)
+  .on('update', ({ x, y }) => {
+    console.log(`The values is x: ${x} and y: ${y}`);
+  })
+  .start();
+
         switch (step) {
             case 1:
-                camera.position.x = 7.96
-                camera.position.y = 5.83
-                camera.position.z = 17.4
-                camera.rotation.x = -0.32;
-                camera.rotation.y = 0.41;
-                camera.rotation.z = 0.13;
-                //Light position changes as camera position changes
-                light.position.set(camera.position.x, camera.position.y, camera.position.z);
+                //camera.position.x = 7.96
+                //camera.position.y = 5.83
+                //camera.position.z = 17.4
+                //camera.rotation.x = -0.32;
+                //camera.rotation.y = 0.41;
+                //camera.rotation.z = 0.13;
+                position = { x : 0, y: 0, z:0 };
+                target = { x : 40, y: 50, z: 20 };
+                tween =  new TWEEN.Tween(position).to(target, 1000);
+                tween.onUpdate(function(){
+                camera.position.x = position.x;
+                camera.position.y = position.y;
+                camera.position.z = position.z
+            });
                 //Setting Labels
                 testDiv.textContent = 'Moon';
                 testLabel.position.set(0, -20, 0);
@@ -557,7 +586,6 @@
                 camera.rotation.x = -0.46
                 camera.rotation.y = 1.04
                 camera.rotation.z = 0.4
-                light.position.set(camera.position.x, camera.position.y, camera.position.z);
                 testDiv.textContent = 'Earth';
                 testLabel.position.set(0, 20, 0);
                 break;
@@ -568,7 +596,6 @@
                 camera.rotation.x = 2.02
                 camera.rotation.y = 0.09
                 camera.rotation.z = -2.95
-                light.position.set(camera.position.x, camera.position.y, camera.position.z);
                 testDiv.textContent = 'Sun';
                 break;
             case 4:
@@ -578,7 +605,6 @@
                 camera.rotation.x = -0.27
                 camera.rotation.y = 0.04
                 camera.rotation.z = 0.01
-                light.position.set(camera.position.x, camera.position.y, camera.position.z);
                 break;
             case 5:
                 camera.position.x = -6.19
@@ -587,7 +613,6 @@
                 camera.rotation.x = 0.83
                 camera.rotation.y = -0.31
                 camera.rotation.z = 0.32
-                light.position.set(camera.position.x, camera.position.y, camera.position.z);
                 break;
             case 6:
                 camera.position.x = 17.21
@@ -596,7 +621,6 @@
                 camera.rotation.x = 1.45
                 camera.rotation.y = 1.04
                 camera.rotation.z = -1.43
-                light.position.set(camera.position.x, camera.position.y, camera.position.z);
                 break;
             case 7:
                 camera.position.x = 0.37
@@ -605,7 +629,6 @@
                 camera.rotation.x = 2.51
                 camera.rotation.y = 0.02
                 camera.rotation.z = -3.13
-                light.position.set(camera.position.x, camera.position.y, camera.position.z);
                 break;
             case 8:
                 camera.position.x = -0.4
@@ -614,7 +637,6 @@
                 camera.rotation.x = 3.01
                 camera.rotation.y = -0.02
                 camera.rotation.z = 3.14
-                light.position.set(camera.position.x, camera.position.y, camera.position.z);
                 break;
             default:
                 break;
