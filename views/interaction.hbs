@@ -8,7 +8,7 @@
         <div id="module-name">
             <h1>{{name}}'s Story</h1>
             <h3>Interaction</h3>
-            <button onclick="tweenExample();">HEY NOW</button>
+            {{!-- <button onclick="tweenExample();">HEY NOW</button> --}}
         </div>
 
         <section id="modal-blackout" class="no-modal"> </section>
@@ -157,7 +157,7 @@
 
     //Because the module doesn't work otherwise.
     window.camera = camera;
-    window.tweenExample = tweenExample;
+
     //Declaring some variables for the labels
     var testDiv, testLabel, labelRenderer;
     //Declaring variable for the model
@@ -270,26 +270,31 @@
         heartObj = scene.getObjectByName('heart', true);
     })
 
-    /////////////////////////////////////////////////
+    //tweening function for smoooth movement
 
-    function tweenExample() {
+    function tweenExample(positionX, positionY, positionZ, rotationX, rotationY, rotationZ) {
         var from = {
             x: camera.position.x,
             y: camera.position.y,
-            z: camera.position.z
+            z: camera.position.z,
+            xR: camera.rotation.x,
+            yR: camera.rotation.y,
+            zR: camera.rotation.z
         };
         var to = {
-            x: 0,
-            y: 0,
-            z: 30
+            x: positionX,
+            y: positionY,
+            z: positionZ,
+            xR: rotationX,
+            yR: rotationY,
+            zR: rotationZ
         };
-        console.log('happening')
         var tween = new TWEEN.Tween(camera.position)
-            .to(to, 1000)
+            .to(to, 2000)
             .easing( TWEEN.Easing.Quadratic.InOut).start();
     }
 
-    var animatic = function () {
+    var animateTween = function () {
                 requestAnimationFrame(animate);
             TWEEN.update();
     }
@@ -552,83 +557,97 @@
     ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
 
     function changeView(step) {
+            window.tweenExample = tweenExample;
         //Setting the container size of the label renderer
         var canvas = document.getElementsByTagName('canvas')[0]
         labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        var posX, posY, posZ;
+        var rotX, rotY, rotZ;
         switch (step) {
             case 1:
-                //camera.position.x = 7.96
-                //camera.position.y = 5.83
-                //camera.position.z = 17.4
-                //camera.rotation.x = -0.32;
-                //camera.rotation.y = 0.41;
-                //camera.rotation.z = 0.13;
+                posX = 7.96
+                posY = 5.83
+                posZ = 17.4
+                rotX = -0.32;
+                rotY = 0.41;
+                rotZ = 0.13;
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
                 //Setting Labels
                 testDiv.textContent = 'Moon';
                 testLabel.position.set(0, -20, 0);
                 break;
             case 2:
-                camera.position.x = 17.26
-                camera.position.y = 4.45
-                camera.position.z = 9.07
-                camera.rotation.x = -0.46
-                camera.rotation.y = 1.04
-                camera.rotation.z = 0.4
+                posX = 17.26
+                posY = 4.45
+                posZ = 9.07
+                rotX = -0.46
+                rotY = 1.04
+                rotZ = 0.4
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+
                 testDiv.textContent = 'Earth';
                 testLabel.position.set(0, 20, 0);
                 break;
             case 3:
-                camera.position.x = 1.84
-                camera.position.y = -17.93
-                camera.position.z = -8.67
-                camera.rotation.x = 2.02
-                camera.rotation.y = 0.09
-                camera.rotation.z = -2.95
+                posX = 1.84
+                posY = -17.93
+                posZ = -8.67
+                rotX = 2.02
+                rotY = 0.09
+                rotZ = -2.95
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
                 testDiv.textContent = 'Sun';
                 break;
             case 4:
-                camera.position.x = 0.7
-                camera.position.y = 5.24
-                camera.position.z = 19.29
-                camera.rotation.x = -0.27
-                camera.rotation.y = 0.04
-                camera.rotation.z = 0.01
+                posX = 0.7
+                posY = 5.24
+                posZ = 19.29
+                rotX = -0.27
+                rotY= 0.04
+                rotZ = 0.01
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+
                 break;
             case 5:
-                camera.position.x = -6.19
-                camera.position.y = -14
-                camera.position.z = 12.87
-                camera.rotation.x = 0.83
-                camera.rotation.y = -0.31
-                camera.rotation.z = 0.32
+                posX = -6.19
+                posY = -14
+                posZ = 12.87
+                rotX = 0.83
+                rotY = -0.31
+                rotZ = 0.32
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
                 break;
             case 6:
-                camera.position.x = 17.21
-                camera.position.y = -10.12
-                camera.position.z = 1.24
-                camera.rotation.x = 1.45
-                camera.rotation.y = 1.04
-                camera.rotation.z = -1.43
+                posX = 17.21
+                posY = -10.12
+                posZ = 1.24
+                rotX = 1.45
+                rotY = 1.04
+                rotZ = -1.43
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
                 break;
             case 7:
-                camera.position.x = 0.37
-                camera.position.y = -11.82
-                camera.position.z = -16.13
-                camera.rotation.x = 2.51
-                camera.rotation.y = 0.02
-                camera.rotation.z = -3.13
+                posX = 0.37
+                posY = -11.82
+                posZ = -16.13
+                rotX = 2.51
+                rotY = 0.02
+                rotZ = -3.13
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
                 break;
             case 8:
-                camera.position.x = -0.4
-                camera.position.y = -2.64
-                camera.position.z = -19.82
-                camera.rotation.x = 3.01
-                camera.rotation.y = -0.02
-                camera.rotation.z = 3.14
+                posX = -0.4
+                posY = -2.64
+                posZ = -19.82
+                rotX = 3.01
+                rotY = -0.02
+                rotZ = 3.14
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
                 break;
             default:
                 break;
         }
+    
     }
 
     /////////////////////////////////////// MODAL REVIEW INFORMATION /////////////////////////////////////////////
