@@ -160,8 +160,6 @@
 
     //Declaring some variables for the labels
     var testDiv, testLabel, labelRenderer;
-    //Declaring variable for the model
-    var heart;
 
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
     //establishing the scebe abd background color
@@ -182,9 +180,6 @@
     testDiv.className = 'model-label';
     testDiv.textContent = 'Moon';
     testLabel = new CSS2DObject(testDiv);
-
-
-
 
     //Setting up the Label Renderer and positioning it over the 3D container only.
     labelRenderer = new CSS2DRenderer();
@@ -293,18 +288,13 @@
             .to(to, 2000)
             .easing( TWEEN.Easing.Quadratic.InOut).start();
     }
-
-    var animateTween = function () {
-                requestAnimationFrame(animate);
-            TWEEN.update();
-    }
     /////////////////////////////////////////////////
 
     //Animate and Render
     var animate = function () {
         requestAnimationFrame(animate);
         controls.update();
-            TWEEN.update();
+        TWEEN.update();
         // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
         renderer.render(scene, camera);
         labelRenderer.render(scene, camera);
@@ -319,6 +309,101 @@
     }
 
     animate();
+
+    //Changing the model views on click using tween.js
+    function changeView(step) {
+            window.tweenExample = tweenExample;
+        //Setting the container size of the label renderer
+        var canvas = document.getElementsByTagName('canvas')[0]
+        labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        var posX, posY, posZ;
+        var rotX, rotY, rotZ;
+        switch (step) {
+            case 1:
+                posX = 7.96
+                posY = 5.83
+                posZ = 17.4
+                rotX = -0.32;
+                rotY = 0.41;
+                rotZ = 0.13;
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+                //Setting Labels
+                testDiv.textContent = 'Moon';
+                testLabel.position.set(0, -20, 0);
+                break;
+            case 2:
+                posX = 17.26
+                posY = 4.45
+                posZ = 9.07
+                rotX = -0.46
+                rotY = 1.04
+                rotZ = 0.4
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+
+                testDiv.textContent = 'Earth';
+                testLabel.position.set(0, 20, 0);
+                break;
+            case 3:
+                posX = 1.84
+                posY = -17.93
+                posZ = -8.67
+                rotX = 2.02
+                rotY = 0.09
+                rotZ = -2.95
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+                testDiv.textContent = 'Sun';
+                break;
+            case 4:
+                posX = 0.7
+                posY = 5.24
+                posZ = 19.29
+                rotX = -0.27
+                rotY= 0.04
+                rotZ = 0.01
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+
+                break;
+            case 5:
+                posX = -6.19
+                posY = -14
+                posZ = 12.87
+                rotX = 0.83
+                rotY = -0.31
+                rotZ = 0.32
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+                break;
+            case 6:
+                posX = 17.21
+                posY = -10.12
+                posZ = 1.24
+                rotX = 1.45
+                rotY = 1.04
+                rotZ = -1.43
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+                break;
+            case 7:
+                posX = 0.37
+                posY = -11.82
+                posZ = -16.13
+                rotX = 2.51
+                rotY = 0.02
+                rotZ = -3.13
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+                break;
+            case 8:
+                posX = -0.4
+                posY = -2.64
+                posZ = -19.82
+                rotX = 3.01
+                rotY = -0.02
+                rotZ = 3.14
+                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
+                break;
+            default:
+                break;
+        }
+    
+    }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -556,99 +641,7 @@
 
     ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
 
-    function changeView(step) {
-            window.tweenExample = tweenExample;
-        //Setting the container size of the label renderer
-        var canvas = document.getElementsByTagName('canvas')[0]
-        labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
-        var posX, posY, posZ;
-        var rotX, rotY, rotZ;
-        switch (step) {
-            case 1:
-                posX = 7.96
-                posY = 5.83
-                posZ = 17.4
-                rotX = -0.32;
-                rotY = 0.41;
-                rotZ = 0.13;
-                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                //Setting Labels
-                testDiv.textContent = 'Moon';
-                testLabel.position.set(0, -20, 0);
-                break;
-            case 2:
-                posX = 17.26
-                posY = 4.45
-                posZ = 9.07
-                rotX = -0.46
-                rotY = 1.04
-                rotZ = 0.4
-                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-
-                testDiv.textContent = 'Earth';
-                testLabel.position.set(0, 20, 0);
-                break;
-            case 3:
-                posX = 1.84
-                posY = -17.93
-                posZ = -8.67
-                rotX = 2.02
-                rotY = 0.09
-                rotZ = -2.95
-                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                testDiv.textContent = 'Sun';
-                break;
-            case 4:
-                posX = 0.7
-                posY = 5.24
-                posZ = 19.29
-                rotX = -0.27
-                rotY= 0.04
-                rotZ = 0.01
-                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-
-                break;
-            case 5:
-                posX = -6.19
-                posY = -14
-                posZ = 12.87
-                rotX = 0.83
-                rotY = -0.31
-                rotZ = 0.32
-                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 6:
-                posX = 17.21
-                posY = -10.12
-                posZ = 1.24
-                rotX = 1.45
-                rotY = 1.04
-                rotZ = -1.43
-                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 7:
-                posX = 0.37
-                posY = -11.82
-                posZ = -16.13
-                rotX = 2.51
-                rotY = 0.02
-                rotZ = -3.13
-                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 8:
-                posX = -0.4
-                posY = -2.64
-                posZ = -19.82
-                rotX = 3.01
-                rotY = -0.02
-                rotZ = 3.14
-                tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            default:
-                break;
-        }
     
-    }
 
     /////////////////////////////////////// MODAL REVIEW INFORMATION /////////////////////////////////////////////
 
@@ -691,7 +684,4 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 </script>
-{{!-- I didn't know how to link in the following --}}
-{{!-- <script type="module" src="js/main-workshop-interaction.js"></script> --}}
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
