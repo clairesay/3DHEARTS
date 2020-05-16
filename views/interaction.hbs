@@ -159,7 +159,11 @@
     window.camera = camera;
 
     //Declaring some variables for the labels
-    var testDiv, testLabel, labelRenderer;
+    var testLabel, labelRenderer;
+    var labelName = ['Part 1', 'Part 2', 'Part 3'];
+    var labelPosX = ['0', '0', '0'];
+    var labelPosY = ['20', '30', '40'];
+    var labelPosZ = ['-20', '0', '20'];
 
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
     //establishing the scebe abd background color
@@ -174,13 +178,7 @@
     //Insert inside 'heart-model' div in interaction template
     var container = document.getElementById('heart-model');
     container.appendChild(renderer.domElement);
-
-    //Generating Labels for the Model
-    testDiv = document.createElement('div');
-    testDiv.className = 'model-label';
-    testDiv.textContent = 'Moon';
-    testLabel = new CSS2DObject(testDiv);
-
+    
     //Setting up the Label Renderer and positioning it over the 3D container only.
     labelRenderer = new CSS2DRenderer();
     labelRenderer.domElement.style.position = 'absolute';
@@ -208,18 +206,33 @@
 
     //Show Labels function
     window.showLabel = showLabel;
+
     function showLabel(showValue) {
         switch (showValue) {
             case 1:
-                testDiv.style.visibility = "visible";
+                labelDiv.style.visibility = "visible";
                 break;
             case -1:
-                testDiv.style.visibility = "hidden";
+                labelDiv.style.visibility = "hidden";
                 break;
             default:
                 break;
         }
     }  
+
+var labelDiv; 
+var setLabel;
+    const posit = new THREE.Vector3();
+     for (var j = 0; j < labelName.length; j ++) {
+        labelDiv = document.createElement('div');
+        labelDiv.className = 'model-label';
+        labelDiv.textContent = labelName[j];
+        setLabel = new CSS2DObject(labelDiv);
+        setLabel.position.set(labelPosX[j], labelPosY[j], labelPosZ[j]);
+        posit.x = setLabel.position.x
+        posit.y = setLabel.position.y
+        posit.z = setLabel.position.z;
+    }
 
     // Declare variables to manipulate heart object rotation
     var heartObj;
@@ -227,43 +240,68 @@
 
     ///////////////////////// MODEL LOADER /////////////////////////////
     // Loading STL model
+
     var loader = new OBJLoader()
+    var box = new THREE.Box3();
 
     loader.load("{{ model }}", function (heart) {
-
+        
         //material of model
         var material = new THREE.MeshStandardMaterial({
             color: 0xfffeea,
-            
             metalness: 0.1,
             roughness: 0.75,
             shadowSide: THREE.DoubleSide,
         });
 
         heart.traverse(function (child) {
-
             if (child instanceof THREE.Mesh) {
                 child.geometry.center();
                 child.material = material;
-
             }
         })
 
         //adding labels to heart, and heart to the scene
         heart.name = 'heart';
-        heart.add(testLabel);
         scene.add(heart);
 
+        heart.add(setLabel);
         //positioning the heart for optimal scale and visibility
         heart.scale.set(0.1, 0.1, 0.1);
         console.log(heart.rotation.x, heart.rotation.y, heart.rotation.z)
         heart.rotation.x = 0;
         heart.rotation.y = 3;
         heart.rotation.z = 0;
-
         // get heart object to rotate
         heartObj = scene.getObjectByName('heart', true);
     })
+
+    /////////////////////////////////////////////////////////////////////////////////////////
+console.log(posit)
+const tempV = new THREE.Vector3();
+const cameraToPoint = new THREE.Vector3();
+const cameraPosition = new THREE.Vector3();
+const normalMatrix = new THREE.Matrix3();
+const minVisibleDot = 41;
+const position = new THREE.Vector3(0, 20, 40);
+function bear() {
+  normalMatrix.getNormalMatrix(camera.matrixWorldInverse);
+  camera.getWorldPosition(cameraPosition);
+    tempV.copy(position);
+    tempV.applyMatrix3(normalMatrix);
+    cameraToPoint.copy(position);
+    cameraToPoint.applyMatrix4(camera.matrixWorldInverse).normalize();
+    const dot = tempV.dot(cameraToPoint);
+    console.log(dot);
+    // if the orientation is not facing us hide it.
+    if (dot < minVisibleDot) {
+        console.log('neigh');
+        labelDiv.style.visibility = "hidden";
+    }
+    // restore the element to its default display style
+    labelDiv.style.visibility = "";
+}
+    /////////////////////////////////////////////////////////////////////////////////////////
 
     //tweening function for smoooth movement
 
@@ -292,9 +330,11 @@
 
     //Animate and Render
     var animate = function () {
+        
         requestAnimationFrame(animate);
         controls.update();
         TWEEN.update();
+        bear();
         // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
         renderer.render(scene, camera);
         labelRenderer.render(scene, camera);
@@ -328,8 +368,8 @@
                 rotZ = 0.13;
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
                 //Setting Labels
-                testDiv.textContent = 'Moon';
-                testLabel.position.set(0, -20, 0);
+                //labelDiv.textContent = 'Moon';
+                //testLabel.position.set(0, -20, 0);
                 break;
             case 2:
                 posX = 17.26
@@ -340,8 +380,8 @@
                 rotZ = 0.4
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
 
-                testDiv.textContent = 'Earth';
-                testLabel.position.set(0, 20, 0);
+                //labelDiv.textContent = 'Earth';
+                //testLabel.position.set(0, 20, 0);
                 break;
             case 3:
                 posX = 1.84
@@ -351,7 +391,7 @@
                 rotY = 0.09
                 rotZ = -2.95
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                testDiv.textContent = 'Sun';
+                //labelDiv.textContent = 'Sun';
                 break;
             case 4:
                 posX = 0.7
@@ -682,6 +722,12 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
 
+				viewer.style.width = getComputedStyle( viewer ).width;
+				viewer.style.height = getComputedStyle( viewer ).height;
+				viewer.setAttribute( 'scrolling', 'no' );
+
+			}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
