@@ -160,10 +160,6 @@
 
     //Declaring some variables for the labels
     var testLabel, labelRenderer;
-    var labelName = ['Part 1', 'Part 2', 'Part 3'];
-    var labelPosX = ['0', '0', '0'];
-    var labelPosY = ['20', '30', '40'];
-    var labelPosZ = ['-20', '0', '20'];
 
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
     //establishing the scebe abd background color
@@ -202,11 +198,8 @@
     controls.zoomSpeed = 1.2;
     controls.panSpeed = 0.8;
 
-    //Zoom in and out buttons controlling max and min camera zoom
-
     //Show Labels function
     window.showLabel = showLabel;
-
     function showLabel(showValue) {
         switch (showValue) {
             case 1:
@@ -220,32 +213,46 @@
         }
     }  
 
-var labelDiv; 
-var setLabel;
-    const posit = new THREE.Vector3();
-     for (var j = 0; j < labelName.length; j ++) {
-        labelDiv = document.createElement('div');
-        labelDiv.className = 'model-label';
-        labelDiv.textContent = labelName[j];
-        setLabel = new CSS2DObject(labelDiv);
-        setLabel.position.set(labelPosX[j], labelPosY[j], labelPosZ[j]);
-        posit.x = setLabel.position.x
-        posit.y = setLabel.position.y
-        posit.z = setLabel.position.z;
-    }
+    // labelDiv, setLabel;
+    var label1 = {labelName:"part1", posX: '0', posY: '20', posZ: '-20'};
+    var label2 = {labelName:"part2", posX: '0', posY: '30', posZ: '0'};
+    var label3 = {labelName:"part3", posX: '0', posY: '40', posZ: '20'};
+
 
     // Declare variables to manipulate heart object rotation
     var heartObj;
     var xRotation, yRotation, zRotation;
-
+    var array = [];
     ///////////////////////// MODEL LOADER /////////////////////////////
     // Loading STL model
 
     var loader = new OBJLoader()
     var box = new THREE.Box3();
+    
+    const tempV = new THREE.Vector3();
+    const cameraToPoint = new THREE.Vector3();
+    const cameraPosition = new THREE.Vector3();
+    const normalMatrix = new THREE.Matrix3();
+    const minVisibleDot = 1;
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+        placeLabel(label1);
+        placeLabel(label2);
+        placeLabel(label3);
+        function placeLabel(label) {
+            const labelDiv = document.createElement('div');
+            labelDiv.className = 'model-label';
+            labelDiv.textContent = label.labelName;
+            const setLabel = new CSS2DObject(labelDiv);
+            setLabel.position.set(label.posX, label.posY, label.posZ)
+                tempV.copy(setLabel.position);
+                cameraToPoint.copy(setLabel.position);
+            array.push(setLabel);
+            console.log(array);
+        }
+///////////////////////////////////////////////////////////////////////////////////////////////
 
     loader.load("{{ model }}", function (heart) {
-        
         //material of model
         var material = new THREE.MeshStandardMaterial({
             color: 0xfffeea,
@@ -265,46 +272,21 @@ var setLabel;
         heart.name = 'heart';
         scene.add(heart);
 
-        heart.add(setLabel);
         //positioning the heart for optimal scale and visibility
         heart.scale.set(0.1, 0.1, 0.1);
         console.log(heart.rotation.x, heart.rotation.y, heart.rotation.z)
         heart.rotation.x = 0;
         heart.rotation.y = 3;
         heart.rotation.z = 0;
+
         // get heart object to rotate
         heartObj = scene.getObjectByName('heart', true);
+        for (var p = 0; p < array.length; p ++) {
+            heart.add(array[p])
+        }
     })
 
-    /////////////////////////////////////////////////////////////////////////////////////////
-console.log(posit)
-const tempV = new THREE.Vector3();
-const cameraToPoint = new THREE.Vector3();
-const cameraPosition = new THREE.Vector3();
-const normalMatrix = new THREE.Matrix3();
-const minVisibleDot = 41;
-const position = new THREE.Vector3(0, 20, 40);
-function bear() {
-  normalMatrix.getNormalMatrix(camera.matrixWorldInverse);
-  camera.getWorldPosition(cameraPosition);
-    tempV.copy(position);
-    tempV.applyMatrix3(normalMatrix);
-    cameraToPoint.copy(position);
-    cameraToPoint.applyMatrix4(camera.matrixWorldInverse).normalize();
-    const dot = tempV.dot(cameraToPoint);
-    console.log(dot);
-    // if the orientation is not facing us hide it.
-    if (dot < minVisibleDot) {
-        console.log('neigh');
-        labelDiv.style.visibility = "hidden";
-    }
-    // restore the element to its default display style
-    labelDiv.style.visibility = "";
-}
-    /////////////////////////////////////////////////////////////////////////////////////////
-
     //tweening function for smoooth movement
-
     function tweenExample(positionX, positionY, positionZ, rotationX, rotationY, rotationZ) {
         var from = {
             x: camera.position.x,
@@ -326,15 +308,13 @@ function bear() {
             .to(to, 2000)
             .easing( TWEEN.Easing.Quadratic.InOut).start();
     }
-    /////////////////////////////////////////////////
 
     //Animate and Render
-    var animate = function () {
-        
+    var animate = function () { 
         requestAnimationFrame(animate);
         controls.update();
         TWEEN.update();
-        bear();
+
         // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
         renderer.render(scene, camera);
         labelRenderer.render(scene, camera);
@@ -352,12 +332,12 @@ function bear() {
 
     //Changing the model views on click using tween.js
     function changeView(step) {
-            window.tweenExample = tweenExample;
-        //Setting the container size of the label renderer
-        var canvas = document.getElementsByTagName('canvas')[0]
+        window.tweenExample = tweenExample;
+        var canvas = document.getElementsByTagName('canvas')[0];
         labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
         var posX, posY, posZ;
         var rotX, rotY, rotZ;
+        var modelLabel = document.querySelectorAll('.model-label');
         switch (step) {
             case 1:
                 posX = 7.96
@@ -367,9 +347,9 @@ function bear() {
                 rotY = 0.41;
                 rotZ = 0.13;
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                //Setting Labels
-                //labelDiv.textContent = 'Moon';
-                //testLabel.position.set(0, -20, 0);
+                modelLabel[1].style.visibility = "hidden"
+                modelLabel[2].style.visibility = "hidden"
+                modelLabel[0].style.visibility = "visible"
                 break;
             case 2:
                 posX = 17.26
@@ -379,9 +359,9 @@ function bear() {
                 rotY = 1.04
                 rotZ = 0.4
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-
-                //labelDiv.textContent = 'Earth';
-                //testLabel.position.set(0, 20, 0);
+                modelLabel[0].style.visibility = "hidden"
+                modelLabel[2].style.visibility = "hidden"
+                modelLabel[1].style.visibility = "visible"
                 break;
             case 3:
                 posX = 1.84
@@ -391,7 +371,9 @@ function bear() {
                 rotY = 0.09
                 rotZ = -2.95
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                //labelDiv.textContent = 'Sun';
+                modelLabel[0].style.visibility = "hidden"
+                modelLabel[1].style.visibility = "hidden"
+                modelLabel[2].style.visibility = "visible"
                 break;
             case 4:
                 posX = 0.7
@@ -401,7 +383,6 @@ function bear() {
                 rotY= 0.04
                 rotZ = 0.01
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-
                 break;
             case 5:
                 posX = -6.19
@@ -442,7 +423,6 @@ function bear() {
             default:
                 break;
         }
-    
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

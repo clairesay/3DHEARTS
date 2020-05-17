@@ -738,3 +738,37 @@ if (dot < minVisibleDot) {
 // restore the element to its default display style
 console.log('leftbracket')
 }
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+for (var j = 0; j < labelName.length; j ++) {
+    labelDiv = document.createElement('div');
+    labelDiv.className = 'model-label';
+    labelDiv.textContent = labelName[j];
+    setLabel = new CSS2DObject(labelDiv);
+    setLabel.position.set(labelPosX[j], labelPosY[j], labelPosZ[j]);
+    posit.x = setLabel.position.x
+    posit.y = setLabel.position.y
+    posit.z = setLabel.position.z;
+            heart.add(setLabel);
+}
+
+
+////////////////////////////////////////////////////////////
+function bear() {
+    normalMatrix.getNormalMatrix(camera.matrixWorldInverse);
+    camera.getWorldPosition(cameraPosition);
+  
+      tempV.applyMatrix3(normalMatrix);
+      
+      cameraToPoint.applyMatrix4(camera.matrixWorldInverse).normalize();
+      const dot = tempV.dot(cameraToPoint);
+  
+      // if the orientation is not facing us hide it
+      if (dot < minVisibleDot) {
+          console.log('neigh');
+      } else {
+      }
+      // restore the element to its default display style
+  }
