@@ -262,6 +262,11 @@ li {
     background-color: white;
 }
 
+.model-label:hover {
+    cursor: pointer;
+    color: blue;
+}
+
 .model-label::after {
     content: "";
     position: absolute;

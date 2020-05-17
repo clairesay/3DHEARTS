@@ -239,7 +239,7 @@
         placeLabel(label1);
         placeLabel(label2);
         placeLabel(label3);
-        function placeLabel(label) {
+        async function placeLabel(label) {
             const labelDiv = document.createElement('div');
             labelDiv.className = 'model-label';
             labelDiv.textContent = label.labelName;
@@ -248,7 +248,7 @@
                 tempV.copy(setLabel.position);
                 cameraToPoint.copy(setLabel.position);
             array.push(setLabel);
-            console.log(array);
+            console.log(array);            
         }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -318,6 +318,7 @@
         // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
         renderer.render(scene, camera);
         labelRenderer.render(scene, camera);
+
     };
 
     // resize window on event onWindowResize
@@ -338,6 +339,9 @@
         var posX, posY, posZ;
         var rotX, rotY, rotZ;
         var modelLabel = document.querySelectorAll('.model-label');
+
+
+
         switch (step) {
             case 1:
                 posX = 7.96
@@ -698,6 +702,11 @@
         OEReviewContent.style.display = "none";
         chestXRReviewContent.style.display = "flex";
     })
+
+//if click on model-label
+
+
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
