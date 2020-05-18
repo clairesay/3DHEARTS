@@ -1,22 +1,29 @@
-* {
-    font-family: 'Work Sans', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,423&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+h1, h2, h3, h4 {
+    font-family: 'Josefin Sans', sans-serif;
 }
 
+p, ul, ol, li, button, a {
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+}
 /* //////////////// SWAL /////////////////// */
 button.swal2-confirm.swal2-styled {
-    background-color: #595959;
+    /* background-color: #595959; */
 }
 
 button.swal2-styled {
-    font-weight: 600;
-    border-radius: 3px;
+    /* font-weight: 600;
+    border-radius: 3px; */
 }
 
 /* //////////////// TOP LEFT BUTTONS //////////////// */
 button {
     background-color: transparent;
     border: none;
-    padding-right: 24px;
+    /* padding-right: 24px; */
+    padding: 0;
 }
 
 .back path {
@@ -25,41 +32,78 @@ button {
 
 /* ////////////////////// TEXT BUTTONS ////////////// */
 .text-button {
-    padding: 0.8em 1.6em;
+    /* padding: 0.8em 1.6em;
     background-color: black;
     border-radius: 3em;
     color: white;
     font-size: 16px;
     position: fixed;
     bottom: 4em;
-    right: 4em;
+    right: 4em; */
+    border-top: 10px solid purple;
+    background-color: #ddd;
+    width: 67%;
+    height: 69px;
+    position: relative;
+    justify-content: center;
+    font-size: 20px;
+    font-style: italic;
+    color: purple;
 }
 
 /* ////////////////////// PROGRESS BUTTONS ////////////// */
 #previous {
-    position: fixed;
-    bottom: 4em;
-    left: 4em;
+    /* position: absolute; */
+    /* margin-right: 100%; */
+    width: 33%;
+    border-top: 10px solid grey;
+    background-color: #ddd;
+    justify-content: center;
 }
 
 #next {
-    position: fixed;
-    bottom: 4em;
-    right: 4em;
+    /* position: relative; */
+    width: 67%;
+    border-top: 10px solid purple;
+    background-color: white;
+    justify-content: center;
+}
+
+#next svg {
+    stroke: purple;
 }
 
 .nav-button svg {
-    fill: white;
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    padding: 1em 0;
 }
 
-.nav-button {
-    padding: 1em 1em 0.8em 1em;
-    background-color: black;
-    border-radius: 6em;
+#previous svg {
+    stroke: grey;
+}
+
+#buttons-container {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    width: calc(40vw + 2.5em);
+    margin-left: -2.5em;
+    height: 68px;
 }
 
 #next-module {
     visibility: hidden;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.case-content {
+    padding: 10px 0;
 }
 
 /* /////////////////// DISPLAY AND VISIBILITY STATES CLASSES /////////////////// */
@@ -88,26 +132,36 @@ button {
 /* BODY */
 
 .common-structure {
-    margin: 2em;
-    min-height: calc(100vh - 4em);
+    /* margin: 2em; */
+    min-height: 100vh
 }
 
 /* ////////////////////////// HEADER //////////////////// */
 header {
-    display: flex;
+    /* display: flex; */
 }
 
 #module-name {
     display: flex;
     flex-direction: column;
+    padding-left: 1em;
+    border-left: 2px solid grey;
 }
 
-#module-name * {
+#module-name {
     margin: 0;
+    text-transform: uppercase;
+}
+
+#module-name h1 {
+    font-size: 32px;
+}
+
+#module-name h3 {
+    font-weight: 200;
 }
 
 h3 {
-    font-weight: 400;
     font-size: 18px;
 }
 
@@ -121,21 +175,137 @@ h5 {
     justify-content: flex-start;
     align-items: center;
 }
+/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
+/* //////////////////// NEW CSS MENU CLASS //////////////// */
 
-/* //////////////////// MENU CLASS //////////////// */
-.menu {
-    width: 100%;
-    max-width: 1024px;
+
+body#index {
+    display: grid;
+    grid-template-rows: 100px auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'Header' 'ModuleMenu'
 }
 
-.menu a:hover {
+section#main-workshop-menu-grid {
+    margin: auto;
+}
+
+#index header {
+    grid-area: Header;
+}
+
+#main-workshop-menu {
+    margin: auto;
+    grid-area: ModuleMenu;
+
+}
+
+#returnToMenu h1 {
+    display: flex;
+    flex-direction: column;
+}
+
+#returnToMenu {
+    display: flex;
+    flex-direction: row;
+}
+
+#main-workshop-menu article:nth-of-type(2n) {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 1fr 3fr;
+    grid-template-areas: 'Start Profile' 'Story Profile'
+}
+
+#main-workshop-menu article img {
+    grid-area: Profile;
+}
+
+#main-workshop-menu article h1 {
+    grid-area: Start
+}
+
+#main-workshop-menu article h4 {
+    grid-area: Story
+}
+
+#main-workshop-menu article:nth-of-type(2n + 1) {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-areas: 1fr 3fr;
+    grid-template-areas: 'Profile Start' 'Profile Story'
+}
+
+#start-module * {
+    margin: auto;
+}
+
+/* //////////////////// NEW CSS OE //////////////// */
+#navigation-tab {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    /* background-color: #eeeeee; */
+
+    /* position: fixed;
+    top: 0;
+    width: 100vw;
+    margin-left: -32px;
+    padding: 0.75em 0 ; */
+    /* margin-left: auto; */
+    grid-area: Nav;
+}
+
+#navigation-tab, #oe header {
+    background-color: #e7e7e7;
+    border-bottom: 5px solid purple;
+}
+
+#navigation-tab a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    color: #595959;
+    transition-duration: 0.2s;
     cursor: pointer;
 }
 
-button:hover {
-    cursor:pointer;
+#navigation-tab a:hover {
+    color: black;
 }
 
+#returnToMenu {
+    /* grid-area: Menubutton; */
+    margin: auto;
+}
+
+#content-half {
+    max-width: 60vw;
+    width: 40vw;
+    grid-area: Information;
+    margin-left: 2.5em;
+}
+
+#image-half {
+    max-width: 40vw;
+    width: 40vw;
+    grid-area: Image;
+}
+
+#oe header {
+    /* grid-area: Nav; */
+    grid-area: MenuButton;
+}
+
+#oe {
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: 2fr 3fr;
+    grid-template-areas: 'MenuButton Nav' 'Information Image'
+}
+
+
+/* //////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* ////////////////// INDEX MENU ////////////////// */
 #index-menu {
     display: grid;
@@ -181,7 +351,7 @@ button:hover {
 
 /* ///////////// FOR INFORMATION SLIDES ONLY /////////////////// */
 .content {
-    margin-left: 54px;
+    /* margin-left: 54px; */
     margin-top: 2em;
     flex-direction: column;
 }
@@ -212,34 +382,11 @@ button:hover {
 }
 
 /* /////////////// NAVIGATION TAB LOCATED AT THE BOTTOM OF THE SCREEN /////////////// */
-#navigation-tab {
-    display: flex;
-    justify-content: space-around;
-    background-color: #ccc;
 
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-    margin-left: -32px;
-    padding: 0.75em 0 ;
-}
-
-#navigation-tab a {
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 16px;
-    color: #595959;
-    transition-duration: 0.2s;
-    cursor: pointer;
-}
-
-#navigation-tab a:hover {
-    color: black;
-}
 
 /* /////////////// UNORDERED LISTS /////////////// */
 ul {
-    margin-left: -40px;
+    /* margin-left: -40px; */
 }
 
 li {
@@ -316,7 +463,7 @@ label:first-of-type {
 
 label:last-of-type {
     border-radius: 0 3px 3px 0;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #eeeeee;
 }
 
 label {
@@ -326,7 +473,7 @@ label {
 }
 
 label:hover {
-    background-color: #ccc;
+    background-color: #eeeeee;
 }
 
 input:checked + label {
@@ -353,18 +500,13 @@ label[for="off"] {
 
 /* ///////////////// PLACEHOLDER and IMAGES //////////////// */
 
-#placeholder-heart {
-    max-height: 50vh;
-}
-
 .chest-xr {
-    height: 100%;
-    width: 74vw;
+    max-width: 100%;
 }
 
 #case-content-button {
     margin-left: auto;
-    margin-right: -2px;
+
     z-index: 10;
 }
 
@@ -372,12 +514,6 @@ label[for="off"] {
     width: 50px;
 }
 
-#interaction-case-content-button-explanation {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
 
 /* ////////////////// INTERACTION: REVIEW INFORMATION MODAL ///////////////////// */
 
