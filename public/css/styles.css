@@ -4,9 +4,14 @@ h1, h2, h3, h4 {
     font-family: 'Josefin Sans', sans-serif;
 }
 
-p, ul, ol, li, button, a {
+p, ul, ol, li, button, a, label, h5, .model-label {
     font-family: 'Nunito', sans-serif;
     font-style: italic;
+}
+
+label, h5, .model-label {
+    font-style: normal;
+    font-weight: 600;
 }
 /* //////////////// SWAL /////////////////// */
 button.swal2-confirm.swal2-styled {
@@ -24,6 +29,10 @@ button {
     border: none;
     /* padding-right: 24px; */
     padding: 0;
+}
+
+button:hover {
+    cursor: pointer;
 }
 
 .back path {
@@ -53,8 +62,6 @@ button {
 
 /* ////////////////////// PROGRESS BUTTONS ////////////// */
 #previous {
-    /* position: absolute; */
-    /* margin-right: 100%; */
     width: 33%;
     border-top: 10px solid grey;
     background-color: #ddd;
@@ -62,7 +69,8 @@ button {
 }
 
 #next {
-    /* position: relative; */
+    position: absolute;
+    right: 0;
     width: 67%;
     border-top: 10px solid purple;
     background-color: white;
@@ -73,15 +81,15 @@ button {
     stroke: purple;
 }
 
+#previous svg {
+    stroke: grey;
+}
+
 .nav-button svg {
     stroke-width: 5;
     stroke-linecap: round;
     stroke-linejoin: round;
     padding: 1em 0;
-}
-
-#previous svg {
-    stroke: grey;
 }
 
 #buttons-container {
@@ -137,15 +145,10 @@ button {
 /* BODY */
 
 .common-structure {
-    /* margin: 2em; */
     min-height: 100vh
 }
 
 /* ////////////////////////// HEADER //////////////////// */
-header {
-    /* display: flex; */
-}
-
 #module-name {
     display: flex;
     flex-direction: column;
@@ -159,15 +162,17 @@ header {
 }
 
 #module-name h1 {
-    font-size: 32px;
+    font-size: 24px;
+}
+
+#interaction #module-name {
+    display: flex;
+    flex-direction: row;
 }
 
 #module-name h3 {
     font-weight: 200;
-}
-
-h3 {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 /* CHANGED THIS FOR THE TOGGLE LABEL */
@@ -184,12 +189,17 @@ h5 {
 /* //////////////////// NEW CSS MENU CLASS //////////////// */
 
 #case-doctor {
-    max-width: 500px;
+    /* max-width: 300px; */
+    
+    padding-bottom: 0.5em;
+    max-height: 70%;
+    /* padding-right: 15vw; */
+    right: 100px;
 }
 
 body#index {
     display: grid;
-    grid-template-rows: 100px auto;
+    grid-template-rows: 200px auto;
     grid-template-columns: 1fr;
     grid-template-areas: 'Header' 'ModuleMenu'
 }
@@ -202,7 +212,7 @@ section#main-workshop-menu-grid {
     grid-area: Header;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: flex-end
 }
 
@@ -210,9 +220,43 @@ section#main-workshop-menu-grid {
     margin: 0;
 }
 
+#oe header, #interaction header, #explanation header {
+    /* margin: auto; */
+    display: flex;
+    justify-content: center;
+
+}
+
+#oe #returnToMenu, #interaction #returnToMenu, #explanation #returnToMenu {
+    margin-top: 20px;
+}
+
+#content-half img {
+    height: 20vh;
+    /* margin-left: auto; */
+    padding: 2.5em 2em 2em 2em;
+}
+
+.content h1, .content h2, .content h3, .content h4 {
+    font-family: 'Nunito', 'sans-serif';
+    font-weight: bold;
+}
+
+#content-half img.differential-diagnoses {
+    padding: 0;
+}
+
+h4.differential-diagnoses {
+    font-style: italic;
+    color: rgb(238, 70, 51);
+    font-weight: 800;
+    font-family: 'Nunito', 'sans-serif';
+}
+
 #menu-title-div {
     display: flex;
     flex-direction: row;
+    align-items: flex-end;
 }
 
 #main-workshop-menu {
@@ -221,14 +265,64 @@ section#main-workshop-menu-grid {
 
 }
 
-#returnToMenu h1 {
-    display: flex;
-    flex-direction: column;
+#menu-title-div h1 {
+    font-size: 30px;
+    text-transform: uppercase;
 }
 
-#returnToMenu {
+#menu-title-div h3 {
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    padding: 0.5em 0;
+}
+
+#menu-title-div {
     display: flex;
     flex-direction: row;
+}
+
+#shading {
+    background-color: #f2f2f2;
+    width: 75vw;
+    height: 7vh;
+    position: absolute;
+    top: 24.3vh;
+
+    left: 15vw;
+
+    z-index: -1;
+
+}
+
+#ben{
+    color: #9b51e0;
+    border-image: linear-gradient(to right, #9b51e0, #bb6bd9 );
+    border-image-slice: 1;
+}
+
+#ayanthi{
+    color: #eb5757;
+    border-image: linear-gradient(to right, #f2994a, #eb5757 );
+    border-image-slice: 1;
+}
+
+#amin{
+    color: #2f80ed;
+    border-image: linear-gradient(to right, #2f80ed, #56ccf2 );
+    border-image-slice: 1;
+}
+
+#richardson{
+    color: #27ae60;
+    border-image: linear-gradient(to right, #6fcf97, #27ae60 );
+    border-image-slice: 1;
+    
+}
+
+#index #returnToMenu img {
+    width: 100px;
+    margin-right: 1em;
 }
 
 #main-workshop-menu article:nth-of-type(2n) {
@@ -245,10 +339,12 @@ section#main-workshop-menu-grid {
 
 #main-workshop-menu article:nth-of-type(2n) img {
     margin-right: auto;
+    padding-left: 0.25em;
 }
 
 #main-workshop-menu article:nth-of-type(2n+1) img {
     margin-left: auto;
+    padding-right: 0.25em;
 }
 
 #main-workshop-menu article a {
@@ -261,11 +357,21 @@ section#main-workshop-menu-grid {
     text-transform: uppercase;
     font-style: normal;
     font-family: 'Josefin Sans', 'sans-serif';
+    color: #c4c4c4;
+    background-color:#ffffff;
+    filter: drop-shadow(0px 8px 16px #cccccc);
+    transform: scale(1);
+    transition-duration: 0.1s;
+}
+
+#main-workshop-menu article a:hover{
+    cursor: pointer;
+    transform: scale(1.01);
 }
 
 #main-workshop-menu article h4 {
     grid-area: Story;
-    border-bottom: 8px solid purple;
+    border-bottom: 7px solid;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -278,11 +384,28 @@ section#main-workshop-menu-grid {
     display: grid;
     grid-template-rows: 3fr 2fr;
     grid-template-columns: 1fr 25vw;
-    grid-template-areas: 'Profile Start' 'Profile Story'
+    grid-template-areas: 'Profile Start' 'Profile Story';
 }
 
 #start-module * {
     margin: auto;
+}
+
+#start-module h4 {
+    font-size: 20px;
+    text-transform: uppercase;
+    padding-bottom: 1em;
+    border-bottom: 7px solid;
+}
+
+#start-module a {
+    padding: 0.8em 1em;
+    font-size: 20px;
+    width: 150px;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    border: none;
 }
 
 /* //////////////////// NEW CSS OE //////////////// */
@@ -301,7 +424,7 @@ section#main-workshop-menu-grid {
     grid-area: Nav;
 }
 
-#navigation-tab, #oe header, #interaction header {
+#navigation-tab, #oe header, #interaction header, #explanation header {
     background-color: #e7e7e7;
     border-bottom: 5px solid purple;
 }
@@ -332,17 +455,17 @@ section#main-workshop-menu-grid {
 }
 
 #image-half {
-    max-width: 40vw;
-    width: 40vw;
+    max-width: 60vw;
+    width: 60vw;
     grid-area: Image;
 }
 
-#oe header {
+#oe header, #interaction header, #explanation header {
     /* grid-area: Nav; */
     grid-area: MenuButton;
 }
 
-#oe, #interaction {
+#oe, #interaction, #explanation {
     display: grid;
     grid-template-rows: 50px 1fr;
     grid-template-columns: 2fr 3fr;
@@ -404,7 +527,7 @@ section#main-workshop-menu-grid {
 /* ///////////// FOR INFORMATION SLIDES ONLY /////////////////// */
 .content {
     /* margin-left: 54px; */
-    margin-top: 2em;
+    margin-top: 1em;
     flex-direction: column;
 }
 
@@ -448,9 +571,13 @@ li {
 
 /* /////////// DIV FOR MODEL TO RENDER IN //////////// */
 #heart-model  {
-    width: 74vw;
-    height: 40vw;
-    position: relative;
+    /* position: absolute; */
+    /* max-width: 100%; */
+    /* height: 100%; */
+}
+
+#hear-model > div {
+    top: 50px;
 }
 
 #heart-model:focus {
@@ -558,13 +685,16 @@ label[for="off"] {
 }
 
 #case-content-button {
-    margin-left: auto;
+    margin: auto;
 
-    z-index: 10;
+
 }
 
 #case-content-button img{
     width: 50px;
+    padding: 0;
+    z-index: 10;
+
 }
 
 

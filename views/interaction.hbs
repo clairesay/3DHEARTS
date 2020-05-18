@@ -40,13 +40,17 @@
                 <img class="chest-xr" src={{xray}}>
             </article>
         </section>
-        <button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
+        
     <section id="content-half">
+                <img src="images/photos/ben-crop.svg">
             <div id="module-name">
-            <h1>{{name}}'s Story</h1>
-            <h3>Interaction</h3>
-            {{!-- <button onclick="tweenExample();">HEY NOW</button> --}}
-        </div>
+                <div>
+                <h1>{{name}}'s Story
+                <h3>Interaction</h3>
+                </div>
+                {{!-- <button onclick="tweenExample();">HEY NOW</button> --}}
+                <button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
+            </div>
     <section class="content module-slide">
         <h1>Interact</h1>
         <p class="case-content">
@@ -104,9 +108,7 @@
         <p class="step"><strong>8. Follow the left ventricular outflow tract into the aortic arch.</strong>
             Can you identify the remnant ligamentum arteriosum or a patent ductus arteriosus?
         </p>
-        <div id="heart-model">
 
-        </div>
     </section>
     <section class="activity module-slide">
         <h1>How would you summarise the cardiac defects you have identified?</h1>
@@ -135,16 +137,31 @@
             Well done on the heart interaction! Proceed to the Explanation Section!
         </p>
     </section>
-    <button id="previous" class="nav-button" onclick="nextSlide(-1)"> <svg width="24" height="24"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>
-    </button>
-    <button id="next-module" class="text-button" onclick="nextModule()">Explanation</button>
-    <button id="next" class="nav-button" onclick="nextSlide(1);"><svg width="24" height="24"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
-        </svg></button>
+        <section id="buttons-container">
+            <button id="previous" class="nav-button" onclick="nextSlide(-1)">
+                    <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258"/>
+                        <path d="M14.5305 26.2037L2.99997 14.6731L14.5305 3.14258"/>
+                    </svg>
+            </button>
+            <button id="next" class="nav-button" onclick="nextSlide(1);">
+                    <svg width="63" height="29" viewBox="0 0 63 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M3 26.2037L14.5305 14.6731L3 3.14258"/>
+                        <path d="M18 26.2037L29.5305 14.6731L18 3.14258"/>
+                        <path d="M33 26.2037L44.5305 14.6731L33 3.14258"/>
+                        <path d="M48 26.2037L59.5305 14.6731L48 3.14258"/>
+                    </svg>
+            </button>
+            <button id="next-module" class="text-button" onclick="nextModule()">Explanation</button>
+        </section>
+
     </section>
+        <section id="image-half">
+                <div id="heart-model">
+
+        </div>
+    </section>
+
 </body>
 <script type="module">
     //importing js modules
@@ -163,12 +180,14 @@
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
     //establishing the scebe abd background color
     var scene = new THREE.Scene();
+        var imageHalf = document.getElementById('image-half')
     scene.background = new THREE.Color("rgb(0, 0, 0)");
-    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 500);
+    var camera = new THREE.PerspectiveCamera(45, imageHalf.clientWidth / imageHalf.clientHeight, 1, 500);
 
     //rendering the window and everything in it
     var renderer = new THREE.WebGLRenderer();
-    renderer.setSize((window.innerWidth / 1.5), (window.innerHeight / 1.5));
+
+    renderer.setSize((imageHalf.clientWidth), (imageHalf.clientHeight));
 
     //Insert inside 'heart-model' div in interaction template
     var container = document.getElementById('heart-model');
@@ -183,7 +202,8 @@
     //Setting up the Label Renderer and positioning it over the 3D container only.
     labelRenderer = new CSS2DRenderer();
     labelRenderer.domElement.style.position = 'absolute';
-    labelRenderer.domElement.style.top = '0px';
+    labelRenderer.domElement.style.top = '50px';
+    labelRenderer.domElement.style.maxHeight = 'calc(100vh - 70px)'
     container.appendChild(labelRenderer.domElement);
 
     //Setting the position of the camera
@@ -302,9 +322,9 @@
     // resize window on event onWindowResize
     window.addEventListener('resize', onWindowResize, false)
     function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.aspect = imageHalf.clientWidth / imageHalf.clientHeight;
         camera.updateProjectionMatrix();
-        renderer.setSize((window.innerWidth / 1.5), (window.innerHeight / 1.5));
+        renderer.setSize((imageHalf.clientWidth), (imageHalf.clientHeight));
     }
 
     animate();
@@ -313,8 +333,8 @@
     function changeView(step) {
             window.tweenExample = tweenExample;
         //Setting the container size of the label renderer
-        var canvas = document.getElementsByTagName('canvas')[0]
-        labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        //var canvas = document.getElementsByTagName('canvas')[0]
+        labelRenderer.setSize(imageHalf.clientWidth, imageHalf.clientHeight);
         var posX, posY, posZ;
         var rotX, rotY, rotZ;
         switch (step) {
@@ -444,18 +464,17 @@
     //highlighting the text to show the current page displayed
     if (page.includes('oe')) {
         document.querySelectorAll('#navigation-tab a')[0].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[0].style.cursor = "default";
     } else if (page.includes('interaction')) {
         document.querySelectorAll('#navigation-tab a')[1].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[1].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[1].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[1].style.cursor = "default";
     } else if (page.includes('explanation')) {
         document.querySelectorAll('#navigation-tab a')[2].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[2].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[2].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[2].style.cursor = "default";
     }
-
     //If the user clicks on a different section to jump to, warn them before they jump to it
     function jumpSection(destination, sectionName) {
         if (destination == page) {
@@ -499,13 +518,19 @@
             //if the current slide is the second last one, show the next-module button, hide the next button and show the previous button
         } else if (currentSlide == (document.querySelectorAll('.module-slide').length - 1)) {
             document.getElementById('previous').style.visibility = "visible"
+            document.getElementById('previous').style.display = "flex"
             document.getElementById('next-module').style.visibility = "visible"
+            document.getElementById('next-module').style.display = "flex"
             document.getElementById('next').style.visibility = "hidden"
+            document.getElementById('next').style.display = "none"
             //show both the previous and next buttons and hide the next-module button at all other times
         } else {
             document.getElementById('previous').style.visibility = "visible"
+            document.getElementById('previous').style.display = "flex"
             document.getElementById('next').style.visibility = "visible"
+            document.getElementById('next').style.display = "flex"
             document.getElementById('next-module').style.visibility = "hidden"
+            document.getElementById('next-module').style.display = "none"
         }
 
         //show this slide a.k.a current slide

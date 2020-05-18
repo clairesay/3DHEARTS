@@ -29,32 +29,44 @@ function moduleStart(name) {
     startModule.className = 'menu grid';
     mainWorkshopMenu.style.display = 'none';
     var caseImage = document.querySelector('#start-module img');
-    var caseName = document.querySelector('#start-module h1')
+    var caseName = document.querySelector('#start-module h4')
     var caseLink = document.querySelector('#start-module a')
     switch (name) {
         case 'ben':
-            caseImage.setAttribute('src', '../public/images/photos/Ben.jpg');
+            caseImage.setAttribute('src', 'images/photos/ben-crop.svg');
             caseImage.setAttribute('alt', 'Ben')
             caseName.innerHTML = "Ben's Story"
+            caseName.setAttribute('id', 'ben')
             caseLink.setAttribute('href', '17040-oe.html');
+            caseLink.style.backgroundImage = "linear-gradient(to right, #9b51e0, #bb6bd9)";
+            // caseName.style.borderImage = "linear-gradient(to right, #9b51e0, #bb6bd9 )"
             break;
         case 'ayanthi':
-            caseImage.setAttribute('src', '../public/images/photos/Ayanthi.jpg');
+            caseImage.setAttribute('src', 'images/photos/ayanthi-crop.svg');
             caseImage.setAttribute('alt', 'Ayanthi')
             caseName.innerHTML = "Ayanthi's Story"
+            caseName.setAttribute('id', 'ayanthi')
             caseLink.setAttribute('href', '19401-oe.html');
+            caseLink.style.backgroundImage = "linear-gradient(to right, #f2994a, #eb5757 )";
+            // caseName.style.borderImage = "linear-gradient(to right, #f2994a, #eb5757 )"
             break;
         case 'amin':
-            caseImage.setAttribute('src', '../public/images/photos/Amin.jpg');
+            caseImage.setAttribute('src', 'images/photos/amin-crop.svg');
             caseImage.setAttribute('alt', 'Amin')
             caseName.innerHTML = "Amin's Story"
+            caseName.setAttribute('id', 'amin')
             caseLink.setAttribute('href', '16751-oe.html');
+            caseLink.style.backgroundImage = "linear-gradient(to right, #2f80ed, #56ccf2 )";
+            // caseName.style.borderImage = "linear-gradient(to right, #2f80ed, #56ccf2 )"
             break;
         case 'richardson':
-            caseImage.setAttribute('src', '../public/images/photos/Richardson.jpg');
+            caseImage.setAttribute('src', 'images/photos/richardson-crop.svg');
             caseImage.setAttribute('alt', 'Richardson')
             caseName.innerHTML = "Richardson's Story"
+            caseName.setAttribute('id', 'richardson')
             caseLink.setAttribute('href', '17863-oe.html');
+            caseLink.style.backgroundImage = "linear-gradient(to right, #6fcf97, #27ae60 )";
+            // caseName.style.borderImage = "linear-gradient(to right, #6fcf97, #27ae60 )"
             break;
     }
 }
