@@ -9,9 +9,9 @@
         <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Interaction');">Interaction</a>
         <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
     </section>
+
     <section id="modal-blackout" class="no-modal"> </section>
         <section id="modal" class="no-modal">
-
             <h3 id="on-examination-review">On Examination</h3>
             <h3 id="chest-xr-review">Chest XR</h3>
             <article id="on-examination-review-content">
@@ -42,102 +42,102 @@
         </section>
         
     <section id="content-half">
-                <img src="images/photos/ben-crop.svg">
-            <div id="module-name">
-                <div>
-                <h1>{{name}}'s Story
-                <h3>Interaction</h3>
-                </div>
-                {{!-- <button onclick="tweenExample();">HEY NOW</button> --}}
-                <button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
-            </div>
-    <section class="content module-slide">
-        <h1>Interact</h1>
-        <p class="case-content">
-            For this stage of the module, you will be using a physical model of the paediatric heart case #{{heartId}} and a
-            digital interactive model.
-        </p>
-        <p id="interaction-case-content-button-explanation" class="case-content">
-            All the case content you reviewed will be available to you in the case button.
-        </p>
-        <p class="case-content">
-            It will be helpful as you interact with the models as the module progresses.
-        </p>
-    </section>
-    <section class="activity module-slide">
-        <article id="toggles">
-            <form id="model-toggles">
-                <input type="radio" name="render-type" id="clear" value="clear" checked>
-                <label for="clear" onclick="zoom(-1);">Zoom Out</label>
-                <input type="radio" name="render-type" id="segments" value="segments">
-                <label for="segments" onclick="zoom(1);">Zoom In</label>
-                {{!-- <input type="radio" name="render-type" id="realistic" value="realistic" checked>
-                <label for="realistic">Realistic</label> --}}
-            </form>
-            <h5>Labels
+        <div id="module-name">  
+            <h1>{{name}}'s Story</h1>
+            <h3>Interaction</h3>
+            <img class="profile" src="images/photos/ben-crop.svg">
+        </div>
+
+        <section class="content module-slide">
+            <h1>Interact</h1>
+            <p class="case-content">
+                For this stage of the module, you will be using a physical model of the paediatric heart case #{{heartId}} and a
+                digital interactive model.
+            </p>
+            <p id="interaction-case-content-button-explanation" class="case-content">
+                All the case content you reviewed will be available to you in the case button.
+            </p>
+            <p class="case-content">
+                It will be helpful as you interact with the models as the module progresses.
+            </p>
+        </section>
+
+        <section class="activity module-slide">
+            <article id="toggles">
                 <form id="model-toggles">
-                    <input type="radio" name="part-labels" id="on" value="labels-on" checked>
-                    <label for="on" onclick="showLabel(1);">On</label>
-                    <input type="radio" name="part-labels" id="off" value="labels-off">
-                    <label for="off" onclick="showLabel(-1);">Off</label>
+                    <input type="radio" name="render-type" id="clear" value="clear" checked>
+                    <label for="clear" onclick="zoom(-1);">Zoom Out</label>
+                    <input type="radio" name="render-type" id="segments" value="segments">
+                    <label for="segments" onclick="zoom(1);">Zoom In</label>
                 </form>
-            </h5>
-        </article>
-        <p class="step">Refer to Specimen {{heartId}}
-        </p>
+                <h5>Labels
+                    <form id="model-toggles">
+                        <input type="radio" name="part-labels" id="on" value="labels-on" checked>
+                        <label for="on" onclick="showLabel(1);">On</label>
+                        <input type="radio" name="part-labels" id="off" value="labels-off">
+                        <label for="off" onclick="showLabel(-1);">Off</label>
+                    </form>
+                </h5>
+            </article>
 
-        <p class="step"><strong>1. Orient the heart so that you are looking at the posterior aspect.</strong>
-            Can you identify the two atrial appendages?
-        </p>
-        <p class="step"><strong>2. Identify the right atrium and follow it down into its corresponding
-                ventricle</strong>
-            Can you identify the features differentiating right from left ventricles?
-        </p>
-        <p class="step"><strong>3. Identify the right ventricular outflow tract</strong>
-        </p>
-        <p class="step"><strong>4. Identify the left atrium and follow it down into its corresponding ventricle</strong>
-            Does this have the features of a left ventricle?
-        </p>
-        <p class="step"><strong>5. Identify the left ventricular outflow tract</strong></p>
-        <p class="step"><strong>6. Identify any inter-atrial communications.</strong>
-            Can you pass a pipe-cleaner through the defect?
-        </p>
-        <p class="step"><strong>7. Identify any inter-ventricular communications.</strong>
-            Can you pass a pipe-cleaner through the defect?
-        </p>
-        <p class="step"><strong>8. Follow the left ventricular outflow tract into the aortic arch.</strong>
-            Can you identify the remnant ligamentum arteriosum or a patent ductus arteriosus?
-        </p>
+            <p class="step">Refer to Specimen {{heartId}}
+            </p>
 
-    </section>
-    <section class="activity module-slide">
-        <h1>How would you summarise the cardiac defects you have identified?</h1>
+            <p class="step"><strong>1. Orient the heart so that you are looking at the posterior aspect.</strong>
+                Can you identify the two atrial appendages?
+            </p>
+            <p class="step"><strong>2. Identify the right atrium and follow it down into its corresponding
+                    ventricle</strong>
+                Can you identify the features differentiating right from left ventricles?
+            </p>
+            <p class="step"><strong>3. Identify the right ventricular outflow tract</strong>
+            </p>
+            <p class="step"><strong>4. Identify the left atrium and follow it down into its corresponding ventricle</strong>
+                Does this have the features of a left ventricle?
+            </p>
+            <p class="step"><strong>5. Identify the left ventricular outflow tract</strong></p>
+            <p class="step"><strong>6. Identify any inter-atrial communications.</strong>
+                Can you pass a pipe-cleaner through the defect?
+            </p>
+            <p class="step"><strong>7. Identify any inter-ventricular communications.</strong>
+                Can you pass a pipe-cleaner through the defect?
+            </p>
+            <p class="step"><strong>8. Follow the left ventricular outflow tract into the aortic arch.</strong>
+                Can you identify the remnant ligamentum arteriosum or a patent ductus arteriosus?
+            </p>
+        </section>
 
-        <p class="case-content">
-            Think carefully about your answer before you proceed to the next page.
-        </p>
-    </section>
-    <section class="activity module-slide">
-        <h1>How would you summarise the cardiac defects you have identified?</h1>
-        <h3>
-            Cardiac Specimen Explanation:
-        </h3>
-        {{#each cardiac_explanation}}
-        {{list this}}
-        {{/each}}
-        {{!-- <p class="case-content">
-            This heart demonstrates atrio-ventricular and ventriculo-arterial concordance. There is a small patent
-            foramen ovale (PFO) and a large sub-pulmonary ventricular septal defect. There is right ventricular
-            hypertrophy. There is a suggestion of aortic hypoplasia. Note the classic relationship of the great vessels
-            – they spiral around each other as they leave the heart, with the aorta located posteriorly.
-        </p> --}}
-    </section>
-    <section class="activity module-slide">
-        <p class="case-content">
-            Well done on the heart interaction! Proceed to the Explanation Section!
-        </p>
-    </section>
-        <section id="buttons-container">
+        <section class="activity module-slide">
+            <h1>How would you summarise the cardiac defects you have identified?</h1>
+
+            <p class="case-content">
+                Think carefully about your answer before you proceed to the next page.
+            </p>
+        </section>
+
+        <section class="activity module-slide">
+            <h1>How would you summarise the cardiac defects you have identified?</h1>
+            <h3>
+                Cardiac Specimen Explanation:
+            </h3>
+            {{#each cardiac_explanation}}
+            {{list this}}
+            {{/each}}
+            {{!-- <p class="case-content">
+                This heart demonstrates atrio-ventricular and ventriculo-arterial concordance. There is a small patent
+                foramen ovale (PFO) and a large sub-pulmonary ventricular septal defect. There is right ventricular
+                hypertrophy. There is a suggestion of aortic hypoplasia. Note the classic relationship of the great vessels
+                – they spiral around each other as they leave the heart, with the aorta located posteriorly.
+            </p> --}}
+        </section>
+
+        <section class="activity module-slide">
+            <p class="case-content">
+                Well done on the heart interaction! Proceed to the Explanation Section!
+            </p>
+        </section>
+
+        <article id="buttons-container">
             <button id="previous" class="nav-button" onclick="nextSlide(-1)">
                     <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258"/>
@@ -153,16 +153,17 @@
                     </svg>
             </button>
             <button id="next-module" class="text-button" onclick="nextModule()">Explanation</button>
-        </section>
+        </article>
 
-    </section>
-        <section id="image-half">
-                <div id="heart-model">
-
-        </div>
+        <button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
     </section>
 
+    <section id="image-half">
+        <div id="heart-model"></div>
+    </section>
 </body>
+
+
 <script type="module">
     //importing js modules
     import * as THREE from './js/three.module.js';
@@ -688,8 +689,10 @@
     //On Examination
     //Check if OE heading is clicked to show OE review content
     OEReviewHeading.addEventListener('click', function showOEReview() {
-        OEReviewHeading.style.backgroundColor = "black";
-        chestXRReviewHeading.style.backgroundColor = "gray";
+        chestXRReviewHeading.style.backgroundColor = "purple";
+        OEReviewHeading.style.backgroundColor = "white";
+                OEReviewHeading.style.color = "purple";
+        chestXRReviewHeading.style.color = "white";
         OEReviewContent.style.display = "flex";
         chestXRReviewContent.style.display = "none";
     })
@@ -697,8 +700,11 @@
     //Chest XR
     //Check if Chest XR heading is clicked to show Chest XR review content
     chestXRReviewHeading.addEventListener('click', function showChestXRReview() {
-        chestXRReviewHeading.style.backgroundColor = "black";
-        OEReviewHeading.style.backgroundColor = "gray";
+                OEReviewHeading.style.backgroundColor = "purple";
+        chestXRReviewHeading.style.backgroundColor = "white";
+        chestXRReviewHeading.style.color = "purple";
+        OEReviewHeading.style.color = "white";
+
         OEReviewContent.style.display = "none";
         chestXRReviewContent.style.display = "flex";
     })

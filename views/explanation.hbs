@@ -11,60 +11,53 @@
     </section>
 
     <section id="content-half">
-        <img src="images/photos/ben-crop.svg">
-        <div id="module-name">
+        <div id="module-name">  
             <h1>{{name}}'s Story</h1>
-            <h3>Explanation</h3>
+            <h3>On Examination</h3>
+            <img class="profile" src="images/photos/ben-crop.svg">
         </div>
-    <section class="content module-slide">
-        <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-        <p>Think carefully about your answer before you proceed to the next page.</p>
-    </section>
-   
-    <section class="content module-slide">
-        <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-        <h3>Explanation</h3>
-        {{#each explanation}}
-        {{list this}}
-        {{/each}}
-    </section>
 
-    <section class="content module-slide">
-        <p class="case-content">Well done on completing {{name}}'s Story! Return to Modules Home to discover more stories.
-        </p>
-    </section>
+        <section class="content module-slide">
+            <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
+            <p>Think carefully about your answer before you proceed to the next page.</p>
+        </section>
+    
+        <section class="content module-slide">
+            <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
+            <h3>Explanation</h3>
+            {{#each explanation}}
+            {{list this}}
+            {{/each}}
+        </section>
 
-    <section id="buttons-container">
-        <button id="previous" class="nav-button" onclick="nextSlide(-1)">
-            <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258"/>
-                <path d="M14.5305 26.2037L2.99997 14.6731L14.5305 3.14258"/>
-            </svg>
-        </button>
-        <button id="next" class="nav-button" onclick="nextSlide(1);">
-            <svg width="63" height="29" viewBox="0 0 63 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M3 26.2037L14.5305 14.6731L3 3.14258"/>
-                <path d="M18 26.2037L29.5305 14.6731L18 3.14258"/>
-                <path d="M33 26.2037L44.5305 14.6731L33 3.14258"/>
-                <path d="M48 26.2037L59.5305 14.6731L48 3.14258"/>
-            </svg>
-        </button>
-        <button id="next-module" class="text-button" onclick="nextModule();">Modules Home</button>
-    </section>
+        <section class="content module-slide">
+            <p class="case-content">Well done on completing {{name}}'s Story! Return to Modules Home to discover more stories.
+            </p>
+        </section>
+
+        <section id="buttons-container">
+            <button id="previous" class="nav-button" onclick="nextSlide(-1)">
+                <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258"/>
+                    <path d="M14.5305 26.2037L2.99997 14.6731L14.5305 3.14258"/>
+                </svg>
+            </button>
+            <button id="next" class="nav-button" onclick="nextSlide(1);">
+                <svg width="63" height="29" viewBox="0 0 63 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 26.2037L14.5305 14.6731L3 3.14258"/>
+                    <path d="M18 26.2037L29.5305 14.6731L18 3.14258"/>
+                    <path d="M33 26.2037L44.5305 14.6731L33 3.14258"/>
+                    <path d="M48 26.2037L59.5305 14.6731L48 3.14258"/>
+                </svg>
+            </button>
+            <button id="next-module" class="text-button" onclick="nextModule();">Modules Home</button>
+        </section>
 
     </section>
     <section id="image-half">
 
     </section>
-    {{!-- <button id="previous" class="nav-button" onclick="nextSlide(-1)"> <svg width="24" height="24"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>
-    </button>
     
-    <button id="next" class="nav-button" onclick="nextSlide(1);"><svg width="24" height="24"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
-        </svg></button> --}}
 </body>
 
 <script>

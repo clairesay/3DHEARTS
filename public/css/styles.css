@@ -1,3 +1,4 @@
+/* //////////////// FONTS /////////////// */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,423&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,400;1,600;1,700;1,800;1,900&display=swap');
 
 h1, h2, h3, h4 {
@@ -13,14 +14,15 @@ label, h5, .model-label {
     font-style: normal;
     font-weight: 600;
 }
+
 /* //////////////// SWAL /////////////////// */
 button.swal2-confirm.swal2-styled {
-    /* background-color: #595959; */
+    background-color: #595959;
 }
 
 button.swal2-styled {
-    /* font-weight: 600;
-    border-radius: 3px; */
+    font-weight: 600;
+    border-radius: 3px;
 }
 
 /* //////////////// TOP LEFT BUTTONS //////////////// */
@@ -41,23 +43,15 @@ button:hover {
 
 /* ////////////////////// TEXT BUTTONS ////////////// */
 .text-button {
-    /* padding: 0.8em 1.6em;
-    background-color: black;
-    border-radius: 3em;
-    color: white;
-    font-size: 16px;
-    position: fixed;
-    bottom: 4em;
-    right: 4em; */
     border-top: 10px solid purple;
-    background-color: #ddd;
+    background-color: rgb(146, 1, 146);
     width: 67%;
     height: 69px;
     position: relative;
     justify-content: center;
     font-size: 20px;
     font-style: italic;
-    color: purple;
+    color: white;
 }
 
 /* ////////////////////// PROGRESS BUTTONS ////////////// */
@@ -96,9 +90,9 @@ button:hover {
     position: fixed;
     bottom: 0;
     display: flex;
-    max-width: calc(360px + 2.5em);
-    width: calc(40vw + 2.5em);
-    margin-left: -2.5em;
+    max-width: 400px;
+    width: calc(40vw);
+    /* margin-left: -2.5em; */
     height: 68px;
 }
 
@@ -109,6 +103,7 @@ button:hover {
 .content {
     display: flex;
     flex-direction: column;
+    margin-left: 2.5em;
 }
 
 .content ul, .content p, .content ol {
@@ -150,30 +145,52 @@ button:hover {
 
 /* ////////////////////////// HEADER //////////////////// */
 #module-name {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     padding-left: 1em;
-    border-left: 4px solid #c4c4c4;
-}
 
-#module-name {
-    margin: 0;
+    margin: 2em 0;
     text-transform: uppercase;
+
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+    grid-template-areas: 'Profile Name' 'Profile Stage'
 }
 
 #module-name h1 {
     font-size: 24px;
+    padding-bottom: 0.5em;
+    grid-area: Name;
+    display: flex;
+    align-self: flex-end;
+    /* border-left: 4px solid #c4c4c4; */
+    padding-left: 20px;
 }
 
-#interaction #module-name {
+
+#module-name .profile {
+    margin: auto;
+    /* display: flex; */
+    grid-area: Profile;
+    padding: 0;
+}
+
+/* #interaction #module-name {
     display: flex;
     flex-direction: row;
-}
+} */
 
 #module-name h3 {
     font-weight: 200;
     font-size: 16px;
+    grid-area: Stage;
+    /* border-left: 4px solid #c4c4c4; */
+    display: flex;
+    align-self: flex-start;
+    padding-left: 20px;
 }
+
 
 /* CHANGED THIS FOR THE TOGGLE LABEL */
 h5 {
@@ -199,7 +216,7 @@ h5 {
 
 body#index {
     display: grid;
-    grid-template-rows: 200px auto;
+    grid-template-rows: 180px auto;
     grid-template-columns: 1fr;
     grid-template-areas: 'Header' 'ModuleMenu'
 }
@@ -237,7 +254,9 @@ section#main-workshop-menu-grid {
     padding: 2.5em 2em 2em 2em;
 }
 
-.content h1, .content h2, .content h3, .content h4 {
+.content h1, .content h2, .content h3, .content h4
+.step h1, .step h2, .step h3, .step h4,
+.activity h1, .activity h2, .activity h3 {
     font-family: 'Nunito', 'sans-serif';
     font-weight: bold;
 }
@@ -251,6 +270,7 @@ h4.differential-diagnoses {
     color: rgb(238, 70, 51);
     font-weight: 800;
     font-family: 'Nunito', 'sans-serif';
+    padding-bottom: 1em;
 }
 
 #menu-title-div {
@@ -387,6 +407,11 @@ h4.differential-diagnoses {
     grid-template-areas: 'Profile Start' 'Profile Story';
 }
 
+#start-module {
+    flex-direction: column;
+    align-items: center;
+}
+
 #start-module * {
     margin: auto;
 }
@@ -406,6 +431,13 @@ h4.differential-diagnoses {
     font-weight: 600;
     text-align: center;
     border: none;
+    text-decoration: none;
+    margin-top: 0;
+}
+
+#start-module img {
+    max-height: 200px;
+    margin: 0 auto;
 }
 
 /* //////////////////// NEW CSS OE //////////////// */
@@ -448,10 +480,10 @@ h4.differential-diagnoses {
 }
 
 #content-half {
-    max-width: 360px;
+    max-width: 400px;
     width: 40vw;
     grid-area: Information;
-    margin-left: 2.5em;
+    /* margin-left: 2.5em; */
 }
 
 #image-half {
@@ -468,7 +500,7 @@ h4.differential-diagnoses {
 #oe, #interaction, #explanation {
     display: grid;
     grid-template-rows: 50px 1fr;
-    grid-template-columns: 2fr 3fr;
+    grid-template-columns: auto 3fr;
     grid-template-areas: 'MenuButton Nav' 'Information Image'
 }
 
@@ -533,7 +565,8 @@ h4.differential-diagnoses {
 
 /* ///////////// FOR ACTIVITY AND INTERACTION ////////////////// */
 .activity {
-    margin-left: 54px;
+    /* margin-left: 54px; */
+    /* margin: auto; */
     margin-top: 1em;
     flex-direction: column;
 }
@@ -544,13 +577,16 @@ h4.differential-diagnoses {
 
 .module-slide {
     display: none;
+    margin: 0 2em;
 }
 
 .module-slide .case-content:first-of-type {
     visibility: visible;
 }
 
-
+.module-slide p {
+    padding: 0.5em 0;
+}
 
 .module-slide h1 {
     margin: 0 0 0.5em 0;
@@ -572,8 +608,8 @@ li {
 /* /////////// DIV FOR MODEL TO RENDER IN //////////// */
 #heart-model  {
     /* position: absolute; */
-    /* max-width: 100%; */
-    /* height: 100%; */
+    /* max-width: 100%;
+    height: 100%; */
 }
 
 #hear-model > div {
@@ -607,8 +643,9 @@ li {
 }
 
 .step strong {
-    margin-left: -20px;
+    /* margin-left: -20px; */
     font-size: 18px;
+    font-weight: 700;
 }
 
 .step:first-of-type {
@@ -619,6 +656,8 @@ li {
 #toggles {
     display: flex;
     flex-wrap: nowrap;
+    margin: auto;
+    margin-bottom: 1em;
 }
 
 #model-toggles {
@@ -681,12 +720,13 @@ label[for="off"] {
 /* ///////////////// PLACEHOLDER and IMAGES //////////////// */
 
 .chest-xr {
-    max-width: 100%;
+    width: 100%;
+    padding: 0;
 }
 
 #case-content-button {
+    display: flex;
     margin: auto;
-
 
 }
 
@@ -694,6 +734,9 @@ label[for="off"] {
     width: 50px;
     padding: 0;
     z-index: 10;
+    margin-left: -2em;
+    position: absolute;
+    bottom: 10vh;
 
 }
 
@@ -709,7 +752,7 @@ label[for="off"] {
     opacity: 0.75;
     display: grid;
     grid-template-rows: 45px 1fr;
-    grid-template-columns: 170px 110px 1fr;
+    grid-template-columns: 180px 110px 1fr;
     grid-template-areas: "Examination ChestXR ." "Information Information Information";
     position: fixed;
     top: 0;
@@ -721,32 +764,34 @@ label[for="off"] {
 
 #modal {
     margin: auto;
-    width: 80vw;
+    width: 30vw;
     height: 60vh;
     opacity: 1;
     background-color: transparent;
     border-radius: 12px;
     position: fixed;
     top: 18vh;
-    left: 10vw;
+    left: 5vw;
 }
 
 #on-examination-review {
     grid-area: Examination;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: purple;
     padding: 0.8em;
-    margin: 0;
+    /* margin: auto; */
     border-radius: 10px 10px 0 0;
+    text-transform: uppercase;
 }
 
 #chest-xr-review {
     grid-area: ChestXR;
-    background-color: grey;
+    background-color: purple;
     color: white;
     padding: 0.8em;
-    margin: 0;
+    /* margin: auto; */
     border-radius: 10px 10px 0 0;
+    text-transform: uppercase;
 }
 
 #on-examination-review:hover, #chest-xr-review:hover {
@@ -758,15 +803,24 @@ label[for="off"] {
 }
 
 #on-examination-review-content h4 {
-    margin-top: 2.5em;
+    margin: 1em 0 0.5em 0;
 }
+
+#on-examination-review-content li {
+    padding: 0.1em 0;
+}
+#on-examination-review-content ul {
+    padding-top: 0.5em;
+}
+
 
 #on-examination-review-content, #chest-xr-review-content {
     grid-area: Information;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     text-align: left;
     padding: 1em;
+    padding-bottom: 2.5em;
     overflow-y: auto;
 }
 
