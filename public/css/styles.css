@@ -88,6 +88,7 @@ button {
     position: fixed;
     bottom: 0;
     display: flex;
+    max-width: calc(360px + 2.5em);
     width: calc(40vw + 2.5em);
     margin-left: -2.5em;
     height: 68px;
@@ -102,8 +103,12 @@ button {
     flex-direction: column;
 }
 
-.case-content {
+.content ul, .content p, .content ol {
     padding: 10px 0;
+}
+
+.content li {
+    padding: 5px 0;
 }
 
 /* /////////////////// DISPLAY AND VISIBILITY STATES CLASSES /////////////////// */
@@ -145,7 +150,7 @@ header {
     display: flex;
     flex-direction: column;
     padding-left: 1em;
-    border-left: 2px solid grey;
+    border-left: 4px solid #c4c4c4;
 }
 
 #module-name {
@@ -178,6 +183,9 @@ h5 {
 /* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
 /* //////////////////// NEW CSS MENU CLASS //////////////// */
 
+#case-doctor {
+    max-width: 500px;
+}
 
 body#index {
     display: grid;
@@ -192,6 +200,19 @@ section#main-workshop-menu-grid {
 
 #index header {
     grid-area: Header;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end
+}
+
+#index #returnToMenu {
+    margin: 0;
+}
+
+#menu-title-div {
+    display: flex;
+    flex-direction: row;
 }
 
 #main-workshop-menu {
@@ -212,27 +233,51 @@ section#main-workshop-menu-grid {
 
 #main-workshop-menu article:nth-of-type(2n) {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: 1fr 3fr;
+    grid-template-rows: 3fr 2fr;
+    grid-template-columns: 25vw 1fr;
     grid-template-areas: 'Start Profile' 'Story Profile'
 }
 
 #main-workshop-menu article img {
     grid-area: Profile;
+    height: 100%;
 }
 
-#main-workshop-menu article h1 {
-    grid-area: Start
+#main-workshop-menu article:nth-of-type(2n) img {
+    margin-right: auto;
+}
+
+#main-workshop-menu article:nth-of-type(2n+1) img {
+    margin-left: auto;
+}
+
+#main-workshop-menu article a {
+    grid-area: Start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-style: normal;
+    font-family: 'Josefin Sans', 'sans-serif';
 }
 
 #main-workshop-menu article h4 {
-    grid-area: Story
+    grid-area: Story;
+    border-bottom: 8px solid purple;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 200;
 }
 
 #main-workshop-menu article:nth-of-type(2n + 1) {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: 1fr 3fr;
+    grid-template-rows: 3fr 2fr;
+    grid-template-columns: 1fr 25vw;
     grid-template-areas: 'Profile Start' 'Profile Story'
 }
 
@@ -256,7 +301,7 @@ section#main-workshop-menu-grid {
     grid-area: Nav;
 }
 
-#navigation-tab, #oe header {
+#navigation-tab, #oe header, #interaction header {
     background-color: #e7e7e7;
     border-bottom: 5px solid purple;
 }
@@ -265,7 +310,7 @@ section#main-workshop-menu-grid {
     text-decoration: none;
     font-weight: 600;
     font-size: 16px;
-    color: #595959;
+    color: #c4c4c4;
     transition-duration: 0.2s;
     cursor: pointer;
 }
@@ -280,7 +325,7 @@ section#main-workshop-menu-grid {
 }
 
 #content-half {
-    max-width: 60vw;
+    max-width: 360px;
     width: 40vw;
     grid-area: Information;
     margin-left: 2.5em;
@@ -297,7 +342,7 @@ section#main-workshop-menu-grid {
     grid-area: MenuButton;
 }
 
-#oe {
+#oe, #interaction {
     display: grid;
     grid-template-rows: 50px 1fr;
     grid-template-columns: 2fr 3fr;
@@ -334,7 +379,14 @@ section#main-workshop-menu-grid {
     grid-area: pre-workshop-link;
 }
 
-#main-workshop-menu, #post-workshop-menu {
+#main-workshop-menu {
+    grid-template-rows: 20vh 20vh;
+    grid-template-columns: 40vw 40vw;
+    row-gap: 2em;
+    column-gap: 2em;
+}
+
+#post-workshop-menu {
     grid-template-rows: 30vh 30vh;
     grid-template-columns: 40vw 40vw;
     row-gap: 1em;
@@ -387,10 +439,11 @@ section#main-workshop-menu-grid {
 /* /////////////// UNORDERED LISTS /////////////// */
 ul {
     /* margin-left: -40px; */
+    list-style-type: disc;
 }
 
 li {
-    margin-left: 40px;
+    margin-left: 28px;
 }
 
 /* /////////// DIV FOR MODEL TO RENDER IN //////////// */
