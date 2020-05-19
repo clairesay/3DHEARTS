@@ -569,8 +569,13 @@ h4.differential-diagnoses {
 }
 
 .model-label {
-    padding:  0.5em 0.75em;
+    /* padding:  0.5em 0.75em; */
     background-color: white;
+}
+
+.model-label:hover {
+    cursor: pointer;
+    color: blue;
 }
 
 .model-label::after {

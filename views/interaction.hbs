@@ -176,7 +176,7 @@
     window.camera = camera;
 
     //Declaring some variables for the labels
-    var testDiv, testLabel, labelRenderer;
+    var testLabel, labelRenderer;
 
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
     //establishing the scebe abd background color
@@ -193,13 +193,7 @@
     //Insert inside 'heart-model' div in interaction template
     var container = document.getElementById('heart-model');
     container.appendChild(renderer.domElement);
-
-    //Generating Labels for the Model
-    testDiv = document.createElement('div');
-    testDiv.className = 'model-label';
-    testDiv.textContent = 'Moon';
-    testLabel = new CSS2DObject(testDiv);
-
+    
     //Setting up the Label Renderer and positioning it over the 3D container only.
     labelRenderer = new CSS2DRenderer();
     labelRenderer.domElement.style.position = 'absolute';
@@ -224,54 +218,78 @@
     controls.zoomSpeed = 1.2;
     controls.panSpeed = 0.8;
 
-    //Zoom in and out buttons controlling max and min camera zoom
-
     //Show Labels function
     window.showLabel = showLabel;
     function showLabel(showValue) {
         switch (showValue) {
             case 1:
-                testDiv.style.visibility = "visible";
+                labelDiv.style.visibility = "visible";
                 break;
             case -1:
-                testDiv.style.visibility = "hidden";
+                labelDiv.style.visibility = "hidden";
                 break;
             default:
                 break;
         }
     }  
 
+    // labelDiv, setLabel;
+    var label1 = {labelName:"part1", posX: '0', posY: '20', posZ: '-20'};
+    var label2 = {labelName:"part2", posX: '0', posY: '30', posZ: '0'};
+    var label3 = {labelName:"part3", posX: '0', posY: '40', posZ: '20'};
+
+
     // Declare variables to manipulate heart object rotation
     var heartObj;
     var xRotation, yRotation, zRotation;
-
+    var array = [];
     ///////////////////////// MODEL LOADER /////////////////////////////
     // Loading STL model
+
     var loader = new OBJLoader()
+    var box = new THREE.Box3();
+    
+    const tempV = new THREE.Vector3();
+    const cameraToPoint = new THREE.Vector3();
+    const cameraPosition = new THREE.Vector3();
+    const normalMatrix = new THREE.Matrix3();
+    const minVisibleDot = 1;
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+        placeLabel(label1);
+        placeLabel(label2);
+        placeLabel(label3);
+        async function placeLabel(label) {
+            const labelDiv = document.createElement('div');
+            labelDiv.className = 'model-label';
+            labelDiv.textContent = label.labelName;
+            const setLabel = new CSS2DObject(labelDiv);
+            setLabel.position.set(label.posX, label.posY, label.posZ)
+                tempV.copy(setLabel.position);
+                cameraToPoint.copy(setLabel.position);
+            array.push(setLabel);
+            console.log(array);            
+        }
+///////////////////////////////////////////////////////////////////////////////////////////////
 
     loader.load("{{ model }}", function (heart) {
-
         //material of model
         var material = new THREE.MeshStandardMaterial({
             color: 0xfffeea,
-            
             metalness: 0.1,
             roughness: 0.75,
             shadowSide: THREE.DoubleSide,
         });
 
         heart.traverse(function (child) {
-
             if (child instanceof THREE.Mesh) {
                 child.geometry.center();
                 child.material = material;
-
             }
         })
 
         //adding labels to heart, and heart to the scene
         heart.name = 'heart';
-        heart.add(testLabel);
         scene.add(heart);
 
         //positioning the heart for optimal scale and visibility
@@ -283,10 +301,12 @@
 
         // get heart object to rotate
         heartObj = scene.getObjectByName('heart', true);
+        for (var p = 0; p < array.length; p ++) {
+            heart.add(array[p])
+        }
     })
 
     //tweening function for smoooth movement
-
     function tweenExample(positionX, positionY, positionZ, rotationX, rotationY, rotationZ) {
         var from = {
             x: camera.position.x,
@@ -308,16 +328,17 @@
             .to(to, 2000)
             .easing( TWEEN.Easing.Quadratic.InOut).start();
     }
-    /////////////////////////////////////////////////
 
     //Animate and Render
-    var animate = function () {
+    var animate = function () { 
         requestAnimationFrame(animate);
         controls.update();
         TWEEN.update();
+
         // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
         renderer.render(scene, camera);
         labelRenderer.render(scene, camera);
+
     };
 
     // resize window on event onWindowResize
@@ -332,12 +353,15 @@
 
     //Changing the model views on click using tween.js
     function changeView(step) {
-            window.tweenExample = tweenExample;
-        //Setting the container size of the label renderer
-        //var canvas = document.getElementsByTagName('canvas')[0]
-        labelRenderer.setSize(imageHalf.clientWidth, imageHalf.clientHeight);
+        window.tweenExample = tweenExample;
+        var canvas = document.getElementsByTagName('canvas')[0];
+        labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
         var posX, posY, posZ;
         var rotX, rotY, rotZ;
+        var modelLabel = document.querySelectorAll('.model-label');
+
+
+
         switch (step) {
             case 1:
                 posX = 7.96
@@ -347,9 +371,9 @@
                 rotY = 0.41;
                 rotZ = 0.13;
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                //Setting Labels
-                testDiv.textContent = 'Moon';
-                testLabel.position.set(0, -20, 0);
+                modelLabel[1].style.visibility = "hidden"
+                modelLabel[2].style.visibility = "hidden"
+                modelLabel[0].style.visibility = "visible"
                 break;
             case 2:
                 posX = 17.26
@@ -359,9 +383,9 @@
                 rotY = 1.04
                 rotZ = 0.4
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-
-                testDiv.textContent = 'Earth';
-                testLabel.position.set(0, 20, 0);
+                modelLabel[0].style.visibility = "hidden"
+                modelLabel[2].style.visibility = "hidden"
+                modelLabel[1].style.visibility = "visible"
                 break;
             case 3:
                 posX = 1.84
@@ -371,7 +395,9 @@
                 rotY = 0.09
                 rotZ = -2.95
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                testDiv.textContent = 'Sun';
+                modelLabel[0].style.visibility = "hidden"
+                modelLabel[1].style.visibility = "hidden"
+                modelLabel[2].style.visibility = "visible"
                 break;
             case 4:
                 posX = 0.7
@@ -381,7 +407,6 @@
                 rotY= 0.04
                 rotZ = 0.01
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-
                 break;
             case 5:
                 posX = -6.19
@@ -422,7 +447,6 @@
             default:
                 break;
         }
-    
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -709,9 +733,20 @@
         chestXRReviewContent.style.display = "flex";
     })
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//if click on model-label
 
+
+
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+			if ( /(iPad|iPhone|iPod)/g.test( navigator.userAgent ) ) {
+
+				viewer.style.width = getComputedStyle( viewer ).width;
+				viewer.style.height = getComputedStyle( viewer ).height;
+				viewer.setAttribute( 'scrolling', 'no' );
+
+			}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
