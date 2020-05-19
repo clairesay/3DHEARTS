@@ -15,6 +15,15 @@ label, h5, .model-label {
     font-weight: 600;
 }
 
+/* /////////////// UNORDERED LISTS /////////////// */
+ul {
+    list-style-type: disc;
+}
+
+li {
+    margin-left: 28px;
+}
+
 /* //////////////// SWAL /////////////////// */
 button.swal2-confirm.swal2-styled {
     background-color: #595959;
@@ -25,7 +34,29 @@ button.swal2-styled {
     border-radius: 3px;
 }
 
-/* //////////////// TOP LEFT BUTTONS //////////////// */
+/* /////////////////// DISPLAY AND VISIBILITY STATES CLASSES /////////////////// */
+.none {
+    display: none;
+}
+
+.grid {
+    display: grid;
+}
+
+.flex {
+    display: flex;
+}
+
+.disabled {
+    visibility: hidden;
+}
+
+.enabled {
+    visibility: visible;
+    display: flex;
+}
+
+/* //////////////// BUTTONS //////////////// */
 button {
     background-color: transparent;
     border: none;
@@ -44,7 +75,7 @@ button:hover {
 /* ////////////////////// TEXT BUTTONS ////////////// */
 .text-button {
     border-top: 10px solid purple;
-    background-color: rgb(146, 1, 146);
+    background-color: purple;
     width: 67%;
     height: 69px;
     position: relative;
@@ -52,6 +83,10 @@ button:hover {
     font-size: 20px;
     font-style: italic;
     color: white;
+}
+
+#next-module {
+    visibility: hidden;
 }
 
 /* ////////////////////// PROGRESS BUTTONS ////////////// */
@@ -92,125 +127,44 @@ button:hover {
     display: flex;
     max-width: 400px;
     width: calc(40vw);
-    /* margin-left: -2.5em; */
     height: 68px;
 }
 
-#next-module {
-    visibility: hidden;
-}
-
-.content {
-    display: flex;
-    flex-direction: column;
-    margin-left: 2.5em;
-}
-
-.content ul, .content p, .content ol {
-    padding: 10px 0;
-}
-
-.content li {
-    padding: 5px 0;
-}
-
-/* /////////////////// DISPLAY AND VISIBILITY STATES CLASSES /////////////////// */
-.none {
-    display: none;
-}
-
-.grid {
-    display: grid;
-}
-
-.flex {
-    display: flex;
-}
-
-.disabled {
-    visibility: hidden;
-}
-
-.enabled {
-    visibility: visible;
-    display: flex;
-}
-
 /* ////////////////////////// GLOBAL /////////////////////// */
+/* HEADER */
+#oe header, #interaction header, #explanation header {
+    display: flex;
+    justify-content: center;
+    grid-area: MenuButton;
+}
+
+#oe #returnToMenu, #interaction #returnToMenu, #explanation #returnToMenu {
+    margin-top: 20px;
+}
+
+#returnToMenu {
+    margin: auto;
+}
+
 /* BODY */
+
+#oe, #interaction, #explanation {
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: auto 3fr;
+    grid-template-areas: 'MenuButton Nav' 'Information Image'
+}
 
 .common-structure {
     min-height: 100vh
 }
 
-/* ////////////////////////// HEADER //////////////////// */
-#module-name {
-    /* display: flex;
-    flex-direction: column; */
-    padding-left: 1em;
-
-    margin: 2em 0;
-    text-transform: uppercase;
-
-    display: grid;
-    grid-template-rows: auto auto;
-    grid-template-columns: auto auto;
-    grid-template-areas: 'Profile Name' 'Profile Stage'
-}
-
-#module-name h1 {
-    font-size: 24px;
-    padding-bottom: 0.5em;
-    grid-area: Name;
-    display: flex;
-    align-self: flex-end;
-    /* border-left: 4px solid #c4c4c4; */
-    padding-left: 20px;
-}
-
-
-#module-name .profile {
-    margin: auto;
-    /* display: flex; */
-    grid-area: Profile;
-    padding: 0;
-}
-
-/* #interaction #module-name {
-    display: flex;
-    flex-direction: row;
-} */
-
-#module-name h3 {
-    font-weight: 200;
-    font-size: 16px;
-    grid-area: Stage;
-    /* border-left: 4px solid #c4c4c4; */
-    display: flex;
-    align-self: flex-start;
-    padding-left: 20px;
-}
-
-
-/* CHANGED THIS FOR THE TOGGLE LABEL */
-h5 {
-    font-weight: 400;
-    font-size: 14px;
-    margin: -15px 0 0 0 ;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-/* /////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-/* //////////////////// NEW CSS MENU CLASS //////////////// */
+/* ///////////////////// INDEX /////////////////////////// */
+/* //////////////////// NEW CSS MENU //////////////// */
 
 #case-doctor {
-    /* max-width: 300px; */
-    
     padding-bottom: 0.5em;
     max-height: 70%;
-    /* padding-right: 15vw; */
     right: 100px;
 }
 
@@ -237,40 +191,21 @@ section#main-workshop-menu-grid {
     margin: 0;
 }
 
-#oe header, #interaction header, #explanation header {
-    /* margin: auto; */
-    display: flex;
-    justify-content: center;
-
+#index-menu {
+    display: grid;
+    grid-template-rows: 80px 240px 80px;
+    grid-template-areas: "pre-workshop-link" "main-workshop-link" "post-workshop-link";
+    row-gap: 1em;
 }
 
-#oe #returnToMenu, #interaction #returnToMenu, #explanation #returnToMenu {
-    margin-top: 20px;
-}
-
-#content-half img {
-    height: 20vh;
-    /* margin-left: auto; */
-    padding: 2.5em 2em 2em 2em;
-}
-
-.content h1, .content h2, .content h3, .content h4
-.step h1, .step h2, .step h3, .step h4,
-.activity h1, .activity h2, .activity h3 {
-    font-family: 'Nunito', 'sans-serif';
-    font-weight: bold;
-}
-
-#content-half img.differential-diagnoses {
-    padding: 0;
-}
-
-h4.differential-diagnoses {
-    font-style: italic;
-    color: rgb(238, 70, 51);
-    font-weight: 800;
-    font-family: 'Nunito', 'sans-serif';
-    padding-bottom: 1em;
+.menu > a {
+    padding: 1em;
+    border: 1px solid black;
+    
+    color: black;
+    text-decoration: none;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 #menu-title-div {
@@ -312,7 +247,6 @@ h4.differential-diagnoses {
     left: 15vw;
 
     z-index: -1;
-
 }
 
 #ben{
@@ -337,7 +271,6 @@ h4.differential-diagnoses {
     color: #27ae60;
     border-image: linear-gradient(to right, #6fcf97, #27ae60 );
     border-image-slice: 1;
-    
 }
 
 #index #returnToMenu img {
@@ -440,90 +373,6 @@ h4.differential-diagnoses {
     margin: 0 auto;
 }
 
-/* //////////////////// NEW CSS OE //////////////// */
-#navigation-tab {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    /* background-color: #eeeeee; */
-
-    /* position: fixed;
-    top: 0;
-    width: 100vw;
-    margin-left: -32px;
-    padding: 0.75em 0 ; */
-    /* margin-left: auto; */
-    grid-area: Nav;
-}
-
-#navigation-tab, #oe header, #interaction header, #explanation header {
-    background-color: #e7e7e7;
-    border-bottom: 5px solid purple;
-}
-
-#navigation-tab a {
-    text-decoration: none;
-    font-weight: 600;
-    font-size: 16px;
-    color: #c4c4c4;
-    transition-duration: 0.2s;
-    cursor: pointer;
-}
-
-#navigation-tab a:hover {
-    color: black;
-}
-
-#returnToMenu {
-    /* grid-area: Menubutton; */
-    margin: auto;
-}
-
-#content-half {
-    max-width: 400px;
-    width: 40vw;
-    grid-area: Information;
-    /* margin-left: 2.5em; */
-}
-
-#image-half {
-    max-width: 60vw;
-    width: 60vw;
-    grid-area: Image;
-}
-
-#oe header, #interaction header, #explanation header {
-    /* grid-area: Nav; */
-    grid-area: MenuButton;
-}
-
-#oe, #interaction, #explanation {
-    display: grid;
-    grid-template-rows: 50px 1fr;
-    grid-template-columns: auto 3fr;
-    grid-template-areas: 'MenuButton Nav' 'Information Image'
-}
-
-
-/* //////////////////////////////////////////////////////////////////////////////////////////////////////////// */
-/* ////////////////// INDEX MENU ////////////////// */
-#index-menu {
-    display: grid;
-    grid-template-rows: 80px 240px 80px;
-    grid-template-areas: "pre-workshop-link" "main-workshop-link" "post-workshop-link";
-    row-gap: 1em;
-}
-
-.menu > a {
-    padding: 1em;
-    border: 1px solid black;
-    
-    color: black;
-    text-decoration: none;
-    font-weight: 400;
-    font-size: 16px;
-}
-
 /* ////////////////// INDEX SUB MENUS ////////////////*/
 #pre-workshop-menu {
     grid-template-rows: 80px;
@@ -556,17 +405,110 @@ h4.differential-diagnoses {
     grid-area: post-workshop-link;
 }
 
-/* ///////////// FOR INFORMATION SLIDES ONLY /////////////////// */
-.content {
-    /* margin-left: 54px; */
-    margin-top: 1em;
-    flex-direction: column;
+
+
+/* ////////////////////////// HEADER //////////////////// */
+#module-name {
+    padding-left: 1em;
+
+    margin: 2em 0;
+    text-transform: uppercase;
+
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+    grid-template-areas: 'Profile Name' 'Profile Stage'
 }
+
+#module-name h1 {
+    font-size: 24px;
+    padding-bottom: 0.5em;
+    grid-area: Name;
+    display: flex;
+    align-self: flex-end;
+    padding-left: 20px;
+}
+
+
+#module-name .profile {
+    margin: auto;
+    grid-area: Profile;
+    padding: 0;
+}
+
+#module-name h3 {
+    font-weight: 200;
+    font-size: 16px;
+    grid-area: Stage;
+    display: flex;
+    align-self: flex-start;
+    padding-left: 20px;
+}
+
+/* //////////////////////// BODY CONTENT /////////////////////////// */
+
+
+.content h1, .content h2, .content h3, .content h4
+.step h1, .step h2, .step h3, .step h4,
+.activity h1, .activity h2, .activity h3 {
+    font-family: 'Nunito', 'sans-serif';
+    font-weight: bold;
+}
+
+/* /////////////////// CONTENT STYLES ////////////////////////////// */
+.content {
+    display: flex;
+    flex-direction: column;
+    margin-left: 2.5em;
+    margin-top: 1em;
+}
+
+.content ul, .content p, .content ol {
+    padding: 10px 0;
+}
+
+.content li {
+    padding: 5px 0;
+}
+
+/* //////////// CONTENT HALF ///////////////// */
+
+#content-half {
+    max-width: 400px;
+    width: 40vw;
+    grid-area: Information;
+}
+
+#content-half img {
+    height: 20vh;
+    padding: 2.5em 2em 2em 2em;
+}
+
+#content-half img.differential-diagnoses {
+    padding: 0;
+}
+
+h4.differential-diagnoses {
+    font-style: italic;
+    color: rgb(238, 70, 51);
+    font-weight: 800;
+    font-family: 'Nunito', 'sans-serif';
+    padding-bottom: 1em;
+}
+
+/* /////////////// IMAGE HALF /////////////////// */
+
+
+#image-half {
+    max-width: 60vw;
+    width: 60vw;
+    grid-area: Image;
+}
+
+
 
 /* ///////////// FOR ACTIVITY AND INTERACTION ////////////////// */
 .activity {
-    /* margin-left: 54px; */
-    /* margin: auto; */
     margin-top: 1em;
     flex-direction: column;
 }
@@ -592,29 +534,35 @@ h4.differential-diagnoses {
     margin: 0 0 0.5em 0;
 }
 
-/* /////////////// NAVIGATION TAB LOCATED AT THE BOTTOM OF THE SCREEN /////////////// */
 
-
-/* /////////////// UNORDERED LISTS /////////////// */
-ul {
-    /* margin-left: -40px; */
-    list-style-type: disc;
+/* //////////////////// NAVIGATION TAB //////////////// */
+#navigation-tab {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    grid-area: Nav;
 }
 
-li {
-    margin-left: 28px;
+#navigation-tab, #oe header, #interaction header, #explanation header {
+    background-color: #e7e7e7;
+    border-bottom: 5px solid purple;
 }
+
+#navigation-tab a {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 16px;
+    color: #c4c4c4;
+    transition-duration: 0.2s;
+    cursor: pointer;
+}
+
+#navigation-tab a:hover {
+    color: black;
+}
+
 
 /* /////////// DIV FOR MODEL TO RENDER IN //////////// */
-#heart-model  {
-    /* position: absolute; */
-    /* max-width: 100%;
-    height: 100%; */
-}
-
-#hear-model > div {
-    top: 50px;
-}
 
 #heart-model:focus {
     outline-width: 0;
@@ -643,7 +591,6 @@ li {
 }
 
 .step strong {
-    /* margin-left: -20px; */
     font-size: 18px;
     font-weight: 700;
 }
@@ -658,6 +605,17 @@ li {
     flex-wrap: nowrap;
     margin: auto;
     margin-bottom: 1em;
+}
+
+/* CHANGED THIS FOR THE TOGGLE LABEL */
+h5 {
+    font-weight: 400;
+    font-size: 14px;
+    margin: -15px 0 0 0 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #model-toggles {
@@ -715,8 +673,6 @@ label[for="off"] {
     right: 12px;
 }
 
-
-
 /* ///////////////// PLACEHOLDER and IMAGES //////////////// */
 
 .chest-xr {
@@ -742,7 +698,6 @@ label[for="off"] {
 
 
 /* ////////////////// INTERACTION: REVIEW INFORMATION MODAL ///////////////////// */
-
 .no-modal {
     display: none;
 }
@@ -779,7 +734,6 @@ label[for="off"] {
     background-color: white;
     color: purple;
     padding: 0.8em;
-    /* margin: auto; */
     border-radius: 10px 10px 0 0;
     text-transform: uppercase;
 }
@@ -789,7 +743,6 @@ label[for="off"] {
     background-color: purple;
     color: white;
     padding: 0.8em;
-    /* margin: auto; */
     border-radius: 10px 10px 0 0;
     text-transform: uppercase;
 }
@@ -813,7 +766,6 @@ label[for="off"] {
     padding-top: 0.5em;
 }
 
-
 #on-examination-review-content, #chest-xr-review-content {
     grid-area: Information;
     background-color: white;
@@ -836,7 +788,6 @@ label[for="off"] {
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*///////////////////////////////////// MEDIA QUERIES START HERE ////////////////////////////////////////*/
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-    
-    /* STYLES GO HERE */ 
 
+    /* STYLES GO HERE */ 
 }
