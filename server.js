@@ -121,6 +121,10 @@ Handlebars.registerHelper("interactionSteps", function (context) {
     return new Handlebars.SafeString("<p class='step'>" + context + "</p>")
 })
 
+Handlebars.registerHelper('toLowerCase', function(str) {
+    return str.toLowerCase();
+  });
+
 /////////////////////////////////////////////////
 
 
