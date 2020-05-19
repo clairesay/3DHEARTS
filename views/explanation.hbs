@@ -14,7 +14,7 @@
         <div id="module-name">  
             <h1>{{name}}'s Story</h1>
             <h3>Explanation</h3>
-            <img class="profile" src="images/photos/ben-crop.svg">
+            <img class="profile" src="images/photos/{{name}}-recrop.png">
         </div>
 
         <section class="content module-slide">
@@ -63,6 +63,23 @@
 <script>
     //This is for the explanation section of the module
 
+    //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
+    switch ("{{name}}") {
+        case "Ben":
+            document.documentElement.style.setProperty("--module-colour", "#9B51E0")
+            break
+        case "Ayanthi":
+            document.documentElement.style.setProperty("--module-colour", "#EB5757")
+            break
+        case "Amin":
+            document.documentElement.style.setProperty("--module-colour", "#2F80ED")
+            break
+        case "Richardson":
+            document.documentElement.style.setProperty("--module-colour", "#27AE60")
+            break
+        default:
+            break
+    }
     ////////////////// TOP LEFT EXIT MODULE ////////////////////
     //Warning to prevent user from accidentally leaving the module
     function exitModule() {

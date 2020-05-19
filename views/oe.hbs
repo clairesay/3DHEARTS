@@ -11,7 +11,7 @@
     </section>
 
     <section id="content-half">
-        <div id="module-name">  
+        <div id="module-name">
             <h1>{{name}}'s Story</h1>
             <h3>On Examination</h3>
             <img class="profile" src="images/photos/{{name}}-recrop.png">
@@ -42,7 +42,8 @@
         </section>
 
         <section class="content module-slide">
-            <p class="case-content" onshow="displayChestXR()">There is a radiology practice adjacent to your clinic and you organise a chest XR.</p>
+            <p class="case-content" onshow="displayChestXR()">There is a radiology practice adjacent to your clinic and
+                you organise a chest XR.</p>
         </section>
 
         {{!-- <section class="content module-slide">
@@ -70,21 +71,21 @@
         <article id="buttons-container">
             <button id="previous" class="nav-button" onclick="nextSlide(-1)">
                 <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258"/>
-                    <path d="M14.5305 26.2037L2.99997 14.6731L14.5305 3.14258"/>
+                    <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258" />
+                    <path d="M14.5305 26.2037L2.99997 14.6731L14.5305 3.14258" />
                 </svg>
             </button>
             <button id="next" class="nav-button" onclick="nextSlide(1);">
                 <svg width="63" height="29" viewBox="0 0 63 29" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M3 26.2037L14.5305 14.6731L3 3.14258"/>
-                    <path d="M18 26.2037L29.5305 14.6731L18 3.14258"/>
-                    <path d="M33 26.2037L44.5305 14.6731L33 3.14258"/>
-                    <path d="M48 26.2037L59.5305 14.6731L48 3.14258"/>
+                    <path d="M3 26.2037L14.5305 14.6731L3 3.14258" />
+                    <path d="M18 26.2037L29.5305 14.6731L18 3.14258" />
+                    <path d="M33 26.2037L44.5305 14.6731L33 3.14258" />
+                    <path d="M48 26.2037L59.5305 14.6731L48 3.14258" />
                 </svg>
             </button>
             <button id="next-module" class="text-button none" onclick="nextModule();">Interaction</button>
         </article>
-    </section> 
+    </section>
 
     <section id="image-half">
         <img class="chest-xr none" src={{xray}}>
@@ -93,6 +94,25 @@
 
 <script>
     //This is for the on-examination section of the module
+
+    //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
+    switch ("{{name}}") {
+        case "Ben":
+            document.documentElement.style.setProperty("--module-colour", "#9B51E0")
+            break
+        case "Ayanthi":
+            document.documentElement.style.setProperty("--module-colour", "#EB5757")
+            break
+        case "Amin":
+            document.documentElement.style.setProperty("--module-colour", "#2F80ED")
+            break
+        case "Richardson":
+            document.documentElement.style.setProperty("--module-colour", "#27AE60")
+            break
+        default:
+            break
+    }
+
 
     function displayChestXR() {
         document.getElementsByClassName('chest-xr')[0].style.display = 'show';
@@ -160,7 +180,7 @@
     ///////////////////////////////// AT THE END OF A MODULE ///////////////////////////
     //at the end of the module, automatically forward user to the next section
     function nextModule() {
-        window.location.href = {{heartId}} + "-interaction.html";
+        window.location.href = {{ heartId }} + "-interaction.html";
     }
 
     ////////// USING LOCAL STORAGE TO OFFSET IF USER NAVIGATES TO PREVIOUS SLIDE FIXING/////////////

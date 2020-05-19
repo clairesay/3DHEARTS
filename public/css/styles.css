@@ -1,3 +1,5 @@
+
+
 /* //////////////// FONTS /////////////// */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,423&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,400;1,600;1,700;1,800;1,900&display=swap');
 
@@ -13,6 +15,12 @@ p, ul, ol, li, button, a, label, h5, .model-label {
 label, h5, .model-label {
     font-style: normal;
     font-weight: 600;
+}
+
+/* //////////////// VARIABLES /////////////// */
+:root {
+    --default-module-colour: purple;
+    --module-colour: var(--default-module-colour);
 }
 
 /* /////////////// UNORDERED LISTS /////////////// */
@@ -74,8 +82,8 @@ button:hover {
 
 /* ////////////////////// TEXT BUTTONS ////////////// */
 .text-button {
-    border-top: 10px solid purple;
-    background-color: purple;
+    border-top: 10px solid var(--module-colour);
+    background-color: var(--module-colour);
     width: 67%;
     height: 69px;
     position: relative;
@@ -101,13 +109,13 @@ button:hover {
     position: absolute;
     right: 0;
     width: 67%;
-    border-top: 10px solid purple;
+    border-top: 10px solid var(--module-colour);
     background-color: white;
     justify-content: center;
 }
 
 #next svg {
-    stroke: purple;
+    stroke: var(--module-colour);
 }
 
 #previous svg {
@@ -545,7 +553,7 @@ h4.differential-diagnoses {
 
 #navigation-tab, #oe header, #interaction header, #explanation header {
     background-color: #e7e7e7;
-    border-bottom: 5px solid purple;
+    border-bottom: 5px solid var(--module-colour);
 }
 
 #navigation-tab a {
@@ -737,7 +745,7 @@ label[for="off"] {
 #on-examination-review {
     grid-area: Examination;
     background-color: white;
-    color: purple;
+    color: var(--module-colour);
     padding: 0.8em;
     border-radius: 10px 10px 0 0;
     text-transform: uppercase;
@@ -745,7 +753,7 @@ label[for="off"] {
 
 #chest-xr-review {
     grid-area: ChestXR;
-    background-color: purple;
+    background-color: var(--module-colour);
     color: white;
     padding: 0.8em;
     border-radius: 10px 10px 0 0;
