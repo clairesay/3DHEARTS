@@ -42,7 +42,7 @@
         </section>
 
         <section class="content module-slide">
-            <p class="case-content" onshow="displayChestXR()">There is a radiology practice adjacent to your clinic and
+            <p id="chest-XR-slide" class="case-content">There is a radiology practice adjacent to your clinic and
                 you organise a chest XR.</p>
         </section>
 
@@ -88,13 +88,13 @@
     </section>
 
     <section id="image-half">
+        <img class="story-illustration" src="images/illustrations/ben-background-history.svg">
         <img class="chest-xr none" src={{xray}}>
     </section>
 </body>
 
 <script>
     //This is for the on-examination section of the module
-
     //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
     switch ("{{name}}") {
         case "Ben":
@@ -114,9 +114,16 @@
     }
 
 
-    function displayChestXR() {
-        document.getElementsByClassName('chest-xr')[0].style.display = 'show';
-    }
+    //function displayChestXR() {
+        //console.log(!!document.getElementById('chest-XR-slide'))
+
+       // var chestXRSlide = !!document.getElementById('chest-XR-slide');
+        //var incorrectIsVisible = window.getComputedStyle(chestXRSlide, null).getPropertyValue('display');
+        //if (chestXRSlide) {
+          //  console.log('now')
+
+        //}
+    //}
 
     ////////////////// TOP LEFT EXIT MODULE ////////////////////
     //Warning to prevent user from accidentally leaving the module
