@@ -209,13 +209,14 @@
     const canvas = document.querySelector('#c');
 
     //rendering the window and everything in it
-  const renderer = new THREE.WebGLRenderer({canvas});
+    const renderer = new THREE.WebGLRenderer({canvas});
 
     //Setting the position of the camera
     camera.position.x = 0;
     camera.position.y = 0;
     camera.position.z = 15;
 
+    //Lights
     var light = new THREE.PointLight(0xfefefe, 1.1, 100);
     light.position.set(camera.position.x, camera.position.y, camera.position.z);
     scene.add(camera);
@@ -225,16 +226,17 @@
     var controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
 
+    //Resizing the renderer as needed
     function resizeRendererToDisplaySize(renderer) {
-  const canvas = renderer.domElement;
-  const width = canvas.clientWidth;
-  const height = canvas.clientHeight;
-  const needResize = canvas.width !== width || canvas.height !== height;
-  if (needResize) {
-    renderer.setSize(width, height, false);
-  }
-  return needResize;
-}
+        const canvas = renderer.domElement;
+        const width = canvas.clientWidth;
+        const height = canvas.clientHeight;
+        const needResize = canvas.width !== width || canvas.height !== height;
+        if (needResize) {
+            renderer.setSize(width, height, false);
+        }
+        return needResize;
+    }
 
     // Declare variables to manipulate heart object rotation
     var heartObj;
@@ -253,6 +255,7 @@
             shadowSide: THREE.DoubleSide,
         });
 
+        //centering the model and adding material
         heart.traverse(function (child) {
             if (child instanceof THREE.Mesh) {
                 child.geometry.center();
@@ -260,7 +263,7 @@
             }
         })
 
-        //adding labels to heart, and heart to the scene
+        //adding heart to scene
         heart.name = 'heart';
         scene.add(heart);
 
@@ -274,128 +277,129 @@
         heartObj = scene.getObjectByName('heart', true);
     })
 
-        ////////////////////////////////////////////////////////////////////////
-  async function loadJSON(url) {
-    const req = await fetch(url);
-    return req.json();
-  }
-
-  /////
+    //dots for the label positions
     var dotGeometry = new THREE.Geometry();
     var dotMaterial = new THREE.PointsMaterial( { size: 10, sizeAttenuation: false } );
     var labelDot = new THREE.Points( dotGeometry, dotMaterial );
-  ////
 
-  let countryInfos;
-  async function loadCountryData() {
-    countryInfos = await loadJSON('./js/heart-labels.json');  
 
-    // these helpers will make it easy to position the boxes
-    // We can rotate the lon helper on its Y axis to the longitude
-    const lonHelper = new THREE.Object3D();
-    // We rotate the latHelper on its X axis to the latitude
-    const latHelper = new THREE.Object3D();
-    lonHelper.add(latHelper);
-    // The position helper moves the object to the edge of the sphere
-    const positionHelper = new THREE.Object3D();
-
-    latHelper.add(positionHelper);
-
-    const labelParentElem = document.querySelector('#labels');
-    for (const countryInfo of countryInfos) {
-      const {xPosition, yPosition, zPosition, name} = countryInfo;
-      // adjust the helpers to point to the latitude and longitude
-      latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition);
-    lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition);
-    positionHelper.position.z = zPosition;
-    console.log(positionHelper.position.z);
-
-      // get the position of the lat/lon
-      positionHelper.updateWorldMatrix(true, false);
-      const position = new THREE.Vector3();
-      positionHelper.getWorldPosition(position);
-      countryInfo.position = position;
-
-      // add an element for each country
-      const elem = document.createElement('div');
-      elem.textContent = name;
-      labelParentElem.appendChild(elem);
-      countryInfo.elem = elem;
-    }
-    //requestRenderIfNotRequested();
-  }
-  loadCountryData();
-
-  const tempV = new THREE.Vector3();
-  const cameraToPoint = new THREE.Vector3();
-const cameraPosition = new THREE.Vector3();
-const normalMatrix = new THREE.Matrix3();
-
-  function updateLabels() {
-    // exit if we have not yet loaded the JSON file
-    if (!countryInfos) {
-      return;
+    //loading the json file with heart labels
+    async function loadJSON(url) {
+        const req = await fetch(url);
+        return req.json();
     }
 
-      const minVisibleDot = 0.2;
-  // get a matrix that represents a relative orientation of the camera
-  normalMatrix.getNormalMatrix(camera.matrixWorldInverse);
-  // get the camera's position
-  camera.getWorldPosition(cameraPosition);
+    //setting heart labels
+    let heartLabels;
+    async function loadLabelData() {
+        heartLabels = await loadJSON('./js/heart-labels.json');  
 
-    for (const countryInfo of countryInfos) {
-      const {position, elem} = countryInfo;
+        //code from three.js fundamentals - plotting labels as though they were on a sphere
+        //uses longitude and latitude
+        //x
+        const latHelper = new THREE.Object3D();
 
-    //creating a dot on the model for each label
+        //y
+        const lonHelper = new THREE.Object3D();
+        lonHelper.add(latHelper);
 
-    dotGeometry.vertices.push(position);
+        //combining x and y
+        const positionHelper = new THREE.Object3D();
+        latHelper.add(positionHelper);
 
-    scene.add( labelDot );
+        //label parent element
+        const labelParentElem = document.querySelector('#labels');
+        for (const heartLabel of heartLabels) {
+            const {xPosition, yPosition, zPosition, name} = heartLabel;
+            // adjust the helpers to point to the latitude and longitude
+            latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition);
+            lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition);     
+            positionHelper.position.z = zPosition;
+            console.log(positionHelper.position.z);
 
-          // Orient the position based on the camera's orientation.
-    // Since the sphere is at the origin and the sphere is a unit sphere
-    // this gives us a camera relative direction vector for the position.
-    tempV.copy(position);
-    tempV.applyMatrix3(normalMatrix);
+            // get the position of the lat/lon
+            positionHelper.updateWorldMatrix(true, false);
+            const position = new THREE.Vector3();
+            positionHelper.getWorldPosition(position);
+            heartLabel.position = position;
+
+            // add label for each object
+            const elem = document.createElement('div');
+            elem.textContent = name;
+            labelParentElem.appendChild(elem);
+            heartLabel.elem = elem;
+            }
+        }
+    loadLabelData();
+
+    const tempV = new THREE.Vector3();
+    const cameraToPoint = new THREE.Vector3();
+    const cameraPosition = new THREE.Vector3();
+    const normalMatrix = new THREE.Matrix3();
+
+    function updateLabels() {
+        // exit if we have not yet loaded the JSON file
+        //all is three.js fundamentals
+        if (!heartLabels) {
+        return;
+        }
+
+        const minVisibleDot = 0.2;
+        // get a matrix that represents a relative orientation of the camera
+        normalMatrix.getNormalMatrix(camera.matrixWorldInverse);
+        // get the camera's position
+        camera.getWorldPosition(cameraPosition);
+
+        for (const heartLabel of heartLabels) {
+            const {position, elem} = heartLabel;
+
+            //creating a dot on the model for each label
+            dotGeometry.vertices.push(position);
+            scene.add( labelDot );
+
+            // Orient the position based on the camera's orientation.
+            // Since the sphere is at the origin and the sphere is a unit sphere
+            // this gives us a camera relative direction vector for the position.
+            tempV.copy(position);
+            tempV.applyMatrix3(normalMatrix);
+        
+            // compute the direction to this position from the camera
+            cameraToPoint.copy(position);
+            cameraToPoint.applyMatrix4(camera.matrixWorldInverse).normalize();
+        
+            // get the dot product of camera relative direction to this position
+            // on the globe with the direction from the camera to that point.
+            // 1 = facing directly towards the camera
+            // 0 = exactly on tangent of the sphere from the camera
+            // < 0 = facing away
+            const dot = tempV.dot(cameraToPoint);
  
-    // compute the direction to this position from the camera
-    cameraToPoint.copy(position);
-    cameraToPoint.applyMatrix4(camera.matrixWorldInverse).normalize();
+            // if the orientation is not facing us hide it.
+            if (dot > minVisibleDot) {
+            elem.style.display = 'none';
+            continue;
+            }
  
-    // get the dot product of camera relative direction to this position
-    // on the globe with the direction from the camera to that point.
-    // 1 = facing directly towards the camera
-    // 0 = exactly on tangent of the sphere from the camera
-    // < 0 = facing away
-    const dot = tempV.dot(cameraToPoint);
- 
-    // if the orientation is not facing us hide it.
-    if (dot > minVisibleDot) {
-      elem.style.display = 'none';
-      continue;
+            // restore the element to its default display style
+            elem.style.display = '';
+
+            // get the normalized screen coordinate of that position
+            // x and y will be in the -1 to +1 range with x = -1 being
+            // on the left and y = -1 being on the bottom
+            tempV.copy(position);
+            tempV.project(camera);
+            // convert the normalized position to CSS coordinates
+            const x = (tempV.x *  .5 + .5) * canvas.clientWidth;
+            const y = (tempV.y * -.5 + .5) * canvas.clientHeight;
+            //console.log(x, y);
+
+            // move the elem to that position
+            elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
+
+            // set the zIndex for sorting
+            elem.style.zIndex = (-tempV.z * .5 + .5) * 100000 | 0;
+        }
     }
- 
-    // restore the element to its default display style
-    elem.style.display = '';
-
-      // get the normalized screen coordinate of that position
-      // x and y will be in the -1 to +1 range with x = -1 being
-      // on the left and y = -1 being on the bottom
-      tempV.copy(position);
-      tempV.project(camera);
-      // convert the normalized position to CSS coordinates
-      const x = (tempV.x *  .5 + .5) * canvas.clientWidth;
-      const y = (tempV.y * -.5 + .5) * canvas.clientHeight;
-      //console.log(x, y);
-
-      // move the elem to that position
-      elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
-
-      // set the zIndex for sorting
-      elem.style.zIndex = (-tempV.z * .5 + .5) * 100000 | 0;
-    }
-  }
-    ////////////////////////////////////////////////////////////////////////
 
     //tweening function for smoooth movement
     function tweenView(positionX, positionY, positionZ, rotationX, rotationY, rotationZ) {
@@ -420,24 +424,21 @@ const normalMatrix = new THREE.Matrix3();
             .easing( TWEEN.Easing.Quadratic.InOut).start();
     }
 
-
-
     //Animate and Render
     var animate = function () { 
-          const canvas = renderer.domElement;
-  camera.aspect = canvas.clientWidth / canvas.clientHeight;
-  camera.updateProjectionMatrix();
-          if (resizeRendererToDisplaySize(renderer)) {
-    const canvas = renderer.domElement;
-    camera.aspect = canvas.clientWidth / canvas.clientHeight;
-    camera.updateProjectionMatrix();
-  }
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+        if (resizeRendererToDisplaySize(renderer)) {
+            const canvas = renderer.domElement;
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+        }
         requestAnimationFrame(animate);
         controls.update();
         TWEEN.update(); 
         updateLabels();
         renderer.render(scene, camera);
-
     };
 
     // resize window on event onWindowResize
@@ -450,7 +451,7 @@ const normalMatrix = new THREE.Matrix3();
 
     animate();
 
-    //Changing the model views on click using tween.js
+    //Changing the model views on click with tween.js
     function changeView(step) {
         window.tweenView = tweenView;
         var posX, posY, posZ;
@@ -554,6 +555,7 @@ const normalMatrix = new THREE.Matrix3();
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // PREVIOUSLY THIS WAS THE MAIN INTERACTION JS FILE //
+    // CONTAINS CLICK THROUGHS RATHER THAN THREE.JS FUNCTIONALITY
 
     //Because the module doesn't work otherwise.
     window.nextPoint = nextPoint;
@@ -791,10 +793,6 @@ const normalMatrix = new THREE.Matrix3();
         }
     }
 
-    ////////////////////////////////////// CHANGING VIEWS IN THREE JS /////////////////////////////////////////////
-
-    
-
     /////////////////////////////////////// MODAL REVIEW INFORMATION /////////////////////////////////////////////
 
     //Toggling display of review information in modal
@@ -837,9 +835,6 @@ const normalMatrix = new THREE.Matrix3();
     })
 
 //if click on model-label
-
-
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

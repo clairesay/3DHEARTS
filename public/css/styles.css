@@ -200,10 +200,10 @@ section#main-workshop-menu-grid {
 }
 
 #index-menu {
-    display: grid;
+    /* display: grid;
     grid-template-rows: 80px 240px 80px;
     grid-template-areas: "pre-workshop-link" "main-workshop-link" "post-workshop-link";
-    row-gap: 1em;
+    row-gap: 1em; */
 }
 
 .menu > a {
@@ -222,10 +222,9 @@ section#main-workshop-menu-grid {
     align-items: flex-end;
 }
 
-#main-workshop-menu {
+#index-menu {
     margin: auto;
     grid-area: ModuleMenu;
-
 }
 
 #menu-title-div h1 {
@@ -286,29 +285,29 @@ section#main-workshop-menu-grid {
     margin-right: 1em;
 }
 
-#main-workshop-menu article:nth-of-type(2n) {
+#index-menu article:nth-of-type(2n) {
     display: grid;
     grid-template-rows: 3fr 2fr;
     grid-template-columns: 25vw 1fr;
     grid-template-areas: 'Start Profile' 'Story Profile'
 }
 
-#main-workshop-menu article img {
+#index-menu article img {
     grid-area: Profile;
     height: 100%;
 }
 
-#main-workshop-menu article:nth-of-type(2n) img {
+#index-menu article:nth-of-type(2n) img {
     margin-right: auto;
     padding-left: 0.25em;
 }
 
-#main-workshop-menu article:nth-of-type(2n+1) img {
+#index-menu article:nth-of-type(2n+1) img {
     margin-left: auto;
     padding-right: 0.25em;
 }
 
-#main-workshop-menu article a {
+#index-menu article a {
     grid-area: Start;
     display: flex;
     justify-content: center;
@@ -325,12 +324,12 @@ section#main-workshop-menu-grid {
     transition-duration: 0.1s;
 }
 
-#main-workshop-menu article a:hover{
+#index-menu article a:hover{
     cursor: pointer;
     transform: scale(1.01);
 }
 
-#main-workshop-menu article h4 {
+#index-menu article h4 {
     grid-area: Story;
     border-bottom: 7px solid;
     display: flex;
@@ -341,7 +340,7 @@ section#main-workshop-menu-grid {
     font-weight: 200;
 }
 
-#main-workshop-menu article:nth-of-type(2n + 1) {
+#index-menu article:nth-of-type(2n + 1) {
     display: grid;
     grid-template-rows: 3fr 2fr;
     grid-template-columns: 1fr 25vw;
@@ -382,38 +381,12 @@ section#main-workshop-menu-grid {
 }
 
 /* ////////////////// INDEX SUB MENUS ////////////////*/
-#pre-workshop-menu {
-    grid-template-rows: 80px;
-    row-gap: 1em;
-}
-
-#pre-workshop-link {
-    grid-area: pre-workshop-link;
-}
-
-#main-workshop-menu {
+#index-menu {
     grid-template-rows: 20vh 20vh;
     grid-template-columns: 40vw 40vw;
     row-gap: 2em;
     column-gap: 2em;
 }
-
-#post-workshop-menu {
-    grid-template-rows: 30vh 30vh;
-    grid-template-columns: 40vw 40vw;
-    row-gap: 1em;
-    column-gap: 1em;
-}
-
-#main-workshop-link {
-    grid-area: main-workshop-link;
-}
-
-#post-workshop-link {
-    grid-area: post-workshop-link;
-}
-
-
 
 /* ////////////////////////// HEADER //////////////////// */
 #module-name {
