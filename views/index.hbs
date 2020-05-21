@@ -1,11 +1,20 @@
 
 
-<body class="common-structure">
-    <button id="returnToMenu" class="none back" onclick="returnToMenu();"> <svg width="36" height="36"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>
-    </button>
-    <h1>3D Hearts Workshop</h1>
+<body id="index" class="common-structure">
+    <header>
+        <div id="menu-title-div">
+            <button id="returnToMenu" class="back" onclick="returnToMenu();">
+                <img src="images/menu-heart-grey.svg" alt="menu button">
+            </button>
+            <div>
+                <h1>Cardiac Cases</h1>
+                <h3>Workshop Module</h3>
+            </div>
+        </div>
+        <img id="case-doctor" src="images/illustrations/landing-page.svg" alt="case doctor">
+        {{!-- <div id="shading"></div> --}}
+    </header>
+
     <section id="index-menu" class="menu">
         <a id="pre-workshop-link" onclick="preWorkshop();">Pre-Workshop Module</a>
         <a id="main-workshop-link" onclick="mainWorkshop();">Main Workshop Module</a>
@@ -18,10 +27,16 @@
     </section>
 
     <section id="main-workshop-menu" class="menu none">
-        <a href="17040-oe.html">Case #17040</a>
-        <a href="main-workshop-module.html">Case #19041</a>
-        <a href="main-workshop-module.html">Case #16751</a>
-        <a href="main-workshop-module.html">Case #17863</a>
+        <article ><a onclick="moduleStart('ben');">Start</a><h4 id="ben">Ben's Story</h4><img src="images/ben-profile-recrop.png" alt="Ben"></article>
+        <article ><a onclick="moduleStart('ayanthi');">Start</a><h4 id="ayanthi">Ayanthi's Story</h4><img src="images/ayanthi-profile-recrop.png" alt="Ayanthi"></article>
+        <article ><a onclick="moduleStart('amin');">Start</a><h4  id="amin">Amin's Story</h4><img src="images/amin-profile-recrop.png" alt="Amin"></article>
+        <article ><a onclick="moduleStart('richardson');">Start</a><h4 id="richardson">Richardson's Story</h4><img src="images/richardson-profile-recrop.png" alt="Richardson"></article>
+    </section>
+    
+    <section id="start-module" class="none">
+        <img>
+        <h4></h4>
+        <a>Explore</a>
     </section>
 
     <section id="post-workshop-menu" class="menu none">

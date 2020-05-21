@@ -1,5 +1,35 @@
-* {
-    font-family: 'Work Sans', sans-serif;
+
+
+/* //////////////// FONTS /////////////// */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,423&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,400;1,600;1,700;1,800;1,900&display=swap');
+
+h1, h2, h3, h4 {
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+p, ul, ol, li, button, a, label, h5, .model-label {
+    font-family: 'Nunito', sans-serif;
+    font-style: italic;
+}
+
+label, h5, .model-label {
+    font-style: normal;
+    font-weight: 600;
+}
+
+/* //////////////// VARIABLES /////////////// */
+:root {
+    --default-module-colour: purple;
+    --module-colour: var(--default-module-colour);
+}
+
+/* /////////////// UNORDERED LISTS /////////////// */
+ul {
+    list-style-type: disc;
+}
+
+li {
+    margin-left: 28px;
 }
 
 /* //////////////// SWAL /////////////////// */
@@ -10,56 +40,6 @@ button.swal2-confirm.swal2-styled {
 button.swal2-styled {
     font-weight: 600;
     border-radius: 3px;
-}
-
-/* //////////////// TOP LEFT BUTTONS //////////////// */
-button {
-    background-color: transparent;
-    border: none;
-    padding-right: 24px;
-}
-
-.back path {
-    transform: scale(1.5)
-}
-
-/* ////////////////////// TEXT BUTTONS ////////////// */
-.text-button {
-    padding: 0.8em 1.6em;
-    background-color: black;
-    border-radius: 3em;
-    color: white;
-    font-size: 16px;
-    position: fixed;
-    bottom: 4em;
-    right: 4em;
-}
-
-/* ////////////////////// PROGRESS BUTTONS ////////////// */
-#previous {
-    position: fixed;
-    bottom: 4em;
-    left: 4em;
-}
-
-#next {
-    position: fixed;
-    bottom: 4em;
-    right: 4em;
-}
-
-.nav-button svg {
-    fill: white;
-}
-
-.nav-button {
-    padding: 1em 1em 0.8em 1em;
-    background-color: black;
-    border-radius: 6em;
-}
-
-#next-module {
-    visibility: hidden;
 }
 
 /* /////////////////// DISPLAY AND VISIBILITY STATES CLASSES /////////////////// */
@@ -84,59 +64,141 @@ button {
     display: flex;
 }
 
-/* ////////////////////////// GLOBAL /////////////////////// */
-/* BODY */
-
-.common-structure {
-    margin: 2em;
-    min-height: calc(100vh - 4em);
-}
-
-/* ////////////////////////// HEADER //////////////////// */
-header {
-    display: flex;
-}
-
-#module-name {
-    display: flex;
-    flex-direction: column;
-}
-
-#module-name * {
-    margin: 0;
-}
-
-h3 {
-    font-weight: 400;
-    font-size: 18px;
-}
-
-/* CHANGED THIS FOR THE TOGGLE LABEL */
-h5 {
-    font-weight: 400;
-    font-size: 14px;
-    margin: -15px 0 0 0 ;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-/* //////////////////// MENU CLASS //////////////// */
-.menu {
-    width: 100%;
-    max-width: 1024px;
-}
-
-.menu a:hover {
-    cursor: pointer;
+/* //////////////// BUTTONS //////////////// */
+button {
+    background-color: transparent;
+    border: none;
+    /* padding-right: 24px; */
+    padding: 0;
 }
 
 button:hover {
-    cursor:pointer;
+    cursor: pointer;
 }
 
-/* ////////////////// INDEX MENU ////////////////// */
+.back path {
+    transform: scale(1.5)
+}
+
+/* ////////////////////// TEXT BUTTONS ////////////// */
+.text-button {
+    border-top: 10px solid var(--module-colour);
+    background-color: var(--module-colour);
+    width: 67%;
+    height: 69px;
+    position: relative;
+    justify-content: center;
+    font-size: 20px;
+    font-style: italic;
+    color: white;
+}
+
+#next-module {
+    visibility: hidden;
+}
+
+/* ////////////////////// PROGRESS BUTTONS ////////////// */
+#previous {
+    width: 33%;
+    border-top: 10px solid grey;
+    background-color: #ddd;
+    justify-content: center;
+}
+
+#next {
+    position: absolute;
+    right: 0;
+    width: 67%;
+    border-top: 10px solid var(--module-colour);
+    background-color: white;
+    justify-content: center;
+}
+
+#next svg {
+    stroke: var(--module-colour);
+}
+
+#previous svg {
+    stroke: grey;
+}
+
+.nav-button svg {
+    stroke-width: 5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    padding: 1em 0;
+}
+
+#buttons-container {
+    position: fixed;
+    bottom: 0;
+    display: flex;
+    max-width: 400px;
+    width: calc(40vw);
+    height: 68px;
+}
+
+/* ////////////////////////// GLOBAL /////////////////////// */
+/* HEADER */
+#oe header, #interaction header, #explanation header {
+    display: flex;
+    justify-content: center;
+    grid-area: MenuButton;
+}
+
+#oe #returnToMenu, #interaction #returnToMenu, #explanation #returnToMenu {
+    margin-top: 20px;
+}
+
+#returnToMenu {
+    margin: auto;
+}
+
+/* BODY */
+
+#oe, #interaction, #explanation {
+    display: grid;
+    grid-template-rows: 50px 1fr;
+    grid-template-columns: auto 3fr;
+    grid-template-areas: 'MenuButton Nav' 'Information Image'
+}
+
+.common-structure {
+    min-height: 100vh
+}
+
+/* ///////////////////// INDEX /////////////////////////// */
+/* //////////////////// NEW CSS MENU //////////////// */
+
+#case-doctor {
+    padding-bottom: 0.5em;
+    max-height: 70%;
+    right: 100px;
+}
+
+body#index {
+    display: grid;
+    grid-template-rows: 180px auto;
+    grid-template-columns: 1fr;
+    grid-template-areas: 'Header' 'ModuleMenu'
+}
+
+section#main-workshop-menu-grid {
+    margin: auto;
+}
+
+#index header {
+    grid-area: Header;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: flex-end
+}
+
+#index #returnToMenu {
+    margin: 0;
+}
+
 #index-menu {
     display: grid;
     grid-template-rows: 80px 240px 80px;
@@ -154,6 +216,171 @@ button:hover {
     font-size: 16px;
 }
 
+#menu-title-div {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+
+#main-workshop-menu {
+    margin: auto;
+    grid-area: ModuleMenu;
+
+}
+
+#menu-title-div h1 {
+    font-size: 30px;
+    text-transform: uppercase;
+}
+
+#menu-title-div h3 {
+    font-size: 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    padding: 0.5em 0;
+}
+
+#menu-title-div {
+    display: flex;
+    flex-direction: row;
+}
+
+#shading {
+    background-color: #f2f2f2;
+    width: 75vw;
+    height: 7vh;
+    position: absolute;
+    top: 24.3vh;
+
+    left: 15vw;
+
+    z-index: -1;
+}
+
+#ben{
+    color: #9b51e0;
+    border-image: linear-gradient(to right, #9b51e0, #bb6bd9 );
+    border-image-slice: 1;
+}
+
+#ayanthi{
+    color: #eb5757;
+    border-image: linear-gradient(to right, #f2994a, #eb5757 );
+    border-image-slice: 1;
+}
+
+#amin{
+    color: #2f80ed;
+    border-image: linear-gradient(to right, #2f80ed, #56ccf2 );
+    border-image-slice: 1;
+}
+
+#richardson{
+    color: #27ae60;
+    border-image: linear-gradient(to right, #6fcf97, #27ae60 );
+    border-image-slice: 1;
+}
+
+#index #returnToMenu img {
+    width: 100px;
+    margin-right: 1em;
+}
+
+#main-workshop-menu article:nth-of-type(2n) {
+    display: grid;
+    grid-template-rows: 3fr 2fr;
+    grid-template-columns: 25vw 1fr;
+    grid-template-areas: 'Start Profile' 'Story Profile'
+}
+
+#main-workshop-menu article img {
+    grid-area: Profile;
+    height: 100%;
+}
+
+#main-workshop-menu article:nth-of-type(2n) img {
+    margin-right: auto;
+    padding-left: 0.25em;
+}
+
+#main-workshop-menu article:nth-of-type(2n+1) img {
+    margin-left: auto;
+    padding-right: 0.25em;
+}
+
+#main-workshop-menu article a {
+    grid-area: Start;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-style: normal;
+    font-family: 'Josefin Sans', 'sans-serif';
+    color: #c4c4c4;
+    background-color:#ffffff;
+    filter: drop-shadow(0px 8px 16px #cccccc);
+    transform: scale(1);
+    transition-duration: 0.1s;
+}
+
+#main-workshop-menu article a:hover{
+    cursor: pointer;
+    transform: scale(1.01);
+}
+
+#main-workshop-menu article h4 {
+    grid-area: Story;
+    border-bottom: 7px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: 200;
+}
+
+#main-workshop-menu article:nth-of-type(2n + 1) {
+    display: grid;
+    grid-template-rows: 3fr 2fr;
+    grid-template-columns: 1fr 25vw;
+    grid-template-areas: 'Profile Start' 'Profile Story';
+}
+
+#start-module {
+    flex-direction: column;
+    align-items: center;
+}
+
+#start-module * {
+    margin: auto;
+}
+
+#start-module h4 {
+    font-size: 20px;
+    text-transform: uppercase;
+    padding-bottom: 1em;
+    border-bottom: 7px solid;
+}
+
+#start-module a {
+    padding: 0.8em 1em;
+    font-size: 20px;
+    width: 150px;
+    color: #ffffff;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    text-decoration: none;
+    margin-top: 0;
+}
+
+#start-module img {
+    max-height: 200px;
+    margin: 0 auto;
+}
+
 /* ////////////////// INDEX SUB MENUS ////////////////*/
 #pre-workshop-menu {
     grid-template-rows: 80px;
@@ -164,7 +391,14 @@ button:hover {
     grid-area: pre-workshop-link;
 }
 
-#main-workshop-menu, #post-workshop-menu {
+#main-workshop-menu {
+    grid-template-rows: 20vh 20vh;
+    grid-template-columns: 40vw 40vw;
+    row-gap: 2em;
+    column-gap: 2em;
+}
+
+#post-workshop-menu {
     grid-template-rows: 30vh 30vh;
     grid-template-columns: 40vw 40vw;
     row-gap: 1em;
@@ -179,16 +413,122 @@ button:hover {
     grid-area: post-workshop-link;
 }
 
-/* ///////////// FOR INFORMATION SLIDES ONLY /////////////////// */
+
+
+/* ////////////////////////// HEADER //////////////////// */
+#module-name {
+    padding-left: 1em;
+
+    margin: 2em 0;
+    text-transform: uppercase;
+
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+    grid-template-areas: 'Profile Name' 'Profile Stage'
+}
+
+#module-name h1 {
+    font-size: 24px;
+    padding-bottom: 0.5em;
+    grid-area: Name;
+    display: flex;
+    align-self: flex-end;
+    padding-left: 20px;
+}
+
+
+#module-name .profile {
+    margin: auto;
+    grid-area: Profile;
+    padding: 0;
+}
+
+#module-name h3 {
+    font-weight: 200;
+    font-size: 16px;
+    grid-area: Stage;
+    display: flex;
+    align-self: flex-start;
+    padding-left: 20px;
+}
+
+/* //////////////////////// BODY CONTENT /////////////////////////// */
+
+
+.content h1, .content h2, .content h3, .content h4
+.step h1, .step h2, .step h3, .step h4,
+.activity h1, .activity h2, .activity h3 {
+    font-family: 'Nunito', 'sans-serif';
+    font-weight: bold;
+}
+
+/* /////////////////// CONTENT STYLES ////////////////////////////// */
 .content {
-    margin-left: 54px;
-    margin-top: 2em;
+    display: flex;
     flex-direction: column;
+    margin-left: 2.5em;
+    margin-top: 1em;
+}
+
+.content ul, .content p, .content ol {
+    padding: 10px 0;
+}
+
+.content li {
+    padding: 5px 0;
+}
+
+/* //////////// CONTENT HALF ///////////////// */
+
+#content-half {
+    max-width: 400px;
+    width: 40vw;
+    grid-area: Information;
+}
+
+#content-half img {
+    height: 20vh;
+    padding: 2.5em 2em 2em 2em;
+}
+
+#content-half img.differential-diagnoses {
+    padding: 0;
+}
+
+h4.differential-diagnoses {
+    font-style: italic;
+    color: rgb(238, 70, 51);
+    font-weight: 800;
+    font-family: 'Nunito', 'sans-serif';
+    padding-bottom: 1em;
+}
+
+/* /////////////// IMAGE HALF /////////////////// */
+
+
+#image-half {
+    max-width: 60vw;
+    width: 60vw;
+    grid-area: Image;
+    display: flex;
+}
+
+.story-illustration {
+    /* width: 80%; */
+    /* height: 80%; */
+    width: 80%;
+    max-height: 80vh;
+    /* position: absolute; */
+    /* top: 10vw; */
+    /* height: 80vh; */
+    /* max-height: 80vh; */
+    display: flex;
+    margin: 5vh auto auto auto;
 }
 
 /* ///////////// FOR ACTIVITY AND INTERACTION ////////////////// */
 .activity {
-    margin-left: 54px;
     margin-top: 1em;
     flex-direction: column;
 }
@@ -199,38 +539,40 @@ button:hover {
 
 .module-slide {
     display: none;
+    margin: 0 2em;
 }
 
 .module-slide .case-content:first-of-type {
     visibility: visible;
 }
 
-.module-slide .case-content:first-of-type {
-    visibility: visible;
+.module-slide p {
+    padding: 0.5em 0;
 }
 
 .module-slide h1 {
     margin: 0 0 0.5em 0;
 }
 
-/* /////////////// NAVIGATION TAB LOCATED AT THE BOTTOM OF THE SCREEN /////////////// */
+
+/* //////////////////// NAVIGATION TAB //////////////// */
 #navigation-tab {
     display: flex;
     justify-content: space-around;
-    background-color: #ccc;
+    align-items: center;
+    grid-area: Nav;
+}
 
-    position: fixed;
-    bottom: 0;
-    width: 100vw;
-    margin-left: -32px;
-    padding: 0.75em 0 ;
+#navigation-tab, #oe header, #interaction header, #explanation header {
+    background-color: #e7e7e7;
+    border-bottom: 5px solid var(--module-colour);
 }
 
 #navigation-tab a {
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 600;
     font-size: 16px;
-    color: #595959;
+    color: #c4c4c4;
     transition-duration: 0.2s;
     cursor: pointer;
 }
@@ -239,24 +581,33 @@ button:hover {
     color: black;
 }
 
-/* /////////////// UNORDERED LISTS /////////////// */
-ul {
-    margin-left: -40px;
-}
-
-li {
-    margin-left: 40px;
-}
 
 /* /////////// DIV FOR MODEL TO RENDER IN //////////// */
-#heart-model  {
-    width: 74vw;
-    height: 40vw;
-}
 
 #heart-model:focus {
     outline-width: 0;
 }
+
+.model-label {
+    /* padding:  0.5em 0.75em; */
+    background-color: white;
+}
+
+.model-label:hover {
+    cursor: pointer;
+    color: blue;
+}
+
+.model-label::after {
+    content: "";
+    position: absolute;
+    top: 99%; /* At the bottom of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: white transparent transparent transparent;
+  }
 
 /* ////////// STEPS/INSTRUCTIONS FOR HOW TO INTERACT ////////////// */
 .step {
@@ -265,8 +616,8 @@ li {
 }
 
 .step strong {
-    margin-left: -20px;
     font-size: 18px;
+    font-weight: 700;
 }
 
 .step:first-of-type {
@@ -277,6 +628,19 @@ li {
 #toggles {
     display: flex;
     flex-wrap: nowrap;
+    margin: auto;
+    margin-bottom: 1em;
+}
+
+/* CHANGED THIS FOR THE TOGGLE LABEL */
+h5 {
+    font-weight: 400;
+    font-size: 14px;
+    margin: -15px 0 0 0 ;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #model-toggles {
@@ -301,7 +665,7 @@ label:first-of-type {
 
 label:last-of-type {
     border-radius: 0 3px 3px 0;
-    border-left: 1px solid #ccc;
+    border-left: 1px solid #eeeeee;
 }
 
 label {
@@ -311,7 +675,7 @@ label {
 }
 
 label:hover {
-    background-color: #ccc;
+    background-color: #eeeeee;
 }
 
 input:checked + label {
@@ -334,38 +698,31 @@ label[for="off"] {
     right: 12px;
 }
 
-
-
 /* ///////////////// PLACEHOLDER and IMAGES //////////////// */
 
-#placeholder-heart {
-    max-height: 50vh;
-}
-
 .chest-xr {
-    height: 100%;
-    width: 74vw;
+    width: 100%;
+    padding: 0;
 }
 
 #case-content-button {
-    margin-left: auto;
-    margin-right: -2px;
-    z-index: 10;
+    display: flex;
+    margin: auto;
+
 }
 
 #case-content-button img{
     width: 50px;
+    padding: 0;
+    z-index: 10;
+    margin-left: -2em;
+    position: absolute;
+    bottom: 10vh;
+
 }
 
-#interaction-case-content-button-explanation {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-}
 
 /* ////////////////// INTERACTION: REVIEW INFORMATION MODAL ///////////////////// */
-
 .no-modal {
     display: none;
 }
@@ -375,7 +732,7 @@ label[for="off"] {
     opacity: 0.75;
     display: grid;
     grid-template-rows: 45px 1fr;
-    grid-template-columns: 170px 110px 1fr;
+    grid-template-columns: 180px 110px 1fr;
     grid-template-areas: "Examination ChestXR ." "Information Information Information";
     position: fixed;
     top: 0;
@@ -387,32 +744,32 @@ label[for="off"] {
 
 #modal {
     margin: auto;
-    width: 80vw;
+    width: 30vw;
     height: 60vh;
     opacity: 1;
     background-color: transparent;
     border-radius: 12px;
     position: fixed;
     top: 18vh;
-    left: 10vw;
+    left: 5vw;
 }
 
 #on-examination-review {
     grid-area: Examination;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: var(--module-colour);
     padding: 0.8em;
-    margin: 0;
     border-radius: 10px 10px 0 0;
+    text-transform: uppercase;
 }
 
 #chest-xr-review {
     grid-area: ChestXR;
-    background-color: grey;
+    background-color: var(--module-colour);
     color: white;
     padding: 0.8em;
-    margin: 0;
     border-radius: 10px 10px 0 0;
+    text-transform: uppercase;
 }
 
 #on-examination-review:hover, #chest-xr-review:hover {
@@ -424,15 +781,23 @@ label[for="off"] {
 }
 
 #on-examination-review-content h4 {
-    margin-top: 2.5em;
+    margin: 1em 0 0.5em 0;
+}
+
+#on-examination-review-content li {
+    padding: 0.1em 0;
+}
+#on-examination-review-content ul {
+    padding-top: 0.5em;
 }
 
 #on-examination-review-content, #chest-xr-review-content {
     grid-area: Information;
-    background-color: black;
-    color: white;
+    background-color: white;
+    color: black;
     text-align: left;
     padding: 1em;
+    padding-bottom: 2.5em;
     overflow-y: auto;
 }
 
@@ -448,7 +813,6 @@ label[for="off"] {
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*///////////////////////////////////// MEDIA QUERIES START HERE ////////////////////////////////////////*/
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-    
-    /* STYLES GO HERE */ 
 
+    /* STYLES GO HERE */ 
 }
