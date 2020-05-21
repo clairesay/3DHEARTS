@@ -159,7 +159,10 @@
     </section>
 
     <section id="image-half">
-        <div id="heart-model"></div>
+        <div id="heart-model">
+            <canvas id="c"></canvas>
+            <div id="labels"></div>
+        </div>
     </section>
 </body>
 
@@ -252,10 +255,9 @@
     }  
 
     // labelDiv, setLabel;
-    var label1 = {labelName:"part1", posX: '0', posY: '20', posZ: '-20'};
-    var label2 = {labelName:"part2", posX: '0', posY: '30', posZ: '0'};
-    var label3 = {labelName:"part3", posX: '0', posY: '40', posZ: '20'};
-
+    //var label1 = {labelName:"part1", posX: '0', posY: '20', posZ: '-20'};
+    //var label2 = {labelName:"part2", posX: '0', posY: '30', posZ: '0'};
+    //var label3 = {labelName:"part3", posX: '0', posY: '40', posZ: '20'};
 
     // Declare variables to manipulate heart object rotation
     var heartObj;
@@ -265,29 +267,29 @@
     // Loading STL model
 
     var loader = new OBJLoader()
-    var box = new THREE.Box3();
+    //var box = new THREE.Box3();
     
-    const tempV = new THREE.Vector3();
-    const cameraToPoint = new THREE.Vector3();
-    const cameraPosition = new THREE.Vector3();
-    const normalMatrix = new THREE.Matrix3();
-    const minVisibleDot = 1;
+    //const tempV = new THREE.Vector3();
+    //const cameraToPoint = new THREE.Vector3();
+    //const cameraPosition = new THREE.Vector3();
+    //const normalMatrix = new THREE.Matrix3();
+    //const minVisibleDot = 1;
 
 ///////////////////////////////////////////////////////////////////////////////////////////////
-        placeLabel(label1);
-        placeLabel(label2);
-        placeLabel(label3);
-        async function placeLabel(label) {
-            const labelDiv = document.createElement('div');
-            labelDiv.className = 'model-label';
-            labelDiv.textContent = label.labelName;
-            const setLabel = new CSS2DObject(labelDiv);
-            setLabel.position.set(label.posX, label.posY, label.posZ)
-                tempV.copy(setLabel.position);
-                cameraToPoint.copy(setLabel.position);
-            array.push(setLabel);
-            console.log(array);            
-        }
+    //    placeLabel(label1);
+    //    placeLabel(label2);
+    //    placeLabel(label3);
+    //    async function placeLabel(label) {
+    //        const labelDiv = document.createElement('div');
+    //        labelDiv.className = 'model-label';
+    //        labelDiv.textContent = label.labelName;
+    //        const setLabel = new CSS2DObject(labelDiv);
+    //        setLabel.position.set(label.posX, label.posY, label.posZ)
+    //            tempV.copy(setLabel.position);
+    //            cameraToPoint.copy(setLabel.position);
+    //        array.push(setLabel);
+    //        console.log(array);            
+    //    }
 ///////////////////////////////////////////////////////////////////////////////////////////////
 
     loader.load("{{ model }}", function (heart) {
@@ -319,10 +321,87 @@
 
         // get heart object to rotate
         heartObj = scene.getObjectByName('heart', true);
-        for (var p = 0; p < array.length; p ++) {
-            heart.add(array[p])
-        }
+        //for (var p = 0; p < array.length; p ++) {
+        //    heart.add(array[p])
+        //}
     })
+
+        ////////////////////////////////////////////////////////////////////////
+  async function loadJSON(url) {
+    const req = await fetch(url);
+    return req.json();
+  }
+
+  let countryInfos;
+  async function loadCountryData() {
+    countryInfos = await loadJSON('./js/heart-labels.json');  
+
+    const lonFudge = Math.PI * 1.5;
+    const latFudge = Math.PI;
+    // these helpers will make it easy to position the boxes
+    // We can rotate the lon helper on its Y axis to the longitude
+    const lonHelper = new THREE.Object3D();
+    // We rotate the latHelper on its X axis to the latitude
+    const latHelper = new THREE.Object3D();
+    lonHelper.add(latHelper);
+    // The position helper moves the object to the edge of the sphere
+    const positionHelper = new THREE.Object3D();
+    positionHelper.position.z = 1;
+    latHelper.add(positionHelper);
+
+    const labelParentElem = document.querySelector('#labels');
+    for (const countryInfo of countryInfos) {
+      const {xPosition, yPosition, zPosition, name} = countryInfo;
+
+      // adjust the helpers to point to the latitude and longitude
+      lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition) + lonFudge;
+      latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition) + latFudge;
+
+      // get the position of the lat/lon
+      positionHelper.updateWorldMatrix(true, false);
+      const position = new THREE.Vector3();
+      positionHelper.getWorldPosition(position);
+      countryInfo.position = position;
+
+      // add an element for each country
+      const elem = document.createElement('div');
+      elem.textContent = name;
+      labelParentElem.appendChild(elem);
+      countryInfo.elem = elem;
+    }
+    //requestRenderIfNotRequested();
+  }
+  loadCountryData();
+
+  const tempV = new THREE.Vector3();
+
+  function updateLabels() {
+    // exit if we have not yet loaded the JSON file
+    if (!countryInfos) {
+      return;
+    }
+
+    for (const countryInfo of countryInfos) {
+      const {position, elem} = countryInfo;
+
+      // get the normalized screen coordinate of that position
+      // x and y will be in the -1 to +1 range with x = -1 being
+      // on the left and y = -1 being on the bottom
+      tempV.copy(position);
+      tempV.project(camera);
+
+      // convert the normalized position to CSS coordinates
+      const x = (tempV.x *  .5 + .5) * canvas.clientWidth;
+      const y = (tempV.y * -.5 + .5) * canvas.clientHeight;
+
+      // move the elem to that position
+      elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
+
+      // set the zIndex for sorting
+      elem.style.zIndex = (-tempV.z * .5 + .5) * 100000 | 0;
+    }
+  }
+    ////////////////////////////////////////////////////////////////////////
 
     //tweening function for smoooth movement
     function tweenExample(positionX, positionY, positionZ, rotationX, rotationY, rotationZ) {
@@ -353,9 +432,17 @@
         controls.update();
         TWEEN.update();
 
+          //if (resizeRendererToDisplaySize(renderer)) {
+    const canvas = renderer.domElement;
+    camera.aspect = canvas.clientWidth / canvas.clientHeight;
+    camera.updateProjectionMatrix();
+  //}
+ 
+        updateLabels();
         // console.log(camera.rotation.x, camera.rotation.y, camera.rotation.z);
         renderer.render(scene, camera);
-        labelRenderer.render(scene, camera);
+
+        //labelRenderer.render(scene, camera);
 
     };
 
