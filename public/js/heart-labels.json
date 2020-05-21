@@ -1,18 +1,18 @@
 [
   {
-    "name": "Jamaica",
+    "name": "Label1",
     "xPosition": 20,
     "yPosition": 50,
     "zPosition": 2
   },
   {
-    "name": "Antigua and Barbuda",
+    "name": "Label2",
     "xPosition": -20,
     "yPosition": 100,
     "zPosition": 2
   },
   {
-    "name": "Sha",
+    "name": "Label3",
     "xPosition": 10,
     "yPosition": 0,
     "zPosition": 2
