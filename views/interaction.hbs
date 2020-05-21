@@ -200,27 +200,30 @@
     var testLabel, labelRenderer;
 
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
+
     //establishing the scebe abd background color
     var scene = new THREE.Scene();
         var imageHalf = document.getElementById('image-half')
     scene.background = new THREE.Color("rgb(0, 0, 0)");
     var camera = new THREE.PerspectiveCamera(45, imageHalf.clientWidth / imageHalf.clientHeight, 1, 500);
 
+      const canvas = document.querySelector('#c');
+  const renderer = new THREE.WebGLRenderer({canvas});
     //rendering the window and everything in it
-    var renderer = new THREE.WebGLRenderer();
+    //var renderer = new THREE.WebGLRenderer();
 
-    renderer.setSize((imageHalf.clientWidth), (imageHalf.clientHeight));
+    //renderer.setSize((imageHalf.clientWidth), (imageHalf.clientHeight));
 
     //Insert inside 'heart-model' div in interaction template
-    var container = document.getElementById('heart-model');
-    container.appendChild(renderer.domElement);
+    //var container = document.getElementById('heart-model');
+    //container.appendChild(renderer.domElement);
     
     //Setting up the Label Renderer and positioning it over the 3D container only.
-    labelRenderer = new CSS2DRenderer();
-    labelRenderer.domElement.style.position = 'absolute';
-    labelRenderer.domElement.style.top = '50px';
-    labelRenderer.domElement.style.maxHeight = 'calc(100vh - 70px)'
-    container.appendChild(labelRenderer.domElement);
+    //labelRenderer = new CSS2DRenderer();
+    //labelRenderer.domElement.style.position = 'absolute';
+    //labelRenderer.domElement.style.top = '50px';
+    //labelRenderer.domElement.style.maxHeight = 'calc(100vh - 70px)'
+    //container.appendChild(labelRenderer.domElement);
 
     //Setting the position of the camera
     camera.position.x = 0;
@@ -233,26 +236,24 @@
     camera.add(light);
 
     //Adding Orbit Controls
-    var controls = new OrbitControls(camera, container);
+    var controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
-    controls.rotateSpeed = 1.0;
-    controls.zoomSpeed = 1.2;
-    controls.panSpeed = 0.8;
+
 
     //Show Labels function
-    window.showLabel = showLabel;
-    function showLabel(showValue) {
-        switch (showValue) {
-            case 1:
-                labelDiv.style.visibility = "visible";
-                break;
-            case -1:
-                labelDiv.style.visibility = "hidden";
-                break;
-            default:
-                break;
-        }
-    }  
+    //window.showLabel = showLabel;
+    //function showLabel(showValue) {
+    //    switch (showValue) {
+    //        case 1:
+    //           labelDiv.style.visibility = "visible";
+    //            break;
+    //       case -1:
+    //           labelDiv.style.visibility = "hidden";
+    //           break;
+    //        default:
+    //            break;
+    //    }
+    //}  
 
     // labelDiv, setLabel;
     //var label1 = {labelName:"part1", posX: '0', posY: '20', posZ: '-20'};
@@ -262,7 +263,7 @@
     // Declare variables to manipulate heart object rotation
     var heartObj;
     var xRotation, yRotation, zRotation;
-    var array = [];
+    //var array = [];
     ///////////////////////// MODEL LOADER /////////////////////////////
     // Loading STL model
 
@@ -314,7 +315,7 @@
 
         //positioning the heart for optimal scale and visibility
         heart.scale.set(0.1, 0.1, 0.1);
-        console.log(heart.rotation.x, heart.rotation.y, heart.rotation.z)
+        //console.log(heart.rotation.x, heart.rotation.y, heart.rotation.z)
         heart.rotation.x = 0;
         heart.rotation.y = 3;
         heart.rotation.z = 0;
@@ -336,8 +337,6 @@
   async function loadCountryData() {
     countryInfos = await loadJSON('./js/heart-labels.json');  
 
-    const lonFudge = Math.PI * 1.5;
-    const latFudge = Math.PI;
     // these helpers will make it easy to position the boxes
     // We can rotate the lon helper on its Y axis to the longitude
     const lonHelper = new THREE.Object3D();
@@ -346,16 +345,18 @@
     lonHelper.add(latHelper);
     // The position helper moves the object to the edge of the sphere
     const positionHelper = new THREE.Object3D();
-    positionHelper.position.z = 1;
+
     latHelper.add(positionHelper);
 
     const labelParentElem = document.querySelector('#labels');
     for (const countryInfo of countryInfos) {
       const {xPosition, yPosition, zPosition, name} = countryInfo;
-
+    //console.log(xPosition, yPosition, zPosition, name);
       // adjust the helpers to point to the latitude and longitude
-      lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition) + lonFudge;
-      latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition) + latFudge;
+      latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition);
+    lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition);
+    positionHelper.position.z = zPosition;
+    console.log(positionHelper.position.z);
 
       // get the position of the lat/lon
       positionHelper.updateWorldMatrix(true, false);
@@ -374,6 +375,9 @@
   loadCountryData();
 
   const tempV = new THREE.Vector3();
+  const cameraToPoint = new THREE.Vector3();
+const cameraPosition = new THREE.Vector3();
+const normalMatrix = new THREE.Matrix3();
 
   function updateLabels() {
     // exit if we have not yet loaded the JSON file
@@ -381,18 +385,57 @@
       return;
     }
 
+      const minVisibleDot = 0.2;
+  // get a matrix that represents a relative orientation of the camera
+  normalMatrix.getNormalMatrix(camera.matrixWorldInverse);
+  // get the camera's position
+  camera.getWorldPosition(cameraPosition);
+
     for (const countryInfo of countryInfos) {
       const {position, elem} = countryInfo;
+
+          // Orient the position based on the camera's orientation.
+    // Since the sphere is at the origin and the sphere is a unit sphere
+    // this gives us a camera relative direction vector for the position.
+    tempV.copy(position);
+    var dotGeometry = new THREE.Geometry();
+    dotGeometry.vertices.push(position);
+    var dotMaterial = new THREE.PointsMaterial( { size: 3, sizeAttenuation: false } );
+    var dote = new THREE.Points( dotGeometry, dotMaterial );
+    scene.add( dote );
+    tempV.applyMatrix3(normalMatrix);
+ 
+    // compute the direction to this position from the camera
+    cameraToPoint.copy(position);
+    cameraToPoint.applyMatrix4(camera.matrixWorldInverse).normalize();
+ 
+    // get the dot product of camera relative direction to this position
+    // on the globe with the direction from the camera to that point.
+    // 1 = facing directly towards the camera
+    // 0 = exactly on tangent of the sphere from the camera
+    // < 0 = facing away
+    const dot = tempV.dot(cameraToPoint);
+ 
+    // if the orientation is not facing us hide it.
+    if (dot > minVisibleDot) {
+      elem.style.display = 'none';
+      continue;
+    }
+ 
+    // restore the element to its default display style
+    elem.style.display = '';
 
       // get the normalized screen coordinate of that position
       // x and y will be in the -1 to +1 range with x = -1 being
       // on the left and y = -1 being on the bottom
       tempV.copy(position);
       tempV.project(camera);
-
+        //console.log(tempV.x);
+        //console.log(tempV.y);
       // convert the normalized position to CSS coordinates
       const x = (tempV.x *  .5 + .5) * canvas.clientWidth;
       const y = (tempV.y * -.5 + .5) * canvas.clientHeight;
+      //console.log(x, y);
 
       // move the elem to that position
       elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
@@ -459,11 +502,11 @@
     //Changing the model views on click using tween.js
     function changeView(step) {
         window.tweenExample = tweenExample;
-        var canvas = document.getElementsByTagName('canvas')[0];
-        labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
+        //var canvas = document.getElementsByTagName('canvas')[0];
+        //labelRenderer.setSize(canvas.clientWidth, canvas.clientHeight);
         var posX, posY, posZ;
         var rotX, rotY, rotZ;
-        var modelLabel = document.querySelectorAll('.model-label');
+        //var modelLabel = document.querySelectorAll('.model-label');
 
 
 
@@ -476,9 +519,6 @@
                 rotY = 0.41;
                 rotZ = 0.13;
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                modelLabel[1].style.visibility = "hidden"
-                modelLabel[2].style.visibility = "hidden"
-                modelLabel[0].style.visibility = "visible"
                 break;
             case 2:
                 posX = 17.26
@@ -488,9 +528,6 @@
                 rotY = 1.04
                 rotZ = 0.4
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                modelLabel[0].style.visibility = "hidden"
-                modelLabel[2].style.visibility = "hidden"
-                modelLabel[1].style.visibility = "visible"
                 break;
             case 3:
                 posX = 1.84
@@ -500,9 +537,6 @@
                 rotY = 0.09
                 rotZ = -2.95
                 tweenExample(posX, posY, posZ, rotX, rotY, rotZ);
-                modelLabel[0].style.visibility = "hidden"
-                modelLabel[1].style.visibility = "hidden"
-                modelLabel[2].style.visibility = "visible"
                 break;
             case 4:
                 posX = 0.7

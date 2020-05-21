@@ -810,6 +810,26 @@ label[for="off"] {
     width: auto;
 }
 
+#heart-model {
+    position: relative; 
+}
+
+#c {
+    width: 100%;  /* let our container decide our size */
+    height: 100%;
+    display: block;
+}
+
+#labels {
+    position: absolute;  /* let us position ourself inside the container */
+    z-index: 0;          /* make a new stacking context so children don't sort with rest of page */
+    left: 0;             /* make our position the top left of the container */
+    top: 0;
+    color: white;
+    opacity:0.5;
+    text-align: center;
+  }
+
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*///////////////////////////////////// MEDIA QUERIES START HERE ////////////////////////////////////////*/
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {

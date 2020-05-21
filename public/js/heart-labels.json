@@ -1,14 +1,20 @@
 [
   {
-    "name": "Antigua and Barbuda",
-    "xPosition": 0,
-    "yPosition": -20,
-    "zPosition": 20
+    "name": "Jamaica",
+    "xPosition": 20,
+    "yPosition": 50,
+    "zPosition": 2
   },
   {
-    "name": "Jamaica",
-    "xPosition": 1,
-    "yPosition": 40,
-    "zPosition": 30
+    "name": "Antigua and Barbuda",
+    "xPosition": -20,
+    "yPosition": 100,
+    "zPosition": 2
+  },
+  {
+    "name": "Sha",
+    "xPosition": 10,
+    "yPosition": 0,
+    "zPosition": 2
   }
 ]
