@@ -772,3 +772,17 @@ function bear() {
       }
       // restore the element to its default display style
   }
+
+//   //////////////////////// lighting fixing ///////////////////
+
+    //var light = new THREE.SpotLight();
+    //var light = new THREE.DirectionalLight( 0xffffff, 1, 100 );
+    //var light = new THREE.PointLight(0xfffdd0, 1.1, 100);
+    //light.castShadow = true;
+    //light.position.set(camera.position.x, camera.position.y, camera.position.z);
+    var dirLight = new THREE.DirectionalLight( 0xffffff );
+    dirLight.castShadow = true;
+
+    scene.add( dirLight );
+scene.add(camera);
+camera.add(dirLight);

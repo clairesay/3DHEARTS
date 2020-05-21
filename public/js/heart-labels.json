@@ -2,8 +2,8 @@
   {
     "name": "Label1",
     "xPosition": 20,
-    "yPosition": 50,
-    "zPosition": 2
+    "yPosition": 100,
+    "zPosition": 2.5
   },
   {
     "name": "Label2",
@@ -15,6 +15,6 @@
     "name": "Label3",
     "xPosition": 10,
     "yPosition": 0,
-    "zPosition": 2
+    "zPosition": 2.1
   }
 ]

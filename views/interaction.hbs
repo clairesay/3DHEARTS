@@ -203,11 +203,10 @@
 
     //establishing the scebe abd background color
     var scene = new THREE.Scene();
-        var imageHalf = document.getElementById('image-half')
-    scene.background = new THREE.Color("rgb(0, 0, 0)");
+    var imageHalf = document.getElementById('image-half')
+    scene.background = new THREE.Color(0x222222);
     var camera = new THREE.PerspectiveCamera(45, imageHalf.clientWidth / imageHalf.clientHeight, 1, 500);
-
-      const canvas = document.querySelector('#c');
+    const canvas = document.querySelector('#c');
 
     //rendering the window and everything in it
   const renderer = new THREE.WebGLRenderer({canvas});
@@ -217,7 +216,7 @@
     camera.position.y = 0;
     camera.position.z = 15;
 
-    var light = new THREE.PointLight(0xfffdd0, 1.1, 100);
+    var light = new THREE.PointLight(0xfefefe, 1.1, 100);
     light.position.set(camera.position.x, camera.position.y, camera.position.z);
     scene.add(camera);
     camera.add(light);
@@ -535,7 +534,6 @@ const normalMatrix = new THREE.Matrix3();
         }
     }
 
-
     /////////////////////////////SHOW LABELS///////////////////////////
     window.showLabel = showLabel;
     function showLabel(value) {
@@ -546,7 +544,7 @@ const normalMatrix = new THREE.Matrix3();
             labelContainer.style.display = "none";
                 break;
             case 1:
-                        labelDot.visible = true;
+            labelDot.visible = true;
             labelContainer.style.display = "block";
                 break;
         }
