@@ -5,8 +5,8 @@
         </button>
     </header>
     <section id="navigation-tab">
-        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Examination');">Case Examination</a>
-        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Interaction');">Interaction</a>
+        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Examination');">Case Details</a>
+        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Interaction');">Exploration</a>
         <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
     </section>
 
@@ -201,10 +201,35 @@
 
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
 
+				var scene = new THREE.Scene();
+				scene.background = new THREE.Color( 0xc4c4c4 );
+				scene.fog = new THREE.Fog( 0xc4c4c4, 10, 50 );
+
+				var hemiLight = new THREE.HemisphereLight( 0xe7e7e7, 0x222222, 0.7 );
+				hemiLight.position.set( 0, 20, 0 );
+
+				var dirLight = new THREE.DirectionalLight( 0xe7e7e7, 0.5 );
+
+				dirLight.castShadow = true;
+				dirLight.shadow.camera.top = 2;
+				dirLight.shadow.camera.bottom = - 2;
+				dirLight.shadow.camera.left = - 2;
+				dirLight.shadow.camera.right = 2;
+				dirLight.shadow.camera.near = 0.1;
+				dirLight.shadow.camera.far = 40;
+
+				// ground
+
+				var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x777777, depthWrite: false } ) );
+				mesh.rotation.x = - Math.PI / 2;
+                mesh.position.y = -8;
+				mesh.receiveShadow = true;
+				scene.add( mesh );
+
     //establishing the scebe abd background color
-    var scene = new THREE.Scene();
+    //var scene = new THREE.Scene();
     var imageHalf = document.getElementById('image-half')
-    scene.background = new THREE.Color(0x222222);
+    //scene.background = new THREE.Color(0x222222);
     var camera = new THREE.PerspectiveCamera(45, imageHalf.clientWidth / imageHalf.clientHeight, 1, 500);
     const canvas = document.querySelector('#c');
 
@@ -216,15 +241,21 @@
     camera.position.y = 0;
     camera.position.z = 15;
 
+                camera.add(dirLight);
+                camera.add(hemiLight);
+
+
     //Lights
-    var light = new THREE.PointLight(0xfefefe, 1.1, 100);
-    light.position.set(camera.position.x, camera.position.y, camera.position.z);
+    //var light = new THREE.PointLight(0xfefefe, 1.1, 100);
+    //light.position.set(camera.position.x, camera.position.y, camera.position.z);
     scene.add(camera);
-    camera.add(light);
+    //camera.add(light);
 
     //Adding Orbit Controls
     var controls = new OrbitControls(camera, canvas);
     controls.enableDamping = true;
+    controls.minDistance = 10;
+    controls.maxDistance = 20;
 
     //Resizing the renderer as needed
     function resizeRendererToDisplaySize(renderer) {
@@ -249,8 +280,7 @@
     loader.load("{{ model }}", function (heart) {
         //material of model
         var material = new THREE.MeshStandardMaterial({
-            color: 0xfffeea,
-            metalness: 0.1,
+            color: 0xfffee2,
             roughness: 0.75,
             shadowSide: THREE.DoubleSide,
         });
@@ -421,7 +451,7 @@
         };
         var tween = new TWEEN.Tween(camera.position)
             .to(to, 2000)
-            .easing( TWEEN.Easing.Quadratic.InOut).start();
+            .easing( TWEEN.Easing.Sinusoidal.InOut).start();
     }
 
     //Animate and Render
@@ -814,9 +844,9 @@
     //On Examination
     //Check if OE heading is clicked to show OE review content
     OEReviewHeading.addEventListener('click', function showOEReview() {
-        chestXRReviewHeading.style.backgroundColor = "purple";
+        chestXRReviewHeading.style.backgroundColor = "var(--default-module-colour)";
         OEReviewHeading.style.backgroundColor = "white";
-                OEReviewHeading.style.color = "purple";
+                OEReviewHeading.style.color = "var(--default-module-colour)";
         chestXRReviewHeading.style.color = "white";
         OEReviewContent.style.display = "flex";
         chestXRReviewContent.style.display = "none";
@@ -825,9 +855,9 @@
     //Chest XR
     //Check if Chest XR heading is clicked to show Chest XR review content
     chestXRReviewHeading.addEventListener('click', function showChestXRReview() {
-                OEReviewHeading.style.backgroundColor = "purple";
+                OEReviewHeading.style.backgroundColor = "var(--default-module-colour)";
         chestXRReviewHeading.style.backgroundColor = "white";
-        chestXRReviewHeading.style.color = "purple";
+        chestXRReviewHeading.style.color = "var(--default-module-colour)";
         OEReviewHeading.style.color = "white";
 
         OEReviewContent.style.display = "none";

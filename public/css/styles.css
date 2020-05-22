@@ -19,7 +19,7 @@ label, h5, .model-label {
 
 /* //////////////// VARIABLES /////////////// */
 :root {
-    --default-module-colour: purple;
+    --default-module-colour: #e7e7e7;
     --module-colour: var(--default-module-colour);
 }
 
@@ -35,11 +35,22 @@ li {
 /* //////////////// SWAL /////////////////// */
 button.swal2-confirm.swal2-styled {
     background-color: #595959;
+
 }
 
 button.swal2-styled {
     font-weight: 600;
     border-radius: 3px;
+    font-style: normal;
+}
+
+h2#swal2-title.swal2-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+}
+
+div#swal2-content.swal2-html-container {
+    font-family: 'Nunito', sans-serif;
 }
 
 /* /////////////////// DISPLAY AND VISIBILITY STATES CLASSES /////////////////// */
@@ -70,10 +81,15 @@ button {
     border: none;
     /* padding-right: 24px; */
     padding: 0;
+    transition-duration: 0.2s;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
 }
 
 button:hover {
     cursor: pointer;
+    filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.5));
+    -webkit-filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.5));
 }
 
 .back path {
@@ -100,8 +116,8 @@ button:hover {
 /* ////////////////////// PROGRESS BUTTONS ////////////// */
 #previous {
     width: 33%;
-    border-top: 10px solid grey;
-    background-color: #ddd;
+    border-top: 10px solid #e0e0e0;
+    background-color: #e7e7e7;
     justify-content: center;
 }
 
@@ -119,7 +135,7 @@ button:hover {
 }
 
 #previous svg {
-    stroke: grey;
+    stroke: #bdbdbd;
 }
 
 .nav-button svg {
@@ -197,13 +213,6 @@ section#main-workshop-menu-grid {
 
 #index #returnToMenu {
     margin: 0;
-}
-
-#index-menu {
-    /* display: grid;
-    grid-template-rows: 80px 240px 80px;
-    grid-template-areas: "pre-workshop-link" "main-workshop-link" "post-workshop-link";
-    row-gap: 1em; */
 }
 
 .menu > a {
@@ -334,7 +343,7 @@ section#main-workshop-menu-grid {
     border-bottom: 7px solid;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
     text-transform: uppercase;
     font-style: normal;
     font-weight: 200;
@@ -373,6 +382,15 @@ section#main-workshop-menu-grid {
     border: none;
     text-decoration: none;
     margin-top: 0;
+
+    transition-duration: 0.2s;
+    filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
+    -webkit-filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
+}
+
+#start-module a:hover {
+    filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.5));
+    -webkit-filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.5));
 }
 
 #start-module img {

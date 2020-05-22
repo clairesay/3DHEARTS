@@ -11,6 +11,7 @@ function mainWorkshop() {
     returnToMenuButton.setAttribute('onclick', 'returnToMenu()');
     indexMenu.style.display = 'grid';
     headings.style.visibility = 'visible';
+    document.getElementById('case-doctor').style.visibility = "visible";
 }
 
 function moduleStart(name) {
@@ -21,13 +22,13 @@ function moduleStart(name) {
     var caseLink = document.querySelector('#start-module a')
     document.getElementById('case-doctor').style.visibility = "hidden";
     returnToMenuButton.setAttribute('onclick', 'mainWorkshop()');
-
+    
     headings.style.visibility = 'hidden';
     switch (name) {
         case 'ben':
             caseImage.setAttribute('src', 'images/photos/ben-recrop.png');
             caseImage.setAttribute('alt', 'Ben')
-            caseName.innerHTML = "Ben's Story"
+            caseName.innerHTML = "Ben, a 3-month old boy with difficulty breathing"
             caseName.setAttribute('id', 'ben')
             caseLink.setAttribute('href', '17040-oe.html');
             caseLink.style.backgroundImage = "linear-gradient(to right, #9b51e0, #bb6bd9)";
@@ -36,7 +37,7 @@ function moduleStart(name) {
         case 'ayanthi':
             caseImage.setAttribute('src', 'images/photos/ayanthi-recrop.png');
             caseImage.setAttribute('alt', 'Ayanthi')
-            caseName.innerHTML = "Ayanthi's Story"
+            caseName.innerHTML = "Ayanthi, a 1-month old girl with cyanotic episodes"
             caseName.setAttribute('id', 'ayanthi')
             caseLink.setAttribute('href', '19401-oe.html');
             caseLink.style.backgroundImage = "linear-gradient(to right, #f2994a, #eb5757 )";
@@ -45,7 +46,7 @@ function moduleStart(name) {
         case 'amin':
             caseImage.setAttribute('src', 'images/photos/amin-recrop.png');
             caseImage.setAttribute('alt', 'Amin')
-            caseName.innerHTML = "Amin's Story"
+            caseName.innerHTML = "Amin, a 6-month old boy at the refugee clinic"
             caseName.setAttribute('id', 'amin')
             caseLink.setAttribute('href', '16751-oe.html');
             caseLink.style.backgroundImage = "linear-gradient(to right, #2f80ed, #56ccf2 )";
@@ -54,7 +55,7 @@ function moduleStart(name) {
         case 'richardson':
             caseImage.setAttribute('src', 'images/photos/richardson-recrop.png');
             caseImage.setAttribute('alt', 'Richardson')
-            caseName.innerHTML = "Richardson's Story"
+            caseName.innerHTML = "Lucy, a 7-day old unwell neonate"
             caseName.setAttribute('id', 'richardson')
             caseLink.setAttribute('href', '19863-oe.html');
             caseLink.style.backgroundImage = "linear-gradient(to right, #6fcf97, #27ae60 )";
@@ -67,4 +68,5 @@ function moduleStart(name) {
 function returnToMenu() {
     indexMenu.style.display = 'grid';
     startModule.style.display = 'none';
+    document.getElementById('case-doctor').style.visibility = "visible";
 }
