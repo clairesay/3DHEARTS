@@ -67,24 +67,28 @@
 
         <section class="activity module-slide">
             <article id="toggles">
-                <form id="model-toggles">
+                {{!-- <form id="model-toggles">
                     <input type="radio" name="render-type" id="clear" value="clear" checked>
                     <label for="clear" onclick="zoom(-1);">Zoom Out</label>
                     <input type="radio" name="render-type" id="segments" value="segments">
                     <label for="segments" onclick="zoom(1);">Zoom In</label>
-                </form>
-                <h5>Labels
-                    <form id="model-toggles">
+                </form> --}}
+                    {{!-- <form id="model-toggles">
                         <input type="radio" name="part-labels" id="on" value="labels-on" checked>
                         <label for="on" onclick="showLabel(1);">On</label>
                         <input type="radio" name="part-labels" id="off" value="labels-off">
                         <label for="off" onclick="showLabel(-1);">Off</label>
+                    </form> --}}
+                    <form>
+                    <h5>Labels</h5>
+                        <label id="switch"> 
+                            <input type="checkbox" checked>
+                            <span class="slider round" onclick="showLabel();"></span>
+                        </label>
                     </form>
-                </h5>
             </article>
 
-            <p class="step">Refer to Specimen {{heartId}}
-            </p>
+            <p class="step">Refer to Specimen {{heartId}}</p>
 
             <p class="step"><strong>1. Orient the heart so that you are looking at the posterior aspect.</strong>
                 Can you identify the two atrial appendages?
@@ -97,7 +101,7 @@
             </p>
             <p class="step"><strong>4. Identify the left atrium and follow it down into its corresponding ventricle</strong>
                 Does this have the features of a left ventricle?
-            </p>
+            </p>>
             <p class="step"><strong>5. Identify the left ventricular outflow tract</strong></p>
             <p class="step"><strong>6. Identify any inter-atrial communications.</strong>
                 Can you pass a pipe-cleaner through the defect?
@@ -571,17 +575,16 @@
 
     /////////////////////////////SHOW LABELS///////////////////////////
     window.showLabel = showLabel;
-    function showLabel(value) {
+    var labelCounter = 0;
+    function showLabel() {
+        labelCounter ++;
         const labelContainer = document.getElementById('labels');
-        switch(value) {
-            case -1:
-            labelDot.visible = false;
-            labelContainer.style.display = "none";
-                break;
-            case 1:
+        if (labelCounter % 2 == 0) {
             labelDot.visible = true;
             labelContainer.style.display = "block";
-                break;
+        } else {
+            labelDot.visible = false;
+            labelContainer.style.display = "none";
         }
     }
 
