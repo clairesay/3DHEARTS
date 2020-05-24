@@ -1,10 +1,11 @@
 
 
 /* //////////////// FONTS /////////////// */
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,423&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,400;1,600;1,700;1,800;1,900&display=swap');
-
+/* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,423&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,400;1,600;1,700;1,800;1,900&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
 h1, h2, h3, h4 {
     font-family: 'Josefin Sans', sans-serif;
+    font-weight: 800;
 }
 
 p, ul, ol, li, button, a, label, h5, .model-label {
@@ -15,6 +16,14 @@ p, ul, ol, li, button, a, label, h5, .model-label {
 label, h5, .model-label {
     font-style: normal;
     font-weight: 600;
+}
+
+span.weak {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+    font-size: 12px;
+    color: #595959;
+    text-transform: none;
 }
 
 /* //////////////// VARIABLES /////////////// */
@@ -128,6 +137,7 @@ button:hover {
     border-top: 10px solid var(--module-colour);
     background-color: white;
     justify-content: center;
+    height: 68px;
 }
 
 #next svg {
@@ -148,9 +158,12 @@ button:hover {
 #buttons-container {
     position: fixed;
     bottom: 0;
+    /* left: calc() */
     display: flex;
-    max-width: 400px;
-    width: calc(40vw);
+    
+    margin-left: -2em;
+    /* max-width: 400px; */
+    width: 50vw;
     height: 68px;
 }
 
@@ -160,6 +173,7 @@ button:hover {
     display: flex;
     justify-content: center;
     grid-area: MenuButton;
+    z-index: 2;
 }
 
 #oe #returnToMenu, #interaction #returnToMenu, #explanation #returnToMenu {
@@ -175,7 +189,7 @@ button:hover {
 #oe, #interaction, #explanation {
     display: grid;
     grid-template-rows: 50px 1fr;
-    grid-template-columns: auto 3fr;
+    grid-template-columns: 50vw 50vw;
     grid-template-areas: 'MenuButton Nav' 'Information Image'
 }
 
@@ -194,7 +208,7 @@ button:hover {
 
 body#index {
     display: grid;
-    grid-template-rows: 180px auto;
+    grid-template-rows: 175px auto;
     grid-template-columns: 1fr;
     grid-template-areas: 'Header' 'ModuleMenu'
 }
@@ -239,6 +253,7 @@ section#main-workshop-menu-grid {
 #menu-title-div h1 {
     font-size: 30px;
     text-transform: uppercase;
+    font-weight: 800;
 }
 
 #menu-title-div h3 {
@@ -342,12 +357,18 @@ section#main-workshop-menu-grid {
     grid-area: Story;
     border-bottom: 7px solid;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    align-items: flex-end;
+    /* align-items: flex-end; */
     text-transform: uppercase;
-    font-style: normal;
-    font-weight: 200;
+    font-weight: 800;
+    text-align: center;
+    /* font-style: normal; */
+    /* font-weight: 200; */
 }
+
+/* #index-menu article h4  */
 
 #index-menu article:nth-of-type(2n + 1) {
     display: grid;
@@ -359,6 +380,7 @@ section#main-workshop-menu-grid {
 #start-module {
     flex-direction: column;
     align-items: center;
+    margin-top: -2em;
 }
 
 #start-module * {
@@ -367,9 +389,19 @@ section#main-workshop-menu-grid {
 
 #start-module h4 {
     font-size: 20px;
+    font-weight: 800;
     text-transform: uppercase;
     padding-bottom: 1em;
     border-bottom: 7px solid;
+    margin-bottom: 2em;
+}
+
+#start-module span.weak {
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 2em
 }
 
 #start-module a {
@@ -408,20 +440,20 @@ section#main-workshop-menu-grid {
 
 /* ////////////////////////// HEADER //////////////////// */
 #module-name {
-    padding-left: 1em;
+    /* padding-left: 1em; */
 
-    margin: 2em 0;
+    margin: 2em 0 2em 0;
     text-transform: uppercase;
 
     display: grid;
     grid-template-rows: auto auto;
-    grid-template-columns: auto auto;
+    grid-template-columns: auto 1fr;
     grid-template-areas: 'Profile Name' 'Profile Stage'
 }
 
 #module-name h1 {
-    font-size: 24px;
-    padding-bottom: 0.5em;
+    font-size: 28px;
+    padding-bottom: 0.25em;
     grid-area: Name;
     display: flex;
     align-self: flex-end;
@@ -436,8 +468,8 @@ section#main-workshop-menu-grid {
 }
 
 #module-name h3 {
-    font-weight: 200;
-    font-size: 16px;
+    /* font-weight: 200; */
+    font-size: 20px;
     grid-area: Stage;
     display: flex;
     align-self: flex-start;
@@ -458,7 +490,7 @@ section#main-workshop-menu-grid {
 .content {
     display: flex;
     flex-direction: column;
-    margin-left: 2.5em;
+    /* margin-left: 2.5em; */
     margin-top: 1em;
 }
 
@@ -473,9 +505,14 @@ section#main-workshop-menu-grid {
 /* //////////// CONTENT HALF ///////////////// */
 
 #content-half {
-    max-width: 400px;
-    width: 40vw;
+    /* max-width: 400px; */
     grid-area: Information;
+    max-height: calc(100vh - 68px - 50px);
+    overflow: hidden;
+    padding: 0 2em;
+    z-index: 2;
+    /* background-color: white;
+    filter: drop-shadow(0px 8px 16px #cccccc); */
 }
 
 #content-half img {
@@ -500,22 +537,16 @@ h4.differential-diagnoses {
 
 #image-half {
     /* max-width: 60vw; */
-    min-width: 60vw;
+    width: 50vw;
     grid-area: Image;
     display: flex;
 }
 
 .story-illustration {
-    /* width: 80%; */
-    /* height: 80%; */
     width: 80%;
     max-height: 80vh;
-    /* position: absolute; */
-    /* top: 10vw; */
-    /* height: 80vh; */
-    /* max-height: 80vh; */
     display: flex;
-    margin: 5vh auto auto auto;
+    margin: auto auto auto auto;
 }
 
 /* ///////////// FOR ACTIVITY AND INTERACTION ////////////////// */
@@ -530,7 +561,7 @@ h4.differential-diagnoses {
 
 .module-slide {
     display: none;
-    margin: 0 2em;
+    /* margin: 0 2em; */
 }
 
 .module-slide .case-content:first-of-type {
@@ -699,17 +730,17 @@ label[for="off"] {
 #case-content-button {
     display: flex;
     margin: auto;
-
+    z-index: 10;
 }
 
 #case-content-button img{
     width: 50px;
     padding: 0;
-    z-index: 10;
-    margin-left: -2em;
-    position: absolute;
-    bottom: 10vh;
 
+    margin-left: -2em;
+    position: fixed;
+    /* top: 10vh; */
+    bottom: calc(2em + 68px);
 }
 
 
@@ -735,8 +766,8 @@ label[for="off"] {
 
 #modal {
     margin: auto;
-    width: 30vw;
-    height: 60vh;
+    width: 40vw;
+    height: 64vh;
     opacity: 1;
     background-color: transparent;
     border-radius: 12px;
@@ -767,8 +798,12 @@ label[for="off"] {
     cursor: pointer;
 }
 
-#on-examination-review-content {
-    flex-direction: column;
+#on-examination-review-content div {
+    position: sticky;
+    top: 0;
+    margin-top: -0.1em;
+    background-color: white;
+    padding: 0.5em;
 }
 
 #on-examination-review-content h4 {
@@ -790,6 +825,13 @@ label[for="off"] {
     padding: 1em;
     padding-bottom: 2.5em;
     overflow-y: auto;
+    margin-top: -0.2em;
+}
+
+#on-examination-review-content {
+    flex-direction: column;
+    scroll-padding-top: 50px;
+    padding-top: 0;
 }
 
 #chest-xr-review-content {
@@ -799,6 +841,7 @@ label[for="off"] {
 #chest-xr-review-content img {
     height: 100%;
     width: auto;
+    margin:auto;
 }
 
 /* LABELS  */
@@ -807,6 +850,7 @@ label[for="off"] {
     position: relative; 
     width: 100%;
     height: 100%;
+    display: none;
 }
 
 #c {

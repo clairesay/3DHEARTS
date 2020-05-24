@@ -46,9 +46,9 @@
                 you organise a chest XR.</p>
         </section>
 
-        {{!-- <section class="content module-slide">
-            
-        </section> --}}
+        <section class="content module-slide">
+                <p id="chest-XR-slide" class="case-content">Chest XR Results</p>
+        </section>
 
         <section class="content module-slide">
             <img class="differential-diagnoses" src="images/info-alert.svg" alt="thinking time">
@@ -88,7 +88,8 @@
     </section>
 
     <section id="image-half">
-        <img class="story-illustration" src="images/illustrations/ben-background-history.svg">
+        <img class="story-illustration" src="images/illustrations/{{name}}-story.svg">
+        {{!-- <img class="story-illustration" src="images/illustrations/ben-background-history.svg"> --}}
         <img class="chest-xr none" src={{xray}}>
     </section>
 </body>
@@ -234,6 +235,34 @@
         }
     }
 
+    function showIllustration(slideNumber) {
+        var switchIllustration = document.getElementsByClassName('story-illustration')[0];
+        switch(slideNumber) {
+            case 0 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-story.svg');
+                break;
+            case 2 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-background-history.svg');
+                break;
+            case 3 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-on-examine.svg');
+                break;
+            case 4 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-chest-x-ray.svg');
+                break;
+            case 5 :
+                switchIllustration.setAttribute('src', 'images/XRAY/{{name}}_XR.jpg');
+                break;
+            case 7 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-story.svg');
+                //switchIllustration.setAttribute('src', 'images/illustrations/ben-chest-x-ray.svg');
+                break;
+            default :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-story.svg');
+                break;
+        }
+    }
+
     //Progression through slides
     var currentSlide = 0;
     function nextSlide(n) {
@@ -242,8 +271,10 @@
         previousSlide.style.display = "none";
         //add or minus 1 to current slide, depending on previous or next button click
         currentSlide += n;
+
         //display the slide
         showSlide(currentSlide);
+        showIllustration(currentSlide);
     }
     showSlide(currentSlide);
 

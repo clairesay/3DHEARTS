@@ -14,7 +14,9 @@
         <section id="modal" class="no-modal">
             <h3 id="on-examination-review">On Examination</h3>
             <h3 id="chest-xr-review">Chest XR</h3>
+
             <article id="on-examination-review-content">
+                <div></div>
                 <p>
                 <ul>
                     {{#each preliminary_information}}
@@ -35,6 +37,7 @@
                     {{/each}}
                 </ul>
                 </p>
+
             </article>
             <article id="chest-xr-review-content">
                 <img class="chest-xr" src={{xray}}>
@@ -155,10 +158,11 @@
             <button id="next-module" class="text-button" onclick="nextModule()">Explanation</button>
         </article>
 
-        <button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
+        
     </section>
-
+<button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
     <section id="image-half">
+        <img class="story-illustration" src="images/illustrations/{{name}}-interaction.svg">
         <div id="heart-model">
             <canvas id="c"></canvas>
             <div id="labels"></div>
@@ -722,6 +726,32 @@
         }
     }
 
+    function showIllustration(slideNumber) {
+        var switchIllustration = document.getElementsByClassName('story-illustration')[0];
+        var heartModels = document.getElementById('heart-model');
+        var caseReviewButton = document.getElementById('case-content-button');
+        var contentHalf = document.getElementById('content-half');
+        var contentHeader = document.querySelector('#oe header');
+        switch(slideNumber) {
+            case 0:
+                switchIllustration.style.display = "flex";
+                heartModels.style.display = "none";
+                caseReviewButton.style.visibility = "visible";
+                break;
+            case 1 :
+                switchIllustration.style.display = "none";
+                heartModels.style.display = "flex";
+                caseReviewButton.style.visibility = "visible";
+
+                break;
+            case 2 :
+                switchIllustration.style.display = "flex";
+                heartModels.style.display = "none";
+                caseReviewButton.style.visibility = "hidden";
+                break;  
+        }
+    }
+
     //Progression through slides
     var currentSlide = 0;
     function nextSlide(n) {
@@ -732,6 +762,7 @@
         currentSlide += n;
         //display the slide
         showSlide(currentSlide);
+        showIllustration(currentSlide);
     }
     showSlide(currentSlide);
 
@@ -844,9 +875,9 @@
     //On Examination
     //Check if OE heading is clicked to show OE review content
     OEReviewHeading.addEventListener('click', function showOEReview() {
-        chestXRReviewHeading.style.backgroundColor = "var(--default-module-colour)";
+        chestXRReviewHeading.style.backgroundColor = "var(--module-colour)";
         OEReviewHeading.style.backgroundColor = "white";
-                OEReviewHeading.style.color = "var(--default-module-colour)";
+                OEReviewHeading.style.color = "var(--module-colour)";
         chestXRReviewHeading.style.color = "white";
         OEReviewContent.style.display = "flex";
         chestXRReviewContent.style.display = "none";
@@ -855,9 +886,9 @@
     //Chest XR
     //Check if Chest XR heading is clicked to show Chest XR review content
     chestXRReviewHeading.addEventListener('click', function showChestXRReview() {
-                OEReviewHeading.style.backgroundColor = "var(--default-module-colour)";
+                OEReviewHeading.style.backgroundColor = "var(--module-colour)";
         chestXRReviewHeading.style.backgroundColor = "white";
-        chestXRReviewHeading.style.color = "var(--default-module-colour)";
+        chestXRReviewHeading.style.color = "var(--module-colour)";
         OEReviewHeading.style.color = "white";
 
         OEReviewContent.style.display = "none";
