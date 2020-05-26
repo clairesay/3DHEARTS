@@ -476,6 +476,18 @@ section#main-workshop-menu-grid {
     padding-left: 20px;
 }
 
+/* //////////////////////// SCROLLBAR /////////////////////////// */
+::-webkit-scrollbar {
+    width: 10px;
+    background-color: var(--default-module-colour);
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background-color: var(--module-colour); 
+}
+
+
 /* //////////////////////// BODY CONTENT /////////////////////////// */
 
 
@@ -523,6 +535,12 @@ section#main-workshop-menu-grid {
 #content-half img.differential-diagnoses {
     padding: 0;
 }
+
+.text-content-wrapper {
+    overflow-y: auto;
+    height: 22em;
+}
+
 
 h4.differential-diagnoses {
     font-style: italic;

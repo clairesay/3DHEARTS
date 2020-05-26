@@ -17,23 +17,25 @@
             <img class="profile" src="images/photos/{{toLowerCase name}}-recrop.png">
         </div>
 
-        <section class="content module-slide">
-            <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-            <p>Think carefully about your answer before you proceed to the next page.</p>
-        </section>
-    
-        <section class="content module-slide">
-            <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-            <h3>Explanation</h3>
-            {{#each explanation}}
-            {{list this}}
-            {{/each}}
-        </section>
+        <div class="text-content-wrapper">
+            <section class="content module-slide">
+                <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
+                <p>Think carefully about your answer before you proceed to the next page.</p>
+            </section>
+        
+            <section class="content module-slide">
+                <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
+                <h3>Explanation</h3>
+                {{#each explanation}}
+                {{list this}}
+                {{/each}}
+            </section>
 
-        <section class="content module-slide">
-            <p class="case-content">Well done on completing {{name}}'s Story! Return to Modules Home to discover more stories.
-            </p>
-        </section>
+            <section class="content module-slide">
+                <p class="case-content">Well done on completing {{name}}'s Story! Return to Modules Home to discover more stories.
+                </p>
+            </section>
+        </div>
 
         <section id="buttons-container">
             <button id="previous" class="nav-button" onclick="nextSlide(-1)">

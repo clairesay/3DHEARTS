@@ -51,99 +51,101 @@
             <img class="profile" src="images/photos/{{toLowerCase name}}-recrop.png">
         </div>
 
-        <section class="content module-slide">
-            <h1>Interact</h1>
-            <p class="case-content">
-                For this stage of the module, you will be using a physical model of the paediatric heart case #{{heartId}} and a
-                digital interactive model.
-            </p>
-            <p id="interaction-case-content-button-explanation" class="case-content">
-                All the case content you reviewed will be available to you in the case button.
-            </p>
-            <p class="case-content">
-                It will be helpful as you interact with the models as the module progresses.
-            </p>
-        </section>
+        <div class="text-content-wrapper">
+            <section class="content module-slide">
+                <h1>Interact</h1>
+                <p class="case-content">
+                    For this stage of the module, you will be using a physical model of the paediatric heart case #{{heartId}} and a
+                    digital interactive model.
+                </p>
+                <p id="interaction-case-content-button-explanation" class="case-content">
+                    All the case content you reviewed will be available to you in the case button.
+                </p>
+                <p class="case-content">
+                    It will be helpful as you interact with the models as the module progresses.
+                </p>
+            </section>
 
-        <section class="activity module-slide">
-            <article id="toggles">
-                {{!-- <form id="model-toggles">
-                    <input type="radio" name="render-type" id="clear" value="clear" checked>
-                    <label for="clear" onclick="zoom(-1);">Zoom Out</label>
-                    <input type="radio" name="render-type" id="segments" value="segments">
-                    <label for="segments" onclick="zoom(1);">Zoom In</label>
-                </form> --}}
+            <section class="activity module-slide">
+                <article id="toggles">
                     {{!-- <form id="model-toggles">
-                        <input type="radio" name="part-labels" id="on" value="labels-on" checked>
-                        <label for="on" onclick="showLabel(1);">On</label>
-                        <input type="radio" name="part-labels" id="off" value="labels-off">
-                        <label for="off" onclick="showLabel(-1);">Off</label>
+                        <input type="radio" name="render-type" id="clear" value="clear" checked>
+                        <label for="clear" onclick="zoom(-1);">Zoom Out</label>
+                        <input type="radio" name="render-type" id="segments" value="segments">
+                        <label for="segments" onclick="zoom(1);">Zoom In</label>
                     </form> --}}
-                    <form>
-                    <h5>Labels</h5>
-                        <label id="switch"> 
-                            <input type="checkbox" checked>
-                            <span class="slider round" onclick="showLabel();"></span>
-                        </label>
-                    </form>
-            </article>
+                        {{!-- <form id="model-toggles">
+                            <input type="radio" name="part-labels" id="on" value="labels-on" checked>
+                            <label for="on" onclick="showLabel(1);">On</label>
+                            <input type="radio" name="part-labels" id="off" value="labels-off">
+                            <label for="off" onclick="showLabel(-1);">Off</label>
+                        </form> --}}
+                        <form>
+                        <h5>Labels</h5>
+                            <label id="switch"> 
+                                <input type="checkbox" checked>
+                                <span class="slider round" onclick="showLabel();"></span>
+                            </label>
+                        </form>
+                </article>
 
-            <p class="step">Refer to Specimen {{heartId}}</p>
+                <p class="step">Refer to Specimen {{heartId}}</p>
 
-            <p class="step"><strong>1. Orient the heart so that you are looking at the posterior aspect.</strong>
-                Can you identify the two atrial appendages?
-            </p>
-            <p class="step"><strong>2. Identify the right atrium and follow it down into its corresponding
-                    ventricle</strong>
-                Can you identify the features differentiating right from left ventricles?
-            </p>
-            <p class="step"><strong>3. Identify the right ventricular outflow tract</strong>
-            </p>
-            <p class="step"><strong>4. Identify the left atrium and follow it down into its corresponding ventricle</strong>
-                Does this have the features of a left ventricle?
-            </p>>
-            <p class="step"><strong>5. Identify the left ventricular outflow tract</strong></p>
-            <p class="step"><strong>6. Identify any inter-atrial communications.</strong>
-                Can you pass a pipe-cleaner through the defect?
-            </p>
-            <p class="step"><strong>7. Identify any inter-ventricular communications.</strong>
-                Can you pass a pipe-cleaner through the defect?
-            </p>
-            <p class="step"><strong>8. Follow the left ventricular outflow tract into the aortic arch.</strong>
-                Can you identify the remnant ligamentum arteriosum or a patent ductus arteriosus?
-            </p>
-        </section>
+                <p class="step"><strong>1. Orient the heart so that you are looking at the posterior aspect.</strong>
+                    Can you identify the two atrial appendages?
+                </p>
+                <p class="step"><strong>2. Identify the right atrium and follow it down into its corresponding
+                        ventricle</strong>
+                    Can you identify the features differentiating right from left ventricles?
+                </p>
+                <p class="step"><strong>3. Identify the right ventricular outflow tract</strong>
+                </p>
+                <p class="step"><strong>4. Identify the left atrium and follow it down into its corresponding ventricle</strong>
+                    Does this have the features of a left ventricle?
+                </p>>
+                <p class="step"><strong>5. Identify the left ventricular outflow tract</strong></p>
+                <p class="step"><strong>6. Identify any inter-atrial communications.</strong>
+                    Can you pass a pipe-cleaner through the defect?
+                </p>
+                <p class="step"><strong>7. Identify any inter-ventricular communications.</strong>
+                    Can you pass a pipe-cleaner through the defect?
+                </p>
+                <p class="step"><strong>8. Follow the left ventricular outflow tract into the aortic arch.</strong>
+                    Can you identify the remnant ligamentum arteriosum or a patent ductus arteriosus?
+                </p>
+            </section>
 
-        <section class="activity module-slide">
-            <h1>How would you summarise the cardiac defects you have identified?</h1>
+            <section class="activity module-slide">
+                <h1>How would you summarise the cardiac defects you have identified?</h1>
 
-            <p class="case-content">
-                Think carefully about your answer before you proceed to the next page.
-            </p>
-        </section>
+                <p class="case-content">
+                    Think carefully about your answer before you proceed to the next page.
+                </p>
+            </section>
 
-        <section class="activity module-slide">
-            <h1>How would you summarise the cardiac defects you have identified?</h1>
-            <h3>
-                Cardiac Specimen Explanation:
-            </h3>
-            {{#each cardiac_explanation}}
-            {{list this}}
-            {{/each}}
-            {{!-- <p class="case-content">
-                This heart demonstrates atrio-ventricular and ventriculo-arterial concordance. There is a small patent
-                foramen ovale (PFO) and a large sub-pulmonary ventricular septal defect. There is right ventricular
-                hypertrophy. There is a suggestion of aortic hypoplasia. Note the classic relationship of the great vessels
-                – they spiral around each other as they leave the heart, with the aorta located posteriorly.
-            </p> --}}
-        </section>
+            <section class="activity module-slide">
+                <h1>How would you summarise the cardiac defects you have identified?</h1>
+                <h3>
+                    Cardiac Specimen Explanation:
+                </h3>
+                {{#each cardiac_explanation}}
+                {{list this}}
+                {{/each}}
+                {{!-- <p class="case-content">
+                    This heart demonstrates atrio-ventricular and ventriculo-arterial concordance. There is a small patent
+                    foramen ovale (PFO) and a large sub-pulmonary ventricular septal defect. There is right ventricular
+                    hypertrophy. There is a suggestion of aortic hypoplasia. Note the classic relationship of the great vessels
+                    – they spiral around each other as they leave the heart, with the aorta located posteriorly.
+                </p> --}}
+            </section>
 
-        <section class="activity module-slide">
-            <p class="case-content">
-                Well done on the heart interaction! Proceed to the Explanation Section!
-            </p>
-        </section>
-
+            <section class="activity module-slide">
+                <p class="case-content">
+                    Well done on the heart interaction! Proceed to the Explanation Section!
+                </p>
+            </section>
+        </div>
+        
         <article id="buttons-container">
             <button id="previous" class="nav-button" onclick="nextSlide(-1)">
                     <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">

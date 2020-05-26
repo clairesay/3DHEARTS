@@ -77,17 +77,18 @@ Handlebars.registerHelper("list", function (context) {
 
         // We'll split the list by '--' to give us arrays to iterate over
         const lines = context.split("--")
-        var list = "<ul class='case-content'>"
+        var list = "<p class='case-content'>"
 
         // Iterate over the lines, sandwiching them inbetween <li> tags, then add them into the list var
         for (i in lines) {
             if (i == 0) {
                 list = list + lines[i]
             } else {
-                list = list + "<li>" + lines[i] + "</li>"
+                list = list + "<br><span>&#8226 </span>" + lines[i]
+                // list = list + "<li>" + lines[i] + "</li>"
             }
         }
-        return new Handlebars.SafeString(list + "</ul>")
+        return new Handlebars.SafeString(list + "</p>")
     } else {
         return new Handlebars.SafeString("<p class='case-content'>" + context + "</p>")
     }
