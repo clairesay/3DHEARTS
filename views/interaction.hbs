@@ -707,12 +707,12 @@
         thisSlide.style.display = "flex";
         var caseContent = document.querySelectorAll('.case-content');
         //if this slide contains a class called 'case-content' a.k.a a point in a slide
-        for (var i = 0; i < caseContent.length; i++) {
-            if ((thisSlide.contains(caseContent[i])) && (true)) {
-                //change the next button to show the next point
-                document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
-            }
-        }
+        //for (var i = 0; i < caseContent.length; i++) {
+        //    if ((thisSlide.contains(caseContent[i])) && (true)) {
+        //        //change the next button to show the next point
+        //        document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
+        //    }
+        //}
 
         //instead if the current slide has steps i.e. the actual interaction stage
         var stepContent = document.querySelectorAll('.step');

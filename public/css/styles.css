@@ -258,7 +258,7 @@ section#main-workshop-menu-grid {
 
 #menu-title-div h3 {
     font-size: 20px;
-    font-weight: 400;
+    font-weight: 600;
     text-transform: uppercase;
     padding: 0.5em 0;
 }
@@ -337,7 +337,7 @@ section#main-workshop-menu-grid {
     justify-content: center;
     align-items: center;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 800;
     text-transform: uppercase;
     font-style: normal;
     font-family: 'Josefin Sans', 'sans-serif';
@@ -522,7 +522,7 @@ section#main-workshop-menu-grid {
     max-height: calc(100vh - 68px - 50px);
     overflow: hidden;
     padding: 0 2em;
-    z-index: 2;
+    /* z-index: 2; */
     /* background-color: white;
     filter: drop-shadow(0px 8px 16px #cccccc); */
 }
@@ -574,7 +574,7 @@ h4.differential-diagnoses {
 }
 
 .case-content {
-    visibility: hidden;
+    /* visibility: hidden; */
 }
 
 .module-slide {
