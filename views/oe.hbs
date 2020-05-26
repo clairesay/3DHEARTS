@@ -241,26 +241,26 @@
         var switchIllustration = document.getElementsByClassName('story-illustration')[0];
         switch(slideNumber) {
             case 0 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-story.svg');
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                 break;
             case 2 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-background-history.svg');
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-background-history.svg');
                 break;
             case 3 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-on-examine.svg');
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
                 break;
             case 4 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-chest-x-ray.svg');
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
             case 5 :
-                switchIllustration.setAttribute('src', 'images/XRAY/{{name}}_XR.jpg');
+                switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
                 break;
             case 7 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-story.svg');
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                 //switchIllustration.setAttribute('src', 'images/illustrations/ben-chest-x-ray.svg');
                 break;
             default :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{name}}-story.svg');
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                 break;
         }
     }
