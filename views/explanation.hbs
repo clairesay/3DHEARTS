@@ -18,18 +18,10 @@
         </div>
 
         <div class="text-content-wrapper">
-            {{!-- <section class="content module-slide">
-                <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-                <p>Think carefully about your answer before you proceed to the next page.</p>
-            </section> --}}
         
-            <section class="content module-slide">
-                {{!-- <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-                <h3>Explanation</h3> --}}
-                {{#each explanation}}
-                {{list this}}
-                {{/each}}
-            </section>
+            {{#each explanation}}
+            {{makeModuleSlides this "How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?"}}
+            {{/each}}
 
             <section class="content module-slide">
                 <p class="case-content">You have completed this cardiac case. Click on the home button to select another case.</p>
@@ -75,7 +67,7 @@
         case "Amin":
             document.documentElement.style.setProperty("--module-colour", "#2F80ED")
             break
-        case "Richardson":
+        case "Lucy":
             document.documentElement.style.setProperty("--module-colour", "#27AE60")
             break
         default:

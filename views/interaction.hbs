@@ -124,18 +124,10 @@
 
             <section class="activity module-slide">
                 <h1>How would you summarise the cardiac defects you have identified?</h1>
-                {{!-- <h3>
-                    Cardiac Specimen Explanation:
-                </h3> --}}
+
                 {{#each cardiac_explanation}}
                 {{list this}}
                 {{/each}}
-                {{!-- <p class="case-content">
-                    This heart demonstrates atrio-ventricular and ventriculo-arterial concordance. There is a small patent
-                    foramen ovale (PFO) and a large sub-pulmonary ventricular septal defect. There is right ventricular
-                    hypertrophy. There is a suggestion of aortic hypoplasia. Note the classic relationship of the great vessels
-                    – they spiral around each other as they leave the heart, with the aorta located posteriorly.
-                </p> --}}
             </section>
             <section class="activity module-slide">
                 <p class="case-content">
@@ -144,7 +136,7 @@
             </section>
             <section class="activity module-slide">
                 <p class="case-content">
-                    Click next to view an explanation of Ben’s cardiac defects.
+                    Click next to view an explanation of {{name}}’s cardiac defects.
                 </p>
             </section>
         </div>
@@ -192,7 +184,7 @@
         case "Amin":
             document.documentElement.style.setProperty("--module-colour", "#2F80ED")
             break
-        case "Richardson":
+        case "Lucy":
             document.documentElement.style.setProperty("--module-colour", "#27AE60")
             break
         default:
@@ -322,7 +314,7 @@
                 case "Amin":
                     heart.scale.set(0.13, 0.13, 0.13);
                     break
-                case "Richardson":
+                case "Lucy":
                     heart.scale.set(0.11, 0.11, 0.11);
                     break
                 default:

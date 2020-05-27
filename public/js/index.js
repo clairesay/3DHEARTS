@@ -54,12 +54,12 @@ function moduleStart(name) {
             caseLink.style.backgroundImage = "linear-gradient(to right, #2f80ed, #56ccf2 )";
             // caseName.style.borderImage = "linear-gradient(to right, #2f80ed, #56ccf2 )"
             break;
-        case 'richardson':
-            caseImage.setAttribute('src', 'images/photos/richardson-recrop.png');
-            caseImage.setAttribute('alt', 'Richardson')
+        case 'lucy':
+            caseImage.setAttribute('src', 'images/photos/lucy-recrop.png');
+            caseImage.setAttribute('alt', 'Lucy')
             caseName.innerHTML = "Lucy"
             caseDescription.innerHTML = "a 7-day old unwell neonate"
-            caseName.setAttribute('id', 'richardson')
+            caseName.setAttribute('id', 'lucy')
             caseLink.setAttribute('href', '19863-oe.html');
             caseLink.style.backgroundImage = "linear-gradient(to right, #6fcf97, #27ae60 )";
             // caseName.style.borderImage = "linear-gradient(to right, #6fcf97, #27ae60 )"
