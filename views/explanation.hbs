@@ -5,8 +5,8 @@
         </button>
     </header>
     <section id="navigation-tab">
-        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Examination');">Case Details</a>
-        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Interaction');">Exploration</a>
+        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Details');">Case Details</a>
+        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Exploration');">Exploration</a>
         <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
     </section>
 
@@ -18,22 +18,21 @@
         </div>
 
         <div class="text-content-wrapper">
-            <section class="content module-slide">
+            {{!-- <section class="content module-slide">
                 <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
                 <p>Think carefully about your answer before you proceed to the next page.</p>
-            </section>
+            </section> --}}
         
             <section class="content module-slide">
-                <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-                <h3>Explanation</h3>
+                {{!-- <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
+                <h3>Explanation</h3> --}}
                 {{#each explanation}}
                 {{list this}}
                 {{/each}}
             </section>
 
             <section class="content module-slide">
-                <p class="case-content">Well done on completing {{name}}'s Story! Return to Modules Home to discover more stories.
-                </p>
+                <p class="case-content">You have completed this cardiac case. Click on the home button to select another case.</p>
             </section>
         </div>
 
@@ -125,8 +124,8 @@
         if (destination == page) {
         } else {
             Swal.fire({
-                title: 'Start the ' + sectionName + ' section?',
-                text: 'You will leave this module.',
+                title: 'Start ' + sectionName + '?',
+                text: 'You will leave this section.',
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cancel',

@@ -5,22 +5,22 @@
         </button>
     </header>
     <section id="navigation-tab">
-        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Examination');">Case Details</a>
-        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Interaction');">Exploration</a>
+        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Details');">Case Details</a>
+        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Exploration');">Exploration</a>
         <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
     </section>
 
     <section id="content-half">
         <div id="module-name">
             <h1>{{name}}'s Story</h1>
-            <h3>On Examination</h3>
+            <h3>Case Details</h3>
             <img class="profile" src="images/photos/{{toLowerCase name}}-recrop.png">
         </div>
 
         <div class="text-content-wrapper">
-            <section class="content module-slide">
+            {{!-- <section class="content module-slide">
             <p>Let's look at the case of {{name}} and a potential diagnosis of a congenital heart defect.</p>
-            </section>
+            </section> --}}
 
             <section class="content module-slide">
                 {{#each preliminary_information}}
@@ -42,13 +42,13 @@
                 {{/each}}
             </section>
 
-            <section class="content module-slide">
+            {{!-- <section class="content module-slide">
                 <p id="chest-XR-slide" class="case-content">There is a radiology practice adjacent to your clinic and
                     you organise a chest XR.</p>
-            </section>
+            </section> --}}
 
             <section class="content module-slide">
-                    <h1 id="chest-XR-slide" class="case-content">Chest XR Results</h1>
+                    <h1 id="chest-XR-slide" class="case-content">This is {{name}}'s chest x-ray.</h1>
             </section>
 
             <section class="content module-slide">
@@ -66,7 +66,7 @@
             </section>
 
             <section class="content module-slide">
-                <p class="case-content">Well done on examining your patient! Proceed to Interaction!</p>
+                <p class="case-content">Now you can proceed to examine the 3D-printed model of {{name}}’s cardiac defects.</p>
             </section>
         </div>
 
@@ -85,7 +85,7 @@
                     <path d="M48 26.2037L59.5305 14.6731L48 3.14258" />
                 </svg>
             </button>
-            <button id="next-module" class="text-button none" onclick="nextModule();">Interaction</button>
+            <button id="next-module" class="text-button none" onclick="nextModule();">3D Model</button>
         </article>
     </section>
 
@@ -171,8 +171,8 @@
         if (destination == page) {
         } else {
             Swal.fire({
-                title: 'Start the ' + sectionName + ' section?',
-                text: 'You will leave this module.',
+                title: 'Start ' + sectionName + '?',
+                text: 'You will leave this section.',
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cancel',
@@ -243,20 +243,22 @@
             case 0 :
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                 break;
-            case 2 :
+            case 1 :
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-background-history.svg');
                 break;
-            case 3 :
+            case 2 :
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
                 break;
-            case 4 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
-                break;
-            case 5 :
+            case 3 :
                 switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
+                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
-            case 7 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
+            case 4 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');  
+                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
+                break;
+            case 6 :
+                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                 //switchIllustration.setAttribute('src', 'images/illustrations/ben-chest-x-ray.svg');
                 break;
             default :

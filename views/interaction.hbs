@@ -5,8 +5,8 @@
         </button>
     </header>
     <section id="navigation-tab">
-        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Examination');">Case Details</a>
-        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Interaction');">Exploration</a>
+        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Details');">Case Details</a>
+        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Exploration');">Exploration</a>
         <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
     </section>
 
@@ -47,19 +47,18 @@
     <section id="content-half">
         <div id="module-name">  
             <h1>{{name}}'s Story</h1>
-            <h3>Interaction</h3>
+            <h3>Exploration</h3>
             <img class="profile" src="images/photos/{{toLowerCase name}}-recrop.png">
         </div>
 
         <div class="text-content-wrapper">
             <section class="content module-slide">
-                <h1>Interact</h1>
+                <h1>Exploration</h1>
                 <p class="case-content">
-                    For this stage of the module, you will be using a physical model of the paediatric heart case #{{heartId}} and a
-                    digital interactive model.
+                    Now pick-up the 3D-printed model labelled #{{heartId}}.
                 </p>
                 <p id="interaction-case-content-button-explanation" class="case-content">
-                    All the case content you reviewed will be available to you in the case button.
+                    The details of {{name}}’s case are available to you by clicking the case content button below.
                 </p>
                 <p class="case-content">
                     It will be helpful as you interact with the models as the module progresses.
@@ -89,7 +88,7 @@
                         </form>
                 </article>
 
-                <p class="step">Refer to Specimen {{heartId}}</p>
+                <p id="refer-to-specimen" class="step">Refer to Specimen #{{heartId}}</p>
 
                 <p class="step"><strong>1. Orient the heart so that you are looking at the posterior aspect.</strong>
                     Can you identify the two atrial appendages?
@@ -125,9 +124,9 @@
 
             <section class="activity module-slide">
                 <h1>How would you summarise the cardiac defects you have identified?</h1>
-                <h3>
+                {{!-- <h3>
                     Cardiac Specimen Explanation:
-                </h3>
+                </h3> --}}
                 {{#each cardiac_explanation}}
                 {{list this}}
                 {{/each}}
@@ -138,10 +137,14 @@
                     – they spiral around each other as they leave the heart, with the aorta located posteriorly.
                 </p> --}}
             </section>
-
             <section class="activity module-slide">
                 <p class="case-content">
-                    Well done on the heart interaction! Proceed to the Explanation Section!
+                    How would you link these cardiac defects to the clinical presentation? What is the diagnosis?
+                </p>
+            </section>
+            <section class="activity module-slide">
+                <p class="case-content">
+                    Click next to view an explanation of Ben’s cardiac defects.
                 </p>
             </section>
         </div>
@@ -212,8 +215,9 @@
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
 
 				var scene = new THREE.Scene();
-				scene.background = new THREE.Color( 0xc4c4c4 );
-				scene.fog = new THREE.Fog( 0xc4c4c4, 10, 50 );
+
+				//scene.background = new THREE.Color( 0xc4c4c4 );
+				//scene.fog = new THREE.Fog( 0xc4c4c4, 10, 50 );
 
 				var hemiLight = new THREE.HemisphereLight( 0xe7e7e7, 0x222222, 0.7 );
 				hemiLight.position.set( 0, 20, 0 );
@@ -230,11 +234,11 @@
 
 				// ground
 
-				var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x777777, depthWrite: false } ) );
-				mesh.rotation.x = - Math.PI / 2;
-                mesh.position.y = -8;
-				mesh.receiveShadow = true;
-				scene.add( mesh );
+				//var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x777777, depthWrite: false } ) );
+				//mesh.rotation.x = - Math.PI / 2;
+                //mesh.position.y = -8;
+				//mesh.receiveShadow = true;
+				//scene.add( mesh );
 
     //establishing the scebe abd background color
     //var scene = new THREE.Scene();
@@ -244,8 +248,11 @@
     const canvas = document.querySelector('#c');
 
     //rendering the window and everything in it
-    const renderer = new THREE.WebGLRenderer({canvas});
-
+    const renderer = new THREE.WebGLRenderer({
+        canvas,
+        alpha: true,
+    });
+    //const renderer = new THREE.CanvasRenderer({ alpha: true });
     //Setting the position of the camera
     camera.position.x = 0;
     camera.position.y = 0;
@@ -308,7 +315,21 @@
         scene.add(heart);
 
         //positioning the heart for optimal scale and visibility
-        heart.scale.set(0.1, 0.1, 0.1);
+            switch ("{{name}}") {
+                case "Ayanthi":
+                    heart.scale.set(0.15, 0.15, 0.15);
+                    break
+                case "Amin":
+                    heart.scale.set(0.13, 0.13, 0.13);
+                    break
+                case "Richardson":
+                    heart.scale.set(0.11, 0.11, 0.11);
+                    break
+                default:
+                    heart.scale.set(0.1, 0.1, 0.1);
+                    break
+            }
+
         heart.rotation.x = 0;
         heart.rotation.y = 3;
         heart.rotation.z = 0;
@@ -649,8 +670,8 @@
         if (destination == page) {
         } else {
             Swal.fire({
-                title: 'Start the ' + sectionName + ' section?',
-                text: 'You will leave this module.',
+                title: 'Start ' + sectionName + '?',
+                text: 'You will leave this section.',
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cancel',
@@ -705,7 +726,7 @@
         //show this slide a.k.a current slide
         var thisSlide = document.getElementsByClassName('module-slide')[currentSlide];
         thisSlide.style.display = "flex";
-        var caseContent = document.querySelectorAll('.case-content');
+        //var caseContent = document.querySelectorAll('.case-content');
         //if this slide contains a class called 'case-content' a.k.a a point in a slide
         //for (var i = 0; i < caseContent.length; i++) {
         //    if ((thisSlide.contains(caseContent[i])) && (true)) {

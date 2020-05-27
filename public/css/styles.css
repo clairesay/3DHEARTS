@@ -113,6 +113,7 @@ button:hover {
     height: 69px;
     position: relative;
     justify-content: center;
+    align-items: center;
     font-size: 20px;
     font-style: italic;
     color: white;
@@ -664,6 +665,12 @@ h4.differential-diagnoses {
     display: flex;
 }
 
+#refer-to-specimen {
+    font-size: 18px;
+    font-weight: 700;
+    font-style: none;
+}
+
 /* //////////////// MODEL TOGGLES (DEPENDS ON WHAT WE NEED THIS WILL CHANGE) ////////////////// */
 #toggles {
     display: flex;
@@ -841,8 +848,7 @@ label[for="off"] {
 }
 
 .show-modal {
-    background-color: black;
-    opacity: 0.75;
+    background-color: rgba(0,0,0,0.4);
     display: grid;
     grid-template-rows: 45px 1fr;
     grid-template-columns: 180px 110px 1fr;
@@ -944,12 +950,15 @@ label[for="off"] {
     width: 100%;
     height: 100%;
     display: none;
+
 }
 
 #c {
     width: 100%; 
     height: 100%;
     display: block;
+    /* background-color: #595959 */
+    background-image: linear-gradient(to right, white, #595959);
 }
 
 #labels {
