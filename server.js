@@ -166,8 +166,8 @@ Handlebars.registerHelper('makeModuleSlides', function(context, heading) {
     }
 })
 
-Handlebars.registerHelper('showKey', function(context, key) {
-    console.log(key)
+Handlebars.registerHelper('isLucy', function(name) {
+    return name === "Lucy"
 })
 
 

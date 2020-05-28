@@ -88,9 +88,19 @@
                 <p class="step"><strong>7. Identify any inter-ventricular communications.</strong>
                     Can you pass a pipe-cleaner through the defect?
                 </p>
+
+                {{#if (isLucy name)}}
+                <p class="step"><strong>8. Compare this VSD to that of specimen 19041.</strong>
+                    Which valve is closely related to this VSD?
+                </p>
+                <p class="step"><strong>9. Follow the left ventricular outflow tract into the aortic arch.</strong>
+                    Is there a focal narrowing? Can you identify the remnant ligamentum arteriosum or a patent ductus arteriosus?
+                </p>
+                {{else}}
                 <p class="step"><strong>8. Follow the left ventricular outflow tract into the aortic arch.</strong>
                     Can you identify the remnant ligamentum arteriosum or a patent ductus arteriosus?
                 </p>
+                {{/if}}
             </section>
 
             <section class="activity module-slide">
@@ -503,6 +513,10 @@
         TWEEN.update(); 
         updateLabels();
         renderer.render(scene, camera);
+
+        // log camera position & rotation to for setting them in changeview
+        console.log(camera.position)
+        console.log(camera.rotation)
     };
 
     // resize window on event onWindowResize
@@ -516,87 +530,194 @@
     animate();
 
     //Changing the model views on click with tween.js
-    function changeView(step) {
+    function changeView(step, name) {
         window.tweenView = tweenView;
         var posX, posY, posZ;
         var rotX, rotY, rotZ;
 
-        switch (step) {
-            case 1:
-                posX = 7.96
-                posY = 5.83
-                posZ = 17.4
-                rotX = -0.32;
-                rotY = 0.41;
-                rotZ = 0.13;
-                tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 2:
-                posX = 17.26
-                posY = 4.45
-                posZ = 9.07
-                rotX = -0.46
-                rotY = 1.04
-                rotZ = 0.4
-                tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 3:
-                posX = 1.84
-                posY = -17.93
-                posZ = -8.67
-                rotX = 2.02
-                rotY = 0.09
-                rotZ = -2.95
-                tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 4:
-                posX = 0.7
-                posY = 5.24
-                posZ = 19.29
-                rotX = -0.27
-                rotY= 0.04
-                rotZ = 0.01
-                tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 5:
-                posX = -6.19
-                posY = -14
-                posZ = 12.87
-                rotX = 0.83
-                rotY = -0.31
-                rotZ = 0.32
-                tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 6:
-                posX = 17.21
-                posY = -10.12
-                posZ = 1.24
-                rotX = 1.45
-                rotY = 1.04
-                rotZ = -1.43
-                tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 7:
-                posX = 0.37
-                posY = -11.82
-                posZ = -16.13
-                rotX = 2.51
-                rotY = 0.02
-                rotZ = -3.13
-                tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
-            case 8:
-                posX = -0.4
-                posY = -2.64
-                posZ = -19.82
-                rotX = 3.01
-                rotY = -0.02
-                rotZ = 3.14
-                tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                break;
+        switch(name) {
+
+            case "Ben":
+                switch (step) {
+                    case 1:
+                        posX = 7.96
+                        posY = 5.83
+                        posZ = 17.4
+                        rotX = -0.32;
+                        rotY = 0.41;
+                        rotZ = 0.13;
+                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        break;
+                    case 2:
+                        posX = 17.26
+                        posY = 4.45
+                        posZ = 9.07
+                        rotX = -0.46
+                        rotY = 1.04
+                        rotZ = 0.4
+                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        break;
+                    case 3:
+                        posX = 1.84
+                        posY = -17.93
+                        posZ = -8.67
+                        rotX = 2.02
+                        rotY = 0.09
+                        rotZ = -2.95
+                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        break;
+                    case 4:
+                        posX = 0.7
+                        posY = 5.24
+                        posZ = 19.29
+                        rotX = -0.27
+                        rotY= 0.04
+                        rotZ = 0.01
+                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        break;
+                    case 5:
+                        posX = -6.19
+                        posY = -14
+                        posZ = 12.87
+                        rotX = 0.83
+                        rotY = -0.31
+                        rotZ = 0.32
+                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        break;
+                    case 6:
+                        posX = 6.37
+                        posY = 5.46
+                        posZ = -18.16
+                        rotX = -2.85
+                        rotY = 0.32
+                        rotZ = 3.05
+                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        break;
+                    case 7:
+                        posX = 0.37
+                        posY = -11.82
+                        posZ = -16.13
+                        rotX = 2.51
+                        rotY = 0.02
+                        rotZ = -3.13
+                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        break;
+                    case 8:
+                        posX = -0.4
+                        posY = -2.64
+                        posZ = -19.82
+                        rotX = 3.01
+                        rotY = -0.02
+                        rotZ = 3.14
+                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        break;
+                    default:
+                        break;
+                }
+                break
+
+            case "Ayanthi":
+                switch (step) {
+                    case 1:
+                        tweenView(3.44, -0.95, 14.6, 0.06, 0.23, -0.01)
+                        break
+                    case 2:
+                        tweenView(14.8, 2.67, 0.14, -1.52, 1.39, 1.52)
+                        break
+                    case 3:
+                        tweenView(-2.32, -12.3, -8.32, 2.17, -0.16, 2.92)
+                        break
+                    case 4:
+                        tweenView(-8.28, 1.33, 12.4, -0.11, -0.58, -0.06)
+                        break
+                    case 5:
+                        tweenView(-8.04, 1.37, 12.6, -0.11, -0.57, -0.06)
+                        break
+                    case 6:
+                        tweenView(13.88, 5.35, 1.91, -1.23, 1.18, 1.20)
+                        break
+                    case 7:
+                        tweenView(-0.32, -13.24, -7.05, 2.06, -0.02, 3.10)
+                        break
+                    case 8:
+                        tweenView(-5.55, 3.44, -13.51, -2.89, -0.38, -3.05)
+                        break
+                    default:
+                        break
+                }
+                break
+
+            case "Amin":
+                switch (step) {
+                    case 1:
+                        tweenView(-0.290, 5.940, 13.77, -0.407, -0.019, -0.008)
+                        break
+                    case 2:
+                        tweenView(4.556, 6.515, 12.719, -0.473, 0.308, 0.154)
+                        break
+                    case 3:
+                        tweenView(8.0291, -10.114, -7.630, 2.217, 0.564, -2.524)
+                        break
+                    case 4:
+                        tweenView( -6.220, 3.708, 13.135, -0.275, -0.427, -0.116)
+                        break
+                    case 5:
+                        tweenView( -7.848, -11.152, 6.246, 1.060, -0.550, 0.751)
+                        break
+                    case 6:
+                        tweenView(12.896, 5.706, 5.111, -0.840, 1.034, 0.764)
+                        break
+                    case 7:
+                        tweenView(-9.886, 1.323, 11.202, -0.117, -0.719, -0.077)
+                        break
+                    case 8:
+                        tweenView( -1.939, 0.798, -14.852, -3.087, -0.129, -3.134)
+                        break
+                    default:
+                        break
+                }
+                break
+
+            case "Lucy":
+                switch (step) {
+                    case 1:
+                        tweenView(-3.612, 2.099, 14.406, -0.144, -0.243, -0.035)
+                        break
+                    case 2:
+                        tweenView(7.354, 7.078, 10.991, -0.572, 0.512, 0.305)
+                        break
+                    case 3:
+                        tweenView(1.538, -14.774, -2.087, 1.711, 0.102, -2.513)
+                        break
+                    case 4:
+                        tweenView(-10.341, 10.160, 3.848, -1.208, -0.760, -1.068)
+                        break
+                    case 5:
+                        tweenView(-11.618, -5.940, 7.396, 0.676, -0.886, 0.556)
+                        break
+                    case 6:
+                        tweenView(9.472, -3.135, 11.199, 0.272, 0.683, -0.175)
+                        break
+                    //7 & 8 are the same
+                    case 7:
+                        tweenView(10.024, -9.739, -5.442, 2.080, 0.731, -2.267)
+                        break
+                    case 8:
+                        tweenView(10.024, -9.739, -5.442, 2.080, 0.731, -2.267)
+                        break
+                    case 9:
+                        tweenView(9.055, -3.204, -11.519, 2.870, 0.648, -2.975)
+                        break
+                    default:
+                        break
+                }
+                break
+
             default:
-                break;
+                break
         }
+
+        
     }
 
     /////////////////////////////SHOW LABELS///////////////////////////
@@ -877,7 +998,7 @@
             //show this step
             thisStep.style.display = "flex";
             // Switch View in Three
-            changeView(currentStep)
+            changeView(currentStep, "{{name}}")
 
             //If the current step has reached the number of existing steps, progress to changing slides
         } else if (currentStep == (steps)) {
