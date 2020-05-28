@@ -987,8 +987,10 @@ label[for="off"] {
 
 #labels div {
     background-color: #595959;
+    color: white;
     padding: 0.5em;
     border-radius: 0.25em;
+    visibility: hidden;
 }
 
 /* ///////////////////// transitionS //////////////////////////// */
