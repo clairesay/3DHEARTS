@@ -34,6 +34,12 @@
             {{makeModuleSlides this "On Examination"}}
             {{/each}}
 
+            {{#if progress}}
+            {{#each progress}}
+            {{makeModuleSlides this "Progress"}}
+            {{/each}}
+            {{/if}}
+
 
             {{!-- <section class="content module-slide">
                     <h1 id="chest-XR-slide" class="case-content">This is {{name}}'s chest x-ray.</h1>

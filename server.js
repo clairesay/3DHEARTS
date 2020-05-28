@@ -263,6 +263,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
                 preliminary_information: lucy.preliminary_information.split("\n"),
                 background_history: lucy.background_history.split("\n"),
                 on_examination: lucy.on_examination.split("\n"),
+                progress: lucy.progress.split("\n"),
                 differential_diagnoses: lucy.differential_diagnoses.split("\n"),
                 xray: `https://s3.amazonaws.com${lucy.xray.slice(1)}`,
                 model: `https://s3.amazonaws.com${lucy.model.slice(1)}`,
