@@ -113,7 +113,7 @@
                 </p>
             </section>
 
-            <section class="activity module-slide">
+            <section class="extra activity module-slide">
                 <div class="differential-highlight">
                     <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
                     <h4>How would you summarise the cardiac defects you have identified?</h4>
@@ -194,6 +194,17 @@
 
 
 <script type="module">
+
+    //////////////////////////////////////// text search ///////////////////////////////////////////
+    //var els = document.querySelectorAll(".case-content");
+    //var searchValue = "trabeculated";
+
+    //for(var i = 0; i < els.length; i++){
+    //   if(els[i].innerHTML.indexOf(searchValue) > -1){
+    //    console.log('found');
+    //    alert('fund')
+    //    }
+    //}
     //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
     switch ("{{name}}") {
         case "Ben":
@@ -353,7 +364,7 @@
 
     //dots for the label positions
     var dotGeometry = new THREE.Geometry();
-    var dotMaterial = new THREE.PointsMaterial( { size: 10, sizeAttenuation: false } );
+    var dotMaterial = new THREE.PointsMaterial( { size: 5, sizeAttenuation: false } );
     var labelDot = new THREE.Points( dotGeometry, dotMaterial );
 
 
@@ -532,6 +543,8 @@
     //Changing the model views on click with tween.js
     function changeView(step, name) {
         window.tweenView = tweenView;
+        var allLabels = document.querySelectorAll('#labels div');
+
         var posX, posY, posZ;
         var rotX, rotY, rotZ;
 
@@ -716,8 +729,17 @@
             default:
                 break
         }
+        for (const heartLabel of heartLabels) {
+            for ( var g = 0; g < allLabels.length; g++ ) {
+                allLabels[g].style.visibility = "hidden";
+            }
+            const {viewNumber} = heartLabel;
+            viewNumberLength = heartLabels.filter(function(d) { return d.viewNumber === step; }).length;
+            for (var h = baseNumber; h < baseNumber + viewNumberLength; h ++) {
+                allLabels[h].style.visibility = "visible";
+            }
+        }
 
-        
     }
 
     /////////////////////////////SHOW LABELS///////////////////////////

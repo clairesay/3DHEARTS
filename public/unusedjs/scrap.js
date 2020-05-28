@@ -786,3 +786,28 @@ function bear() {
     scene.add( dirLight );
 scene.add(camera);
 camera.add(dirLight);
+
+// //////////////
+
+,
+  {
+    "name": "Left Atrium",
+    "xPosition": -30,
+    "yPosition": -20,
+    "zPosition": 2.1,
+    "viewNumber": 4
+  },
+  {
+    "name": "Left Ventricle",
+    "xPosition": -20,
+    "yPosition": -70,
+    "zPosition": 2.1,
+    "viewNumber": 4
+  },
+  {
+    "name": "Left Ventricular Outflow Tract",
+    "xPosition": -10,
+    "yPosition": -60,
+    "zPosition": 2.1,
+    "viewNumber": 5
+  }
