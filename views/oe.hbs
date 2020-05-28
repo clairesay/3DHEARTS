@@ -251,11 +251,20 @@
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
                 break;
             case 4 :
-                switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
+                if ("{{name}}" != "Lucy") {
+                    switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
+                } else {
+                    switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
+                }            
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
             case 5 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');  
+                if ("{{name}}" != "Lucy") {
+                    switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
+                } else {
+                    switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
+                }      
+  
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
             case 7 :

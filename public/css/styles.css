@@ -259,7 +259,7 @@ section#main-workshop-menu-grid {
 
 #menu-title-div h3 {
     font-size: 20px;
-    font-weight: 600;
+    font-weight: 700;
     text-transform: uppercase;
     padding: 0.5em 0;
 }
@@ -443,7 +443,7 @@ section#main-workshop-menu-grid {
 #module-name {
     /* padding-left: 1em; */
 
-    margin: 2em 0 2em 0;
+    margin: 2em 0 1em 0;
     text-transform: uppercase;
 
     display: grid;

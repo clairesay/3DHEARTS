@@ -1,20 +1,26 @@
 [
   {
-    "name": "Label1",
-    "xPosition": 20,
-    "yPosition": 100,
-    "zPosition": 2.5
+    "name": "Atrial Appendage",
+    "xPosition": -30,
+    "yPosition": -15,
+    "zPosition": 2.1
   },
   {
-    "name": "Label2",
-    "xPosition": -20,
-    "yPosition": 100,
-    "zPosition": 2
+    "name": "Atrial Appendage",
+    "xPosition": 30,
+    "yPosition": 30,
+    "zPosition": 2.1
   },
   {
-    "name": "Label3",
-    "xPosition": 10,
-    "yPosition": 0,
+    "name": "Atrial Appendage",
+    "xPosition": -30,
+    "yPosition": -15,
+    "zPosition": 2.1
+  },
+  {
+    "name": "Atrial Appendage",
+    "xPosition": 30,
+    "yPosition": 30,
     "zPosition": 2.1
   }
 ]
