@@ -159,8 +159,9 @@
             <button id="next-module" class="text-button" onclick="nextModule()">Explanation</button>
         </article>
 
-        
+            
     </section>
+<button id="collapse-button" onclick="collapseSection()">collapse</button>
 <button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
     <section id="image-half">
             <article id="toggles">
@@ -205,6 +206,38 @@
     //    alert('fund')
     //    }
     //}
+
+    window.collapseSection = collapseSection;
+        var tip = true;
+    function collapseSection() {
+        var contentHalf = document.getElementById('content-half');
+        var collapseButton = document.getElementById('collapse-button');
+        var caseContentButton = document.getElementById('case-content-button');
+        var c = document.getElementById('c');
+        var int = document.getElementById('interaction')
+        if (tip == true) {
+        contentHalf.style.transform = "translateX(-1vw)"
+        contentHalf.style.direction = "rtl"
+        collapseButton.style.transform = "translateX(-35vw)"
+        caseContentButton.style.transform = "translateX(-35vw)"
+        int.style.gridTemplateColumns = "5vw 35vw 60vw"
+        int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
+        //c.setAttribute('width', '98vw');
+        tip = false;
+        } else {
+        contentHalf.style.transform = "translateX(0)"
+        contentHalf.style.direction = "ltr"
+        collapseButton.style.transform = "translateX(0)"
+        caseContentButton.style.transform = "translateX(0)"
+        int.style.gridTemplateColumns = "40vw 60vw"
+        int.style.gridTemplateAreas = "'MenuButton Nav' 'Information Image'"
+        c.style.width = "100%";
+        //c.setAttribute('width', '0')
+        tip = true;
+        }
+
+    }
+
     //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
     switch ("{{name}}") {
         case "Ben":
@@ -551,89 +584,44 @@
         var baseNumber;
         var viewNumberLength;
         switch(name) {
-
             case "Ben":
-                switch (step) {
-                    case 1:
-                        posX = 7.96
-                        posY = 5.83
-                        posZ = 17.4
-                        rotX = -0.32;
-                        rotY = 0.41;
-                        rotZ = 0.13;
-                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                        baseNumber = 0;
-                        break;
-                    case 2:
-                        posX = 17.26
-                        posY = 4.45
-                        posZ = 9.07
-                        rotX = -0.46
-                        rotY = 1.04
-                        rotZ = 0.4
-                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                        baseNumber = 2;
-                        break;
-                    case 3:
-                        posX = 1.84
-                        posY = -17.93
-                        posZ = -8.67
-                        rotX = 2.02
-                        rotY = 0.09
-                        rotZ = -2.95
-                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                        baseNumber = 3;
-                        break;
-                    case 4:
-                        posX = 0.7
-                        posY = 5.24
-                        posZ = 19.29
-                        rotX = -0.27
-                        rotY= 0.04
-                        rotZ = 0.01
-                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                        break;
-                    case 5:
-                        posX = -6.19
-                        posY = -14
-                        posZ = 12.87
-                        rotX = 0.83
-                        rotY = -0.31
-                        rotZ = 0.32
-                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                        break;
-                    case 6:
-                        posX = 6.37
-                        posY = 5.46
-                        posZ = -18.16
-                        rotX = -2.85
-                        rotY = 0.32
-                        rotZ = 3.05
-                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                        break;
-                    case 7:
-                        posX = 0.37
-                        posY = -11.82
-                        posZ = -16.13
-                        rotX = 2.51
-                        rotY = 0.02
-                        rotZ = -3.13
-                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                        break;
-                    case 8:
-                        posX = -0.4
-                        posY = -2.64
-                        posZ = -19.82
-                        rotX = 3.01
-                        rotY = -0.02
-                        rotZ = 3.14
-                        tweenView(posX, posY, posZ, rotX, rotY, rotZ);
-                        break;
-                    default:
-                        break;
+        switch (step) {
+            case 1:
+                tweenView(7.96, 5.83, 17.4, -0.32, 0.41, 0.13);
+                baseNumber = 0;
+                break;
+            case 2:
+                tweenView(17.26, 4.45, 9.07, -0.46, 1.04, 0.4);
+                baseNumber = 2
+                break;
+            case 3:
+                tweenView(1.84, -17.93, -8.67, 2.02, 0.09, -2.95);
+                baseNumber = 3
+                break;
+            case 4:
+                tweenView(0.7, 5.24, 19.29, -0.27, 0.04, 0.01);
+                baseNumber = 6;
+                break;
+            case 5:
+                tweenView(-6.19, -14, 12.87, 0.83, -0.31, 0.32);
+                baseNumber = 6;
+                break;
+            case 6:
+                tweenView(17.21, -10.12, 1.24, 1.45, 1.04, -1.43);
+                baseNumber = 6;
+                break;
+            case 7:
+                tweenView(0.37, -11.82, 2.51, 0.02, -3.13);
+                baseNumber = 6;
+                break;
+            case 8:
+                tweenView(-0.4, -0.26, -19.82, 3.01, -0.02, 3.14);
+                baseNumber = 6;
+                break;
+            default:
+                break;
                 }
-                break
-
+                break;
             case "Ayanthi":
                 switch (step) {
                     case 1:
