@@ -246,6 +246,14 @@
 				dirLight.shadow.camera.near = 0.1;
 				dirLight.shadow.camera.far = 40;
 
+				// ground
+
+				//var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x777777, depthWrite: false } ) );
+				//mesh.rotation.x = - Math.PI / 2;
+                //mesh.position.y = -8;
+				//mesh.receiveShadow = true;
+				//scene.add( mesh );
+
     //establishing the scebe abd background color
     //var scene = new THREE.Scene();
     var imageHalf = document.getElementById('image-half')
@@ -522,9 +530,12 @@
     function changeView(step) {
         window.tweenView = tweenView;
         var allLabels = document.querySelectorAll('#labels div');
+
+        var posX, posY, posZ;
+        var rotX, rotY, rotZ;
+
         var baseNumber;
         var viewNumberLength;
-<<<<<<< Updated upstream
         switch (step) {
             case 1:
                 posX = 7.96
@@ -606,140 +617,6 @@
                 tweenView(posX, posY, posZ, rotX, rotY, rotZ);
                                 baseNumber = 6;
                 break;
-=======
-        switch(name) {
-
-            case "Ben":
-                switch (step) {
-                    case 1:
-                        tweenView(7.96, 5.83, 17.4, -0.32, 0.41, 0.13);
-                        baseNumber = 0;
-                        break;
-                    case 2:
-                        tweenView(17.26, 4.45, 9.07, -0.46, 1.04, 0.4);
-                        baseNumber = 2;
-                        break;
-                    case 3:
-                        tweenView(1.84, -17.93, -8.67, 2.02, 0.09, -2.95);
-                        baseNumber = 3;
-                        break;
-                    case 4:
-                        tweenView(0.7, 5.24, 19.29, -0.27, 0.04, 0.01);
-                        break;
-                    case 5:
-                        tweenView(-6.19, -14, 12.87, 0.83, -0.31, 0.32);
-                        break;
-                    case 6:
-                        tweenView(6.37, 5.46, -18.16, -2.85, 0.32, 3.05);
-                        break;
-                    case 7:
-                        tweenView(0.37, -11.82, -16.13, 2.51, 0.02, -3.13);
-                        break;
-                    case 8:
-                        tweenView(-0.4, -2.64, -19.82, 3.01, -0.02, 3.14);
-                        break;
-                    default:
-                        break;
-                }
-                break
-
-            case "Ayanthi":
-                switch (step) {
-                    case 1:
-                        tweenView(3.44, -0.95, 14.6, 0.06, 0.23, -0.01)
-                        break
-                    case 2:
-                        tweenView(14.8, 2.67, 0.14, -1.52, 1.39, 1.52)
-                        break
-                    case 3:
-                        tweenView(-2.32, -12.3, -8.32, 2.17, -0.16, 2.92)
-                        break
-                    case 4:
-                        tweenView(-8.28, 1.33, 12.4, -0.11, -0.58, -0.06)
-                        break
-                    case 5:
-                        tweenView(-8.04, 1.37, 12.6, -0.11, -0.57, -0.06)
-                        break
-                    case 6:
-                        tweenView(13.88, 5.35, 1.91, -1.23, 1.18, 1.20)
-                        break
-                    case 7:
-                        tweenView(-0.32, -13.24, -7.05, 2.06, -0.02, 3.10)
-                        break
-                    case 8:
-                        tweenView(-5.55, 3.44, -13.51, -2.89, -0.38, -3.05)
-                        break
-                    default:
-                        break
-                }
-                break
-
-            case "Amin":
-                switch (step) {
-                    case 1:
-                        tweenView(-0.290, 5.940, 13.77, -0.407, -0.019, -0.008)
-                        break
-                    case 2:
-                        tweenView(4.556, 6.515, 12.719, -0.473, 0.308, 0.154)
-                        break
-                    case 3:
-                        tweenView(8.0291, -10.114, -7.630, 2.217, 0.564, -2.524)
-                        break
-                    case 4:
-                        tweenView( -6.220, 3.708, 13.135, -0.275, -0.427, -0.116)
-                        break
-                    case 5:
-                        tweenView( -7.848, -11.152, 6.246, 1.060, -0.550, 0.751)
-                        break
-                    case 6:
-                        tweenView(12.896, 5.706, 5.111, -0.840, 1.034, 0.764)
-                        break
-                    case 7:
-                        tweenView(-9.886, 1.323, 11.202, -0.117, -0.719, -0.077)
-                        break
-                    case 8:
-                        tweenView( -1.939, 0.798, -14.852, -3.087, -0.129, -3.134)
-                        break
-                    default:
-                        break
-                }
-                break
-
-            case "Lucy":
-                switch (step) {
-                    case 1:
-                        tweenView(-3.612, 2.099, 14.406, -0.144, -0.243, -0.035)
-                        break
-                    case 2:
-                        tweenView(7.354, 7.078, 10.991, -0.572, 0.512, 0.305)
-                        break
-                    case 3:
-                        tweenView(1.538, -14.774, -2.087, 1.711, 0.102, -2.513)
-                        break
-                    case 4:
-                        tweenView(-10.341, 10.160, 3.848, -1.208, -0.760, -1.068)
-                        break
-                    case 5:
-                        tweenView(-11.618, -5.940, 7.396, 0.676, -0.886, 0.556)
-                        break
-                    case 6:
-                        tweenView(9.472, -3.135, 11.199, 0.272, 0.683, -0.175)
-                        break
-                    //7 & 8 are the same
-                    case 7:
-                        tweenView(10.024, -9.739, -5.442, 2.080, 0.731, -2.267)
-                        break
-                    case 8:
-                        tweenView(10.024, -9.739, -5.442, 2.080, 0.731, -2.267)
-                        break
-                    case 9:
-                        tweenView(9.055, -3.204, -11.519, 2.870, 0.648, -2.975)
-                        break
-                    default:
-                        break
-                    }
-                break
->>>>>>> Stashed changes
             default:
                 break;
         }
@@ -760,11 +637,9 @@
     window.showLabel = showLabel;
     var labelCounter = 0;
     function showLabel() {
-
         labelCounter ++;
         const labelContainer = document.getElementById('labels');
         if (labelCounter % 2 == 0) {
-            console.log(labelCounter)
             labelDot.visible = true;
             labelContainer.style.display = "block";
         } else {
@@ -933,6 +808,7 @@
                 heartModels.style.display = "flex";
                 toggles.style.display = "flex";
                 caseReviewButton.style.visibility = "visible";
+
                 break;
             case 2 :
                 switchIllustration.style.display = "flex";
