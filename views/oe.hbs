@@ -18,9 +18,9 @@
         </div>
 
         <div class="text-content-wrapper">
-            <section class="content module-slide">
+            {{!-- <section class="content module-slide">
             <p>Let's look at the case of {{name}} and a potential diagnosis of a congenital heart defect.</p>
-            </section>
+            </section> --}}
 
             {{#each preliminary_information}}
             {{makeModuleSlides this ""}}
@@ -41,19 +41,23 @@
             {{/if}}
 
 
-            {{!-- <section class="content module-slide">
+            <section class="content module-slide">
                     <h1 id="chest-XR-slide" class="case-content">This is {{name}}'s chest x-ray.</h1>
-            </section> --}}
+            </section>
 
             <section class="content module-slide">
-                <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
-                <h4 class="differential-diagnoses">What are your differential diagnoses?</h4>
+                <div class="differential-highlight">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <h4>What are your differential diagnoses?</h4>
+                </div>
                 <p class="case-content">Think carefully about your answer before you proceed to the next page.</p>
             </section>
 
             <section class="content module-slide">
-                <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
-                <h4 class="differential-diagnoses">What are your differential diagnoses?</h4>
+                <div class="differential-highlight">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <h4>What are your differential diagnoses?</h4>
+                </div>
                 {{#each differential_diagnoses}}
                 {{list this}}
                 {{/each}}
@@ -244,14 +248,17 @@
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
                 break;
             case 3 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
+                break;
+            case 4 :
                 switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
-            case 4 :
+            case 5 :
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');  
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
-            case 6 :
+            case 7 :
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                 //switchIllustration.setAttribute('src', 'images/illustrations/ben-chest-x-ray.svg');
                 break;

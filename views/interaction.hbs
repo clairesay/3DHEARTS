@@ -66,27 +66,6 @@
             </section>
 
             <section class="activity module-slide">
-                <article id="toggles">
-                    {{!-- <form id="model-toggles">
-                        <input type="radio" name="render-type" id="clear" value="clear" checked>
-                        <label for="clear" onclick="zoom(-1);">Zoom Out</label>
-                        <input type="radio" name="render-type" id="segments" value="segments">
-                        <label for="segments" onclick="zoom(1);">Zoom In</label>
-                    </form> --}}
-                        {{!-- <form id="model-toggles">
-                            <input type="radio" name="part-labels" id="on" value="labels-on" checked>
-                            <label for="on" onclick="showLabel(1);">On</label>
-                            <input type="radio" name="part-labels" id="off" value="labels-off">
-                            <label for="off" onclick="showLabel(-1);">Off</label>
-                        </form> --}}
-                        <form>
-                        <h5>Labels</h5>
-                            <label id="switch"> 
-                                <input type="checkbox" checked>
-                                <span class="slider round" onclick="showLabel();"></span>
-                            </label>
-                        </form>
-                </article>
 
                 <p id="refer-to-specimen" class="step">Refer to Specimen #{{heartId}}</p>
 
@@ -115,25 +94,32 @@
             </section>
 
             <section class="activity module-slide">
-                <h1>How would you summarise the cardiac defects you have identified?</h1>
-
+                <div class="differential-highlight">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <h4>How would you summarise the cardiac defects you have identified?</h4>
+                </div>
                 <p class="case-content">
                     Think carefully about your answer before you proceed to the next page.
                 </p>
             </section>
 
             <section class="activity module-slide">
-                <h1>How would you summarise the cardiac defects you have identified?</h1>
-
+                <div class="differential-highlight">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <h4>How would you summarise the cardiac defects you have identified?</h4>
+                </div>
                 {{#each cardiac_explanation}}
                 {{list this}}
                 {{/each}}
             </section>
             <section class="activity module-slide">
-                <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
-                <p class="case-content">
-                    How would you link these cardiac defects to the clinical presentation? What is the diagnosis?
-                </p>
+                <div class="differential-highlight">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    {{!-- <p class="case-content">
+                        How would you link these cardiac defects to the clinical presentation? What is the diagnosis?
+                    </p> --}}
+                    <h4>How would you link these cardiac defects to the clinical presentation? What is the diagnosis?</h4>
+                </div>
             </section>
             <section class="activity module-slide">
                 <p class="case-content">
@@ -164,6 +150,27 @@
     </section>
 <button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
     <section id="image-half">
+            <article id="toggles">
+                    {{!-- <form id="model-toggles">
+                        <input type="radio" name="render-type" id="clear" value="clear" checked>
+                        <label for="clear" onclick="zoom(-1);">Zoom Out</label>
+                        <input type="radio" name="render-type" id="segments" value="segments">
+                        <label for="segments" onclick="zoom(1);">Zoom In</label>
+                    </form> --}}
+                        {{!-- <form id="model-toggles">
+                            <input type="radio" name="part-labels" id="on" value="labels-on" checked>
+                            <label for="on" onclick="showLabel(1);">On</label>
+                            <input type="radio" name="part-labels" id="off" value="labels-off">
+                            <label for="off" onclick="showLabel(-1);">Off</label>
+                        </form> --}}
+                        <form>
+                        <h5>Labels</h5>
+                            <label id="switch"> 
+                                <input type="checkbox" checked>
+                                <span class="slider round" onclick="showLabel();"></span>
+                            </label>
+                        </form>
+                </article>
         <img class="story-illustration" src="images/illustrations/{{toLowerCase name}}-interaction.svg">
         <div id="heart-model">
             <canvas id="c"></canvas>
@@ -751,21 +758,25 @@
         var caseReviewButton = document.getElementById('case-content-button');
         var contentHalf = document.getElementById('content-half');
         var contentHeader = document.querySelector('#oe header');
+        var toggles = document.getElementById('toggles');
         switch(slideNumber) {
             case 0:
                 switchIllustration.style.display = "flex";
                 heartModels.style.display = "none";
+                toggles.style.display = "none";
                 caseReviewButton.style.visibility = "visible";
                 break;
             case 1 :
                 switchIllustration.style.display = "none";
                 heartModels.style.display = "flex";
+                toggles.style.display = "flex";
                 caseReviewButton.style.visibility = "visible";
 
                 break;
             case 2 :
                 switchIllustration.style.display = "flex";
                 heartModels.style.display = "none";
+                toggles.style.display = "none";
                 caseReviewButton.style.visibility = "hidden";
                 break;  
         }

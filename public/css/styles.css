@@ -535,6 +535,9 @@ section#main-workshop-menu-grid {
 
 #content-half img.differential-diagnoses {
     padding: 0;
+    width: 64px;
+    height: 64px;
+    padding-right: 1em;
 }
 
 .text-content-wrapper {
@@ -543,12 +546,20 @@ section#main-workshop-menu-grid {
 }
 
 
-h4.differential-diagnoses {
+div.differential-highlight h4 {
     font-style: italic;
     color: var(--module-colour);
+    font-size: 18px;
     font-weight: 800;
     font-family: 'Nunito', 'sans-serif';
-    padding-bottom: 1em;
+    margin-bottom: 0;
+    /* padding-bottom: 1em; */
+}
+
+.differential-highlight {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 /* /////////////// IMAGE HALF /////////////////// */
@@ -673,10 +684,12 @@ h4.differential-diagnoses {
 
 /* //////////////// MODEL TOGGLES (DEPENDS ON WHAT WE NEED THIS WILL CHANGE) ////////////////// */
 #toggles {
-    display: flex;
+    display: none;
     flex-wrap: nowrap;
-    margin: auto;
-    margin-bottom: 1em;
+    position: absolute;
+    margin-top: 63px;
+    z-index: 100;
+    right: calc(25vw - 42px);
 }
 
 /* CHANGED THIS FOR THE TOGGLE LABEL */
@@ -692,7 +705,7 @@ h5 {
 
     text-transform: uppercase;
     font-weight: 800;
-    color: #6fcf97
+    color: white;
 }
 
 #model-toggles {
@@ -755,10 +768,10 @@ label[for="off"] {
     position: relative;
     display: inline-block;
     width: 32px;
-    height: 3px;
+    height: 1px;
     border: none;
     background-color: transparent;
-    border: 10px solid white;
+    border: 8px solid white;
     border-radius: 20px;
     filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5));
     /* margin-top: 0.2em; */
@@ -788,7 +801,7 @@ label[for="off"] {
     height: 18px;
     width: 18px;
     left: -2px;
-    bottom: -2.45px;
+    bottom: -3.5px;
     background-color: #bdbdbd;
     /* border: 2px solid black; */
     -webkit-transition: .3s;
@@ -864,7 +877,7 @@ label[for="off"] {
 #modal {
     margin: auto;
     width: 40vw;
-    height: 64vh;
+    height: 62vh;
     opacity: 1;
     background-color: transparent;
     border-radius: 12px;
@@ -977,6 +990,16 @@ label[for="off"] {
     padding: 0.5em;
     border-radius: 0.25em;
 }
+
+/* ///////////////////// transitionS //////////////////////////// */
+.fade-in {
+    transition:opacity 3s ease-in-out;
+    -webkit-transition: opacity 3s ease-in-out;
+    -moz-transition: opacity 3s ease-in-out;
+    -o-transition: opacity 3s ease-in-out;
+    -ms-transition: opacity 3s ease-in-out;
+  }
+
 
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*///////////////////////////////////// MEDIA QUERIES START HERE ////////////////////////////////////////*/
