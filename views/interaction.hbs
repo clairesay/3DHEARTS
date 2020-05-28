@@ -548,6 +548,8 @@
         var posX, posY, posZ;
         var rotX, rotY, rotZ;
 
+        var baseNumber;
+        var viewNumberLength;
         switch(name) {
 
             case "Ben":
@@ -560,6 +562,7 @@
                         rotY = 0.41;
                         rotZ = 0.13;
                         tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        baseNumber = 0;
                         break;
                     case 2:
                         posX = 17.26
@@ -569,6 +572,7 @@
                         rotY = 1.04
                         rotZ = 0.4
                         tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        baseNumber = 2;
                         break;
                     case 3:
                         posX = 1.84
@@ -578,6 +582,7 @@
                         rotY = 0.09
                         rotZ = -2.95
                         tweenView(posX, posY, posZ, rotX, rotY, rotZ);
+                        baseNumber = 3;
                         break;
                     case 4:
                         posX = 0.7
