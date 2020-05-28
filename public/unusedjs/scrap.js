@@ -698,3 +698,91 @@ function zoom(zoomValue) {
 {{!-- <script type="module" src="js/main-workshop-interaction.js"></script> --}}
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////</section></section>
+///////////////////////////////////////////////////////////////////////////////////////////////////////////</header>
+/////////////////////////////////////// TESTING WHICH LABELS ARE IN VIEW OF CAMERA ////////////////////////////////////
+const tempV = new THREE.Vector3();
+const cameraToPoint = new THREE.Vector3();
+const cameraPosition = new THREE.Vector3();
+const normalMatrix = new THREE.Matrix3();
+
+const minVisibleDot = 0.2;
+// get a matrix that represents a relative orientation of the camera
+normalMatrix.getNormalMatrix(camera.matrixWorldInverse);
+// get the camera's position
+camera.getWorldPosition(cameraPosition);
+
+ // Orient the position based on the camera's orientation.
+// Since the sphere is at the origin and the sphere is a unit sphere
+// this gives us a camera relative direction vector for the position.
+tempV.copy(posit);
+tempV.applyMatrix3(normalMatrix);
+
+// compute the direction to this position from the camera
+cameraToPoint.copy(posit);
+cameraToPoint.applyMatrix4(camera.matrixWorldInverse).normalize();
+
+// get the dot product of camera relative direction to this position
+// on the globe with the direction from the camera to that point.
+// 1 = facing directly towards the camera
+// 0 = exactly on tangent of the sphere from the camera
+// < 0 = facing away
+const dot = tempV.dot(cameraToPoint);
+
+// if the orientation is not facing us hide it.
+if (dot < minVisibleDot) {
+  console.log('kale')
+}
+
+// restore the element to its default display style
+console.log('leftbracket')
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+for (var j = 0; j < labelName.length; j ++) {
+    labelDiv = document.createElement('div');
+    labelDiv.className = 'model-label';
+    labelDiv.textContent = labelName[j];
+    setLabel = new CSS2DObject(labelDiv);
+    setLabel.position.set(labelPosX[j], labelPosY[j], labelPosZ[j]);
+    posit.x = setLabel.position.x
+    posit.y = setLabel.position.y
+    posit.z = setLabel.position.z;
+            heart.add(setLabel);
+}
+
+
+////////////////////////////////////////////////////////////
+function bear() {
+    normalMatrix.getNormalMatrix(camera.matrixWorldInverse);
+    camera.getWorldPosition(cameraPosition);
+  
+      tempV.applyMatrix3(normalMatrix);
+      
+      cameraToPoint.applyMatrix4(camera.matrixWorldInverse).normalize();
+      const dot = tempV.dot(cameraToPoint);
+  
+      // if the orientation is not facing us hide it
+      if (dot < minVisibleDot) {
+          console.log('neigh');
+      } else {
+      }
+      // restore the element to its default display style
+  }
+
+//   //////////////////////// lighting fixing ///////////////////
+
+    //var light = new THREE.SpotLight();
+    //var light = new THREE.DirectionalLight( 0xffffff, 1, 100 );
+    //var light = new THREE.PointLight(0xfffdd0, 1.1, 100);
+    //light.castShadow = true;
+    //light.position.set(camera.position.x, camera.position.y, camera.position.z);
+    var dirLight = new THREE.DirectionalLight( 0xffffff );
+    dirLight.castShadow = true;
+
+    scene.add( dirLight );
+scene.add(camera);
+camera.add(dirLight);

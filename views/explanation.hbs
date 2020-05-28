@@ -1,51 +1,77 @@
-<body class="common-structure">
+<body id="explanation" class="common-structure">
     <header>
-        <button id="returnToMenu" onclick="exitModule();"> <svg width="24" height="24"
-                xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-                <path
-                    d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
-            </svg> </button>
-        <div id="module-name">
-            <h1>{{name}}'s Story</h1>
-            <h3>Explanation</h3>
-        </div>
+        <button id="returnToMenu" onclick="exitModule();">
+            <img src="images/menu-heart.svg">
+        </button>
     </header>
-    <section class="content module-slide">
-        <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-        <p>Think carefully about your answer before you proceed to the next page.</p>
-    </section>
-   
-    <section class="content module-slide">
-        <h1>How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?</h1>
-        <h3>Explanation</h3>
-        {{#each explanation}}
-        {{list this}}
-        {{/each}}
-    </section>
-
-    <section class="content module-slide">
-        <p class="case-content">Well done on completing {{name}}'s Story! Return to Modules Home to discover more stories.
-        </p>
-    </section>
-    <button id="previous" class="nav-button" onclick="nextSlide(-1)"> <svg width="24" height="24"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>
-    </button>
-    <button id="next-module" class="text-button" onclick="nextModule();">Modules Home</button>
-    <button id="next" class="nav-button" onclick="nextSlide(1);"><svg width="24" height="24"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
-        </svg></button>
     <section id="navigation-tab">
-        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Examination');">Case Examination</a>
-        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Interaction');">Interaction</a>
+        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Details');">Case Details</a>
+        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Exploration');">Exploration</a>
         <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
     </section>
+
+    <section id="content-half">
+        <div id="module-name">  
+            <h1>{{name}}'s Story</h1>
+            <h3>Explanation</h3>
+            <img class="profile" src="images/photos/{{toLowerCase name}}-recrop.png">
+        </div>
+
+        <div class="text-content-wrapper">
+            {{#each explanation}}
+            {{makeModuleSlides this "How would you link the above cardiac defects to the clinical presentation? What is the diagnosis?"}}
+            {{/each}}
+
+            <section class="content module-slide">
+                <p class="case-content">You have completed this cardiac case. Click on the home button to select another case.</p>
+            </section>
+        </div>
+
+        <section id="buttons-container">
+            <button id="previous" class="nav-button" onclick="nextSlide(-1)">
+                <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258"/>
+                    <path d="M14.5305 26.2037L2.99997 14.6731L14.5305 3.14258"/>
+                </svg>
+            </button>
+            <button id="next" class="nav-button" onclick="nextSlide(1);">
+                <svg width="63" height="29" viewBox="0 0 63 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 26.2037L14.5305 14.6731L3 3.14258"/>
+                    <path d="M18 26.2037L29.5305 14.6731L18 3.14258"/>
+                    <path d="M33 26.2037L44.5305 14.6731L33 3.14258"/>
+                    <path d="M48 26.2037L59.5305 14.6731L48 3.14258"/>
+                </svg>
+            </button>
+            <button id="next-module" class="text-button" onclick="nextModule();">Home</button>
+        </section>
+
+    </section>
+    <section id="image-half">
+        <img class="story-illustration" src="images/illustrations/{{toLowerCase name}}-explanation.svg">
+    </section>
+
 </body>
 
 <script>
     //This is for the explanation section of the module
 
+    //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
+    switch ("{{name}}") {
+        case "Ben":
+            document.documentElement.style.setProperty("--module-colour", "#9B51E0")
+            break
+        case "Ayanthi":
+            document.documentElement.style.setProperty("--module-colour", "#EB5757")
+            break
+        case "Amin":
+            document.documentElement.style.setProperty("--module-colour", "#2F80ED")
+            break
+        case "Lucy":
+            document.documentElement.style.setProperty("--module-colour", "#27AE60")
+            break
+        default:
+            break
+    }
     ////////////////// TOP LEFT EXIT MODULE ////////////////////
     //Warning to prevent user from accidentally leaving the module
     function exitModule() {
@@ -72,15 +98,15 @@
     //highlighting the text to show the current page displayed
     if (page.includes('oe')) {
         document.querySelectorAll('#navigation-tab a')[0].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[0].style.cursor = "default";
     } else if (page.includes('interaction')) {
         document.querySelectorAll('#navigation-tab a')[1].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[1].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[1].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[1].style.cursor = "default";
     } else if (page.includes('explanation')) {
         document.querySelectorAll('#navigation-tab a')[2].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[2].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[2].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[2].style.cursor = "default";
     }
 
@@ -89,8 +115,8 @@
         if (destination == page) {
         } else {
             Swal.fire({
-                title: 'Start the ' + sectionName + ' section?',
-                text: 'You will leave this module.',
+                title: 'Start ' + sectionName + '?',
+                text: 'You will leave this section.',
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cancel',
@@ -127,13 +153,19 @@
             //if the current slide is the second last one, show the next-module button, hide the next button and show the previous button
         } else if (currentSlide == (document.querySelectorAll('.module-slide').length - 1)) {
             document.getElementById('previous').style.visibility = "visible"
+            document.getElementById('previous').style.display = "flex"
             document.getElementById('next-module').style.visibility = "visible"
+            document.getElementById('next-module').style.display = "flex"
             document.getElementById('next').style.visibility = "hidden"
+            document.getElementById('next').style.display = "none"
             //show both the previous and next buttons and hide the next-module button at all other times
         } else {
             document.getElementById('previous').style.visibility = "visible"
+            document.getElementById('previous').style.display = "flex"
             document.getElementById('next').style.visibility = "visible"
+            document.getElementById('next').style.display = "flex"
             document.getElementById('next-module').style.visibility = "hidden"
+            document.getElementById('next-module').style.display = "none"
         }
 
         //show this slide a.k.a current slide
@@ -141,12 +173,12 @@
         thisSlide.style.display = "flex";
         var caseContent = document.querySelectorAll('.case-content');
         //if this slide contains a class called 'case-content' a.k.a a point in a slide
-        for (var i = 0; i < caseContent.length; i++) {
-            if ((thisSlide.contains(caseContent[i])) && (true)) {
-                //change the next button to show the next point
-                document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
-            }
-        }
+        //for (var i = 0; i < caseContent.length; i++) {
+        //    if ((thisSlide.contains(caseContent[i])) && (true)) {
+        //        //change the next button to show the next point
+        //        document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
+        //    }
+        //}
     }
 
     //Progression through slides

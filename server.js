@@ -11,7 +11,7 @@ var StoryblokClient = require('storyblok-js-client')
 var ben = new Object();
 var ayanthi = new Object();
 var amin = new Object();
-var richardson = new Object();
+var lucy = new Object();
 
 const Storyblok = new StoryblokClient({
     accessToken: "cxBOVdDowPMBH7h41jTGuQtt"
@@ -53,8 +53,8 @@ Storyblok.get('cdn/stories', {
                 case "Amin":
                     amin = story.content
                     break
-                case "Richardson":
-                    richardson = story.content
+                case "Lucy":
+                    lucy = story.content
                     break
                 default:
                     break
@@ -77,17 +77,18 @@ Handlebars.registerHelper("list", function (context) {
 
         // We'll split the list by '--' to give us arrays to iterate over
         const lines = context.split("--")
-        var list = "<ul class='case-content'>"
+        var list = "<p class='case-content'>"
 
         // Iterate over the lines, sandwiching them inbetween <li> tags, then add them into the list var
         for (i in lines) {
             if (i == 0) {
                 list = list + lines[i]
             } else {
-                list = list + "<li>" + lines[i] + "</li>"
+                list = list + "<br><span>&#8226 </span>" + lines[i]
+                // list = list + "<li>" + lines[i] + "</li>"
             }
         }
-        return new Handlebars.SafeString(list + "</ul>")
+        return new Handlebars.SafeString(list + "</p>")
     } else {
         return new Handlebars.SafeString("<p class='case-content'>" + context + "</p>")
     }
@@ -95,7 +96,10 @@ Handlebars.registerHelper("list", function (context) {
 })
 
 Handlebars.registerHelper("review", function (context) {
+    if (context === "<<start>>" || context === "<<end>>") return
+
     // The lists in Storyblok have bullet points starting with '--'
+    console.log(context)
     if (context.includes("--")) {
 
         // We'll split the list by '--' to give us arrays to iterate over
@@ -120,6 +124,54 @@ Handlebars.registerHelper("review", function (context) {
 Handlebars.registerHelper("interactionSteps", function (context) {
     return new Handlebars.SafeString("<p class='step'>" + context + "</p>")
 })
+
+Handlebars.registerHelper('toLowerCase', function(str) {
+    return str.toLowerCase();
+})
+
+
+
+Handlebars.registerHelper('makeModuleSlides', function(context, heading) {
+    //to have dynamic sections, have ben.preInteraction and ben.postInteraction instead of passing the different sections(preliminary info, background info, oe, interaction, explanation)
+
+    // Split the Storyblok section into an array of lines
+    const lines = context.split("\n")
+
+    // Iterate over lines
+    for(i in lines) {
+        // ... to check for either the start or end of the section
+        if(lines[i] === "<<start>>") return new Handlebars.SafeString("<section class='content module-slide'><h1>" + heading + "</h1>")
+        if(lines[i] === "<<end>>") return new Handlebars.SafeString("</section>")
+
+        // ... to check if the line is a list of bullet points
+        if(lines[i].includes("--")) {
+            // We'll split the line by "--" to make an array of bullet points
+            const points = lines[i].split("--")
+            let list = "<p>"
+            
+            for (j in points) {
+                if (j == 0) {
+                    list = list + points[j]
+                } else {
+                    list = list + "<br><span>&#8226 </span>" + points[j]
+                }
+            }
+
+            return new Handlebars.SafeString(list + "</ul>")
+
+        // Otherwise, it's a straight up sentence and just return it   
+        } else {
+            return new Handlebars.SafeString("<p>" + lines[i] + "</p>")
+        }
+    }
+})
+
+Handlebars.registerHelper('isLucy', function(name) {
+    return name === "Lucy"
+})
+
+
+
 
 /////////////////////////////////////////////////
 
@@ -202,20 +254,21 @@ app.get('/:heartId-:stage.html', (req, res) => {
             })
             break
 
-        // Richardson
+        // Lucy
         case "19863":
             res.render(`${stage}`, {
-                title: `${richardson.name}'s Story`,
-                name: richardson.name,
+                title: `${lucy.name}'s Story`,
+                name: lucy.name,
                 heartId: heartId,
-                preliminary_information: richardson.preliminary_information.split("\n"),
-                background_history: richardson.background_history.split("\n"),
-                on_examination: richardson.on_examination.split("\n"),
-                differential_diagnoses: richardson.differential_diagnoses.split("\n"),
-                xray: `https://s3.amazonaws.com${richardson.xray.slice(1)}`,
-                model: `https://s3.amazonaws.com${richardson.model.slice(1)}`,
-                cardiac_explanation: richardson.cardiac_explanation.split("\n"),
-                explanation: richardson.explanation.split("\n")
+                preliminary_information: lucy.preliminary_information.split("\n"),
+                background_history: lucy.background_history.split("\n"),
+                on_examination: lucy.on_examination.split("\n"),
+                progress: lucy.progress.split("\n"),
+                differential_diagnoses: lucy.differential_diagnoses.split("\n"),
+                xray: `https://s3.amazonaws.com${lucy.xray.slice(1)}`,
+                model: `https://s3.amazonaws.com${lucy.model.slice(1)}`,
+                cardiac_explanation: lucy.cardiac_explanation.split("\n"),
+                explanation: lucy.explanation.split("\n")
             })
             break
 

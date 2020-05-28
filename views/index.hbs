@@ -1,35 +1,52 @@
 
 
-<body class="common-structure">
-    <button id="returnToMenu" class="none back" onclick="returnToMenu();"> <svg width="36" height="36"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>
-    </button>
-    <h1>3D Hearts Workshop</h1>
-    <section id="index-menu" class="menu">
-        <a id="pre-workshop-link" onclick="preWorkshop();">Pre-Workshop Module</a>
-        <a id="main-workshop-link" onclick="mainWorkshop();">Main Workshop Module</a>
-        <a id="post-workshop-link" onclick="postWorkshop();">Post-Workshop Module</a>
-    </section>
+<body id="index" class="common-structure">
+    <header>
+        <div id="menu-title-div">
+            <button id="returnToMenu" class="back" onclick="returnToMenu();">
+                <img src="images/menu-heart-grey.svg" alt="menu button">
+            </button>
+            <div>
+                <h1>Child and Adolescent Health</h1>
+                <h3>Cardiac Cases</h3>
+            </div>
+        </div>
+        <img id="case-doctor" src="images/illustrations/landing-page.svg" alt="case doctor">
+        {{!-- <div id="shading"></div> --}}
+    </header>
 
-    <section id="pre-workshop-menu" class="menu none">
-        <a href="pre-workshop-module">Revisit your knowledge of Healthy Heart Anatomy with an Interactive 3D Heart
-            Model</a>
+    <section id="index-menu" class="grid" >
+        <article ><a onclick="moduleStart('ben');">Start</a>
+            <h4 id="ben">Ben 
+                {{!-- <span class="weak">a 3-month old boy with difficulty breathing</span> --}}
+            </h4>
+            <img src="images/ben-profile-recrop.png" alt="Ben">
+        </article>
+        <article ><a onclick="moduleStart('ayanthi');">Start</a>
+            <h4 id="ayanthi">Ayanthi 
+                {{!-- <span class="weak">a 1-month old girl with cyanotic episodes</span> --}}
+            </h4>
+            <img src="images/ayanthi-profile-recrop.png" alt="Ayanthi">
+        </article>
+        <article ><a onclick="moduleStart('amin');">Start</a>
+            <h4  id="amin">Amin 
+                {{!-- <span class="weak"> a 6-month old boy at the refugee clinic</span> --}}
+            </h4>
+            <img src="images/amin-profile-recrop.png" alt="Amin">
+        </article>
+        <article ><a onclick="moduleStart('lucy');">Start</a>
+            <h4 id="lucy">Lucy 
+                {{!-- <span class="weak">7-day old unwell neonate</span> --}}
+            </h4>
+            <img src="images/lucy-profile-recrop.png" alt="lucy">
+        </article>
     </section>
-
-    <section id="main-workshop-menu" class="menu none">
-        <a href="17040-oe.html">Case #17040</a>
-        <a href="19401-oe.html">Case #19401</a>
-        <a href="16751-oe.html">Case #16751</a>
-        <a href="19863-oe.html">Case #19863</a>
+    
+    <section id="start-module" class="none">
+        <img>
+        <h4></h4>
+        <span class="weak"></span>
+        <a>Explore</a>
     </section>
-
-    <section id="post-workshop-menu" class="menu none">
-        <a href="post-workshop-module.html">Case #17040</a>
-        <a href="post-workshop-module.html">Case #19041</a>
-        <a href="post-workshop-module.html">Case #16751</a>
-        <a href="post-workshop-module.html">Case #17863</a>
-    </section>
-
 </body>
 <script src="js/index.js"></script>

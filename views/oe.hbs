@@ -1,84 +1,130 @@
-<body class="common-structure">
+<body id="oe" class="common-structure">
     <header>
-        <button id="returnToMenu" onclick="exitModule();"> <svg width="24" height="24"
-                xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-                <path
-                    d="M12 11.293l10.293-10.293.707.707-10.293 10.293 10.293 10.293-.707.707-10.293-10.293-10.293 10.293-.707-.707 10.293-10.293-10.293-10.293.707-.707 10.293 10.293z" />
-            </svg> </button>
+        <button id="returnToMenu" onclick="exitModule();">
+            <img src="images/menu-heart.svg">
+        </button>
+    </header>
+    <section id="navigation-tab">
+        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Details');">Case Details</a>
+        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Exploration');">Exploration</a>
+        <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
+    </section>
+
+    <section id="content-half">
         <div id="module-name">
             <h1>{{name}}'s Story</h1>
-            <h3>On Examination</h3>
+            <h3>Case Details</h3>
+            <img class="profile" src="images/photos/{{toLowerCase name}}-recrop.png">
         </div>
-    </header>
 
-    <section class="content module-slide">
-        <p>Let's look at the case of {{name}} and a potential diagnosis of a congenital heart defect.</p>
+        <div class="text-content-wrapper">
+            {{!-- <section class="content module-slide">
+            <p>Let's look at the case of {{name}} and a potential diagnosis of a congenital heart defect.</p>
+            </section> --}}
+
+            {{#each preliminary_information}}
+            {{makeModuleSlides this ""}}
+            {{/each}}
+
+            {{#each background_history}}
+            {{makeModuleSlides this "Background History"}}
+            {{/each}}
+
+            {{#each on_examination}}
+            {{makeModuleSlides this "On Examination"}}
+            {{/each}}
+
+            {{#if progress}}
+            {{#each progress}}
+            {{makeModuleSlides this "Progress"}}
+            {{/each}}
+            {{/if}}
+
+
+            <section class="content module-slide">
+                    <h1 id="chest-XR-slide" class="case-content">This is {{name}}'s chest x-ray.</h1>
+            </section>
+
+            <section class="content module-slide">
+                <div class="differential-highlight">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <h4>What are your differential diagnoses?</h4>
+                </div>
+                <p class="case-content">Think carefully about your answer before you proceed to the next page.</p>
+            </section>
+
+            <section class="content module-slide">
+                <div class="differential-highlight">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <h4>What are your differential diagnoses?</h4>
+                </div>
+                {{#each differential_diagnoses}}
+                {{list this}}
+                {{/each}}
+            </section>
+
+            <section class="content module-slide">
+                <p class="case-content">Now you can proceed to examine the 3D-printed model of {{name}}’s cardiac defects.</p>
+            </section>
+        </div>
+
+        <article id="buttons-container">
+            <button id="previous" class="nav-button" onclick="nextSlide(-1)">
+                <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258" />
+                    <path d="M14.5305 26.2037L2.99997 14.6731L14.5305 3.14258" />
+                </svg>
+            </button>
+            <button id="next" class="nav-button" onclick="nextSlide(1);">
+                <svg width="63" height="29" viewBox="0 0 63 29" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M3 26.2037L14.5305 14.6731L3 3.14258" />
+                    <path d="M18 26.2037L29.5305 14.6731L18 3.14258" />
+                    <path d="M33 26.2037L44.5305 14.6731L33 3.14258" />
+                    <path d="M48 26.2037L59.5305 14.6731L48 3.14258" />
+                </svg>
+            </button>
+            <button id="next-module" class="text-button none" onclick="nextModule();">3D Model</button>
+        </article>
     </section>
 
-    <section class="content module-slide">
-        {{#each preliminary_information}}
-        {{list this}}
-        {{/each}}
-    </section>
-
-    <section class="content module-slide">
-        <h1>Background History</h1>
-        {{#each background_history}}
-        {{list this}}
-        {{/each}}
-    </section>
-
-    <section class="content module-slide">
-        <h1>On Examination</h1>
-        {{#each on_examination}}
-        {{ list this }}
-        {{/each}}
-    </section>
-
-    <section class="content module-slide">
-        <p class="case-content">There is a radiology practice adjacent to your clinic and you organise a chest XR.</p>
-    </section>
-
-    <section class="content module-slide">
-        <p class="case-content"><img class="chest-xr" src={{xray}}></p>
-    </section>
-
-    <section class="content module-slide">
-        <h1>What are your differential diagnoses?</h1>
-        <p class="case-content">Think carefully about your answer before you proceed to the next page.</p>
-    </section>
-
-    <section class="content module-slide">
-        <h1>What are your differential diagnoses?</h1>
-        {{#each differential_diagnoses}}
-        {{list this}}
-        {{/each}}
-    </section>
-
-    <section class="content module-slide">
-        <p class="case-content">Well done on examining your patient! Proceed to Interaction!</p>
-    </section>
-
-
-
-    <button id="previous" class="nav-button" onclick="nextSlide(-1)"> <svg width="24" height="24"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M2.117 12l7.527 6.235-.644.765-9-7.521 9-7.479.645.764-7.529 6.236h21.884v1h-21.883z" /></svg>
-    </button>
-    <button id="next-module" class="text-button" onclick="nextModule();">Interaction</button>
-    <button id="next" class="nav-button" onclick="nextSlide(1);"><svg width="24" height="24"
-            xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd">
-            <path d="M21.883 12l-7.527 6.235.644.765 9-7.521-9-7.479-.645.764 7.529 6.236h-21.884v1h21.883z" />
-        </svg></button>
-    <section id="navigation-tab">
-        <a onclick="jumpSection('{{heartId}}' + '-oe.html', 'Case Examination');">Case Examination</a>
-        <a onclick="jumpSection('{{heartId}}' + '-interaction.html', 'Interaction');">Interaction</a>
-        <a onclick="jumpSection('{{heartId}}' + '-explanation.html', 'Explanation');">Explanation</a>
+    <section id="image-half">
+        <img class="story-illustration" src="images/illustrations/{{toLowerCase name}}-story.svg">
+        {{!-- <img class="story-illustration" src="images/illustrations/ben-background-history.svg"> --}}
+        <img class="chest-xr none" src={{xray}}>
     </section>
 </body>
 
 <script>
     //This is for the on-examination section of the module
+    //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
+    switch ("{{name}}") {
+        case "Ben":
+            document.documentElement.style.setProperty("--module-colour", "#9B51E0")
+            break
+        case "Ayanthi":
+            document.documentElement.style.setProperty("--module-colour", "#EB5757")
+            break
+        case "Amin":
+            document.documentElement.style.setProperty("--module-colour", "#2F80ED")
+            break
+        case "Lucy":
+            document.documentElement.style.setProperty("--module-colour", "#27AE60")
+            break
+        default:
+            break
+    }
+
+
+    //function displayChestXR() {
+        //console.log(!!document.getElementById('chest-XR-slide'))
+
+       // var chestXRSlide = !!document.getElementById('chest-XR-slide');
+        //var incorrectIsVisible = window.getComputedStyle(chestXRSlide, null).getPropertyValue('display');
+        //if (chestXRSlide) {
+          //  console.log('now')
+
+        //}
+    //}
 
     ////////////////// TOP LEFT EXIT MODULE ////////////////////
     //Warning to prevent user from accidentally leaving the module
@@ -106,15 +152,15 @@
     //highlighting the text to show the current page displayed
     if (page.includes('oe')) {
         document.querySelectorAll('#navigation-tab a')[0].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[0].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[0].style.cursor = "default";
     } else if (page.includes('interaction')) {
         document.querySelectorAll('#navigation-tab a')[1].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[1].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[1].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[1].style.cursor = "default";
     } else if (page.includes('explanation')) {
         document.querySelectorAll('#navigation-tab a')[2].style.color = "black";
-        document.querySelectorAll('#navigation-tab a')[2].style.fontWeight = "500";
+        document.querySelectorAll('#navigation-tab a')[2].style.fontWeight = "700";
         document.querySelectorAll('#navigation-tab a')[2].style.cursor = "default";
     }
 
@@ -123,8 +169,8 @@
         if (destination == page) {
         } else {
             Swal.fire({
-                title: 'Start the ' + sectionName + ' section?',
-                text: 'You will leave this module.',
+                title: 'Start ' + sectionName + '?',
+                text: 'You will leave this section.',
                 icon: 'warning',
                 showCancelButton: true,
                 cancelButtonText: 'Cancel',
@@ -142,7 +188,7 @@
     ///////////////////////////////// AT THE END OF A MODULE ///////////////////////////
     //at the end of the module, automatically forward user to the next section
     function nextModule() {
-        window.location.href = {{heartId}} + "-interaction.html";
+        window.location.href = {{ heartId }} + "-interaction.html";
     }
 
     ////////// USING LOCAL STORAGE TO OFFSET IF USER NAVIGATES TO PREVIOUS SLIDE FIXING/////////////
@@ -161,13 +207,19 @@
             //if the current slide is the second last one, show the next-module button, hide the next button and show the previous button
         } else if (currentSlide == (document.querySelectorAll('.module-slide').length - 1)) {
             document.getElementById('previous').style.visibility = "visible"
+            document.getElementById('previous').style.display = "flex"
             document.getElementById('next-module').style.visibility = "visible"
+            document.getElementById('next-module').style.display = "flex"
             document.getElementById('next').style.visibility = "hidden"
+            document.getElementById('next').style.display = "none"
             //show both the previous and next buttons and hide the next-module button at all other times
         } else {
             document.getElementById('previous').style.visibility = "visible"
+            document.getElementById('previous').style.display = "flex"
             document.getElementById('next').style.visibility = "visible"
+            document.getElementById('next').style.display = "flex"
             document.getElementById('next-module').style.visibility = "hidden"
+            document.getElementById('next-module').style.display = "none"
         }
 
         //show this slide a.k.a current slide
@@ -175,11 +227,53 @@
         thisSlide.style.display = "flex";
         var caseContent = document.querySelectorAll('.case-content');
         //if this slide contains a class called 'case-content' a.k.a a point in a slide
-        for (var i = 0; i < caseContent.length; i++) {
-            if ((thisSlide.contains(caseContent[i])) && (true)) {
-                //change the next button to show the next point
-                document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
-            }
+        //for (var i = 0; i < caseContent.length; i++) {
+        //    if ((thisSlide.contains(caseContent[i])) && (true)) {
+        //        //change the next button to show the next point
+        //        document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
+        //    }
+        //}
+    }
+
+    function showIllustration(slideNumber) {
+        var switchIllustration = document.getElementsByClassName('story-illustration')[0];
+        switch(slideNumber) {
+            case 0 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
+                break;
+            case 1 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-background-history.svg');
+                break;
+            case 2 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
+                break;
+            case 3 :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
+                break;
+            case 4 :
+                if ("{{name}}" != "Lucy") {
+                    switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
+                } else {
+                    switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
+                }            
+                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
+                break;
+            case 5 :
+                if ("{{name}}" != "Lucy") {
+                    switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
+                } else {
+                    switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
+                }      
+  
+                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
+                break;
+            case 7 :
+                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
+                //switchIllustration.setAttribute('src', 'images/illustrations/ben-chest-x-ray.svg');
+                break;
+            default :
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
+                break;
         }
     }
 
@@ -191,8 +285,10 @@
         previousSlide.style.display = "none";
         //add or minus 1 to current slide, depending on previous or next button click
         currentSlide += n;
+
         //display the slide
         showSlide(currentSlide);
+        showIllustration(currentSlide);
     }
     showSlide(currentSlide);
 
