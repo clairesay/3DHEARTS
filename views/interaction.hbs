@@ -158,10 +158,12 @@
             </button>
             <button id="next-module" class="text-button" onclick="nextModule()">Explanation</button>
         </article>
-
+    <div id="banner">
+        <div id="circle"></div>
+    </div>
             
     </section>
-<button id="collapse-button" onclick="collapseSection()">collapse</button>
+<button id="collapse-button" onclick="collapseSection()"><img src="images/collapse-button.svg"><img id="collapse-button-arrows" src="images/collapse-button-arrows.svg"></button>
 <button id="case-content-button" onclick="showReviewModal();"><img src="images/case-content.svg"></button>
     <section id="image-half">
             <article id="toggles">
@@ -208,32 +210,44 @@
     //}
 
     window.collapseSection = collapseSection;
-        var tip = true;
+        var collapseTicker = true;
     function collapseSection() {
         var contentHalf = document.getElementById('content-half');
         var collapseButton = document.getElementById('collapse-button');
+
         var caseContentButton = document.getElementById('case-content-button');
         var c = document.getElementById('c');
         var int = document.getElementById('interaction')
-        if (tip == true) {
-        contentHalf.style.transform = "translateX(-1vw)"
-        contentHalf.style.direction = "rtl"
-        collapseButton.style.transform = "translateX(-35vw)"
-        caseContentButton.style.transform = "translateX(-35vw)"
-        int.style.gridTemplateColumns = "5vw 35vw 60vw"
-        int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
-        //c.setAttribute('width', '98vw');
-        tip = false;
+        var text = document.querySelectorAll('.text-content-wrapper');
+        var buttonsContainer = document.getElementById('buttons-container');
+        var nextButton = document.getElementById('next')
+
+        var collapseButtonArrows = document.getElementById('collapse-button-arrows');
+
+        if (collapseTicker == true) {
+            contentHalf.style.direction = "rtl"
+
+            collapseButton.style.transform = "translateX(-35vw)"
+            collapseButtonArrows.style.transform = "rotateZ(180deg)"
+
+            caseContentButton.style.transform = "translateX(-35vw)"
+            int.style.gridTemplateColumns = "5vw 35vw 60vw"
+            int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
+            buttonsContainer.style.marginRight = '-2em';
+            buttonsContainer.style.marginLeft = '0';
+            collapseTicker = false;
         } else {
-        contentHalf.style.transform = "translateX(0)"
-        contentHalf.style.direction = "ltr"
-        collapseButton.style.transform = "translateX(0)"
-        caseContentButton.style.transform = "translateX(0)"
-        int.style.gridTemplateColumns = "40vw 60vw"
-        int.style.gridTemplateAreas = "'MenuButton Nav' 'Information Image'"
-        c.style.width = "100%";
-        //c.setAttribute('width', '0')
-        tip = true;
+            contentHalf.style.transform = "translateX(0)"
+            contentHalf.style.direction = "ltr"
+            collapseButton.style.transform = "translateX(0)"
+            collapseButtonArrows.style.transform = "rotateZ(0deg)"
+            caseContentButton.style.transform = "translateX(0)"
+            int.style.gridTemplateColumns = "40vw 0vw 60vw"
+            int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
+            c.style.width = "100%";
+            buttonsContainer.style.marginLeft = '-2em';
+            buttonsContainer.style.marginRight = '0';
+            collapseTicker = true;
         }
 
     }
@@ -737,16 +751,17 @@
 
     /////////////////////////////SHOW LABELS///////////////////////////
     window.showLabel = showLabel;
-    var labelCounter = 0;
+    var labelTicker = false;
     function showLabel() {
-        labelCounter ++;
         const labelContainer = document.getElementById('labels');
-        if (labelCounter % 2 == 0) {
+        if (labelTicker == true) {
             labelDot.visible = true;
             labelContainer.style.display = "block";
+            labelTicker = false;
         } else {
             labelDot.visible = false;
             labelContainer.style.display = "none";
+            labelTicker = true;
         }
     }
 
@@ -898,18 +913,21 @@
         var contentHalf = document.getElementById('content-half');
         var contentHeader = document.querySelector('#oe header');
         var toggles = document.getElementById('toggles');
+        var collapseButton = document.getElementById('collapse-button');
         switch(slideNumber) {
             case 0:
                 switchIllustration.style.display = "flex";
                 heartModels.style.display = "none";
                 toggles.style.display = "none";
                 caseReviewButton.style.visibility = "visible";
+                collapseButton.style.visibility = "hidden";
                 break;
             case 1 :
                 switchIllustration.style.display = "none";
                 heartModels.style.display = "flex";
                 toggles.style.display = "flex";
                 caseReviewButton.style.visibility = "visible";
+                collapseButton.style.visibility = "visible"
 
                 break;
             case 2 :
@@ -917,6 +935,7 @@
                 heartModels.style.display = "none";
                 toggles.style.display = "none";
                 caseReviewButton.style.visibility = "hidden";
+                collapseButton.style.visibility = "hidden"
                 break;  
         }
     }

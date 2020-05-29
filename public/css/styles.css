@@ -178,7 +178,7 @@ button:hover {
     display: flex;
     justify-content: center;
     grid-area: MenuButton;
-    z-index: 2;
+    z-index: 3;
 }
 
 #oe #returnToMenu, #interaction #returnToMenu, #explanation #returnToMenu {
@@ -201,8 +201,9 @@ button:hover {
 #interaction{
     display: grid;
     grid-template-rows: 50px 1fr;
-    grid-template-columns: 40vw 60vw;
-    grid-template-areas: 'MenuButton Nav' 'Information Image'
+    grid-template-columns: 40vw 0vw 60vw;
+    grid-template-areas: 'MenuButton MenuButton Nav' 'Information Image Image';
+    transition-duration: 0.5s;
 }
 
 .common-structure {
@@ -537,18 +538,20 @@ section#main-workshop-menu-grid {
     grid-area: Information;
     /* height: calc(100vh - 68px - 50px); */
     min-height: calc(100vh - 68px - 50px);
+    max-height: calc(100vh - 50px);
     overflow: hidden;
     padding: 0 2em;
-    /* z-index: 2; */
+    z-index: 2;
     background-color: white;
-    filter: drop-shadow(0px 8px 16px #cccccc);
-    transition-duration: 0.5s;
+    filter: drop-shadow(2px 2px 8px #cccccc);
+    transition-duration: 0.2s;
 
 }
 
 #content-half img {
     height: 20vh;
     padding: 2.5em 2em 2em 2em;
+
 }
 
 #content-half img.differential-diagnoses {
@@ -585,6 +588,8 @@ div.differential-highlight h4 {
 
 #image-half {
     /* max-width: 60vw; */
+    /* min-height: calc(100vh - 50px); */
+    max-height: calc(100vh - 50px);
     width: 100%;
     grid-area: Image;
     display: flex;
@@ -861,6 +866,7 @@ label[for="off"] {
     display: flex;
     margin: auto;
     z-index: 30;
+    transition-duration: 0.001s;
 }
 
 #case-content-button img{
@@ -876,10 +882,39 @@ label[for="off"] {
 /* COLLAPSE BUTTON */
 #collapse-button {
     position: absolute;
-    top: 20vh;
-    left: 38vw;
-    z-index: 10;
+    visibility: hidden;
+    top: 17vh;
+    left: 34.5vw;
+    z-index: 3;
+    transition-duration: 0s;
+    filter: none;
+    -webkit-filter: none;
 }
+
+#collapse-button > img {
+    width: 10vw;
+}
+
+#collapse-button #collapse-button-arrows {
+    width: 2vw;
+    position: relative;
+    top: -3.5vw;
+    left: -4vw;
+    transition-duration: 0.3s;
+    transform: rotateZ(0deg);
+}
+
+#collapse-button:before{
+    position: absolute;
+    content: "";
+    width: 5.5vw;
+    height: calc(100% + 10px);
+    left: 0;
+    top: -5px;
+    background: white;
+    filter: none;
+}
+
 
 /* ////////////////// INTERACTION: REVIEW INFORMATION MODAL ///////////////////// */
 .no-modal {
