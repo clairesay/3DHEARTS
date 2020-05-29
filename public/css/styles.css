@@ -883,7 +883,7 @@ label[for="off"] {
 #collapse-button {
     position: absolute;
     visibility: hidden;
-    top: 17vh;
+    top: 12vh;
     left: 34.5vw;
     z-index: 3;
     transition-duration: 0s;
