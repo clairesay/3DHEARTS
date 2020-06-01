@@ -236,7 +236,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
         // Ayanthi
         case "19401":
             res.render(`${stage}`, {
-                title: `${ayanthi.name}'s Story`,
+                title: `Ayanthi, a 1-month old girl`,
                 name: ayanthi.name,
                 heartId: heartId,
                 preliminary_information: ayanthi.preliminary_information.split("\n"),
@@ -253,7 +253,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
         // Amin
         case "16751":
             res.render(`${stage}`, {
-                title: `${amin.name}'s Story`,
+                title: `Amin, a 6-month old boy`,
                 name: amin.name,
                 heartId: heartId,
                 preliminary_information: amin.preliminary_information.split("\n"),
@@ -270,7 +270,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
         // Lucy
         case "19863":
             res.render(`${stage}`, {
-                title: `${lucy.name}'s Story`,
+                title: `Lucy, a 7 day old neonate`,
                 name: lucy.name,
                 heartId: heartId,
                 preliminary_information: lucy.preliminary_information.split("\n"),
