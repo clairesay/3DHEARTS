@@ -166,12 +166,25 @@ Handlebars.registerHelper('makeModuleSlides', function(context, heading) {
     }
 })
 
+Handlebars.registerHelper('nameCheck', function(caseName, nameCheck) {
+    return caseName === nameCheck
+})
+
+Handlebars.registerHelper('isBen', function(name) {
+    return name === "Ben"
+})
+
+Handlebars.registerHelper('isAyanthi', function(name) {
+    return name === "Ayanthi"
+})
+
+Handlebars.registerHelper('isAmin', function(name) {
+    return name === "Amin"
+})
+
 Handlebars.registerHelper('isLucy', function(name) {
     return name === "Lucy"
 })
-
-
-
 
 /////////////////////////////////////////////////
 
@@ -206,7 +219,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
         case "17040":
             console.log(heartId)
             res.render(`${stage}`, {
-                title: `${ben.name}'s Story`,
+                title: `Ben, a 3-month old boy`,
                 name: ben.name,
                 heartId: heartId,
                 preliminary_information: ben.preliminary_information.split("\n"),
