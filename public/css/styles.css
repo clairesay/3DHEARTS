@@ -355,7 +355,7 @@ section#main-workshop-menu-grid {
     font-family: 'Josefin Sans', 'sans-serif';
     color: #c4c4c4;
     background-color:#ffffff;
-    filter: drop-shadow(0px 8px 16px #cccccc);
+    filter: drop-shadow(0px 8px 16px #dddddd);
     transform: scale(1);
     transition-duration: 0.1s;
 }

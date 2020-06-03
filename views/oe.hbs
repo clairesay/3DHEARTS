@@ -133,18 +133,6 @@
             break
     }
 
-
-    //function displayChestXR() {
-        //console.log(!!document.getElementById('chest-XR-slide'))
-
-       // var chestXRSlide = !!document.getElementById('chest-XR-slide');
-        //var incorrectIsVisible = window.getComputedStyle(chestXRSlide, null).getPropertyValue('display');
-        //if (chestXRSlide) {
-          //  console.log('now')
-
-        //}
-    //}
-
     ////////////////// TOP LEFT EXIT MODULE ////////////////////
     //Warning to prevent user from accidentally leaving the module
     function exitModule() {
@@ -289,7 +277,6 @@
                     switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
                     attributeTextXR.innerHTML = "";
                 }            
-                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
             case 6 :
                 if ("{{name}}" != "Lucy") {
@@ -303,6 +290,10 @@
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
             case 7 :
+                    if ("{{name}}" == "Lucy") {
+                        switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
+                        attributeTextXR.innerHTML = "";
+                    }
                     attributeTextXR.innerHTML = "";
             case 8 :
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
