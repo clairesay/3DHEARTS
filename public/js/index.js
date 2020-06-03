@@ -77,9 +77,27 @@ function returnToMenu() {
 /////////////////////////////// thank you modal ///////////////////////////////////
 var modal = document.getElementById('thank-you-modal');
 var modalBlackout = document.getElementById('modal-blackout');
+var modalButton = document.getElementById('thank-you-modal-button')
+var modalTicker = false;
+
 function tyModal() {
     //Modal Background
     modalBlackout.classList.toggle('show-modal');
     //Actual Modal
     modal.classList.toggle('show-modal');
+
+    if (modal.classList.contains('show-modal')) {
+        modalTicker = true;
+    } else {
+        modalTicker = false;
+    }
 }
+
+document.addEventListener('click', function(event) {
+  var isClickInside = modal.contains(event.target);
+  var isClickButtonInside = modalButton.contains(event.target)
+  if ((!isClickInside) && (!isClickButtonInside) && (modalTicker == true)) {
+    tyModal();
+    modalTicker = false;
+  }
+});
