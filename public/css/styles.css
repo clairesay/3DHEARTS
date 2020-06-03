@@ -639,6 +639,41 @@ div.differential-highlight h4 {
     grid-area: Nav;
 }
 
+.module-descriptions {
+    position: absolute;
+    max-width: 13vw;
+    width: 13vw;
+    /* top: 35.3px; */
+    top: 50px;
+    margin-left: -3.75vw;
+    visibility: hidden;
+    background-color: #595959;
+    color: white;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 10;
+    opacity: 0;
+    padding: 0.5em;
+    transition-duration: 0.2s;
+    border-radius: 2px;
+}
+
+.module-descriptions::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #595959 transparent;
+}
+
+#navigation-tab a:nth-child(n):hover > p.module-descriptions:nth-of-type(1) {
+    opacity: 1;
+    visibility: visible;
+}
+
 #navigation-tab, #oe header, #interaction header, #explanation header {
     background-color: #e7e7e7;
     border-bottom: 5px solid var(--module-colour);
@@ -651,6 +686,7 @@ div.differential-highlight h4 {
     color: #c4c4c4;
     transition-duration: 0.2s;
     cursor: pointer;
+    position: relative;
 }
 
 #navigation-tab a:hover {
