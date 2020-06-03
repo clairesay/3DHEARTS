@@ -106,9 +106,10 @@
     </section>
 
     <section id="image-half">
+        <figure>
         <img class="story-illustration" src="images/illustrations/{{toLowerCase name}}-story.svg">
-        {{!-- <img class="story-illustration" src="images/illustrations/ben-background-history.svg"> --}}
-        <img class="chest-xr none" src={{xray}}>
+        <figcaption class="chest-xr-caption"></figcaption>
+        </figure>
     </section>
 </body>
 
@@ -255,37 +256,55 @@
 
     function showIllustration(slideNumber) {
         var switchIllustration = document.getElementsByClassName('story-illustration')[0];
+        var attributeTextXR = document.getElementsByClassName('chest-xr-caption')[0];
         switch(slideNumber) {
-            case 0 :
+            case 1 :
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                 break;
-            case 1 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-background-history.svg');
-                break;
             case 2 :
-                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-background-history.svg');
                 break;
             case 3 :
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
                 break;
             case 4 :
-                if ("{{name}}" != "Lucy") {
-                    switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
-                } else {
-                    switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
-                }            
-                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
+                switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
+                attributeTextXR.innerHTML = "";
                 break;
             case 5 :
                 if ("{{name}}" != "Lucy") {
+                    switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
+                    switch("{{name}}") {
+                        case "Ben" :
+                        attributeTextXR.innerHTML = "Case courtesy of Dr Jeremy Jones, Radiopaedia.org, rID: 27377"
+                            break;
+                        case "Ayanthi" :
+                        attributeTextXR.innerHTML = "Case courtesy of Dr Mohammed Alshammari, Radiopaedia.org, rID: 16268"
+                            break;
+                        case "Amin":
+                        attributeTextXR.innerHTML = "Courtesy of Dr Greg Petermann (05/04/2004)"
+                            break;
+                    }
+                } else {
+                    switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
+                    attributeTextXR.innerHTML = "";
+                }            
+                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
+                break;
+            case 6 :
+                if ("{{name}}" != "Lucy") {
                     switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
+                    attributeTextXR.innerHTML = "";
                 } else {
                     switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
+                    attributeTextXR.innerHTML = "Case courtesy of Dr Angela Byrne, Radiopaedia.org, rID: 7588"
                 }      
   
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
             case 7 :
+                    attributeTextXR.innerHTML = "";
+            case 8 :
                 //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                 //switchIllustration.setAttribute('src', 'images/illustrations/ben-chest-x-ray.svg');
                 break;

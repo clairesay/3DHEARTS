@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5 {
     font-weight: 800;
 }
 
-p, ul, ol, li, button, a, label, .model-label {
+p, ul, ol, li, button, a, label, .model-label, figcaption {
     font-family: 'Nunito', sans-serif;
     font-style: italic;
 }
@@ -593,7 +593,24 @@ div.differential-highlight h4 {
     width: 100%;
     grid-area: Image;
     display: flex;
+    flex-direction: column;
     transition-duration: 0.5s;
+    position: relative;
+}
+
+figure {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: auto 0;
+}
+
+figcaption {
+    position: relative;
+    margin-left: 10%;
+    margin-top: 0.5em;
+    font-size: 10pt;
+    color: #bdbdbd;
 }
 
 .story-illustration {
@@ -893,7 +910,7 @@ label[for="off"] {
 /* FANCY TOGGLES */
 /* ///////////////// PLACEHOLDER and IMAGES //////////////// */
 
-.chest-xr {
+.chest-xr-img {
     width: 100%;
     padding: 0;
 }
