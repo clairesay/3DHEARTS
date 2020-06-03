@@ -324,7 +324,7 @@
         var text = document.querySelectorAll('.text-content-wrapper');
         var buttonsContainer = document.getElementById('buttons-container');
         var nextButton = document.getElementById('next')
-
+        var header = document.getElementsByTagName('header')[0];
         var collapseButtonArrows = document.getElementById('collapse-button-arrows');
 
         if (collapseTicker == true) {
@@ -338,6 +338,8 @@
             int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
             buttonsContainer.style.marginRight = '-2em';
             buttonsContainer.style.marginLeft = '0';
+            header.style.filter = "none";
+
             collapseTicker = false;
         } else {
             contentHalf.style.transform = "translateX(0)"
@@ -350,6 +352,7 @@
             c.style.width = "100%";
             buttonsContainer.style.marginLeft = '-2em';
             buttonsContainer.style.marginRight = '0';
+            header.style.filter = "drop-shadow(2px 2px 8px #cccccc)"
             collapseTicker = true;
         }
 

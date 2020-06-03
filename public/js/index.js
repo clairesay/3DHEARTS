@@ -3,8 +3,12 @@ var indexMenu = document.getElementById('index-menu');
 var returnToMenuButton = document.getElementById('returnToMenu');
 var headings = document.querySelector('#menu-title-div>div');
 var startModule = document.getElementById('start-module');
+
+//thank you modal button
+var modalButton = document.getElementById('thank-you-modal-button')
 // displays the main workshop module menu
 function mainWorkshop() {
+    modalButton.style.display = "flex";
     startModule.style.display = 'none';
     returnToMenuButton.setAttribute('onclick', 'returnToMenu()');
     indexMenu.style.display = 'grid';
@@ -13,6 +17,7 @@ function mainWorkshop() {
 }
 
 function moduleStart(name) {
+    modalButton.style.display = "none";
     startModule.style.display = "flex"
     indexMenu.style.display = 'none';
     var caseImage = document.querySelector('#start-module img');
@@ -21,7 +26,8 @@ function moduleStart(name) {
     var caseDescription = document.querySelector('span.weak');
     document.getElementById('case-doctor').style.visibility = "hidden";
     returnToMenuButton.setAttribute('onclick', 'mainWorkshop()');
-    
+
+
     headings.style.visibility = 'hidden';
     switch (name) {
         case 'ben':
@@ -77,7 +83,6 @@ function returnToMenu() {
 /////////////////////////////// thank you modal ///////////////////////////////////
 var modal = document.getElementById('thank-you-modal');
 var modalBlackout = document.getElementById('modal-blackout');
-var modalButton = document.getElementById('thank-you-modal-button')
 var modalTicker = false;
 
 function tyModal() {
