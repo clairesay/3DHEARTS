@@ -73,3 +73,13 @@ function returnToMenu() {
     startModule.style.display = 'none';
     document.getElementById('case-doctor').style.visibility = "visible";
 }
+
+/////////////////////////////// thank you modal ///////////////////////////////////
+var modal = document.getElementById('thank-you-modal');
+var modalBlackout = document.getElementById('modal-blackout');
+function tyModal() {
+    //Modal Background
+    modalBlackout.classList.toggle('show-modal');
+    //Actual Modal
+    modal.classList.toggle('show-modal');
+}

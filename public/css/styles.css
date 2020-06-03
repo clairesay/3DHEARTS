@@ -8,7 +8,7 @@ h1, h2, h3, h4, h5 {
     font-weight: 800;
 }
 
-p, ul, ol, li, button, a, label, .model-label, figcaption {
+p, ul, ol, li, button, a, label, .model-label, figcaption, aside {
     font-family: 'Nunito', sans-serif;
     font-style: italic;
 }
@@ -212,12 +212,6 @@ button:hover {
 
 /* ///////////////////// INDEX /////////////////////////// */
 /* //////////////////// NEW CSS MENU //////////////// */
-
-#case-doctor {
-    padding-bottom: 0.5em;
-    max-height: 70%;
-    right: 100px;
-}
 
 body#index {
     display: grid;
@@ -447,6 +441,48 @@ section#main-workshop-menu-grid {
     margin: 0 auto;
 }
 
+/* ////////////////// INDEX MENU EXTRAS ////////////// */
+#case-doctor {
+    padding-bottom: 0.5em;
+    max-height: 70%;
+    right: 100px;
+}
+
+#thank-you-modal {
+    /* visibility: hidden; */
+    position: absolute;
+    font-size: 12px;
+    background-color: white;
+    width: 50vw;
+    height: auto;
+    top: 12vh;
+    left: 24vw;
+
+    border-radius: 8px;
+
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+#thank-you-modal-button {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    z-index: 30;
+    filter: none;
+}
+
+#close-button {
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    filter: none;
+    /* background-color: white;
+    padding: 0.5em 1em 1em 1em;
+    z-index: -1; */
+}
+
 /* ////////////////// INDEX SUB MENUS ////////////////*/
 #index-menu {
     grid-template-rows: 20vh 20vh;
@@ -609,7 +645,7 @@ figcaption {
     position: relative;
     margin-left: 10%;
     margin-top: 0.5em;
-    font-size: 10pt;
+    font-size: 10px;
     color: #bdbdbd;
 }
 
@@ -673,6 +709,8 @@ figcaption {
     padding: 0.5em;
     transition-duration: 0.2s;
     border-radius: 2px;
+
+    z-index: 10;
 }
 
 .module-descriptions::after {
