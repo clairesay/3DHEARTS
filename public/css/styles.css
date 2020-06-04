@@ -312,9 +312,15 @@ section#main-workshop-menu-grid {
     border-image-slice: 1;
 }
 
-#index #returnToMenu img {
-    width: 100px;
+#menu-title-div > #returnToMenu > img {
+    width: 96px;
     margin: 0 2em;
+}
+
+#returnToMenu > img {
+    width: 48px;
+    z-index: 30;
+    /* margin: 0 2em; */
 }
 
 #index-menu article:nth-of-type(2n) {
@@ -522,6 +528,7 @@ section#main-workshop-menu-grid {
     display: flex;
     align-self: flex-end;
     padding-left: 20px;
+    padding-right: 40px;
 }
 
 
@@ -1177,4 +1184,8 @@ label[for="off"] {
 @media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
 
     /* STYLES GO HERE */ 
+}
+
+@media only screen and (max-width: 984px) {
+
 }
