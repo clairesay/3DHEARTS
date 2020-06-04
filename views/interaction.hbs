@@ -703,8 +703,9 @@
     animate();
 
 
-    var depo = 0;
+    var labelBaseNumber = 0;
     var previousViewNumberLength = 0;
+    var stepDirection;
     //Changing the model views on click with tween.js
     function changeView(step, name) {
         window.tweenView = tweenView;
@@ -906,15 +907,21 @@
             viewNumberLength = heartLabels.filter(function(d) { return d.viewNumber === step; }).length;
             
             //if the step number is greater than 1
-            if (step > 1) {
-                for (var t = 1; t < step; t ++) {
-                previousViewNumberLength = heartLabels.filter(function(d) { return d.viewNumber === (t); }).length;
+            if (step >= 1) {
+                previousViewNumberLength = heartLabels.filter(function(d) { return d.viewNumber === (step - 1); }).length;
                 localStorage.setItem('previousViewNumber', previousViewNumberLength);
-                }
+            } else {
+                localStorage.setItem('previousViewNumber', 0);
             }
         }
-        depo += previousViewNumberLength;
-        for (var h = depo; h < depo + viewNumberLength; h ++) {
+
+        if (stepDirection == true) {
+            labelBaseNumber += previousViewNumberLength;
+        } else if (stepDirection == false) {
+            labelBaseNumber -= viewNumberLength
+        }
+
+        for (var h = labelBaseNumber; h < labelBaseNumber + viewNumberLength; h ++) {
             allLabels[h].style.visibility = "visible";
         }
     }
@@ -1168,11 +1175,17 @@
     function nextStep(m) {
         //Increment the steps by either -1 or 1 depending upon previous or next buttons clicked
         currentStep += m;
+        if (m > 0) {
+            stepDirection = true;
+        } else if (m < 0) {
+            stepDirection = false;
+        }
+
+        console.log(stepDirection)
         //If the current step exists
         switch("{{name}}") {
             case "Lucy":
                 if ((currentStep > 0) && (currentStep < 11)) {
-                    console.log(currentStep)
                     //Hide the previous step
                     var previousStep = document.querySelectorAll('.step')[currentStep - 1];
                     previousStep.style.display = "none";
@@ -1182,7 +1195,7 @@
                 break;
             default:
                 if ((currentStep > 0) && (currentStep < 10)) {
-                    console.log(currentStep)
+                    //console.log(currentStep)
                     //Hide the previous step
                     var previousStep = document.querySelectorAll('.step')[currentStep - 1];
                     previousStep.style.display = "none";
