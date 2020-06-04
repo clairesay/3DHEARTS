@@ -1,0 +1,86 @@
+[
+  {
+    "name": "Left Atrial Appendage",
+    "xPosition": -60,
+    "yPosition": 70,
+    "zPosition": -1.5,
+    "viewNumber": 1
+  },
+  {
+    "name": "Right Atrial Appendage",
+    "xPosition": 3,
+    "yPosition": -20,
+    "zPosition": 1.7,
+    "viewNumber": 1
+  },
+  {
+    "name": "Right Atrium",
+    "xPosition": 3,
+    "yPosition": -40,
+    "zPosition": 2,
+    "viewNumber": 2
+  },
+  {
+    "name": "Right Ventricular Outflow Tract",
+    "xPosition": -40,
+    "yPosition": 50,
+    "zPosition": 1.7,
+    "viewNumber": 3
+  },
+  {
+    "name": "Left Atrium",
+    "xPosition": -80,
+    "yPosition": 70,
+    "zPosition": -1.5,
+    "viewNumber": 4
+  },
+  {
+    "name": "Left Ventricle",
+    "xPosition": -30,
+    "yPosition": -155,
+    "zPosition": 2.3,
+    "viewNumber": 4
+  },
+  {
+    "name": "Left Ventricular Outflow Track",
+    "xPosition": -20,
+    "yPosition": -145,
+    "zPosition": 2.2,
+    "viewNumber": 5
+  },
+  {
+    "name": "Fenestrated Secundum Atrial Septal Defect",
+    "xPosition": 20,
+    "yPosition": -45,
+    "zPosition": 1.6,
+    "viewNumber": 6
+  },
+  {
+    "name": "Peri-membranous Ventricular Septal Defect",
+    "xPosition": -55,
+    "yPosition": 5,
+    "zPosition": 1.5,
+    "viewNumber": 7
+  },
+  {
+    "name": "Peri-membranous Ventricular Septal Defect",
+    "xPosition": -55,
+    "yPosition": 5,
+    "zPosition": 1.5,
+    "viewNumber": 8
+  },
+  {
+    "name": "Small Calibre Aorta and Coarctation",
+    "xPosition": 37,
+    "yPosition": 63,
+    "zPosition": 2.6,
+    "viewNumber": 9
+  },
+  {
+    "name": "Left Ventricular Outflow Tract",
+    "xPosition": 20,
+    "yPosition": 35,
+    "zPosition": 1.5,
+    "viewNumber": 9
+  }
+]

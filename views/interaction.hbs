@@ -517,7 +517,7 @@
 
     //dots for the label positions
     var dotGeometry = new THREE.Geometry();
-    var dotMaterial = new THREE.PointsMaterial( { size: 5, sizeAttenuation: false } );
+    var dotMaterial = new THREE.PointsMaterial( { color: 0xFF0000, size: 5, sizeAttenuation: false } );
     var labelDot = new THREE.Points( dotGeometry, dotMaterial );
 
 
@@ -708,6 +708,7 @@
     var stepDirection;
     //Changing the model views on click with tween.js
     function changeView(step, name) {
+                    console.log(step);
         window.tweenView = tweenView;
         var allLabels = document.querySelectorAll('#labels div');
 
@@ -905,20 +906,35 @@
             //number of labels of the current viewNumber
             const {viewNumber} = heartLabel;
             viewNumberLength = heartLabels.filter(function(d) { return d.viewNumber === step; }).length;
-            
+
             //if the step number is greater than 1
             if (step >= 1) {
                 previousViewNumberLength = heartLabels.filter(function(d) { return d.viewNumber === (step - 1); }).length;
                 localStorage.setItem('previousViewNumber', previousViewNumberLength);
-            } else {
+            } else if (step == 0) {
                 localStorage.setItem('previousViewNumber', 0);
-            }
+            } 
         }
 
-        if (stepDirection == true) {
-            labelBaseNumber += previousViewNumberLength;
-        } else if (stepDirection == false) {
-            labelBaseNumber -= viewNumberLength
+        switch("{{name}}") {
+            case "Lucy":
+            if ((stepDirection == true) && (step <= 9)) {
+                labelBaseNumber += previousViewNumberLength;
+            }   else if ((stepDirection == false) && (step < 9)) {
+                labelBaseNumber -= viewNumberLength;
+            }   else if ((step == 9) && (stepDirection == false)) {
+                //do nothing
+            }
+                break;
+            default:
+            if ((stepDirection == true) && (step <= 8)) {
+                labelBaseNumber += previousViewNumberLength;
+            }   else if ((stepDirection == false) && (step < 8)) {
+                labelBaseNumber -= viewNumberLength;
+            }   else if ((step == 8) && (stepDirection == false)) {
+                //do nothing
+            }
+                break;
         }
 
         for (var h = labelBaseNumber; h < labelBaseNumber + viewNumberLength; h ++) {
@@ -1201,6 +1217,7 @@
                     previousStep.style.display = "none";
                 } else if (currentStep > 9) {
                     currentStep -=1;
+                    console.log('neigh')
                 }
                 break;
         }
