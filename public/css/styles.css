@@ -110,11 +110,11 @@ button:hover {
     border-top: 10px solid var(--module-colour);
     background-color: var(--module-colour);
     width: 67%;
-    height: 69px;
+    height: 42px;
     position: relative;
     justify-content: center;
     align-items: center;
-    font-size: 20px;
+    font-size: 12px;
     font-style: italic;
     color: white;
 }
@@ -126,34 +126,37 @@ button:hover {
 /* ////////////////////// PROGRESS BUTTONS ////////////// */
 #previous {
     width: 33%;
-    border-top: 10px solid #e0e0e0;
+    border-top: 5px solid #e0e0e0;
     background-color: #e7e7e7;
     justify-content: center;
+    height: 42px;
 }
 
 #next {
     position: absolute;
     right: 0;
     width: 67%;
-    border-top: 10px solid var(--module-colour);
+    border-top: 5px solid var(--module-colour);
     background-color: white;
     justify-content: center;
-    height: 68px;
+    height: 42px;
 }
 
 #next svg {
     stroke: var(--module-colour);
+    height: 20px;
 }
 
 #previous svg {
     stroke: #bdbdbd;
+    height: 20px;
 }
 
 .nav-button svg {
     stroke-width: 5;
     stroke-linecap: round;
     stroke-linejoin: round;
-    padding: 1em 0;
+    padding: 0.6em 0 1em 0;
 }
 
 #buttons-container {
@@ -164,8 +167,8 @@ button:hover {
     
     margin-left: -2em;
     /* max-width: 400px; */
-    width: 50vw;
-    height: 68px;
+    width: 100vw;
+    height: 42px;
 }
 
 #interaction #buttons-container {
@@ -176,27 +179,29 @@ button:hover {
 /* HEADER */
 #oe header, #interaction header, #explanation header {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     grid-area: MenuButton;
     z-index: 3;
     filter: drop-shadow(2px 2px 8px #cccccc);
 }
 
 #oe #returnToMenu, #interaction #returnToMenu, #explanation #returnToMenu {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 #returnToMenu {
-    margin: auto;
+    /* margin: auto; */
+    margin-left: 2em;
 }
 
 /* BODY */
 
 #oe, #explanation {
     display: grid;
-    grid-template-rows: 50px 1fr;
-    grid-template-columns: 50vw 50vw;
-    grid-template-areas: 'MenuButton Nav' 'Information Image'
+    grid-template-rows: 76px 96px 1fr;
+    /* ////////////////////////////// fix this bc not adding to 100 /////////////////// */
+    grid-template-columns: 59vw 40vw;
+    grid-template-areas: 'MenuButton Nav' 'ProfileImage ProfileImage' 'Information Image'
 }
 
 #interaction{
@@ -512,13 +517,14 @@ section#main-workshop-menu-grid {
 #module-name {
     /* padding-left: 1em; */
 
-    margin: 2em 0 1em 0;
+    margin: 2em 0 2em 0;
     text-transform: uppercase;
 
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: auto 1fr;
-    grid-template-areas: 'Profile Name' 'Profile Stage'
+    grid-template-areas: 'Profile Name' 'Profile Stage';
+    border-left: 3px solid #e7e7e7;
 }
 
 #module-name h1 {
@@ -545,6 +551,14 @@ section#main-workshop-menu-grid {
     display: flex;
     align-self: flex-start;
     padding-left: 20px;
+}
+
+.profile-banner {
+    grid-area: ProfileImage;
+    object-fit: cover;
+    object-position: 0 -150px;
+    width: 100vw;
+    height: 96px;
 }
 
 /* //////////////////////// SCROLLBAR /////////////////////////// */
@@ -574,7 +588,7 @@ section#main-workshop-menu-grid {
     display: flex;
     flex-direction: column;
     /* margin-left: 2.5em; */
-    margin-top: 1em;
+    /* margin-top: 1em; */
 }
 
 .content ul, .content p, .content ol {
@@ -591,13 +605,14 @@ section#main-workshop-menu-grid {
     /* max-width: 400px; */
     grid-area: Information;
     /* height: calc(100vh - 68px - 50px); */
-    min-height: calc(100vh - 68px - 50px);
-    max-height: calc(100vh - 50px);
+    /* min-height: calc(100vh - 68px - 50px); */
+    min-height: calc(100vh - 76px - 96px - 68px);
+    max-height: calc(100vh - 76px - 96px - 68px);
     overflow: hidden;
     padding: 0 2em;
     z-index: 2;
     background-color: white;
-    filter: drop-shadow(2px 2px 8px #cccccc);
+    /* filter: drop-shadow(2px 2px 8px #cccccc); */
     transition-duration: 0.2s;
 
 }
@@ -617,7 +632,8 @@ section#main-workshop-menu-grid {
 
 .text-content-wrapper {
     overflow-y: auto;
-    height: 22em;
+    /* height: 22em; */
+    height: 500px;
 }
 
 
@@ -643,14 +659,15 @@ div.differential-highlight h4 {
 #image-half {
     /* max-width: 60vw; */
     /* min-height: calc(100vh - 50px); */
-    max-height: calc(100vh - 50px);
-    width: 100%;
+    max-height: calc(100vh - 76px - 96px);
+    width: 40vw;
     grid-area: Image;
     display: flex;
     flex-direction: column;
     transition-duration: 0.5s;
     position: relative;
     overflow: hidden;
+    background-color: white;
 }
 
 figure {
@@ -670,7 +687,7 @@ figcaption {
 
 .story-illustration {
     width: 80%;
-    max-height: 80vh;
+    max-height: 60vh;
     display: flex;
     margin: auto auto auto auto;
 }
@@ -749,8 +766,8 @@ figcaption {
 }
 
 #navigation-tab, #oe header, #interaction header, #explanation header {
-    background-color: #e7e7e7;
-    border-bottom: 5px solid var(--module-colour);
+    /* background-color: #e7e7e7; */
+    /* border-bottom: 5px solid var(--module-colour); */
 }
 
 #navigation-tab a {
