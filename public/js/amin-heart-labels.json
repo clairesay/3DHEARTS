@@ -1,72 +1,72 @@
 [
   {
     "name": "Left Atrial Appendage",
-    "xPosition": -20,
-    "yPosition": 70,
+    "xPosition": -30,
+    "yPosition": 60,
     "zPosition": -1.5,
     "viewNumber": 1
   },
   {
     "name": "Right Atrial Appendage",
-    "xPosition": -40,
-    "yPosition": -50,
+    "xPosition": 30,
+    "yPosition": -40,
     "zPosition": 2.5,
     "viewNumber": 1
   },
   {
     "name": "Right Atrium",
-    "xPosition": -50,
-    "yPosition": -50,
-    "zPosition": 1.7,
+    "xPosition": 30,
+    "yPosition": -40,
+    "zPosition": 2.5,
     "viewNumber": 2
   },
   {
     "name": "Right Ventricular Outflow Tract",
-    "xPosition": -45,
-    "yPosition": 90,
-    "zPosition": 2,
+    "xPosition": -10,
+    "yPosition": 77,
+    "zPosition": 1.6,
     "viewNumber": 3
   },
   {
     "name": "Left Atrium",
-    "xPosition": -20,
-    "yPosition": 70,
+    "xPosition": -30,
+    "yPosition": 60,
     "zPosition": -1.5,
     "viewNumber": 4
   },
   {
     "name": "Left Ventricle",
-    "xPosition": -30,
-    "yPosition": -150,
-    "zPosition": 2.4,
+    "xPosition": -60,
+    "yPosition": -160,
+    "zPosition": 2.2,
     "viewNumber": 4
   },
   {
-    "name": "Ventricular Outflow Track",
-    "xPosition": -20,
-    "yPosition": -165,
-    "zPosition": 2.2,
+    "name": "Left Ventricular Outflow Track",
+    "xPosition": -30,
+    "yPosition": -148,
+    "zPosition": 1.6,
     "viewNumber": 5
   },
   {
-    "name": "Patent Foramen Ovale",
-    "xPosition": -20,
-    "yPosition": -165,
-    "zPosition": 5,
+    "name": "Large Secundum Atrial Septal Defect",
+    "xPosition": 40,
+    "yPosition": -35,
+    "zPosition": 1.8,
     "viewNumber": 6
   },
   {
-    "name": "Sub-pulmonary VSD",
-    "xPosition": -48,
-    "yPosition": 110,
-    "zPosition": 1.5,
+    "name": "Mid-muscular Ventricular Septal Defect",
+    "xPosition": -60,
+    "yPosition": -160,
+    "zPosition": 2.2,
     "viewNumber": 7
   },
   {
-    "name": "Ascending Aorta",
-    "xPosition": 20,
-    "yPosition": 40,
-    "zPosition": 1.5,
+    "name": "Patent Ductus Arteriosus",
+    "xPosition": 30,
+    "yPosition": 140,
+    "zPosition": 2.8,
     "viewNumber": 8
   }
 ]
