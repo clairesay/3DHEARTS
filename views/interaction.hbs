@@ -534,6 +534,8 @@
 
         //code from three.js fundamentals - plotting labels as though they were on a sphere
         //uses longitude and latitude
+        const lonFudge = Math.PI * 1.5;
+        const latFudge = Math.PI;
         //x
         const latHelper = new THREE.Object3D();
 
@@ -541,18 +543,25 @@
         const lonHelper = new THREE.Object3D();
         lonHelper.add(latHelper);
 
+        //const depthHelper = new THREE.Object3D();
+        //latHelper.add(depthHelper);
+
         //combining x and y
         const positionHelper = new THREE.Object3D();
+        positionHelper.position.z = 3;
         latHelper.add(positionHelper);
+
 
         //label parent element
         const labelParentElem = document.querySelector('#labels');
         for (const heartLabel of heartLabels) {
             const {xPosition, yPosition, zPosition, name} = heartLabel;
             // adjust the helpers to point to the latitude and longitude
-            latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition);
-            lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition);     
-            positionHelper.position.z = zPosition;
+            latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition) + latFudge;
+            lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition) + lonFudge;    
+            //depthHelper.position.z = 5; 
+            //console.log(depthHelper.position.z)
+            //positionHelper.position.z = zPosition;
             //console.log(positionHelper.position.z);
 
             // get the position of the lat/lon
@@ -560,7 +569,7 @@
             const position = new THREE.Vector3();
             positionHelper.getWorldPosition(position);
             heartLabel.position = position;
-
+            console.log(heartLabel.position)
             // add label for each object
             const elem = document.createElement('div');
             elem.textContent = name;
@@ -639,6 +648,23 @@
         }
     }
 
+var curve = new THREE.CubicBezierCurve3(
+	new THREE.Vector3( 294, 244, 2.1 ),
+	new THREE.Vector3( -5, 15, 0 ),
+	new THREE.Vector3( 20, 15, 0 ),
+	new THREE.Vector3( 10, 0, 0 )
+);
+
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+
+// Create the final object to add to the scene
+var curveObject = new THREE.Line( geometry, material );
+
+    scene.add( curveObject );
+
     //tweening function for smoooth movement
     function tweenView(positionX, positionY, positionZ, rotationX, rotationY, rotationZ) {
         var from = {
@@ -679,8 +705,8 @@
         renderer.render(scene, camera);
 
         // log camera position & rotation to for setting them in changeview
-        console.log(camera.position)
-        console.log(camera.rotation)
+        //console.log(camera.position)
+        //console.log(camera.rotation)
     };
 
     // resize window on event onWindowResize
@@ -705,51 +731,51 @@
         var viewNumberLength;
         switch(name) {
             case "Ben":
-        switch (step) {
-            case 1:
-                //tweenView(7.96, 5.83, 17.4, -0.32, 0.41, 0.13);
-                tweenView(5.85, 4.28, 12.79, -0.32, 0.41, 0.13);
-                baseNumber = 0;
-                break;
-            case 2:
-                //tweenView(17.26, 4.45, 9.07, -0.46, 1.04, 0.4);
-                tweenView(12.05, 3.11, 6.33, -0.46, 1.04, 0.40);
-                baseNumber = 2
-                break;
-            case 3:
-                //tweenView(1.84, -17.93, -8.67, 2.02, 0.09, -2.95);
-                tweenView(1.42, -13.87, -6.7, 2.02, 0.09, -2.95);
-                baseNumber = 3
-                break;
-            case 4:
-                //tweenView(0.7, 5.24, 19.29, -0.27, 0.04, 0.01);
-                tweenView(0.51, 3.85, 14.1, -0.27, 0.04, 0.01);
-                baseNumber = 6;
-                break;
-            case 5:
-                //tweenView(-6.19, -14, 12.87, 0.83, -0.31, 0.32);
-                tweenView(-4.55, -10.29, 9.46, 0.83, -0.31, 0.32);
-                baseNumber = 6;
-                break;
-            case 6:
-                //tweenView(17.21, -10.12, 1.24, 1.45, 1.04, -1.43);
-                //tweenView(11.19, -13.67, 9.38, 0.97, 0.60, -0.68);
-                tweenView(8.66, -10.58, 7.26, 0.97, 0.59, -0.68);
-                baseNumber = 6;
-                break;
-            case 7:
-                //tweenView(0.37, -11.82,-16.13, 2.51, 0.02, -3.13);
-                tweenView(0.29, -9.15, -12.48, 2.51, 0.02, -3.13);
-                baseNumber = 6;
-                break;
-            case 8:
-                //tweenView(-0.4, -0.26, -19.82, 3.01, -0.02, 3.14);
-                //tweenView(6.01, 5.41, -17.01, -2.83, 0.32, 3.04);
-                tweenView(4.65, 4.19, -13.16, -2.83, 0.32, 3.04);
-                baseNumber = 6;
-                break;
-            default:
-                break;
+                switch (step) {
+                    case 1:
+                        //tweenView(7.96, 5.83, 17.4, -0.32, 0.41, 0.13);
+                        tweenView(5.85, 4.28, 12.79, -0.32, 0.41, 0.13);
+                        baseNumber = 0;
+                        break;
+                    case 2:
+                        //tweenView(17.26, 4.45, 9.07, -0.46, 1.04, 0.4);
+                        tweenView(12.05, 3.11, 6.33, -0.46, 1.04, 0.40);
+                        baseNumber = 2
+                        break;
+                    case 3:
+                        //tweenView(1.84, -17.93, -8.67, 2.02, 0.09, -2.95);
+                        tweenView(1.42, -13.87, -6.7, 2.02, 0.09, -2.95);
+                        baseNumber = 3
+                        break;
+                    case 4:
+                        //tweenView(0.7, 5.24, 19.29, -0.27, 0.04, 0.01);
+                        tweenView(0.51, 3.85, 14.1, -0.27, 0.04, 0.01);
+                        baseNumber = 6;
+                        break;
+                    case 5:
+                        //tweenView(-6.19, -14, 12.87, 0.83, -0.31, 0.32);
+                        tweenView(-4.55, -10.29, 9.46, 0.83, -0.31, 0.32);
+                        baseNumber = 6;
+                        break;
+                    case 6:
+                        //tweenView(17.21, -10.12, 1.24, 1.45, 1.04, -1.43);
+                        //tweenView(11.19, -13.67, 9.38, 0.97, 0.60, -0.68);
+                        tweenView(8.66, -10.58, 7.26, 0.97, 0.59, -0.68);
+                        //baseNumber = 6;
+                        break;
+                    case 7:
+                        //tweenView(0.37, -11.82,-16.13, 2.51, 0.02, -3.13);
+                        tweenView(0.29, -9.15, -12.48, 2.51, 0.02, -3.13);
+                        //baseNumber = 6;
+                        break;
+                    case 8:
+                        //tweenView(-0.4, -0.26, -19.82, 3.01, -0.02, 3.14);
+                        //tweenView(6.01, 5.41, -17.01, -2.83, 0.32, 3.04);
+                        tweenView(4.65, 4.19, -13.16, -2.83, 0.32, 3.04);
+                        //baseNumber = 6;
+                        break;
+                    default:
+                        break;
                 }
                 break;
             case "Ayanthi":
@@ -856,7 +882,7 @@
         for (const heartLabel of heartLabels) {
             for ( var g = 0; g < allLabels.length; g++ ) {
                 allLabels[g].style.visibility = "hidden";
-            }
+           }
             const {viewNumber} = heartLabel;
             viewNumberLength = heartLabels.filter(function(d) { return d.viewNumber === step; }).length;
             for (var h = baseNumber; h < baseNumber + viewNumberLength; h ++) {
@@ -867,20 +893,20 @@
     }
 
     /////////////////////////////SHOW LABELS///////////////////////////
-    window.showLabel = showLabel;
-    var labelTicker = false;
-    function showLabel() {
-        const labelContainer = document.getElementById('labels');
-        var slider = document.querySelectorAll('input')[0]
-        if (slider.checked == true) {
-            labelDot.visible = true;
-            labelContainer.style.display = "block";
-        } else {
-            labelDot.visible = false;
-            labelContainer.style.display = "none";
-            labelTicker = true;
-        }
-    }
+    //window.showLabel = showLabel;
+    //var labelTicker = false;
+    //function showLabel() {
+    //    const labelContainer = document.getElementById('labels');
+    //    var slider = document.querySelectorAll('input')[0]
+    //    if (slider.checked == true) {
+    //       labelDot.visible = true;
+    //        labelContainer.style.display = "block";
+    //    } else {
+    //        labelDot.visible = false;
+    //        labelContainer.style.display = "none";
+    //        labelTicker = true;
+    //    }
+    //}
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

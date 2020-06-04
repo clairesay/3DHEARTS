@@ -1145,7 +1145,7 @@ label[for="off"] {
     display: block;
     /* background-color: #595959 */
     background-image: linear-gradient(to right, white, #595959);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #labels {
@@ -1158,15 +1158,18 @@ label[for="off"] {
     /* opacity:0.5; */
     text-align: center;
     max-height: calc(100vh - 50px);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 #labels div {
+    position: absolute;
     background-color: #595959;
     color: white;
     padding: 0.5em;
     border-radius: 0.25em;
-    visibility: hidden;
+    width: auto;
+    display: inline-block;
+    /* visibility: hidden; */
 }
 
 /* ///////////////////// transitionS //////////////////////////// */

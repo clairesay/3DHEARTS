@@ -1,0 +1,15 @@
+,
+  {
+    "name": "Right Atrium",
+    "xPosition": 30,
+    "yPosition": 32,
+    "zPosition": 2.1,
+    "viewNumber": 2
+  },
+  {
+    "name": "Right Ventricular Outflow Tract",
+    "xPosition": 60,
+    "yPosition": 180,
+    "zPosition": 2.5,
+    "viewNumber": 3
+  }
