@@ -1166,10 +1166,23 @@ label[for="off"] {
     background-color: #595959;
     color: white;
     padding: 0.5em;
-    border-radius: 0.25em;
-    width: auto;
+    border-radius: 2px;
+    /* width: auto; */
     display: inline-block;
+    white-space: nowrap;
     /* visibility: hidden; */
+    margin-top: 2em;
+}
+
+#labels div::after {
+    content: " ";
+    position: absolute;
+    bottom: 100%;  /* At the top of the tooltip */
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #595959 transparent;
 }
 
 /* ///////////////////// transitionS //////////////////////////// */

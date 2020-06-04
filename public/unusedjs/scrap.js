@@ -811,3 +811,28 @@ camera.add(dirLight);
     "zPosition": 2.1,
     "viewNumber": 5
   }
+
+
+  ////////////////////////////////////////////// line ////////////////////////////////////
+  var curve = new THREE.CubicBezierCurve3(
+	new THREE.Vector3( 294, 244, 2.1 ),
+	new THREE.Vector3( -5, 15, 0 ),
+	new THREE.Vector3( 20, 15, 0 ),
+	new THREE.Vector3( 10, 0, 0 )
+);
+
+var points = curve.getPoints( 50 );
+var geometry = new THREE.BufferGeometry().setFromPoints( points );
+
+var material = new THREE.LineBasicMaterial( { color : 0xff0000 } );
+
+// Create the final object to add to the scene
+var curveObject = new THREE.Line( geometry, material );
+
+    scene.add( curveObject );
+
+    ///////////////////////////
+
+
+
+    
