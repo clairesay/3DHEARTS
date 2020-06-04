@@ -1170,7 +1170,7 @@ label[for="off"] {
     /* width: auto; */
     display: inline-block;
     white-space: nowrap;
-    /* visibility: hidden; */
+    visibility: hidden;
     margin-top: 2em;
 }
 
