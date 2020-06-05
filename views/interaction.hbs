@@ -603,8 +603,7 @@
             //const {position, elem} = heartLabel;
 
             //creating a dot on the model for each label
-            dotGeometry.vertices.push(position);
-            scene.add( labelDot );
+
 
             // Orient the position based on the camera's orientation.
             // Since the sphere is at the origin and the sphere is a unit sphere
@@ -636,8 +635,24 @@
             
 
 
+            //console.log(heartLabels[2].position)
+            var newVector = new THREE.Vector3();
+            var raycaster = new THREE.Raycaster();
+            raycaster.set( camera.getWorldPosition(cameraPosition), camera.getWorldDirection( newVector ) )
+            for (var p = 0; p < heartLabels.length; p ++) {
+            var intersects = raycaster.intersectObject( heartLabels[p].labelDot )
 
-
+                if ( intersects.length > 0 ) {
+                    heartLabels[p].elem.style.display = '';
+                    heartLabels[p].dotMaterial.color.set('#FFF000')
+                    //labelDot.visible = true;
+                    continue;
+                } 
+                    heartLabels[p].elem.style.display = 'none';
+                    //labelDot.visible = false;
+            }
+            dotGeometry.vertices.push(position);
+            scene.add( labelDot );
 
             // get the normalized screen coordinate of that position
             // x and y will be in the -1 to +1 range with x = -1 being
