@@ -504,13 +504,17 @@ section#main-workshop-menu-grid {
 
 /* ////////////////////////// HEADER //////////////////// */
 #module-name {
-    margin: 2em 0 2em 0;
+    margin-top: 2em;
+    /* margin-bottom: 2em; */
+    padding-bottom: 1.5em;
     text-transform: uppercase;
 
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: auto 1fr;
-    grid-template-areas: 'Profile Name' 'Profile Stage'
+    grid-template-areas: 'Profile Name' 'Profile Stage';
+    position: relative;
+    box-shadow: 0 4px 4px -4px rgba(0,0,0,0);
 }
 
 #module-name h1 {
@@ -522,7 +526,6 @@ section#main-workshop-menu-grid {
     padding-left: 20px;
     padding-right: 40px;
 }
-
 
 #module-name .profile {
     margin: auto;
@@ -604,9 +607,11 @@ section#main-workshop-menu-grid {
 
 .text-content-wrapper {
     overflow-y: auto;
-    height: 22em;
+    padding-right: 1em;
+    max-height: calc(100vh - 50px - 68px - 125.2px - 5em);
+    position: relative;
+    margin-bottom: 90px;
 }
-
 
 div.differential-highlight h4 {
     font-style: italic;
@@ -674,7 +679,7 @@ figcaption {
 }
 
 .module-slide h1 {
-    margin: 0 0 0.5em 0;
+    margin: 0.5em 0 0.5em 0;
 }
 
 

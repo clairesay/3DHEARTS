@@ -348,5 +348,16 @@
         }
     }
 
+    ////////////////////// FIX THE SCROLL LEVEL /////////////////
+    var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
+    var moduleName = document.getElementById('module-name');
+    textContentWrapper.addEventListener('scroll', function banana() {
+        if ((textContentWrapper.scrollHeight > textContentWrapper.clientHeight) && (textContentWrapper.scrollTop > 5)) {
+            moduleName.style.boxShadow = "0 4px 4px -4px grey"
+        } else {
+            moduleName.style.boxShadow = "none";
+        }
+    });
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>

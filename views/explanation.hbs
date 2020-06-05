@@ -32,7 +32,7 @@
         </div>
 
         <section id="buttons-container">
-            <button id="previous" class="nav-button" onclick="nextSlide(-1)">
+            <button id="previous" class="nav-button" onclick="nextSlide(-1);">
                 <svg width="33" height="29" viewBox="0 0 33 29" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M29.5305 26.2037L18 14.6731L29.5305 3.14258"/>
                     <path d="M14.5305 26.2037L2.99997 14.6731L14.5305 3.14258"/>
@@ -228,6 +228,18 @@
             currentPoint = 0;
         }
     }
+
+    ////////////////////// FIX THE SCROLL LEVEL /////////////////
+    var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
+    var moduleName = document.getElementById('module-name');
+    textContentWrapper.addEventListener('scroll', function banana() {
+        if ((textContentWrapper.scrollHeight > textContentWrapper.clientHeight) && (textContentWrapper.scrollTop > 5)) {
+            moduleName.style.boxShadow = "0 4px 4px -4px grey"
+        } else {
+            moduleName.style.boxShadow = "none";
+        }
+    });
+
 
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
