@@ -541,6 +541,10 @@ section#main-workshop-menu-grid {
     padding-left: 20px;
 }
 
+#banner-image {
+    display: none;
+}
+
 /* //////////////////////// SCROLLBAR /////////////////////////// */
 ::-webkit-scrollbar {
     width: 10px;
@@ -944,6 +948,10 @@ label {
     padding: 0;
 }
 
+#min-chest-xr {
+    display: none;
+}
+
 #case-content-button {
     display: flex;
     margin: auto;
@@ -965,7 +973,8 @@ label {
     position: absolute;
     visibility: hidden;
     top: 12vh;
-    left: 34.5vw;
+    left:34.5vw;
+    /* left: calc(40vw - 4em); */
     z-index: 3;
     transition-duration: 0s;
     filter: none;
@@ -988,6 +997,7 @@ label {
 #collapse-button:before{
     position: absolute;
     content: "";
+    min-width: 4em;
     width: 5.5vw;
     height: calc(100% + 10px);
     left: 0;
@@ -1169,6 +1179,158 @@ label {
     /* STYLES GO HERE */ 
 }
 
-@media only screen and (max-width: 984px) {
+@media only screen and (max-width: 1024px) {
+    
+    /* module descriptions */
+    #interaction .module-descriptions {
+        min-width: 12vw;
+        margin-left: -3vw;
+    }
+    
+    /* module name */
+    
+    #interaction #module-name {
+        margin-top: 4em;
+    }
 
+    #interaction #module-name h1, #interaction #module-name h3 {
+        padding-left: 0;
+    }
+
+    #interaction #module-name .profile {
+        margin: 0 auto 0 0;
+        display: none;
+    }
+
+}
+
+@media only screen and (max-width: 824px) {
+
+    /* Buttons */
+
+    #buttons-container {
+        width: 100vw;
+    }
+
+    /* moduel descriptions */
+
+    .module-descriptions {
+        min-width: 21vw;
+        margin-left: -5.25vw;
+    }
+
+    /* Index */
+
+    #index header {
+        margin: 0 auto;
+        align-items: flex-end;
+    }
+
+    body#index {
+        grid-template-rows: 150px auto;
+    }
+
+    #index #returnToMenu > img {
+        width: 72px;
+        margin-left: 0;
+    }
+
+    #menu-title-div h1 {
+        font-size: 24px;
+    }
+
+    #case-doctor {
+        display: none;
+    }
+
+    #index-menu {
+        grid-template-rows: 15vh 15vh;
+    }
+
+    #index-menu article:nth-of-type(2n), #index-menu article:nth-of-type(2n + 1) {
+        grid-template-rows: 5fr 4fr;
+    }
+
+    #index-menu article a, #index-menu article h4 {
+        font-size: 12px;
+    }
+
+    /* oe and explanation */
+    #oe, #explanation {
+        grid-template-rows: 50px 76px 1fr;
+        grid-template-columns: 25vw 25vw 25vw 25vw;
+        grid-template-areas:
+            'MenuButton Nav Nav Nav'
+            'Banner Banner Banner Banner'
+            'Information Information Information Information';
+    }
+
+    #content-half {
+        filter: none;
+    }
+
+    #oe header, #interaction header, #explanation header {
+        filter: none;
+    }
+
+    /* Moduel NAme */
+    #module-name {
+        padding-bottom: 1em;
+        margin-top: 2em;
+        grid-template-rows: auto auto;
+        /* grid-template-columns: auto auto; */
+        grid-template-areas:
+            'Name Profile'
+            'Stage Profile';
+    }
+
+    #interaction #module-name {
+        margin-top: 4em;
+    }
+
+    #module-name h1 {
+        padding-right: 1em;
+        padding-left: 0;
+    }
+
+    #module-name h3 {
+        padding-left: 0;
+    }
+
+    #module-name .profile {
+        margin: 0 auto 0 0;
+        display: none;
+    }
+
+    #banner-image {
+        position: absolute;
+        width: 100vw;
+        display: flex;
+        grid-area: Banner;
+        object-fit: contain;
+        z-index: -1;
+    }
+
+    #image-half {
+        background-color: white;
+    }
+
+    /* on examination */
+    #min-chest-xr {
+        display: block;
+        max-height: calc(100vh - 76px - 50px - 68px - 150px);
+        max-width: 87%;
+        width: auto;
+        height: auto;
+        margin: auto;
+    }
+
+    #content-half img {
+        height: auto;
+    }
+
+    figcaption {
+        margin-left: 4em;
+    }
+    
 }

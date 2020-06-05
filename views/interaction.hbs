@@ -308,6 +308,7 @@
         //selecting all variables involved
         var contentHalf = document.getElementById('content-half');
         var collapseButton = document.getElementById('collapse-button');
+        var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
         var caseContentButton = document.getElementById('case-content-button');
         var c = document.getElementById('c');
         var int = document.getElementById('interaction')
@@ -320,8 +321,10 @@
         //if collapsed
         if (collapseTicker == true) {
             contentHalf.style.direction = "rtl"
-            collapseButton.style.transform = "translateX(-35vw)"
+            //collapseButton.style.transform = "translateX(-35vw)"
+            collapseButton.style.left = "0"
             collapseButtonArrows.style.transform = "rotateZ(180deg)"
+            textContentWrapper.style.overflow = "hidden";
             caseContentButton.style.transform = "translateX(-35vw)"
             int.style.gridTemplateColumns = "5vw 35vw 60vw"
             int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
@@ -334,8 +337,10 @@
         } else {
             contentHalf.style.transform = "translateX(0)"
             contentHalf.style.direction = "ltr"
-            collapseButton.style.transform = "translateX(0)"
+            //collapseButton.style.transform = "translateX(0)"
+            collapseButton.style.left = "34.5vw"
             collapseButtonArrows.style.transform = "rotateZ(0deg)"
+            textContentWrapper.style.overflow = "auto";
             caseContentButton.style.transform = "translateX(0)"
             int.style.gridTemplateColumns = "40vw 0vw 60vw"
             int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
