@@ -870,4 +870,43 @@ var curveObject = new THREE.Line( geometry, material );
                         //}
             
             
-//////////////////////////
+////////////////////////// another failed raycaster
+
+            //console.log(heartLabels[2].position)
+            var newVector = new THREE.Vector3();
+            var raycaster = new THREE.Raycaster();
+            raycaster.set( camera.getWorldPosition(cameraPosition), camera.getWorldDirection( newVector ) )
+            for (var p = 0; p < heartLabels.length; p ++) {
+            var intersects = raycaster.intersectObject( heartLabels[p].labelDot )
+
+                if ( intersects.length > 0 ) {
+                    heartLabels[p].elem.style.display = '';
+                    heartLabels[p].dotMaterial.color.set('#FFF000')
+                    //labelDot.visible = true;
+                    continue;
+                } 
+                    heartLabels[p].elem.style.display = 'none';
+                    //labelDot.visible = false;
+            }
+
+
+            //////////////////
+
+            /////extra label stuff
+
+            for (var b = labelBaseNumber; b < labelBaseNumber + viewNumberLength; b ++) {
+                if (b !== h) {
+                    heartLabels[b].labelDot.visible = false;
+                } else if (b == h ) {
+                    heartLabels[b].labelDot.visible = true;
+                }
+
+                }
+
+                for (const heartLabel of heartLabels) {
+                    const {labelDot} = heartLabel;
+                    heartLabels[h].labelDot.visible = true;
+    
+    
+                    //labelDot[!h].visible = false;
+                }
