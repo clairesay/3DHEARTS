@@ -60,7 +60,19 @@
 
 
             <section class="content module-slide">
-                    <h1 id="chest-XR-slide" class="case-content">This is {{name}}'s chest x-ray.</h1>
+                {{#if (nameCheck name "Ben")}}
+                <h1 id="chest-XR-slide" class="case-content">This is {{name}}'s chest x-ray.</h1>
+                {{/if}}
+                {{#if (nameCheck name "Ayanthi")}}
+                <h1 id="chest-XR-slide" class="case-content">There is a radiology practice…</h1>
+                {{/if}}
+                {{#if (nameCheck name "Amin")}}
+                <h1 id="chest-XR-slide" class="case-content">This is {{name}}'s chest x-ray.</h1>
+                {{/if}}
+                {{#if (nameCheck name "Lucy")}}
+                <h1 id="chest-XR-slide" class="case-content">You organize a mobile chest x-ray</h1>
+                {{/if}}
+
             </section>
 
             <section class="content module-slide">
