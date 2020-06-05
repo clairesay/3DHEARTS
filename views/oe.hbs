@@ -228,20 +228,12 @@
             document.getElementById('next-module').style.visibility = "hidden"
             document.getElementById('next-module').style.display = "none"
         }
-
-        //show this slide a.k.a current slide
         var thisSlide = document.getElementsByClassName('module-slide')[currentSlide];
         thisSlide.style.display = "flex";
         var caseContent = document.querySelectorAll('.case-content');
-        //if this slide contains a class called 'case-content' a.k.a a point in a slide
-        //for (var i = 0; i < caseContent.length; i++) {
-        //    if ((thisSlide.contains(caseContent[i])) && (true)) {
-        //        //change the next button to show the next point
-        //        document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
-        //    }
-        //}
     }
 
+//SETTING ILLUSTRATION ON RIGHT HAND SIDE BASED ON SLIDE PROGRESSION
     function showIllustration(slideNumber) {
         var switchIllustration = document.getElementsByClassName('story-illustration')[0];
         var attributeTextXR = document.getElementsByClassName('chest-xr-caption')[0];
@@ -260,6 +252,7 @@
                 attributeTextXR.innerHTML = "";
                 break;
             case 5 :
+            //if not lucy, display xray
                 if ("{{name}}" != "Lucy") {
                     switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
                     switch("{{name}}") {
@@ -279,6 +272,7 @@
                 }            
                 break;
             case 6 :
+            //if lucy, display xray
                 if ("{{name}}" != "Lucy") {
                     switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                     attributeTextXR.innerHTML = "";
@@ -286,8 +280,6 @@
                     switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
                     attributeTextXR.innerHTML = "Case courtesy of Dr Angela Byrne, Radiopaedia.org, rID: 7588"
                 }      
-  
-                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-chest-x-ray.svg');
                 break;
             case 7 :
                     if ("{{name}}" == "Lucy") {
@@ -296,8 +288,6 @@
                     }
                     attributeTextXR.innerHTML = "";
             case 8 :
-                //switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
-                //switchIllustration.setAttribute('src', 'images/illustrations/ben-chest-x-ray.svg');
                 break;
             default :
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');

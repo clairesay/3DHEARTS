@@ -301,23 +301,13 @@
 
 <script type="module">
 
-    //////////////////////////////////////// text search ///////////////////////////////////////////
-    //var els = document.querySelectorAll(".case-content");
-    //var searchValue = "trabeculated";
-
-    //for(var i = 0; i < els.length; i++){
-    //   if(els[i].innerHTML.indexOf(searchValue) > -1){
-    //    console.log('found');
-    //    alert('fund')
-    //    }
-    //}
-
+    //Collapsing the window in interaction
     window.collapseSection = collapseSection;
-        var collapseTicker = true;
+    var collapseTicker = true;
     function collapseSection() {
+        //selecting all variables involved
         var contentHalf = document.getElementById('content-half');
         var collapseButton = document.getElementById('collapse-button');
-
         var caseContentButton = document.getElementById('case-content-button');
         var c = document.getElementById('c');
         var int = document.getElementById('interaction')
@@ -327,20 +317,20 @@
         var header = document.getElementsByTagName('header')[0];
         var collapseButtonArrows = document.getElementById('collapse-button-arrows');
 
+        //if collapsed
         if (collapseTicker == true) {
             contentHalf.style.direction = "rtl"
-
             collapseButton.style.transform = "translateX(-35vw)"
             collapseButtonArrows.style.transform = "rotateZ(180deg)"
-
             caseContentButton.style.transform = "translateX(-35vw)"
             int.style.gridTemplateColumns = "5vw 35vw 60vw"
             int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
             buttonsContainer.style.marginRight = '-2em';
             buttonsContainer.style.marginLeft = '0';
             header.style.filter = "none";
-
             collapseTicker = false;
+
+        //if expanded
         } else {
             contentHalf.style.transform = "translateX(0)"
             contentHalf.style.direction = "ltr"
@@ -355,7 +345,6 @@
             header.style.filter = "drop-shadow(2px 2px 8px #cccccc)"
             collapseTicker = true;
         }
-
     }
 
     //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
@@ -390,60 +379,46 @@
     var testLabel, labelRenderer;
 
     ///////////////////////// SETTING UP THE SCENE /////////////////////////////   
-
-				var scene = new THREE.Scene();
-
-				//scene.background = new THREE.Color( 0xc4c4c4 );
-				//scene.fog = new THREE.Fog( 0xc4c4c4, 10, 50 );
-
-				var hemiLight = new THREE.HemisphereLight( 0xe7e7e7, 0x222222, 0.7 );
-				hemiLight.position.set( 0, 20, 0 );
-
-				var dirLight = new THREE.DirectionalLight( 0xe7e7e7, 0.5 );
-
-				dirLight.castShadow = true;
-				dirLight.shadow.camera.top = 2;
-				dirLight.shadow.camera.bottom = - 2;
-				dirLight.shadow.camera.left = - 2;
-				dirLight.shadow.camera.right = 2;
-				dirLight.shadow.camera.near = 0.1;
-				dirLight.shadow.camera.far = 40;
-
-				// ground
-
-				//var mesh = new THREE.Mesh( new THREE.PlaneBufferGeometry( 100, 100 ), new THREE.MeshPhongMaterial( { color: 0x777777, depthWrite: false } ) );
-				//mesh.rotation.x = - Math.PI / 2;
-                //mesh.position.y = -8;
-				//mesh.receiveShadow = true;
-				//scene.add( mesh );
-
     //establishing the scebe abd background color
-    //var scene = new THREE.Scene();
+    var scene = new THREE.Scene();
+
+    //lights
+    var hemiLight = new THREE.HemisphereLight( 0xe7e7e7, 0x222222, 0.7 );
+    hemiLight.position.set( 0, 20, 0 );
+
+    var dirLight = new THREE.DirectionalLight( 0xe7e7e7, 0.5 );
+
+    dirLight.castShadow = true;
+    dirLight.shadow.camera.top = 2;
+    dirLight.shadow.camera.bottom = - 2;
+    dirLight.shadow.camera.left = - 2;
+    dirLight.shadow.camera.right = 2;
+    dirLight.shadow.camera.near = 0.1;
+    dirLight.shadow.camera.far = 40;
+
+    //getting the right half of the canvas
     var imageHalf = document.getElementById('image-half')
-    //scene.background = new THREE.Color(0x222222);
-    var camera = new THREE.PerspectiveCamera(45, imageHalf.clientWidth / imageHalf.clientHeight, 1, 500);
     const canvas = document.querySelector('#c');
+
+    var camera = new THREE.PerspectiveCamera(45, imageHalf.clientWidth / imageHalf.clientHeight, 1, 500);
 
     //rendering the window and everything in it
     const renderer = new THREE.WebGLRenderer({
         canvas,
         alpha: true,
     });
-    //const renderer = new THREE.CanvasRenderer({ alpha: true });
+
     //Setting the position of the camera
     camera.position.x = 0;
     camera.position.y = 0;
     camera.position.z = 15;
 
-                camera.add(dirLight);
-                camera.add(hemiLight);
+    //adding lights to camera
+    camera.add(dirLight);
+    camera.add(hemiLight);
 
-
-    //Lights
-    //var light = new THREE.PointLight(0xfefefe, 1.1, 100);
-    //light.position.set(camera.position.x, camera.position.y, camera.position.z);
+    //adding camera to scene
     scene.add(camera);
-    //camera.add(light);
 
     //Adding Orbit Controls
     var controls = new OrbitControls(camera, canvas);
@@ -542,9 +517,7 @@
 
         //combining x and y
         const positionHelper = new THREE.Object3D();
-        //positionHelper.position.z = 3;
         depthHelper.add(positionHelper);
-
 
         //label parent element
         const labelParentElem = document.querySelector('#labels');
@@ -555,9 +528,6 @@
             latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition) + latFudge;
             lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition) + lonFudge;    
             depthHelper.position.z = zPosition; 
-            //console.log(depthHelper.position.z)
-            //positionHelper.position.z = zPosition;
-            //console.log(positionHelper.position.z);
 
             // get the position of the lat/lon
             positionHelper.updateWorldMatrix(true, false);
@@ -625,13 +595,11 @@
             // if the orientation is not facing us hide it.
             if (dot > minVisibleDot) {
             elem.style.display = 'none';
-            //labelDot.visible = false;
-            //labelDot.style.display = 'none';
             continue;
             }
             // restore the element to its default display style
             elem.style.display = '';
-            //labelDot.visible = true;
+
             dotGeometry.vertices.push(position);
             scene.add( labelDot );
             labelDot.visible = false;
@@ -716,16 +684,11 @@
         window.tweenView = tweenView;
         var allLabels = document.querySelectorAll('#labels div');
 
-        var posX, posY, posZ;
-        var rotX, rotY, rotZ;
-
         var baseNumber;
         var viewNumberLength = 0;
-        var secondViewNumberLength;
-        var gimble = 0;
+
         switch (step) {
         case 1:
-            //baseNumber = 0;
             switch (name){
             case 'Ben':
                 tweenView(5.85, 4.28, 12.79, -0.32, 0.41, 0.13);
@@ -745,7 +708,6 @@
             break;
 
         case 2:
-            //baseNumber = 2;
             switch (name){
             case 'Ben':
                 tweenView(12.05, 3.11, 6.33, -0.46, 1.04, 0.40);
@@ -765,7 +727,6 @@
             break;
 
         case 3:
-            //baseNumber = 3;
             switch (name){
             case 'Ben':
                 tweenView(1.42, -13.87, -6.7, 2.02, 0.09, -2.95);
@@ -785,7 +746,6 @@
             break;
 
         case 4:
-            //baseNumber = 4;
             switch (name){
             case 'Ben':
                 tweenView(0.51, 3.85, 14.1, -0.27, 0.04, 0.01);
@@ -805,7 +765,6 @@
             break;
 
         case 5:
-            //baseNumber = 6;
             switch (name){
             case 'Ben':
                 tweenView(-4.55, -10.29, 9.46, 0.83, -0.31, 0.32);
@@ -825,7 +784,6 @@
             break;
 
         case 6:
-            //baseNumber = 7;
             switch (name){
             case 'Ben':
                 tweenView(8.66, -10.58, 7.26, 0.97, 0.59, -0.68);
@@ -845,7 +803,6 @@
             break;
 
         case 7:
-            //baseNumber = 8;
             switch (name){
             case 'Ben':
                 tweenView(0.29, -9.15, -12.48, 2.51, 0.02, -3.13);
@@ -866,7 +823,6 @@
             break;
 
         case 8:
-            //baseNumber = 9;
             switch (name){
             case 'Ben':
                 tweenView(4.65, 4.19, -13.16, -2.83, 0.32, 3.04);
@@ -886,7 +842,6 @@
             break;
             
         case 9:
-            //baseNumber = 10;
             switch (name){
             case 'Lucy':
                 tweenView(9.055, -3.204, -11.519, 2.870, 0.648, -2.975);
@@ -920,7 +875,9 @@
             } 
         }
 
+        //ensuring correct number of labels are shown pending user clicks forward or backward
         switch("{{name}}") {
+            //if lucy, number of steps is 9
             case "Lucy":
             if ((stepDirection == true) && (step <= 9)) {
                 labelBaseNumber += previousViewNumberLength;
@@ -930,6 +887,7 @@
                 //do nothing
             }
                 break;
+            //if not lucy, number of steps is 8
             default:
             if ((stepDirection == true) && (step <= 8)) {
                 labelBaseNumber += previousViewNumberLength;
@@ -941,6 +899,7 @@
                 break;
         }
 
+        //display all the labels with viewNumber
         for (var h = labelBaseNumber; h < labelBaseNumber + viewNumberLength; h ++) {
             allLabels[h].style.visibility = "visible";
         }
@@ -1077,14 +1036,6 @@
         //show this slide a.k.a current slide
         var thisSlide = document.getElementsByClassName('module-slide')[currentSlide];
         thisSlide.style.display = "flex";
-        //var caseContent = document.querySelectorAll('.case-content');
-        //if this slide contains a class called 'case-content' a.k.a a point in a slide
-        //for (var i = 0; i < caseContent.length; i++) {
-        //    if ((thisSlide.contains(caseContent[i])) && (true)) {
-        //        //change the next button to show the next point
-        //        document.getElementById('next').setAttribute("onclick", "nextPoint(1);")
-        //    }
-        //}
 
         //instead if the current slide has steps i.e. the actual interaction stage
         var stepContent = document.querySelectorAll('.step');
