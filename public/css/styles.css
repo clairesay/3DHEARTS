@@ -717,6 +717,38 @@ figcaption {
     border-color: transparent transparent #595959 transparent;
 }
 
+
+.onhover-definitions {
+    position: fixed;
+    margin-top: 0.5vw;
+    text-align: left;
+    max-width: 30vw;
+    display: block;
+    visibility: hidden;
+    background-color: #595959;
+    color: white;
+    font-style: normal;
+    font-weight: 200;
+    font-size: 10;
+    opacity: 0;
+    padding: 0.5em;
+    transition-duration: 0.2s;
+    border-radius: 2px;
+
+    z-index: 5;
+}
+
+a.definition {
+    text-decoration: underline;
+    text-decoration-color: var(--module-colour);
+    color: var(--module-colour);
+}
+
+a:hover > strong.onhover-definitions {
+    opacity: 1;
+    visibility: visible;
+}
+
 #navigation-tab a:nth-child(n):hover > p.module-descriptions:nth-of-type(1) {
     opacity: 1;
     visibility: visible;
