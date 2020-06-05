@@ -515,12 +515,6 @@
         heartObj = scene.getObjectByName('heart', true);
     })
 
-    //dots for the label positions
-    var dotGeometry = new THREE.Geometry();
-    var dotMaterial = new THREE.PointsMaterial( { color: 0xFF0000, size: 5, sizeAttenuation: false } );
-    var labelDot = new THREE.Points( dotGeometry, dotMaterial );
-
-
     //loading the json file with heart labels
     async function loadJSON(url) {
         const req = await fetch(url);
@@ -556,6 +550,7 @@
         const labelParentElem = document.querySelector('#labels');
         for (const heartLabel of heartLabels) {
             const {xPosition, yPosition, zPosition, name} = heartLabel;
+
             // adjust the helpers to point to the latitude and longitude
             latHelper.rotation.x = THREE.MathUtils.degToRad(xPosition) + latFudge;
             lonHelper.rotation.y = THREE.MathUtils.degToRad(yPosition) + lonFudge;    
@@ -569,12 +564,18 @@
             const position = new THREE.Vector3();
             positionHelper.getWorldPosition(position);
             heartLabel.position = position;
-            console.log(heartLabel.position)
             // add label for each object
             const elem = document.createElement('div');
             elem.textContent = name;
             labelParentElem.appendChild(elem);
             heartLabel.elem = elem;
+
+            //const dotGeometry = new THREE.Geometry();
+            //heartLabel.dotGeometry = dotGeometry;
+            //const dotMaterial = new THREE.PointsMaterial( { color: 0x595959, size: 5, sizeAttenuation: false } );
+            //heartLabel.dotMaterial = dotMaterial;
+            //const labelDot = new THREE.Points( dotGeometry, dotMaterial );
+            //heartLabel.labelDot = labelDot;
             }
         }
     loadLabelData();
@@ -598,11 +599,12 @@
         camera.getWorldPosition(cameraPosition);
 
         for (const heartLabel of heartLabels) {
+            //const {position, elem, dotGeometry, dotMaterial, labelDot} = heartLabel;
             const {position, elem} = heartLabel;
 
             //creating a dot on the model for each label
-            dotGeometry.vertices.push(position);
-            scene.add( labelDot );
+            //dotGeometry.vertices.push(position);
+            //scene.add( labelDot );
 
             // Orient the position based on the camera's orientation.
             // Since the sphere is at the origin and the sphere is a unit sphere
@@ -624,12 +626,14 @@
             // if the orientation is not facing us hide it.
             if (dot > minVisibleDot) {
             elem.style.display = 'none';
+            //labelDot.visible = false;
+            //labelDot.style.display = 'none';
             continue;
             }
- 
             // restore the element to its default display style
             elem.style.display = '';
-
+            //labelDot.visible = true;
+            
             // get the normalized screen coordinate of that position
             // x and y will be in the -1 to +1 range with x = -1 being
             // on the left and y = -1 being on the bottom
@@ -638,7 +642,6 @@
             // convert the normalized position to CSS coordinates
             const x = (tempV.x *  .5 + .5) * canvas.clientWidth;
             const y = (tempV.y * -.5 + .5) * canvas.clientHeight;
-            //console.log(x, y);
 
             // move the elem to that position
             elem.style.transform = `translate(-50%, -50%) translate(${x}px,${y}px)`;
@@ -708,7 +711,6 @@
     var stepDirection;
     //Changing the model views on click with tween.js
     function changeView(step, name) {
-                    console.log(step);
         window.tweenView = tweenView;
         var allLabels = document.querySelectorAll('#labels div');
 
@@ -949,10 +951,10 @@
         const labelContainer = document.getElementById('labels');
         var slider = document.querySelectorAll('input')[0]
         if (slider.checked == true) {
-           labelDot.visible = true;
+           //labelDot.visible = true;
             labelContainer.style.display = "block";
         } else {
-            labelDot.visible = false;
+            //labelDot.visible = false;
             labelContainer.style.display = "none";
             labelTicker = true;
         }
@@ -1197,7 +1199,6 @@
             stepDirection = false;
         }
 
-        console.log(stepDirection)
         //If the current step exists
         switch("{{name}}") {
             case "Lucy":
@@ -1217,7 +1218,6 @@
                     previousStep.style.display = "none";
                 } else if (currentStep > 9) {
                     currentStep -=1;
-                    console.log('neigh')
                 }
                 break;
         }

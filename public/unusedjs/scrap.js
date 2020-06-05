@@ -835,4 +835,39 @@ var curveObject = new THREE.Line( geometry, material );
 
 
 
-    
+    ///// failed raycaster ///////////
+
+    var raycaster = new THREE.Raycaster();
+    var intersects = raycaster.intersectObject( labelDot )
+
+    if ( intersects.length > 0 ) {
+        var firstIntersectedObject  = intersects[0];
+        console.log(intersects[0])
+        elem.style.display = 'none';
+        console.log('yay')
+        //labelDot.visible = true;
+        continue;
+    } 
+    elem.style.display = '';
+        //labelDot.visible = false;
+
+
+/////////////////////////////////// failed raycaster 2
+                        //console.log(heartLabels[2].position)
+                        var raycaster = new THREE.Raycaster();
+                        //for (var p = 0; p < heartLabels.length; p ++) {
+                        var intersects = raycaster.intersectObjects( scene.children )
+            
+                            if ( intersects.length > 0 ) {
+                                heartLabels[0].elem.style.display = '';
+                                heartLabels[0].dotMaterial.color.set('#FFF000')
+                                console.log('yay')
+                                //labelDot.visible = true;
+                                continue;
+                            } 
+                             heartLabels[0].elem.style.display = 'none';
+                                //labelDot.visible = false;
+                        //}
+            
+            
+//////////////////////////
