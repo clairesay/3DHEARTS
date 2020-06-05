@@ -609,6 +609,7 @@ section#main-workshop-menu-grid {
     overflow-y: auto;
     padding-right: 1em;
     max-height: calc(100vh - 50px - 68px - 125.2px - 5em);
+    min-height: calc(100vh - 50px - 68px - 125.2px - 5em);
     position: relative;
     margin-bottom: 90px;
 }
