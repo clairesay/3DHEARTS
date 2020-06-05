@@ -524,7 +524,7 @@
     //setting heart labels
     let heartLabels;
     async function loadLabelData() {
-        heartLabels = await loadJSON('./js/{{name}}-heart-labels.json');  
+        heartLabels = await loadJSON('./js/{{toLowerCase name}}-heart-labels.json');  
 
         //code from three.js fundamentals - plotting labels as though they were on a sphere
         //uses longitude and latitude
@@ -570,12 +570,12 @@
             labelParentElem.appendChild(elem);
             heartLabel.elem = elem;
 
-            //const dotGeometry = new THREE.Geometry();
-            //heartLabel.dotGeometry = dotGeometry;
-            //const dotMaterial = new THREE.PointsMaterial( { color: 0x595959, size: 5, sizeAttenuation: false } );
-            //heartLabel.dotMaterial = dotMaterial;
-            //const labelDot = new THREE.Points( dotGeometry, dotMaterial );
-            //heartLabel.labelDot = labelDot;
+            const dotGeometry = new THREE.Geometry();
+            heartLabel.dotGeometry = dotGeometry;
+            const dotMaterial = new THREE.PointsMaterial( { color: 0x595959, size: 5, sizeAttenuation: false } );
+            heartLabel.dotMaterial = dotMaterial;
+            const labelDot = new THREE.Points( dotGeometry, dotMaterial );
+            heartLabel.labelDot = labelDot;
             }
         }
     loadLabelData();
@@ -599,12 +599,12 @@
         camera.getWorldPosition(cameraPosition);
 
         for (const heartLabel of heartLabels) {
-            //const {position, elem, dotGeometry, dotMaterial, labelDot} = heartLabel;
-            const {position, elem} = heartLabel;
+            const {position, elem, dotGeometry, dotMaterial, labelDot} = heartLabel;
+            //const {position, elem} = heartLabel;
 
             //creating a dot on the model for each label
-            //dotGeometry.vertices.push(position);
-            //scene.add( labelDot );
+            dotGeometry.vertices.push(position);
+            scene.add( labelDot );
 
             // Orient the position based on the camera's orientation.
             // Since the sphere is at the origin and the sphere is a unit sphere
@@ -634,6 +634,11 @@
             elem.style.display = '';
             //labelDot.visible = true;
             
+
+
+
+
+
             // get the normalized screen coordinate of that position
             // x and y will be in the -1 to +1 range with x = -1 being
             // on the left and y = -1 being on the bottom
