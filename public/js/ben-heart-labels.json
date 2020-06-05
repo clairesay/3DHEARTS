@@ -1,55 +1,55 @@
 [
   {
-    "name": "Left Atrial Appendage",
-    "xPosition": -20,
+    "name": "Left atrial appendage",
+    "xPosition": -30,
     "yPosition": 70,
     "zPosition": -1.5,
     "viewNumber": 1
   },
   {
-    "name": "Right Atrial Appendage",
-    "xPosition": -40,
+    "name": "Right atrial appendage",
+    "xPosition": -30,
     "yPosition": -50,
     "zPosition": 2.5,
     "viewNumber": 1
   },
   {
-    "name": "Right Atrium",
+    "name": "Right atrium",
     "xPosition": -50,
     "yPosition": -50,
     "zPosition": 1.7,
     "viewNumber": 2
   },
   {
-    "name": "Right Ventricular Outflow Tract",
+    "name": "Right ventricular outflow tract",
     "xPosition": -45,
     "yPosition": 90,
     "zPosition": 2,
     "viewNumber": 3
   },
   {
-    "name": "Left Atrium",
-    "xPosition": -20,
+    "name": "Left atrium",
+    "xPosition": -30,
     "yPosition": 70,
     "zPosition": -1.5,
     "viewNumber": 4
   },
   {
-    "name": "Left Ventricle",
-    "xPosition": -30,
+    "name": "Left ventricle",
+    "xPosition": -25,
     "yPosition": -150,
     "zPosition": 2.4,
     "viewNumber": 4
   },
   {
-    "name": "Ventricular Outflow Tract",
+    "name": "Left ventricular outflow tract",
     "xPosition": -20,
     "yPosition": -165,
     "zPosition": 2.2,
     "viewNumber": 5
   },
   {
-    "name": "Patent Foramen Ovale",
+    "name": "Patent foramen ovale",
     "xPosition": -20,
     "yPosition": -165,
     "zPosition": 5,
@@ -63,7 +63,7 @@
     "viewNumber": 7
   },
   {
-    "name": "Ascending Aorta",
+    "name": "Ascending aorta",
     "xPosition": 20,
     "yPosition": 40,
     "zPosition": 1.5,

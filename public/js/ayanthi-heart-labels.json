@@ -1,69 +1,69 @@
 [
   {
-    "name": "Left Atrial Appendage",
-    "xPosition": -40,
-    "yPosition": 85,
+    "name": "Left atrial appendage",
+    "xPosition": -20,
+    "yPosition": 95,
     "zPosition": -1.8,
     "viewNumber": 1
   },
   {
-    "name": "Right Atrial Appendage",
+    "name": "Right atrial appendage",
     "xPosition": -40,
     "yPosition": -20,
     "zPosition": 2.5,
     "viewNumber": 1
   },
   {
-    "name": "Right Atrium",
+    "name": "Right atrium",
     "xPosition": -30,
     "yPosition": 20,
     "zPosition": 2,
     "viewNumber": 2
   },
   {
-    "name": "Right Ventricular Outflow Tract",
+    "name": "Right ventricular outflow tract",
     "xPosition": -45,
     "yPosition": 110,
     "zPosition": 1.6,
     "viewNumber": 3
   },
   {
-    "name": "Left Atrium",
+    "name": "Left atrium",
     "xPosition": -30,
     "yPosition": 100,
     "zPosition": -1.5,
     "viewNumber": 4
   },
   {
-    "name": "Left Ventricle",
+    "name": "Left ventricle",
     "xPosition": -40,
     "yPosition": -148,
     "zPosition": 2.4,
     "viewNumber": 4
   },
   {
-    "name": "Left Ventricular Outflow Tract",
+    "name": "Left ventricular outflow tract",
     "xPosition": -35,
     "yPosition": -139,
     "zPosition": 2.2,
     "viewNumber": 5
   },
   {
-    "name": "No Inter-atrial Communications",
+    "name": "No inter-atrial communications",
     "xPosition": -30,
     "yPosition": 20,
     "zPosition": 2,
     "viewNumber": 6
   },
   {
-    "name": "Ventricular Septal Defect, Overriding Aorta",
+    "name": "Ventricular septal defect, overriding aorta",
     "xPosition": -40,
     "yPosition": 117,
     "zPosition": 1.6,
     "viewNumber": 7
   },
   {
-    "name": "Ascending Aorta",
+    "name": "Ascending aorta",
     "xPosition": 8,
     "yPosition": 30,
     "zPosition": 1.1,

@@ -1,71 +1,71 @@
 [
   {
-    "name": "Left Atrial Appendage",
+    "name": "Left atrial appendage",
     "xPosition": -30,
     "yPosition": 60,
     "zPosition": -1.5,
     "viewNumber": 1
   },
   {
-    "name": "Right Atrial Appendage",
+    "name": "Right atrial appendage",
     "xPosition": 30,
     "yPosition": -40,
     "zPosition": 2.5,
     "viewNumber": 1
   },
   {
-    "name": "Right Atrium",
+    "name": "Right atrium",
     "xPosition": 30,
     "yPosition": -40,
     "zPosition": 2.5,
     "viewNumber": 2
   },
   {
-    "name": "Right Ventricular Outflow Tract",
+    "name": "Right ventricular outflow tract",
     "xPosition": -10,
     "yPosition": 77,
     "zPosition": 1.6,
     "viewNumber": 3
   },
   {
-    "name": "Left Atrium",
+    "name": "Left atrium",
     "xPosition": -30,
     "yPosition": 60,
     "zPosition": -1.5,
     "viewNumber": 4
   },
   {
-    "name": "Left Ventricle",
+    "name": "Left ventricle",
     "xPosition": -60,
     "yPosition": -160,
     "zPosition": 2.2,
     "viewNumber": 4
   },
   {
-    "name": "Left Ventricular Outflow Track",
+    "name": "Left ventricular outflow tract",
     "xPosition": -30,
     "yPosition": -148,
     "zPosition": 1.6,
     "viewNumber": 5
   },
   {
-    "name": "Large Secundum Atrial Septal Defect",
-    "xPosition": 40,
-    "yPosition": -35,
+    "name": "Large secundum atrial septal defect",
+    "xPosition": 42,
+    "yPosition": -39,
     "zPosition": 1.8,
     "viewNumber": 6
   },
   {
-    "name": "Mid-muscular Ventricular Septal Defect",
-    "xPosition": -60,
-    "yPosition": -160,
+    "name": "Mid-muscular ventricular septal defect",
+    "xPosition": -62,
+    "yPosition": -158,
     "zPosition": 2.2,
     "viewNumber": 7
   },
   {
-    "name": "Patent Ductus Arteriosus",
-    "xPosition": 30,
-    "yPosition": 140,
+    "name": "Patent ductus arteriosus",
+    "xPosition": 22,
+    "yPosition": 138,
     "zPosition": 2.8,
     "viewNumber": 8
   }
