@@ -62,7 +62,7 @@
                     Now pick-up the 3D-printed model labelled #{{heartId}}.
                 </p>
                 <p id="interaction-case-content-button-explanation" class="case-content">
-                    The details of {{name}}’s case are available to you by clicking the case content button below.
+                    The details of {{name}}’s case are available to you by clicking the case content button.
                 </p>
                 <p class="case-content">
                     It will be helpful as you interact with the models as the module progresses.
@@ -278,7 +278,7 @@
     </div>
             
     </section>
-<button id="collapse-button" onclick="collapseSection()"><img src="images/buttons/collapse-button.svg"><img id="collapse-button-arrows" src="images/buttons/collapse-button-arrows.svg"></button>
+<button id="collapse-button"><img src="images/buttons/collapse-button.svg"><img id="collapse-button-arrows" src="images/buttons/collapse-button-arrows.svg"></button>
 <button id="case-content-button" onclick="showReviewModal();"><img src="images/buttons/case-content.svg"></button>
     <section id="image-half">
             <article id="toggles">
@@ -302,27 +302,31 @@
 <script type="module">
 
     //Collapsing the window in interaction
-    window.collapseSection = collapseSection;
+    window.collapseSectionHorizontal = collapseSectionHorizontal;
+    window.collapseSectionVertical = collapseSectionVertical;
+    
+    var tabletMode;
+    var collapseButton = document.getElementById('collapse-button');
+    
     var collapseTicker = true;
-    function collapseSection() {
-        //selecting all variables involved
-        var contentHalf = document.getElementById('content-half');
-        var collapseButton = document.getElementById('collapse-button');
-        var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
-        var caseContentButton = document.getElementById('case-content-button');
-        var c = document.getElementById('c');
-        var int = document.getElementById('interaction')
-        var text = document.querySelectorAll('.text-content-wrapper');
-        var buttonsContainer = document.getElementById('buttons-container');
-        var nextButton = document.getElementById('next')
-        var header = document.getElementsByTagName('header')[0];
-        var collapseButtonArrows = document.getElementById('collapse-button-arrows');
+    var contentHalf = document.getElementById('content-half');
+    var collapseButton = document.getElementById('collapse-button');
+    var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
+    var collapseButtonArrows = document.getElementById('collapse-button-arrows');
+    var caseContentButton = document.getElementById('case-content-button');
+    var c = document.getElementById('c');
+    var int = document.getElementById('interaction')
+    var buttonsContainer = document.getElementById('buttons-container');
+    var nextButton = document.getElementById('next')
+    var header = document.getElementsByTagName('header')[0];
 
+    function collapseSectionHorizontal() {
         //if collapsed
+        c.style.width = "100%";
         if (collapseTicker == true) {
             contentHalf.style.direction = "rtl"
-            //collapseButton.style.transform = "translateX(-35vw)"
-            collapseButton.style.left = "0"
+            contentHalf.style.visibility = "hidden"
+            collapseButton.style.transform = "translateX(-35vw)"
             collapseButtonArrows.style.transform = "rotateZ(180deg)"
             textContentWrapper.style.overflow = "hidden";
             caseContentButton.style.transform = "translateX(-35vw)"
@@ -332,25 +336,67 @@
             buttonsContainer.style.marginLeft = '0';
             header.style.filter = "none";
             collapseTicker = false;
-
         //if expanded
         } else {
             contentHalf.style.transform = "translateX(0)"
             contentHalf.style.direction = "ltr"
-            //collapseButton.style.transform = "translateX(0)"
-            collapseButton.style.left = "34.5vw"
+            contentHalf.style.visibility = "visible"
+            collapseButton.style.transform = "translateX(0)"
             collapseButtonArrows.style.transform = "rotateZ(0deg)"
             textContentWrapper.style.overflow = "auto";
             caseContentButton.style.transform = "translateX(0)"
             int.style.gridTemplateColumns = "40vw 0vw 60vw"
             int.style.gridTemplateAreas = "'MenuButton MenuButton Nav' 'Information Image Image'"
-            c.style.width = "100%";
+ 
             buttonsContainer.style.marginLeft = '-2em';
             buttonsContainer.style.marginRight = '0';
             header.style.filter = "drop-shadow(2px 2px 8px #cccccc)"
             collapseTicker = true;
         }
     }
+
+
+    function collapseSectionVertical() {
+        //if collapsed
+        c.style.height = "100%";
+        if (collapseTicker == true) {
+            int.style.gridTemplateRows = "50px 0 1fr 65px"
+            contentHalf.style.visibility = "hidden"
+            contentHalf.style.height = "0"
+            textContentWrapper.style.overflow = "hidden";
+            caseContentButton.style.visibility = "hidden"
+            collapseButtonArrows.style.transform = "rotateZ(270deg)"//
+            collapseButton.style.top = "-2px";
+
+            collapseTicker = false;
+        //if expanded
+        } else {
+            contentHalf.style.height = "244px"
+            int.style.gridTemplateRows = "50px auto 1fr 65px"
+            contentHalf.style.visibility = "visible"
+            collapseButtonArrows.style.transform = "rotateZ(90deg)"
+            collapseButton.style.top = contentHalf.clientHeight + "px";
+            caseContentButton.style.visibility = "visible"
+            caseContentButton.style.position = "default";
+            caseContentButton.style.top = "17px"
+            
+            collapseTicker = true;
+        }
+    }
+
+        function mediaQueryModifier(x) {
+        if (x.matches) { // If media query matches
+            collapseButton.setAttribute('onclick', 'collapseSectionVertical()')
+            tabletMode = true;
+        } else {
+            collapseButton.setAttribute('onclick', 'collapseSectionHorizontal()')
+            tabletMode = false;
+        }
+    }
+
+    var tabletSize = window.matchMedia("(max-width: 824px)")
+    mediaQueryModifier(tabletSize) // Call listener function at run time
+    tabletSize.addListener(mediaQueryModifier) // Attach listener function on state changes
 
     //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
     switch ("{{name}}") {
@@ -1148,7 +1194,9 @@
     ////////////////////////////////// PROGRESSION THROUGH STEPS OF INTERACTION /////////////////////////////
     //Progress through the Steps
     var currentStep = 0;
+
     function nextStep(m) {
+
         //Increment the steps by either -1 or 1 depending upon previous or next buttons clicked
         currentStep += m;
         if (m > 0) {
@@ -1187,6 +1235,16 @@
     function showStep() {
         //Number of Steps
         var steps = document.querySelectorAll('.step').length;
+
+        //if the instructions are closed and the student tries to move to the next step
+        //open the instructions
+
+        if ((collapseTicker == false) && (tabletMode == true)) {
+            collapseSectionVertical();
+            //collapseTicker = true;
+        } else if ((collapseTicker == false) && (tabletMode == false)) {
+            collapseSectionHorizontal();
+        }
 
         //If the first step hasn't been accessed yet, progress to changing slides
         if (currentStep < 0) {

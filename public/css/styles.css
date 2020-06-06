@@ -631,6 +631,7 @@ div.differential-highlight h4 {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin: 1em 0;
 }
 
 /* /////////////// IMAGE HALF /////////////////// */
@@ -838,7 +839,7 @@ a:hover > strong.onhover-definitions {
     flex-wrap: nowrap;
     position: absolute;
     margin-top: 63px;
-    z-index: 100;
+    z-index: 10;
     right: calc(30vw - 42px);
 }
 
@@ -973,7 +974,7 @@ label {
     position: absolute;
     visibility: hidden;
     top: 12vh;
-    left:34.5vw;
+    left: 34.5vw;
     /* left: calc(40vw - 4em); */
     z-index: 3;
     transition-duration: 0s;
@@ -1023,7 +1024,7 @@ label {
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: 10;
+    z-index: 20;
 }
 
 #modal {
@@ -1102,7 +1103,7 @@ label {
 }
 
 #chest-xr-review-content img {
-    height: 100%;
+    /* height: 100%; */
     max-width: 100%;
     width: auto;
     margin:auto;
@@ -1202,6 +1203,10 @@ label {
         display: none;
     }
 
+    #collapse-button {
+        left: 33.5vw;
+    }
+
 }
 
 @media only screen and (max-width: 824px) {
@@ -1215,8 +1220,8 @@ label {
     /* moduel descriptions */
 
     .module-descriptions {
-        min-width: 21vw;
-        margin-left: -5.25vw;
+        min-width: 18vw;
+        margin-left: -4.5vw;
     }
 
     /* Index */
@@ -1258,34 +1263,158 @@ label {
     /* oe and explanation */
     #oe, #explanation {
         grid-template-rows: 50px 76px 1fr;
-        grid-template-columns: 25vw 25vw 25vw 25vw;
+        grid-template-columns: 25vw 75vw;
         grid-template-areas:
-            'MenuButton Nav Nav Nav'
-            'Banner Banner Banner Banner'
-            'Information Information Information Information';
+            'MenuButton Nav'
+            'Banner Banner'
+            'Information Information';
+        max-width: 100vw;
+        max-height: 100vh;
+        overflow: hidden;
     }
 
     #content-half {
         filter: none;
+        max-width: 100vw;
+        overflow-x: hidden;
+        overflow-y: hidden;
+        height: calc(100vh - 50px - 76px - 68px);
+        transition-duration: 0s;
     }
+
+    /* interaction */
+    #interaction {
+        grid-template-rows: 50px auto 1fr 65px;
+        grid-template-columns: 25vw 75vw;
+        grid-template-areas:
+            'MenuButton Nav'
+            'Information Information'
+            'Image Image'
+            ' . . ';
+        max-width: 100vw;
+        max-height: 100vh;
+        overflow: hidden;
+    }
+
+    #interaction #module-name {
+        margin-top: 4em;
+    }
+
+    #interaction .text-content-wrapper {
+        height: auto;
+        min-height: 0;
+        margin-bottom: 2em;
+        overflow: hidden;
+        /* filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.5)); */
+    }
+
+    #interaction #content-half {
+        min-height: 244px;
+        max-height: auto;
+        height: auto;
+
+    }
+
+    #interaction #buttons-container {
+        width: 100vw;
+        position: fixed;
+    }
+
+    .activity.module-slide {
+        margin-top: 0;
+    }
+
+    #case-content-button {
+        position: fixed;
+        top: 20px;
+        right: 85px;
+        /* z-index: 3; */
+    }
+
+    #toggles {
+        right: calc(50vw - 42px);
+        margin-top: 2em;
+    }
+
+    #c {
+        max-height: 100%;
+    }
+
+    /* collapse button */ 
+    #collapse-button {
+        left: auto;
+        right: 3em;
+        top: 244px;
+        z-index: 7;
+        width: 100px;
+        transition-duration: 0s;
+        /* transform: rotate(90deg); */
+    }
+
+    #collapse-button > img {
+        width: 100px;
+    }
+
+    #collapse-button #collapse-button-arrows {
+        transform: rotateZ(90deg);
+
+        width: 15px;
+        position: relative;
+        top: -40px;
+        left: 5px;
+    }
+
+    #collapse-button:before{
+        position: absolute;
+        content: "";
+        /* min-width: 4em; */
+        width: 100px;
+        height: 43px;
+        left: 5px;
+        top: 7px;
+        background: white;
+        filter: none;
+    }
+
+    #case-content-button img {
+        position: default;
+        top: 95px;
+    }
+
+    /* modal */
+    #modal {
+        width: 80vw;
+        height: 75vh;
+        left: 10vw;
+        top: 100px;
+    }
+
+    /* headers and navigation */
 
     #oe header, #interaction header, #explanation header {
         filter: none;
+        z-index: 8;
+    }
+
+    #navigation-tab {
+        max-width: 75vw;
+        z-index: 8;
     }
 
     /* Moduel NAme */
     #module-name {
         padding-bottom: 1em;
         margin-top: 2em;
+        width: auto;
         grid-template-rows: auto auto;
-        /* grid-template-columns: auto auto; */
+        grid-template-columns: auto;
+        grid-template-areas:
+            'Name'
+            'Stage';
+        /* grid-template-rows: auto auto;
         grid-template-areas:
             'Name Profile'
-            'Stage Profile';
-    }
-
-    #interaction #module-name {
-        margin-top: 4em;
+            'Stage Profile'; */
     }
 
     #module-name h1 {
@@ -1316,13 +1445,14 @@ label {
     }
 
     /* on examination */
-    #min-chest-xr {
+    img#min-chest-xr {
         display: block;
-        max-height: calc(100vh - 76px - 50px - 68px - 150px);
+        /* max-height: calc(100vh - 76px - 50px - 68px - 150px); */
         max-width: 87%;
         width: auto;
         height: auto;
         margin: auto;
+        padding-bottom: 0;
     }
 
     #content-half img {
@@ -1333,4 +1463,10 @@ label {
         margin-left: 4em;
     }
     
+}
+
+@media only screen and (max-width: 450px) {
+    #case-content-button {
+        right: 50px;
+    }
 }

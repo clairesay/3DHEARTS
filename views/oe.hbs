@@ -235,10 +235,27 @@
         var caseContent = document.querySelectorAll('.case-content');
     }
 
-//SETTING ILLUSTRATION ON RIGHT HAND SIDE BASED ON SLIDE PROGRESSION
+
+    /////////////////////// ATTRIBUTE TEXT FOR CHEST XR (THIS CHANGES BASED ON SCREEN SIZE) ////////////////////
+    var attributeTextXR = document.getElementsByClassName('chest-xr-caption')[1];
+    var altAttributeTextXR = document.getElementsByClassName('chest-xr-caption')[0];
+
+    function mediaQueryModifier(x) {
+        if (x.matches) { // If media query matches
+            altAttributeTextXR.style.visibility = "visible";
+        } else {
+            altAttributeTextXR.style.visibility = "hidden";
+        }
+    }
+
+    var tabletSize = window.matchMedia("(max-width: 824px)")
+    mediaQueryModifier(tabletSize) // Call listener function at run time
+    tabletSize.addListener(mediaQueryModifier) // Attach listener function on state changes
+
+//////////////// SETTING ILLUSTRATION ON RIGHT HAND SIDE BASED ON SLIDE PROGRESSION ///////////////////
     function showIllustration(slideNumber) {
         var switchIllustration = document.getElementsByClassName('story-illustration')[0];
-        var attributeTextXR = document.getElementsByClassName('chest-xr-caption')[0];
+        console.log(slideNumber);
         switch(slideNumber) {
             case 1 :
                 switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
@@ -259,18 +276,22 @@
                     switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
                     switch("{{name}}") {
                         case "Ben" :
-                        attributeTextXR.innerHTML = "Case courtesy of Dr Jeremy Jones, Radiopaedia.org, rID: 27377"
+                        attributeTextXR.innerHTML = "Case courtesy of Dr Jeremy Jones, Radiopaedia.org, rID: 27377";
+                        altAttributeTextXR.innerHTML = "Case courtesy of Dr Jeremy Jones, Radiopaedia.org, rID: 27377";
                             break;
                         case "Ayanthi" :
-                        attributeTextXR.innerHTML = "Case courtesy of Dr Mohammed Alshammari, Radiopaedia.org, rID: 16268"
+                        attributeTextXR.innerHTML = "Case courtesy of Dr Mohammed Alshammari, Radiopaedia.org, rID: 16268";
+                        altAttributeTextXR.innerHTML = "Case courtesy of Dr Mohammed Alshammari, Radiopaedia.org, rID: 16268";
                             break;
                         case "Amin":
-                        attributeTextXR.innerHTML = "Courtesy of Dr Greg Petermann (05/04/2004)"
+                        attributeTextXR.innerHTML = "Courtesy of Dr Greg Petermann (05/04/2004)";
+                        altAttributeTextXR.innerHTML = "Courtesy of Dr Greg Petermann (05/04/2004)";
                             break;
                     }
                 } else {
                     switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-on-examine.svg');
                     attributeTextXR.innerHTML = "";
+                    altAttributeTextXR.innerHTML = "";
                 }            
                 break;
             case 6 :
@@ -278,17 +299,21 @@
                 if ("{{name}}" != "Lucy") {
                     switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                     attributeTextXR.innerHTML = "";
+                    altAttributeTextXR.innerHTML = "";
                 } else {
                     switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_XR.jpg');
-                    attributeTextXR.innerHTML = "Case courtesy of Dr Angela Byrne, Radiopaedia.org, rID: 7588"
+                    attributeTextXR.innerHTML = "Case courtesy of Dr Angela Byrne, Radiopaedia.org, rID: 7588";
+                    altAttributeTextXR.innerHTML = "Case courtesy of Dr Angela Byrne, Radiopaedia.org, rID: 7588";
                 }      
                 break;
             case 7 :
                     if ("{{name}}" == "Lucy") {
                         switchIllustration.setAttribute('src', 'images/illustrations/{{toLowerCase name}}-story.svg');
                         attributeTextXR.innerHTML = "";
+                        altAttributeTextXR.innerHTML = "";
                     }
                     attributeTextXR.innerHTML = "";
+                    altAttributeTextXR.innerHTML = "";
             case 8 :
                 break;
             default :
@@ -300,6 +325,9 @@
     //Progression through slides
     var currentSlide = 0;
     function nextSlide(n) {
+        var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
+        textContentWrapper.scrollTop = 0;
+
         //hide the previous slide
         var previousSlide = document.getElementsByClassName('module-slide')[currentSlide];
         previousSlide.style.display = "none";
