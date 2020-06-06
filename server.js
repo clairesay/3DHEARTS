@@ -99,7 +99,6 @@ Handlebars.registerHelper("review", function (context) {
     if (context === "<<start>>" || context === "<<end>>") return
 
     // The lists in Storyblok have bullet points starting with '--'
-    console.log(context)
     if (context.includes("--")) {
 
         // We'll split the list by '--' to give us arrays to iterate over
@@ -170,22 +169,6 @@ Handlebars.registerHelper('nameCheck', function(caseName, nameCheck) {
     return caseName === nameCheck
 })
 
-Handlebars.registerHelper('isBen', function(name) {
-    return name === "Ben"
-})
-
-Handlebars.registerHelper('isAyanthi', function(name) {
-    return name === "Ayanthi"
-})
-
-Handlebars.registerHelper('isAmin', function(name) {
-    return name === "Amin"
-})
-
-Handlebars.registerHelper('isLucy', function(name) {
-    return name === "Lucy"
-})
-
 /////////////////////////////////////////////////
 
 
@@ -235,6 +218,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
 
         // Ayanthi
         case "19401":
+            console.log(heartId)
             res.render(`${stage}`, {
                 title: `Ayanthi, a 1-month old girl`,
                 name: ayanthi.name,
@@ -252,6 +236,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
 
         // Amin
         case "16751":
+            console.log(heartId)
             res.render(`${stage}`, {
                 title: `Amin, a 6-month old boy`,
                 name: amin.name,
@@ -269,6 +254,7 @@ app.get('/:heartId-:stage.html', (req, res) => {
 
         // Lucy
         case "19863":
+            console.log(heartId)
             res.render(`${stage}`, {
                 title: `Lucy, a 7 day old neonate`,
                 name: lucy.name,
