@@ -1130,7 +1130,11 @@
 
                 break;
             case 2 :
-                switchIllustration.style.display = "flex";
+                if (tabletMode == true) {
+                    switchIllustration.style.display = "none";
+                } else {
+                    switchIllustration.style.display = "flex";
+                }
                 heartModels.style.display = "none";
                 toggles.style.display = "none";
                 caseReviewButton.style.visibility = "hidden";
