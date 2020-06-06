@@ -680,6 +680,10 @@ figcaption {
     display: none;
 }
 
+#first-module-slide p{
+    padding-top: 1.7em;
+}
+
 .module-slide .case-content:first-of-type {
     visibility: visible;
 }
