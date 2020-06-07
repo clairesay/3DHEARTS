@@ -699,6 +699,7 @@ figcaption {
     justify-content: space-around;
     align-items: center;
     grid-area: Nav;
+    z-index: 18;
 }
 
 .module-descriptions {
@@ -718,7 +719,7 @@ figcaption {
     transition-duration: 0.2s;
     border-radius: 2px;
 
-    z-index: 10;
+    z-index: 18;
 }
 
 .module-descriptions::after {
@@ -843,7 +844,7 @@ a:hover > strong.onhover-definitions {
     flex-wrap: nowrap;
     position: absolute;
     margin-top: 63px;
-    z-index: 10;
+    z-index: 5;
     right: calc(30vw - 42px);
 }
 
@@ -960,8 +961,15 @@ label {
 #case-content-button {
     display: flex;
     margin: auto;
-    z-index: 30;
     transition-duration: 0.001s;
+}
+
+.base-layer {
+    z-index: 5;
+}
+
+.z-layers {
+    z-index: 30;
 }
 
 #case-content-button img{
@@ -1188,10 +1196,10 @@ label {
     
     /* module descriptions */
     #interaction .module-descriptions {
-        min-width: 12vw;
+        /* min-width: 12vw; */
+        min-width: 120px;
         margin-left: -3vw;
     }
-    
     /* module name */
     
     #interaction #module-name {
@@ -1226,6 +1234,10 @@ label {
     .module-descriptions {
         min-width: 18vw;
         margin-left: -4.5vw;
+    }
+
+    #navigation-tab > a:nth-of-type(3) > .module-descriptions {
+        margin-left: -4vw;
     }
 
     /* Index */
@@ -1469,8 +1481,20 @@ label {
     
 }
 
+@media only screen and (max-width: 600px) {
+    #navigation-tab > a:nth-of-type(3) > .module-descriptions {
+        margin-left: -6vw;
+    }
+    
+}
+
 @media only screen and (max-width: 450px) {
     #case-content-button {
         right: 50px;
     }
+
+    #navigation-tab > a:nth-of-type(3) > .module-descriptions {
+        margin-left: -12vw;
+    }
+    
 }

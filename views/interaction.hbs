@@ -279,7 +279,7 @@
             
     </section>
 <button id="collapse-button"><img src="images/buttons/collapse-button.svg"><img id="collapse-button-arrows" src="images/buttons/collapse-button-arrows.svg"></button>
-<button id="case-content-button" onclick="showReviewModal();"><img src="images/buttons/case-content.svg"></button>
+<button id="case-content-button" class="base-layer" onclick="showReviewModal();"><img src="images/buttons/case-content.svg"></button>
     <section id="image-half">
             <article id="toggles">
                         <form>
@@ -1289,6 +1289,9 @@
         //Actual Modal
         var modal = document.getElementById('modal');
         modal.classList.toggle('show-modal');
+        //Case Content Button
+        var caseContentButton = document.getElementById('case-content-button');
+        caseContentButton.classList.toggle('z-layers')
     }
 
     //Selecting onexamination and chest xr review titles and content
