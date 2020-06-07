@@ -386,10 +386,10 @@
 
         function mediaQueryModifier(x) {
         if (x.matches) { // If media query matches
-            collapseButton.setAttribute('onclick', 'collapseSectionVertical()')
+            collapseButton.setAttribute('onclick', 'collapseSectionVertical()');
             tabletMode = true;
         } else {
-            collapseButton.setAttribute('onclick', 'collapseSectionHorizontal()')
+            collapseButton.setAttribute('onclick', 'collapseSectionHorizontal()');
             tabletMode = false;
         }
     }
