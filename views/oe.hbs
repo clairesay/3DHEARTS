@@ -74,7 +74,7 @@
                 <h1 id="chest-XR-slide" class="case-content">You organize a mobile chest x-ray.</h1>
                 {{/if}}
 
-                <img id="min-chest-xr" src="images/XRAY/{{toLowerCase name}}_xr.jpg">
+                <img id="min-chest-xr" src="images/xray/{{toLowerCase name}}_xr.jpg">
                 <figcaption class="chest-xr-caption"></figcaption>
 
             </section>
@@ -287,7 +287,7 @@
             case 5 :
             //if not lucy, display xray
                 if ("{{name}}" != "Lucy") {
-                    switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_xr.jpg');
+                    switchIllustration.setAttribute('src', 'images/xray/{{toLowerCase name}}_xr.jpg');
                     switch("{{name}}") {
                         case "Ben" :
                         attributeTextXR.innerHTML = "Case courtesy of Dr Jeremy Jones, Radiopaedia.org, rID: 27377";
@@ -315,7 +315,7 @@
                     attributeTextXR.innerHTML = "";
                     altAttributeTextXR.innerHTML = "";
                 } else {
-                    switchIllustration.setAttribute('src', 'images/XRAY/{{toLowerCase name}}_xr.jpg');
+                    switchIllustration.setAttribute('src', 'images/xray/{{toLowerCase name}}_xr.jpg');
                     attributeTextXR.innerHTML = "Case courtesy of Dr Angela Byrne, Radiopaedia.org, rID: 7588";
                     altAttributeTextXR.innerHTML = "Case courtesy of Dr Angela Byrne, Radiopaedia.org, rID: 7588";
                 }      
