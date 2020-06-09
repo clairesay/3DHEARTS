@@ -1546,7 +1546,7 @@ label {
     
 }
 
-@media screen and (orientation:portrait) {
+@media only screen and (orientation:portrait) {
 
     #index-menu {
         grid-template-rows: 12vh 12vh 12vh 12vh;
@@ -1576,5 +1576,15 @@ label {
 
     #start-module {
         margin-top: 3vh;
+    }
+}
+
+@media only screen and (orientation:landscape) and (max-height: 450px) {
+    body#index {
+        grid-template-rows: 120px auto;
+    }
+
+    #index-menu {
+        margin-bottom: 48px;
     }
 }
