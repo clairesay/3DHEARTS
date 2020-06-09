@@ -1,7 +1,6 @@
 
 
 /* //////////////// FONTS /////////////// */
-/* @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,700;1,423&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,400;1,600;1,700;1,800;1,900&display=swap'); */
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,600;1,700;1,800;1,900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap');
 
@@ -1181,6 +1180,37 @@ label {
     border-color: transparent transparent #595959 transparent;
 }
 
+/* /////////////////// home page ////////////////////////// */
+
+#page-404 {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+
+#page-404 h1 {
+    font-size: 36px;
+}
+
+#page-404 a {
+    padding: 1em 1.5em;
+    margin-top: 2em;
+    border: 2px solid #e7e7e7;
+    color: #bdbdbd;
+    background-color: white;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+#page-404 a:hover {
+    border-color: #595959;
+    color: #595959;
+}
+
 /* ///////////////////// transitionS //////////////////////////// */
 .fade-in {
     transition:opacity 3s ease-in-out;
@@ -1193,10 +1223,6 @@ label {
 
 /*///////////////////////////////////////////////////////////////////////////////////////////////////////*/
 /*///////////////////////////////////// MEDIA QUERIES START HERE ////////////////////////////////////////*/
-@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
-
-    /* STYLES GO HERE */ 
-}
 
 @media only screen and (max-width: 1024px) {
     
@@ -1356,7 +1382,6 @@ label {
         position: fixed;
         top: 20px;
         right: 85px;
-        /* z-index: 3; */
     }
 
     #toggles {
@@ -1376,7 +1401,6 @@ label {
         z-index: 7;
         width: 100px;
         transition-duration: 0s;
-        /* transform: rotate(90deg); */
     }
 
     #collapse-button > img {
@@ -1395,7 +1419,6 @@ label {
     #collapse-button:before{
         position: absolute;
         content: "";
-        /* min-width: 4em; */
         width: 100px;
         height: 43px;
         left: 5px;
@@ -1439,11 +1462,6 @@ label {
         grid-template-areas:
             'Name'
             'Stage';
-        /* grid-template-rows: auto auto;
-        grid-template-areas:
-            'Name Profile'
-            'Stage Profile'; */
-
         border-left: 4px solid #e7e7e7 ;
         padding-left: 1em;
     }
@@ -1478,7 +1496,6 @@ label {
     /* on examination */
     img#min-chest-xr {
         display: block;
-        /* max-height: calc(100vh - 76px - 50px - 68px - 150px); */
         max-width: 87%;
         width: auto;
         height: auto;
@@ -1539,7 +1556,6 @@ label {
 
     #index-menu article:nth-of-type(2n + 1) {
         grid-template-rows: 5fr 4fr;
-        /* grid-template-columns: 1fr 3fr; */
         grid-template-columns: 1fr;
         grid-template-areas:
         'Start'
