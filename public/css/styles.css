@@ -623,6 +623,13 @@ section#main-workshop-menu-grid {
     margin-bottom: 90px;
 }
 
+/* fixing ben's explanation bit in particular */
+#explanation #content-half .text-content-wrapper p span  {
+    margin: 0 0.5em;
+    display: inline-block;
+    margin-top: 10px;
+}
+
 div.differential-highlight h4 {
     font-style: italic;
     color: var(--module-colour);
