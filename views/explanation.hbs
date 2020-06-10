@@ -1,7 +1,7 @@
 <body id="explanation" class="common-structure">
     <header>
         <button id="returnToMenu" onclick="exitModule();">
-            <img src="images/buttons/{{toLowerCase name}}-menu-home-small.svg">
+            <img src="images/buttons/{{toLowerCase name}}-menu-home-small.svg" alt="Click to return to home">
         </button>
     </header>
     <section id="navigation-tab">
@@ -58,6 +58,19 @@
 
 <script>
     //This is for the explanation section of the module
+
+    var tabletMode;
+    function mediaQueryModifier(x) {
+        if (x.matches) { // If media query matches
+            tabletMode = true;
+        } else {
+            tabletMode = false;
+        }
+    }
+
+    var tabletSize = window.matchMedia("(max-width: 824px)")
+    mediaQueryModifier(tabletSize) // Call listener function at run time
+    tabletSize.addListener(mediaQueryModifier) // Attach listener function on state changes
 
     //////////////////////////////////////// COLOUR SWITCH //////////////////////////////////////
     switch ("{{name}}") {
@@ -232,8 +245,8 @@
     ////////////////////// FIX THE SCROLL LEVEL /////////////////
     var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
     var moduleName = document.getElementById('module-name');
-    textContentWrapper.addEventListener('scroll', function banana() {
-        if ((textContentWrapper.scrollHeight > textContentWrapper.clientHeight) && (textContentWrapper.scrollTop > 5)) {
+    textContentWrapper.addEventListener('scroll', function scrollShadow() {
+        if ((textContentWrapper.scrollHeight > textContentWrapper.clientHeight) && (textContentWrapper.scrollTop > 5) && (tabletMode == false)) {
             moduleName.style.boxShadow = "0 4px 4px -4px grey"
         } else {
             moduleName.style.boxShadow = "none";

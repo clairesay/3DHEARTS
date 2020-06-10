@@ -1,7 +1,7 @@
 <body id="interaction" class="common-structure">
     <header>
         <button id="returnToMenu" onclick="exitModule();">
-            <img src="images/buttons/{{toLowerCase name}}-menu-home-small.svg">
+            <img src="images/buttons/{{toLowerCase name}}-menu-home-small.svg" alt="Click to return to home">
         </button>
     </header>
     <section id="navigation-tab">
@@ -44,7 +44,7 @@
 
             </article>
             <article id="chest-xr-review-content">
-                <img class="chest-xr" src={{xray}}>
+                <img class="chest-xr" src={{xray}} alt="Chest x-ray">
             </article>
         </section>
         
@@ -220,7 +220,7 @@
 
             <section class="activity module-slide">
                 <div class="differential-highlight">
-                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg">
                     <h4>How would you summarise the cardiac defects you have identified?</h4>
                 </div>
                 <p class="case-content">
@@ -230,7 +230,7 @@
 
             <section class="extra activity module-slide">
                 <div class="differential-highlight">
-                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg">
                     <h4>How would you summarise the cardiac defects you have identified?</h4>
                 </div>
                 {{#each cardiac_explanation}}
@@ -239,7 +239,7 @@
             </section>
             <section class="activity module-slide">
                 <div class="differential-highlight">
-                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg">
                     {{!-- <p class="case-content">
                         How would you link these cardiac defects to the clinical presentation? What is the diagnosis?
                     </p> --}}
@@ -278,8 +278,8 @@
     </div>
             
     </section>
-<button id="collapse-button"><img src="images/buttons/collapse-button.svg"><img id="collapse-button-arrows" src="images/buttons/collapse-button-arrows.svg"></button>
-<button id="case-content-button" class="base-layer" onclick="showReviewModal();"><img src="images/buttons/case-content.svg"></button>
+<button id="collapse-button"><img src="images/buttons/collapse-button.svg" alt="Click to collapse instructions"><img id="collapse-button-arrows" src="images/buttons/collapse-button-arrows.svg"></button>
+<button id="case-content-button" class="base-layer" onclick="showReviewModal();"><img src="images/buttons/case-content.svg" alt="Click to reveal case content"></button>
     <section id="image-half">
             <article id="toggles">
                         <form>
@@ -384,7 +384,7 @@
         }
     }
 
-        function mediaQueryModifier(x) {
+    function mediaQueryModifier(x) {
         if (x.matches) { // If media query matches
             collapseButton.setAttribute('onclick', 'collapseSectionVertical()');
             tabletMode = true;
@@ -1326,8 +1326,8 @@
     ////////////////////// FIX THE SCROLL LEVEL /////////////////
     var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
     var moduleName = document.getElementById('module-name');
-    textContentWrapper.addEventListener('scroll', function banana() {
-        if ((textContentWrapper.scrollHeight > textContentWrapper.clientHeight) && (textContentWrapper.scrollTop > 5)) {
+    textContentWrapper.addEventListener('scroll', function scrollShadow() {
+        if ((textContentWrapper.scrollHeight > textContentWrapper.clientHeight) && (textContentWrapper.scrollTop > 5) && (tabletMode == false)) {
             moduleName.style.boxShadow = "0 4px 4px -4px grey"
         } else {
             moduleName.style.boxShadow = "none";

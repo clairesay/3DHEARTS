@@ -1,7 +1,7 @@
 <body id="oe" class="common-structure">
     <header>
         <button id="returnToMenu" onclick="exitModule();">
-            <img src="images/buttons/{{toLowerCase name}}-menu-home-small.svg">
+            <img src="images/buttons/{{toLowerCase name}}-menu-home-small.svg" alt="Click to return to home">
         </button>
     </header>
     <section id="navigation-tab">
@@ -71,14 +71,14 @@
                 <h1 id="chest-XR-slide" class="case-content">You organize a mobile chest x-ray.</h1>
                 {{/if}}
 
-                <img id="min-chest-xr" src={{xray}}>
+                <img id="min-chest-xr" src={{xray}} alt="Chest x-ray">
                 <figcaption class="chest-xr-caption"></figcaption>
 
             </section>
 
             <section class="content module-slide">
                 <div class="differential-highlight">
-                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg">
                     <h4>What are your differential diagnoses?</h4>
                 </div>
                 <p class="case-content">Think carefully about your answer before you proceed to the next page.</p>
@@ -86,7 +86,7 @@
 
             <section class="content module-slide">
                 <div class="differential-highlight">
-                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg" alt="thinking time">
+                    <img class="differential-diagnoses" src="images/illustrations/{{toLowerCase name}}-differential.svg">
                     <h4>What are your differential diagnoses?</h4>
                 </div>
                 {{#each differential_diagnoses}}
@@ -251,10 +251,13 @@
     var attributeTextXR = document.getElementsByClassName('chest-xr-caption')[1];
     var altAttributeTextXR = document.getElementsByClassName('chest-xr-caption')[0];
 
+    var tabletMode;
     function mediaQueryModifier(x) {
         if (x.matches) { // If media query matches
+            tabletMode = true;
             altAttributeTextXR.style.visibility = "visible";
         } else {
+            tabletMode = false;
             altAttributeTextXR.style.visibility = "hidden";
         }
     }
@@ -392,8 +395,8 @@
     ////////////////////// FIX THE SCROLL LEVEL /////////////////
     var textContentWrapper = document.getElementsByClassName('text-content-wrapper')[0];
     var moduleName = document.getElementById('module-name');
-    textContentWrapper.addEventListener('scroll', function banana() {
-        if ((textContentWrapper.scrollHeight > textContentWrapper.clientHeight) && (textContentWrapper.scrollTop > 5)) {
+    textContentWrapper.addEventListener('scroll', function scrollShadow() {
+        if ((textContentWrapper.scrollHeight > textContentWrapper.clientHeight) && (textContentWrapper.scrollTop > 5) && (tabletMode == false)) {
             moduleName.style.boxShadow = "0 4px 4px -4px grey"
         } else {
             moduleName.style.boxShadow = "none";
