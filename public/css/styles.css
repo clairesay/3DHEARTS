@@ -1587,4 +1587,8 @@ label {
     #index-menu {
         margin-bottom: 48px;
     }
+
+    #thank-you-modal {
+        top: 15vh;
+    }
 }
