@@ -16,7 +16,7 @@
     "handlebars": "^4.7.6",
     "sass": "^1.26.5",
     "storyblok-js-client": "^2.4.1",
-    "three": "^0.115.0",
+    "three": "^0.125.0",
     "three-css2drender": "^1.0.0",
     "three-stl-loader": "^1.0.6",
     "tweenjs": "^1.0.2",
